@@ -1,0 +1,13 @@
+# Dependencias
+node_modules/
+
+# Variaveis de ambiente sensiveis
+.env
+
+# Logs e arquivos temporarios de execucao
+log_execucoes.txt
+novas_vagas.json
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

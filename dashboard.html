@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EstágioBot AI - Painel de Observabilidade</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+
+  <!-- Top Navigation -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm shadow-indigo-200">
+          🤖
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-slate-900 leading-tight">EstágioBot AI</h1>
+          <p class="text-xs text-slate-500">Painel de Observabilidade & Auditoria</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+          <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          Agendado (Windows Task Scheduler)
+        </span>
+        <button onclick="location.reload()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1.5 px-3 rounded-md transition">
+          🔄 Atualizar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- KPI Metric Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Status do Robô</p>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="metric-status" class="text-xl font-bold text-slate-900">Operacional</span>
+          <span class="text-xs text-emerald-600 font-medium">100% OK</span>
+        </div>
+        <p id="metric-last-run" class="text-xs text-slate-400 mt-1">Última checagem: Carregando...</p>
+      </div>
+
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Varreduras Registradas</p>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="metric-total-runs" class="text-2xl font-bold text-slate-900">0</span>
+          <span class="text-xs text-indigo-600 font-medium">De hora em hora</span>
+        </div>
+        <p class="text-xs text-slate-400 mt-1">Execuções em segundo plano</p>
+      </div>
+
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Vagas Encontradas</p>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="metric-total-jobs" class="text-2xl font-bold text-emerald-600">0</span>
+          <span class="text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded">Filtradas</span>
+        </div>
+        <p class="text-xs text-slate-400 mt-1">Turno livre + Engenharia/Dados</p>
+      </div>
+
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Tempo Médio de Raciocínio</p>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="metric-avg-time" class="text-2xl font-bold text-slate-900">0s</span>
+          <span class="text-xs text-slate-500 font-medium">IA + Web Search</span>
+        </div>
+        <p class="text-xs text-slate-400 mt-1">Por ciclo completo</p>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Timeline / Log Executions (2 Cols) -->
+      <section class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+          <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <span>⏱️</span> Histórico de Execuções Recentes
+          </h2>
+          <span class="text-xs text-slate-500">Gravado automaticamente</span>
+        </div>
+        <div class="divide-y divide-slate-100 max-h-[460px] overflow-y-auto" id="runs-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Vagas Notificadas / Repositório (1 Col) -->
+      <section class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+        <div class="p-5 border-b border-slate-200 bg-slate-50/50">
+          <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <span>🎯</span> Vagas Já Notificadas
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Links verificados e enviados para o seu e-mail</p>
+        </div>
+        <div class="p-4 space-y-3 overflow-y-auto max-h-[460px] flex-1" id="jobs-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Load Data -->
+  <script src="historico_execucoes.js"></script>
+  <script src="banco_vagas.js"></script>
+
+  <!-- Dashboard Renderer Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const data = window.HISTORICO_EXECUCOES || [];
+      const banco = window.BANCO_VAGAS || [];
+      
+      // Calculate Metrics
+      const totalRuns = data.length;
+      let totalTime = 0;
+
+      data.forEach(item => {
+        totalTime += (item.duracaoSegundos || 30);
+      });
+
+      const avgTime = totalRuns > 0 ? Math.round(totalTime / totalRuns) : 0;
+      const lastRun = data.length > 0 ? data[0].timestamp : "Nenhuma ainda";
+
+      // Populate Metrics Cards
+      document.getElementById("metric-total-runs").innerText = totalRuns;
+      document.getElementById("metric-total-jobs").innerText = banco.length;
+      document.getElementById("metric-avg-time").innerText = `${avgTime}s`;
+      document.getElementById("metric-last-run").innerText = `Última checagem: ${lastRun}`;
+
+      // Render Execution Timeline
+      const runsContainer = document.getElementById("runs-container");
+      if (data.length === 0) {
+        runsContainer.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">Nenhum registro encontrado ainda.</div>`;
+      } else {
+        runsContainer.innerHTML = data.map(item => {
+          let badge = "";
+          let icon = "";
+          if (item.status === "VAGAS_SALVAS" || item.status === "VAGAS_ENVIADAS") {
+            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800">Vagas Inéditas</span>`;
+            icon = `<div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">⭐</div>`;
+          } else if (item.status === "RESUMO_DIARIO_ENVIADO") {
+            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-indigo-100 text-indigo-800">Resumo 07:15 Enviado</span>`;
+            icon = `<div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">✉️</div>`;
+          } else if (item.status === "ERRO") {
+            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-100 text-rose-800">Falha</span>`;
+            icon = `<div class="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm">⚠️</div>`;
+          } else {
+            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-slate-100 text-slate-600">Sem Vagas Novas</span>`;
+            icon = `<div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm">🔍</div>`;
+          }
+
+          return `
+            <div class="p-4 flex items-start gap-3 hover:bg-slate-50/70 transition">
+              ${icon}
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-semibold text-slate-900">${item.timestamp}</span>
+                  <div class="flex items-center gap-2">
+                    <span class="text-[11px] text-slate-400">⏱️ ${item.duracaoSegundos || 30}s</span>
+                    ${badge}
+                  </div>
+                </div>
+                <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.mensagem}</p>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      // Render Stored Jobs from Database
+      const jobsContainer = document.getElementById("jobs-container");
+      if (banco.length === 0) {
+        jobsContainer.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">Nenhuma vaga registrada ainda no banco.</div>`;
+      } else {
+        jobsContainer.innerHTML = banco.map(job => {
+          const statusBadge = job.notificada 
+            ? `<span class="text-[10px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-medium">Enviada por e-mail</span>`
+            : `<span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-semibold">Pendente (Envio às 07:15)</span>`;
+
+          return `
+            <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-100/50 transition">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider truncate">${job.empresa}</span>
+                ${statusBadge}
+              </div>
+              <h3 class="text-xs font-bold text-slate-900 mt-1 leading-snug">${job.cargo}</h3>
+              <p class="text-[11px] text-slate-500 mt-0.5">📍 ${job.modalidade}</p>
+              ${job.requisitos ? `<p class="text-[11px] text-slate-600 mt-1 line-clamp-2">📝 ${job.requisitos}</p>` : ''}
+              ${job.link ? `
+                <div class="mt-2.5">
+                  <a href="${job.link}" target="_blank" class="text-[11px] inline-flex items-center gap-1 font-semibold text-indigo-600 hover:text-indigo-800">
+                    Acessar Vaga Oficial ↗
+                  </a>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join("");
+      }
+
+    });
+  </script>
+</body>
+</html>

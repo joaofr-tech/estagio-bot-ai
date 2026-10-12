@@ -1,0 +1,32 @@
+window.BANCO_VAGAS = [
+  {
+    "id": "spc-brasil-dev-sistemas",
+    "empresa": "SPC Brasil",
+    "cargo": "Estagiário(a) Desenvolvimento de Sistemas",
+    "modalidade": "Remoto",
+    "requisitos": "Java, SQL e IA generativa",
+    "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG6Sb5bavCpwLACy6n2zPn6YrkqAAS4C0ghvhcOTiQDHYYUagNHs-lStln5A2Ec_eP3LGUUy5MNwjfT4VxC_V4tQQJh3LiaA34yqDbAlm7UxayiqvxPZoFh2ekPsI74GdzlgWzcsVrYhUv4QkGhsBEL5ZS8qvsBF-D_W5_r4w==",
+    "dataColeta": "07/10/2026, 15:35",
+    "notificada": true
+  },
+  {
+    "id": "eldorado-data-mining",
+    "empresa": "Instituto de Pesquisas Eldorado",
+    "cargo": "Estágio em Desenvolvimento de Software / Data Mining",
+    "modalidade": "Remoto",
+    "requisitos": "Python, SQL, Data Mining",
+    "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG8Wk-1Lwaqiz9fYL1y5ZQDQB_S1eQK_bQh_waf4ApPnDhApw88hPKtDalxp4QIvjTNeGyhUfLiYSpXfqoRdxOSYi9mOdFmIACRPVmfUg_m2-jYDzc8kaFpe_BWRG0viK8GYU7t",
+    "dataColeta": "03/10/2026, 12:02",
+    "notificada": true
+  },
+  {
+    "id": "eldorado-automacao-testes",
+    "empresa": "Instituto de Pesquisas Eldorado",
+    "cargo": "Estágio em Automação de Testes / Desenvolvimento de Software",
+    "modalidade": "Remoto",
+    "requisitos": "Java, Python, Android, Automação IA",
+    "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFtqkIVpycT9r2CK65Y0VAT4AXSpVjVwvM_W73dgUoofGyVfHO_TXHAoWTrIRbxkZYqhNTrtSME4iT5Dr5okiANz7e9e3JRFYBpJblYeP2MT4xzJwN0ZPg6-jg8IJy5i6My42m-M1Z9ndv3FVs4bOH8BYTzh_f-jMb8GmXgVJ3LdW3oS3Q=",
+    "dataColeta": "03/10/2026, 12:02",
+    "notificada": true
+  }
+];
