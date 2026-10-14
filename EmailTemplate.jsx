@@ -16,12 +16,13 @@ const EmailTemplate = ({ vagas = [] }) => {
   return (
     <Html>
       <Head />
-      <Preview>Novas Vagas de Estágio (Atualizadas)</Preview>
+      <Preview>Novas Oportunidades de Estágio Selecionadas</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Text style={title}>🚀 Novas Vagas Encontradas!</Text>
+          <Text style={brandHeader}>ESTÁGIOBOT AI</Text>
+          <Text style={title}>Novas Vagas de Estágio</Text>
           <Text style={subtitle}>
-            Aqui estão as oportunidades fresquinhas de desenvolvimento e dados que separamos para você hoje.
+            Identificamos {vagas.length} oportunidade(s) compatível(is) com seu turno de estudo (manhã livre) e seu perfil em Engenharia/Dados/IA.
           </Text>
 
           <Section style={grid}>
@@ -31,10 +32,12 @@ const EmailTemplate = ({ vagas = [] }) => {
                   <Text style={companyName}>{vaga.empresa}</Text>
                   <Text style={jobTitle}>{vaga.cargo}</Text>
                   <Text style={details}>📍 {vaga.modalidade}</Text>
-                  <Text style={requirements}>📝 {vaga.requisitos}</Text>
+                  {vaga.requisitos ? (
+                    <Text style={requirements}>📝 {vaga.requisitos}</Text>
+                  ) : null}
                   <Section style={btnContainer}>
                     <Link href={vaga.link} style={button}>
-                      Ver Vaga
+                      Candidatar-se à Vaga ↗
                     </Link>
                   </Section>
                 </Column>
@@ -43,7 +46,7 @@ const EmailTemplate = ({ vagas = [] }) => {
           </Section>
 
           <Text style={footer}>
-            Automatizado com carinho pelo seu Agente de Vagas.
+            Monitoramento autônomo • Painel atualizado em tempo real no seu computador.
           </Text>
         </Container>
       </Body>
@@ -54,37 +57,45 @@ const EmailTemplate = ({ vagas = [] }) => {
 export default EmailTemplate;
 
 const main = {
-  backgroundColor: '#f6f9fc',
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
+  backgroundColor: '#F5F6F5',
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif',
 };
 
 const container = {
-  backgroundColor: '#ffffff',
-  margin: '0 auto',
-  padding: '20px 0 48px',
-  marginBottom: '64px',
-  borderRadius: '8px',
-  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  backgroundColor: '#FFFFFF',
+  margin: '24px auto',
+  padding: '32px 24px',
+  borderRadius: '12px',
+  border: '1px solid #E2E6E3',
+  maxWidth: '600px',
+};
+
+const brandHeader = {
+  fontSize: '11px',
+  fontWeight: '700',
+  letterSpacing: '1px',
+  color: '#235347',
+  textTransform: 'uppercase',
+  marginBottom: '4px',
 };
 
 const title = {
-  fontSize: '24px',
+  fontSize: '22px',
   lineHeight: '1.25',
   fontWeight: '700',
-  color: '#333',
-  padding: '0 24px',
+  color: '#192420',
+  margin: '4px 0 8px 0',
 };
 
 const subtitle = {
-  fontSize: '16px',
+  fontSize: '14px',
   lineHeight: '1.5',
-  color: '#555',
-  padding: '0 24px',
+  color: '#5C6C65',
   marginBottom: '24px',
 };
 
 const grid = {
-  padding: '0 24px',
+  width: '100%',
 };
 
 const cardRow = {
@@ -92,63 +103,65 @@ const cardRow = {
 };
 
 const card = {
-  border: '1px solid #eaeaea',
-  borderRadius: '8px',
+  border: '1px solid #E2E6E3',
+  borderRadius: '10px',
   padding: '16px',
-  backgroundColor: '#fafafa',
+  backgroundColor: '#FAFBFA',
   width: '100%',
 };
 
 const companyName = {
-  fontSize: '12px',
-  fontWeight: '600',
+  fontSize: '11px',
+  fontWeight: '700',
   textTransform: 'uppercase',
-  color: '#888',
-  margin: '0',
+  color: '#235347',
+  margin: '0 0 4px 0',
+  letterSpacing: '0.5px',
 };
 
 const jobTitle = {
-  fontSize: '18px',
-  fontWeight: 'bold',
-  color: '#111',
-  marginTop: '4px',
-  marginBottom: '8px',
+  fontSize: '16px',
+  fontWeight: '700',
+  color: '#192420',
+  margin: '0 0 6px 0',
 };
 
 const details = {
-  fontSize: '14px',
-  color: '#444',
+  fontSize: '13px',
+  color: '#5C6C65',
   margin: '4px 0',
 };
 
 const requirements = {
-  fontSize: '13px',
-  color: '#666',
+  fontSize: '12px',
+  color: '#5C6C65',
   margin: '8px 0 16px 0',
   lineHeight: '1.4',
 };
 
 const btnContainer = {
   textAlign: 'left',
+  marginTop: '12px',
 };
 
 const button = {
-  backgroundColor: '#000000',
-  borderRadius: '4px',
-  color: '#fff',
-  fontSize: '14px',
+  backgroundColor: '#235347',
+  borderRadius: '6px',
+  color: '#FFFFFF',
+  fontSize: '13px',
   textDecoration: 'none',
   textAlign: 'center',
   display: 'inline-block',
-  padding: '10px 16px',
-  fontWeight: 'bold',
+  padding: '8px 16px',
+  fontWeight: '600',
 };
 
 const footer = {
-  color: '#8898aa',
-  fontSize: '12px',
+  color: '#8A9992',
+  fontSize: '11px',
   lineHeight: '16px',
-  marginTop: '24px',
+  marginTop: '32px',
   textAlign: 'center',
-  padding: '0 24px',
+  borderTop: '1px solid #E2E6E3',
+  paddingTop: '16px',
 };

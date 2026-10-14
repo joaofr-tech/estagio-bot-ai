@@ -1,5 +1,4 @@
 require('esbuild-register');
-const path = require('path');
 const nodemailer = require('nodemailer');
 const React = require('react');
 const { render } = require('@jsx-email/all');
@@ -7,18 +6,18 @@ const EmailTemplate = require('./EmailTemplate.jsx').default;
 const { obterPendentes, marcarComoNotificadas } = require('./gerenciador_vagas.js');
 require('dotenv').config({ path: __dirname + '/.env' });
 
-async function dispararResumo() {
-  console.log("=========================================");
-  console.log(`[${new Date().toLocaleString('pt-BR')}] Verificando vagas pendentes para o Resumo Matinal das 07:15...`);
+async function verificarEEnviar() {
+  const agora = new Date().toLocaleString('pt-BR');
+  console.log(`[${agora}] Verificando vagas acumuladas não enviadas...`);
 
   const pendentes = obterPendentes();
 
   if (pendentes.length === 0) {
-    console.log("Nenhuma vaga pendente no banco de dados. E-mail poupado com sucesso para não gerar spam!");
+    console.log("Nenhuma vaga pendente para envio. Caixa de entrada poupada!");
     return;
   }
 
-  console.log(`Encontradas ${pendentes.length} vaga(s) inédita(s) acumuladas. Compilando e-mail...`);
+  console.log(`Encontradas ${pendentes.length} vaga(s) pendente(s). Compilando e-mail...`);
 
   const emailHtml = await render(React.createElement(EmailTemplate, { vagas: pendentes }));
 
@@ -32,24 +31,24 @@ async function dispararResumo() {
     },
   });
 
-  const subject = `☕ Resumo Matinal: ${pendentes.length} Nova(s) Vaga(s) de Estágio Encontrada(s)!`;
+  const subject = `Novas Vagas de Estágio Encontradas (${pendentes.length})`;
 
   try {
     const info = await transporter.sendMail({
       from: `"EstágioBot AI" <${process.env.EMAIL_ADDRESS}>`,
-      to: "jf756061@gmail.com",
+      to: process.env.EMAIL_ADDRESS,
       subject: subject,
       html: emailHtml,
     });
-    console.log(`E-mail de resumo enviado com sucesso! Message ID: ${info.messageId}`);
+    console.log(`E-mail enviado com sucesso! ID: ${info.messageId}`);
 
-    // Marca as vagas no banco como notificadas para nunca mais reenviar
+    // Marca as vagas no banco como notificadas
     const ids = pendentes.map(v => v.id);
     marcarComoNotificadas(ids);
-    console.log(`${ids.length} vaga(s) marcada(s) como notificadas no banco local.`);
+    console.log(`${ids.length} vaga(s) marcada(s) como notificadas.`);
   } catch (error) {
-    console.error("Erro ao enviar o e-mail de resumo:", error);
+    console.error("Erro ao enviar e-mail:", error);
   }
 }
 
-dispararResumo();
+verificarEEnviar();

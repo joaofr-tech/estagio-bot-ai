@@ -11,3 +11,6 @@ novas_vagas.json
 # Sistema operacional
 .DS_Store
 Thumbs.db
+
+.agents/
+skills-lock.json

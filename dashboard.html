@@ -3,222 +3,395 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EstágioBot AI - Painel de Observabilidade</title>
+  <title>EstágioBot • Oportunidades & Monitoramento</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#235347',
+              hover: '#1B4238',
+              light: '#EAF1EE',
+              surface: '#F4F7F5',
+            },
+            canvas: '#F5F6F5',
+            ink: {
+              DEFAULT: '#192420',
+              muted: '#5C6C65',
+              subtle: '#8A9992',
+              border: '#E2E6E3',
+              card: '#FFFFFF',
+            }
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+<body class="bg-canvas text-ink antialiased min-h-screen flex flex-col selection:bg-brand selection:text-white">
 
-  <!-- Top Navigation -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm shadow-indigo-200">
-          🤖
+  <!-- Minimal Header -->
+  <header class="bg-ink-card border-b border-ink-border sticky top-0 z-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Live Pulse -->
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-brand text-white flex items-center justify-center font-bold text-sm shadow-sm">
+          EB
         </div>
         <div>
-          <h1 class="text-lg font-bold text-slate-900 leading-tight">EstágioBot AI</h1>
-          <p class="text-xs text-slate-500">Painel de Observabilidade & Auditoria</p>
+          <h1 class="text-sm sm:text-base font-bold text-ink leading-tight">EstágioBot</h1>
+          <div class="flex items-center gap-1.5 text-xs text-ink-muted">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="header-status-text">Carregando status...</span>
+          </div>
         </div>
       </div>
-      <div class="flex items-center space-x-3">
-        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-          <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-          Agendado (Windows Task Scheduler)
-        </span>
-        <button onclick="location.reload()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-1.5 px-3 rounded-md transition">
-          🔄 Atualizar
+
+      <!-- Segmented Navigation Tabs -->
+      <nav class="flex items-center p-1 bg-canvas rounded-xl border border-ink-border">
+        <button id="nav-btn-vagas" onclick="switchView('vagas')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-ink-card text-brand shadow-sm transition">
+          Vagas <span id="badge-total-vagas" class="ml-1 px-1.5 py-0.2 rounded-full bg-brand-light text-brand font-mono text-[11px]">0</span>
         </button>
-      </div>
+        <button id="nav-btn-historico" onclick="switchView('historico')" class="px-3.5 py-1.5 rounded-lg text-xs font-medium text-ink-muted hover:text-ink transition">
+          Histórico de Checagens
+        </button>
+      </nav>
+
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+  <!-- Main Viewport -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
 
-    <!-- KPI Metric Cards -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Status do Robô</p>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="metric-status" class="text-xl font-bold text-slate-900">Operacional</span>
-          <span class="text-xs text-emerald-600 font-medium">100% OK</span>
-        </div>
-        <p id="metric-last-run" class="text-xs text-slate-400 mt-1">Última checagem: Carregando...</p>
-      </div>
-
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Varreduras Registradas</p>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="metric-total-runs" class="text-2xl font-bold text-slate-900">0</span>
-          <span class="text-xs text-indigo-600 font-medium">De hora em hora</span>
-        </div>
-        <p class="text-xs text-slate-400 mt-1">Execuções em segundo plano</p>
-      </div>
-
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Vagas Encontradas</p>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="metric-total-jobs" class="text-2xl font-bold text-emerald-600">0</span>
-          <span class="text-xs text-emerald-700 font-medium bg-emerald-50 px-2 py-0.5 rounded">Filtradas</span>
-        </div>
-        <p class="text-xs text-slate-400 mt-1">Turno livre + Engenharia/Dados</p>
-      </div>
-
-      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Tempo Médio de Raciocínio</p>
-        <div class="mt-2 flex items-baseline justify-between">
-          <span id="metric-avg-time" class="text-2xl font-bold text-slate-900">0s</span>
-          <span class="text-xs text-slate-500 font-medium">IA + Web Search</span>
-        </div>
-        <p class="text-xs text-slate-400 mt-1">Por ciclo completo</p>
-      </div>
-    </section>
-
-    <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- ============================================== -->
+    <!-- VIEW 1: VAGAS (OPORTUNIDADES DE ESTÁGIO)       -->
+    <!-- ============================================== -->
+    <div id="view-vagas" class="space-y-5">
       
-      <!-- Timeline / Log Executions (2 Cols) -->
-      <section class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
-          <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <span>⏱️</span> Histórico de Execuções Recentes
-          </h2>
-          <span class="text-xs text-slate-500">Gravado automaticamente</span>
+      <!-- Search & Filters Toolbar -->
+      <div class="bg-ink-card p-3 sm:p-4 rounded-xl border border-ink-border flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between shadow-xs">
+        
+        <!-- Search Input -->
+        <div class="relative flex-1">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-ink-subtle">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </span>
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Pesquisar por empresa, linguagem ou tecnologia..." 
+            class="w-full pl-9 pr-8 py-2 bg-canvas border border-ink-border rounded-lg text-xs sm:text-sm text-ink placeholder:text-ink-subtle focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition"
+          >
+          <button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-ink-subtle hover:text-ink">
+            ✕
+          </button>
         </div>
-        <div class="divide-y divide-slate-100 max-h-[460px] overflow-y-auto" id="runs-container">
-          <!-- Rendered dynamically -->
-        </div>
-      </section>
 
-      <!-- Vagas Notificadas / Repositório (1 Col) -->
-      <section class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-        <div class="p-5 border-b border-slate-200 bg-slate-50/50">
-          <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <span>🎯</span> Vagas Já Notificadas
-          </h2>
-          <p class="text-xs text-slate-500 mt-0.5">Links verificados e enviados para o seu e-mail</p>
+        <!-- Filter Chips -->
+        <div class="flex items-center gap-1.5">
+          <button onclick="setFilter('all')" id="chip-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand text-white transition">
+            Todas
+          </button>
+          <button onclick="setFilter('remoto')" id="chip-remoto" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-canvas text-ink-muted hover:text-ink border border-ink-border transition">
+            Remoto
+          </button>
+          <button onclick="setFilter('bh')" id="chip-bh" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-canvas text-ink-muted hover:text-ink border border-ink-border transition">
+            BH & Híbrido
+          </button>
         </div>
-        <div class="p-4 space-y-3 overflow-y-auto max-h-[460px] flex-1" id="jobs-container">
+
+      </div>
+
+      <!-- Counter Summary -->
+      <div class="flex items-center justify-between text-xs text-ink-muted px-1">
+        <span id="jobs-counter-text">Carregando oportunidades...</span>
+        <span class="text-[11px] text-ink-subtle">Sincronização em tempo real</span>
+      </div>
+
+      <!-- Job Cards Grid -->
+      <div id="jobs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW 2: HISTÓRICO DE AUDITORIA & OBSERVABILIDADE -->
+    <!-- ============================================== -->
+    <div id="view-historico" class="hidden space-y-4">
+      
+      <div class="bg-ink-card p-5 rounded-xl border border-ink-border shadow-xs">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-ink-border">
+          <div>
+            <h2 class="text-sm font-bold text-ink">Registro de Varreduras da IA</h2>
+            <p class="text-xs text-ink-muted mt-0.5">Auditoria dos ciclos executados em segundo plano pelo agente</p>
+          </div>
+          <span class="font-mono text-xs text-brand bg-brand-light px-2.5 py-1 rounded-md font-semibold" id="total-runs-badge">
+            0 checagens
+          </span>
+        </div>
+
+        <div id="runs-list" class="divide-y divide-ink-border">
           <!-- Rendered dynamically -->
         </div>
-      </section>
+      </div>
 
     </div>
 
   </main>
 
-  <!-- Load Data -->
+  <!-- Clean Footer -->
+  <footer class="border-t border-ink-border bg-ink-card py-4 mt-auto">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-ink-subtle gap-2">
+      <div class="flex items-center gap-2">
+        <span>EstágioBot AI</span>
+        <span>•</span>
+        <span>Desenvolvimento, Dados & Inteligência Artificial</span>
+      </div>
+      <div class="font-mono text-[11px]">
+        Filtro ativo: Turno da manhã livre
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Sources -->
   <script src="historico_execucoes.js"></script>
   <script src="banco_vagas.js"></script>
 
-  <!-- Dashboard Renderer Logic -->
+  <!-- App Controller -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const data = window.HISTORICO_EXECUCOES || [];
-      const banco = window.BANCO_VAGAS || [];
-      
-      // Calculate Metrics
-      const totalRuns = data.length;
-      let totalTime = 0;
+    let currentView = 'vagas';
+    let currentFilter = 'all';
+    let searchQuery = '';
 
-      data.forEach(item => {
-        totalTime += (item.duracaoSegundos || 30);
+    const executionData = (window.HISTORICO_EXECUCOES || []).slice();
+    const dbJobs = (window.BANCO_VAGAS || []).slice();
+
+    // Consolidate Unique Jobs
+    function getConsolidatedJobs() {
+      const map = new Map();
+      dbJobs.forEach(job => {
+        if (job.empresa && job.cargo) {
+          const key = (job.empresa + '|' + job.cargo).toLowerCase();
+          map.set(key, job);
+        }
+      });
+      executionData.forEach(run => {
+        if (Array.isArray(run.vagas)) {
+          run.vagas.forEach(job => {
+            const key = (job.empresa + '|' + job.cargo).toLowerCase();
+            if (!map.has(key)) {
+              map.set(key, { ...job, dataColeta: run.timestamp, notificada: true });
+            }
+          });
+        }
+      });
+      return Array.from(map.values());
+    }
+
+    const allJobs = getConsolidatedJobs();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initHeader();
+      renderJobs();
+      renderHistory();
+      setupSearch();
+
+      // Auto-refresh silent listener (keeps page always fresh)
+      window.addEventListener("focus", () => location.reload());
+      setInterval(() => location.reload(), 60000);
+    });
+
+    function initHeader() {
+      const lastRun = executionData.length > 0 ? executionData[0].timestamp : "Nenhuma recente";
+      document.getElementById("header-status-text").innerText = `Última varredura: ${lastRun}`;
+      document.getElementById("badge-total-vagas").innerText = allJobs.length;
+      document.getElementById("total-runs-badge").innerText = `${executionData.length} varreduras registradas`;
+    }
+
+    function switchView(view) {
+      currentView = view;
+      const btnVagas = document.getElementById("nav-btn-vagas");
+      const btnHist = document.getElementById("nav-btn-historico");
+      const viewVagas = document.getElementById("view-vagas");
+      const viewHist = document.getElementById("view-historico");
+
+      if (view === 'vagas') {
+        btnVagas.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-ink-card text-brand shadow-sm transition";
+        btnHist.className = "px-3.5 py-1.5 rounded-lg text-xs font-medium text-ink-muted hover:text-ink transition";
+        viewVagas.classList.remove("hidden");
+        viewHist.classList.add("hidden");
+      } else {
+        btnHist.className = "px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-ink-card text-brand shadow-sm transition";
+        btnVagas.className = "px-3.5 py-1.5 rounded-lg text-xs font-medium text-ink-muted hover:text-ink transition";
+        viewHist.classList.remove("hidden");
+        viewVagas.classList.add("hidden");
+      }
+    }
+
+    function setupSearch() {
+      const input = document.getElementById("search-input");
+      const clearBtn = document.getElementById("search-clear-btn");
+
+      input.addEventListener("input", (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        if (searchQuery.length > 0) {
+          clearBtn.classList.remove("hidden");
+        } else {
+          clearBtn.classList.add("hidden");
+        }
+        renderJobs();
+      });
+    }
+
+    function clearSearch() {
+      document.getElementById("search-input").value = "";
+      searchQuery = "";
+      document.getElementById("search-clear-btn").classList.add("hidden");
+      renderJobs();
+    }
+
+    function setFilter(type) {
+      currentFilter = type;
+      const chips = {
+        all: document.getElementById("chip-all"),
+        remoto: document.getElementById("chip-remoto"),
+        bh: document.getElementById("chip-bh")
+      };
+
+      Object.entries(chips).forEach(([key, btn]) => {
+        if (!btn) return;
+        if (key === type) {
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand text-white transition";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-medium bg-canvas text-ink-muted hover:text-ink border border-ink-border transition";
+        }
       });
 
-      const avgTime = totalRuns > 0 ? Math.round(totalTime / totalRuns) : 0;
-      const lastRun = data.length > 0 ? data[0].timestamp : "Nenhuma ainda";
+      renderJobs();
+    }
 
-      // Populate Metrics Cards
-      document.getElementById("metric-total-runs").innerText = totalRuns;
-      document.getElementById("metric-total-jobs").innerText = banco.length;
-      document.getElementById("metric-avg-time").innerText = `${avgTime}s`;
-      document.getElementById("metric-last-run").innerText = `Última checagem: ${lastRun}`;
+    function renderJobs() {
+      const container = document.getElementById("jobs-grid");
+      const counterText = document.getElementById("jobs-counter-text");
 
-      // Render Execution Timeline
-      const runsContainer = document.getElementById("runs-container");
-      if (data.length === 0) {
-        runsContainer.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">Nenhum registro encontrado ainda.</div>`;
-      } else {
-        runsContainer.innerHTML = data.map(item => {
-          let badge = "";
-          let icon = "";
-          if (item.status === "VAGAS_SALVAS" || item.status === "VAGAS_ENVIADAS") {
-            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800">Vagas Inéditas</span>`;
-            icon = `<div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">⭐</div>`;
-          } else if (item.status === "RESUMO_DIARIO_ENVIADO") {
-            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-indigo-100 text-indigo-800">Resumo 07:15 Enviado</span>`;
-            icon = `<div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">✉️</div>`;
-          } else if (item.status === "ERRO") {
-            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-100 text-rose-800">Falha</span>`;
-            icon = `<div class="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm">⚠️</div>`;
-          } else {
-            badge = `<span class="px-2 py-0.5 rounded text-xs font-semibold bg-slate-100 text-slate-600">Sem Vagas Novas</span>`;
-            icon = `<div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm">🔍</div>`;
-          }
+      const filtered = allJobs.filter(job => {
+        if (searchQuery) {
+          const str = `${job.cargo} ${job.empresa} ${job.requisitos || ''} ${job.modalidade || ''}`.toLowerCase();
+          if (!str.includes(searchQuery)) return false;
+        }
+        if (currentFilter === 'remoto') {
+          return (job.modalidade || '').toLowerCase().includes('remoto');
+        } else if (currentFilter === 'bh') {
+          const mod = (job.modalidade || '').toLowerCase();
+          return mod.includes('belo horizonte') || mod.includes('híbrido') || mod.includes('presencial') || mod.includes('bh');
+        }
+        return true;
+      });
 
-          return `
-            <div class="p-4 flex items-start gap-3 hover:bg-slate-50/70 transition">
-              ${icon}
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-semibold text-slate-900">${item.timestamp}</span>
-                  <div class="flex items-center gap-2">
-                    <span class="text-[11px] text-slate-400">⏱️ ${item.duracaoSegundos || 30}s</span>
-                    ${badge}
-                  </div>
-                </div>
-                <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.mensagem}</p>
-              </div>
-            </div>
-          `;
-        }).join("");
+      counterText.innerHTML = `Mostrando <strong class="text-brand font-semibold">${filtered.length}</strong> de ${allJobs.length} vagas catalogadas`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center bg-ink-card rounded-xl border border-ink-border">
+            <p class="text-xs text-ink-muted">Nenhuma oportunidade corresponde à sua busca.</p>
+          </div>
+        `;
+        return;
       }
 
-      // Render Stored Jobs from Database
-      const jobsContainer = document.getElementById("jobs-container");
-      if (banco.length === 0) {
-        jobsContainer.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">Nenhuma vaga registrada ainda no banco.</div>`;
-      } else {
-        jobsContainer.innerHTML = banco.map(job => {
-          const statusBadge = job.notificada 
-            ? `<span class="text-[10px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-medium">Enviada por e-mail</span>`
-            : `<span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-semibold">Pendente (Envio às 07:15)</span>`;
+      container.innerHTML = filtered.map(job => {
+        const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+        const badgeModalidade = isRemoto
+          ? `<span class="inline-flex items-center gap-1 text-[11px] font-medium text-brand bg-brand-light px-2 py-0.5 rounded-md">
+               Remoto
+             </span>`
+          : `<span class="inline-flex items-center gap-1 text-[11px] font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md">
+               ${job.modalidade || 'Híbrido/BH'}
+             </span>`;
 
-          return `
-            <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-100/50 transition">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider truncate">${job.empresa}</span>
-                ${statusBadge}
+        return `
+          <div class="bg-ink-card p-5 rounded-xl border border-ink-border flex flex-col justify-between hover:border-brand/40 transition shadow-xs">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-1.5">
+                <span class="text-xs font-bold text-brand uppercase tracking-wider">${job.empresa || 'Empresa Confidencial'}</span>
+                ${badgeModalidade}
               </div>
-              <h3 class="text-xs font-bold text-slate-900 mt-1 leading-snug">${job.cargo}</h3>
-              <p class="text-[11px] text-slate-500 mt-0.5">📍 ${job.modalidade}</p>
-              ${job.requisitos ? `<p class="text-[11px] text-slate-600 mt-1 line-clamp-2">📝 ${job.requisitos}</p>` : ''}
-              ${job.link ? `
-                <div class="mt-2.5">
-                  <a href="${job.link}" target="_blank" class="text-[11px] inline-flex items-center gap-1 font-semibold text-indigo-600 hover:text-indigo-800">
-                    Acessar Vaga Oficial ↗
-                  </a>
-                </div>
+
+              <h3 class="text-sm sm:text-base font-bold text-ink leading-snug">
+                ${job.cargo}
+              </h3>
+
+              ${job.requisitos ? `
+                <p class="mt-2 text-xs text-ink-muted leading-relaxed line-clamp-3">
+                  ${job.requisitos}
+                </p>
               ` : ''}
             </div>
-          `;
-        }).join("");
+
+            <div class="mt-4 pt-3 border-t border-ink-border flex items-center justify-between gap-2">
+              <span class="font-mono text-[11px] text-ink-subtle">
+                ${job.dataColeta ? job.dataColeta.split(',')[0] : 'Recente'}
+              </span>
+
+              ${job.link ? `
+                <a 
+                  href="${job.link}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand text-white hover:bg-brand-hover transition"
+                >
+                  <span>Candidatar-se</span>
+                  <span class="text-[10px]">↗</span>
+                </a>
+              ` : `
+                <span class="text-xs text-ink-subtle">Link indisponível</span>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderHistory() {
+      const container = document.getElementById("runs-list");
+      if (executionData.length === 0) {
+        container.innerHTML = `<div class="py-6 text-center text-xs text-ink-muted">Nenhum log registrado ainda.</div>`;
+        return;
       }
 
-    });
+      container.innerHTML = executionData.map(run => {
+        const hasJobs = Array.isArray(run.vagas) && run.vagas.length > 0;
+        const jobBadge = hasJobs 
+          ? `<span class="text-[11px] font-semibold text-brand bg-brand-light px-2 py-0.5 rounded-md">${run.vagas.length} vaga(s) inédita(s)</span>`
+          : `<span class="text-[11px] text-ink-subtle">Sem vagas inéditas</span>`;
+
+        return `
+          <div class="py-3 flex items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-ink-muted shrink-0">${run.timestamp}</span>
+              <span class="text-ink truncate">${run.mensagem}</span>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="font-mono text-ink-subtle text-[11px]">⏱️ ${run.duracaoSegundos || 30}s</span>
+              ${jobBadge}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
   </script>
 </body>
 </html>
