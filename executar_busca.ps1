@@ -13,12 +13,26 @@ if (Test-Path $vagasJson) {
 }
 
 $prompt = @"
-Voce e o Agente de Busca de Estagios do Joao. Siga o processo:
-1. Pesquise vagas novas de estagio em Engenharia de Software, Desenvolvimento, Dados ou IA (Remoto ou BH, Contagem, Ibirite, Sarzedo).
-2. REGRA DE OURO PARA LINKS: Use EXATAMENTE a URL fornecida pela busca (mesmo que seja um redirecionamento do Google/Vertex). NUNCA deduza ou encurte URLs.
-3. Requisitos: Aluno do 3 semestre, estuda de MANHA (precisa ser turno da tarde ou flexivel).
-4. Se encontrar vagas que atendam a esses requisitos, salve-as em novas_vagas.json (array JSON puro com empresa, cargo, modalidade, requisitos, link).
-5. Se nao houver vagas novas, apenas responda 'Nenhuma vaga nova nesta rodada.' e finalize silenciosamente.
+Voce e o Agente Especialista em Busca de Estagios de TI do Joao.
+Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SEM DUPLICIDADES:
+
+1. ESCOPO & PERFIL:
+   - Areas: Engenharia de Software, Desenvolvimento Web/Full Stack/Mobile, Engenharia/Ciencia de Dados, Inteligencia Artificial/Automacao.
+   - Localizacao: Remoto (Brasil) ou Presencial/Hibrido em Belo Horizonte e regiao metropolitana (Contagem, Betim, Ibirite, Sarzedo).
+   - Requisito obrigatorio de horario: Joao estuda no turno da MANHA (3º periodo de Engenharia de Software). A vaga DEVE ser no turno da TARDE (ex: 12h-18h, 13h-19h) ou com carga horaria FLEXIVEL de 6h diarias.
+
+2. VAGAS RECENTES & ATIVAS (EVITE VAGAS EXPIRADAS):
+   - Priorize vagas publicadas RECENTEMENTE (ultimas 24 a 72 horas / semana corrente) em plataformas ativas como Gupy, LinkedIn Jobs, Lever, Greenhouse, Catho, Vagas.com ou sites de carreiras das empresas.
+   - Ignore postagens antigas de semanas/meses atras que provavelmente ja foram preenchidas ou encerradas.
+
+3. LINKS DIRETOS & VALIDOS:
+   - Forneca a URL real e direta da pagina de candidatura (ex: https://empresa.gupy.io/job/... ou https://linkedin.com/jobs/view/...).
+   - Se o resultado vier com redirecionamento de busca, extraia e use o link direto da pagina da vaga para evitar links quebrados ou expirados.
+
+4. FORMATO DE SAIDA:
+   - Se encontrar novas vagas compativeis e ativas, salve-as EXATAMENTE em 'novas_vagas.json' como um array JSON puro contendo:
+     [ { "empresa": "...", "cargo": "...", "modalidade": "...", "requisitos": "...", "link": "..." } ]
+   - Se nao encontrar vagas novas e ativas com esses requisitos nesta rodada, apenas responda 'Nenhuma vaga nova nesta rodada.' e finalize silenciosamente sem criar o arquivo.
 "@
 
 $result = agy -p $prompt --dangerously-skip-permissions

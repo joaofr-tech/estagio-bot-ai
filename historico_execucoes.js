@@ -1,5 +1,255 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "27/10/2026, 18:34:45",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1398,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "27/10/2026, 17:41:15",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1788,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "27/10/2026, 16:26:56",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 930,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "27/10/2026, 15:38:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1621,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "27/10/2026, 15:10:34",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 16211,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "27/10/2026, 01:42:13",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1847,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "27/10/2026, 00:27:15",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 948,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "26/10/2026, 23:30:03",
+    "status": "VAGAS_SALVAS",
+    "duracaoSegundos": 1116,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Onfly",
+        "cargo": "Programa de Estágio (Recruta Onfly 2026) - Trilha Tecnologia",
+        "modalidade": "Belo Horizonte - MG (Presencial / Híbrido)",
+        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatas (a partir do 3º período); lógica de programação, interesse prático em desenvolvimento (frontend, backend, mobile), dados ou automação com IA; carga horária de 6h diárias (compatível com turno da tarde/flexível); bolsa-auxílio de até R$ 2.500 + benefícios; inscrições até 02/11/2026.",
+        "link": "https://recruta.onfly.com.br/"
+      },
+      {
+        "empresa": "TRT-MG (Tribunal Regional do Trabalho da 3ª Região / CIEE-MG)",
+        "cargo": "Estágio em Tecnologia da Informação / Engenharia de Software (Edital nº 01/2026)",
+        "modalidade": "Belo Horizonte - MG (Presencial)",
+        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins; desenvolvimento de sistemas, suporte e infraestrutura tecnológica; turno da tarde (vespertino) ou flexível (carga horária de 4h a 6h diárias); bolsa-auxílio + auxílio-transporte; inscrições e prova online via CIEE até 29/10/2026 às 12h.",
+        "link": "https://pp.ciee.org.br/vitrine/17416/detalhe"
+      }
+    ]
+  },
+  {
+    "timestamp": "26/10/2026, 22:36:00",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1474,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "26/10/2026, 21:39:30",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1684,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "26/10/2026, 20:31:34",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1208,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "26/10/2026, 19:53:25",
+    "status": "VAGAS_SALVAS",
+    "duracaoSegundos": 1642,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "SOUTAG TECNOLOGIA BRASIL LTDA",
+        "cargo": "Estagiário de Automação e IA",
+        "modalidade": "Presencial (Belo Horizonte - MG / Funcionários)",
+        "requisitos": "Cursando graduação na área de exatas ou engenharias (previsão de formatura igual ou superior a 1 ano - ideal para 3º período de Engenharia de Software); conhecimentos em programação (Python ou JavaScript); ferramentas de dados (SQL, PowerBI, Excel); desejável noções em modelos de IA e ferramentas de automação (N8N, Make, Machine Learning). Carga horária de 6h diárias flexível / vespertina (compatível com estudos matutinos). Bolsa estágio de R$ 2.000,00 + Vale Refeição flexível de R$ 660,00 + Vale Transporte.",
+        "link": "https://vagas.solides.com.br/vaga/944056"
+      }
+    ]
+  },
+  {
+    "timestamp": "26/10/2026, 18:24:43",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 797,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "26/10/2026, 18:06:46",
+    "status": "VAGAS_SALVAS",
+    "duracaoSegundos": 9662,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "ZG Soluções",
+        "cargo": "Acelera ZG - 11º Edição - Construindo devs de verdade (Com ou sem IA)!",
+        "modalidade": "100% Remoto",
+        "requisitos": "Estudantes de graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (conclusão prevista a partir de 2028/2 - compatível com 3º período); raciocínio lógico, algoritmos e estruturas de dados; Linux (Ubuntu/Kubuntu); formação prática de 6 meses na stack (Java, TypeScript, Microsserviços, Desenvolvimento com IA, Clean Code) com bolsa de estágio acima do mercado e carga horária flexível (momentos síncronos e assíncronos gravados).",
+        "link": "https://zgteam.gupy.io/jobs/12776284"
+      }
+    ]
+  },
+  {
+    "timestamp": "26/10/2026, 13:59:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 1200,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "25/10/2026, 23:22:40",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 673,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "25/10/2026, 21:23:10",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 703,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "25/10/2026, 20:21:18",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 591,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "25/10/2026, 18:20:20",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 534,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "25/10/2026, 17:20:22",
+    "status": "VAGAS_SALVAS",
+    "duracaoSegundos": 536,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Sandvik Mining and Rock Technology",
+        "cargo": "Estagiário(a) Análise de Dados - Rock Processing",
+        "modalidade": "Belo Horizonte - MG (Híbrido)",
+        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Ciência de Dados ou Sistemas de Informação; Excel intermediário; desejável familiaridade com Power Query, SQL ou Python, Power BI e DAX; carga horária de 6h diárias (compatível com turno da tarde/flexível).",
+        "link": "https://sandvik.gupy.io/jobs/12764072"
+      },
+      {
+        "empresa": "SMS group",
+        "cargo": "Estágio de TI",
+        "modalidade": "Belo Horizonte - MG (Híbrido)",
+        "requisitos": "Cursando superior em Tecnologia da Informação, Engenharia de Software ou áreas correlatas; suporte técnico N1, sistemas Windows e pacote Office; desejável ferramentas de acesso remoto e noções de automação; carga horária de 6h diárias (compatível com turno da tarde/flexível).",
+        "link": "https://smstalents.gupy.io/jobs/12663373"
+      },
+      {
+        "empresa": "Belgo Arames",
+        "cargo": "Estagiário de TI - Área Industrial",
+        "modalidade": "Contagem - MG (Presencial)",
+        "requisitos": "Cursando superior em Engenharia de Software, Sistemas de Informação ou Ciência da Computação; noções de sistemas de manufatura/MES; conhecimentos em informática avançada (Windows/Linux) e lógica de programação; carga horária de 6h diárias (compatível com turno da tarde/flexível).",
+        "link": "https://belgo.gupy.io/jobs/12747324"
+      },
+      {
+        "empresa": "PETRONAS",
+        "cargo": "Programa de Estágio PETRONAS 2026",
+        "modalidade": "Contagem - MG (Híbrido)",
+        "requisitos": "Cursando graduação em Engenharia de Software, TI ou áreas correlatas; pacote Office intermediário; disponibilidade de 30h semanais (6h por dia, compatível com turno da tarde/flexível); inglês intermediário desejável.",
+        "link": "https://programadeestagiopetronas.gupy.io/jobs/12749668"
+      }
+    ]
+  },
+  {
+    "timestamp": "25/10/2026, 14:14:49",
+    "status": "VAGAS_SALVAS",
+    "duracaoSegundos": 203,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Valenet",
+        "cargo": "Estagiário de Tecnologia (Desenvolvimento, Dados e IA)",
+        "modalidade": "Belo Horizonte - MG (Híbrido)",
+        "requisitos": "Cursando Ensino Superior em Tecnologia/Engenharias (formação a partir de 04/2027); noções de SQL, lógica de programação; diferenciais: Python, JavaScript/React, Git e uso de IA/APIs; turno da tarde ou flexível",
+        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGgJu65Kyy4HC0v86r96l6OVHO4zaWYJSPjs7OGykmgpYtFniIqADxIIfPb9t8w4o_ZYnxXZh95Stc0hAgcm2lOjCNHWoXTnFn7y47KN-ldwo9I0hVANHa-q2Uw2yJ6vqu0CuCJNZNaALEu-CXmNw87_fRHSmqPefl2dJH11ynQRm2Cs5PZXOk-O5uMrSVtAdLT7Vkdj1t-w919HTUCuss4ICdt0u4scJ37TIegFw=="
+      },
+      {
+        "empresa": "Instituto de Pesquisas Eldorado",
+        "cargo": "Estágio em Automação de Testes / Desenvolvimento de Software",
+        "modalidade": "Remoto",
+        "requisitos": "Cursando Ciência da Computação, Eng. de Software/Computação ou Sistemas de Informação; Java, Python, ecossistema Android, ferramentas assistidas por IA (Gemini Code Assist); horário flexível / tarde",
+        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG1o0DkUywHgUaQUSKR8qmmjqz93UWRhO-7oyeLnzFk7-Wv8V-0dmvHquAhIdBjKIvwwQINlRgM7AuFlDBPAtESkKglGKUz5Ycno3AXV_DJl56XQRQaJGKO2_9xUl3HAUhbqqmncOdDattgy-VEpI4fxTrNxzT3T7a0i4mrJuTC0vjmk-g="
+      },
+      {
+        "empresa": "SMS group",
+        "cargo": "Estágio em Engenharia de Sistemas",
+        "modalidade": "Belo Horizonte - MG (Híbrido)",
+        "requisitos": "Cursando Engenharia de Sistemas, Software, Computação ou áreas afins a partir do 3º período; lógica de programação, Python, C# ou scripts para automação e IA; carga de 6h/dia turno da tarde",
+        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEGL-yj26WMOWa4yW1DGugHwApab67412aCXSEpZI6jsR8ubw4Au8ryhyDZ1ybYbMUvWG1S4UYJtSWOM8k4u4VuI8eApcaz5yuiZ56tdsrOrA_wUM9ezMJRLPjXuWfpJOEb-aKIaryvrzDiHu06QtIj_qSP-5--6A5RbafkW4V0ZhCIcNt6qvkWb_ui3aP7jeEelDm-hQnUNOhV"
+      },
+      {
+        "empresa": "Teknisa",
+        "cargo": "Estagiário de Programação Full Stack [BH]",
+        "modalidade": "Belo Horizonte - MG (Híbrido)",
+        "requisitos": "Cursando Ciência da Computação, Sistemas de Informação ou áreas afins; lógica de programação, JavaScript, CSS/HTML, Python e React; carga 6h/dia compatível com turno da tarde",
+        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlQlj9y3stQmuefx4RPbnjeEQiOEC7jKoSEljgt8Vu68tPrr4keKLZARivGEs4Ywz0hj2U6rTYGEMA7UdQHaVDXbqRR-rJQ9dGPFMzYpLtkp9guB594rI4MDBqsP7ErDdWFn_eWqTOaH6n40y4JPan6UAvWhzjdjnFiQ=="
+      },
+      {
+        "empresa": "MRV&CO",
+        "cargo": "Estágio em Ciência de Dados",
+        "modalidade": "Belo Horizonte - MG (Híbrido)",
+        "requisitos": "Graduação em andamento em Estatística, Ciência de Dados, Ciência da Computação, Engenharias ou SI; interesse em modelagem preditiva, análise de dados e IA; carga horária de 6h vespertino/flexível",
+        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE84TjG39mN5r2qSklS9mW5JwoczHczRx8Fr8TQ0yMcYX3ThbSv7wieFFg2l_f9D4dVoyTgBMhsuaA741VnPp5D5fF4rK5m_6lAXXPbBodLSaNMifUfZRHlTq_mXPR4jWEad3X3_Qizl-StEXmHFUmkSO_c6X6zpXftqAWyGD88"
+      }
+    ]
+  },
+  {
+    "timestamp": "25/10/2026, 13:17:42",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 376,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "25/10/2026, 12:18:24",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 418,
@@ -1141,990 +1391,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 284,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "22/10/2026, 22:15:55",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 268,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Concert Technologies S.A.",
-        "cargo": "Estágio — Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto (Belo Horizonte - MG)",
-        "requisitos": "Cursando Ciência da Computação, Engenharia de Software, Sistemas de Informação ou áreas afins (a partir do 3º período). Lógica de programação, Angular, Git; desejável Python, C#/.NET e SQL. Carga horária de 6h no período da tarde / flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEh-DDeBav2gt_O7BKWfZBSgbVDx5P-woX88erV3HRrkUVijGOwXfZ9S20U9pMjDmgQJX9U7DWH42j5ntOrXSReXOP2Z0PLLwtLobSqh46n4w8NWTb5NHBCJyI4DLdXLkSqP-frIco="
-      },
-      {
-        "empresa": "BWTech",
-        "cargo": "Estágio em Desenvolvimento Full Stack",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Ensino superior em andamento a partir do 3º período em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou afins. Lógica de programação, POO, banco de dados. Diferenciais: JS, React, Python, C#, Docker. Carga de 6h com flexibilidade de horário.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH-c5ZpS5YFEzr4-cL54SV5gQ0kTFNY5HOkq6B2mPHCCnDXrSIzraru3TugrWRcHayknGgjDfLttyzbW_oztOw-N6VGpUKgXCr53oL9jK32iLRtjVME1VKefX6rr58eZLsWnmYLJWr-WzIhn2bwEzZykX3_YAaBUosm5ri0LckX_Lmha7j0uqSioEQfrC2cwQ=="
-      },
-      {
-        "empresa": "Belgo Arames",
-        "cargo": "Estagiário(a) em Análise de Dados e Power BI",
-        "modalidade": "Híbrido (Contagem - MG)",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou afins (a partir do 3º período). Conhecimentos em análise de dados, Power BI, SQL e lógica. 6h diárias / flexível para turno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7hXshw73MJkolbezJRZ60Uly4-PoZVQF9vYUNBWZvhOk7tRCTxuOdOLU62EA3zpqaBCmkyOYvvOKRJoLspihSjvPJK8J8VI1CUiU5h9ttzc8PWfx0KsxQVmbKEKb6yRYxZBTxgYYfixj6ve45DD9z0qHITMLVDBdx="
-      },
-      {
-        "empresa": "Belgo Arames",
-        "cargo": "Estágio de Engenharia de Dados",
-        "modalidade": "Híbrido (Contagem - MG)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou afins. Noções de pipelines ETL/ELT, modelagem de dados, SQL e conceitos de nuvem (Azure). Jornada de 6h compatível com estudo pela manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFotDwZo13D2j3zmp0NiuzM_VkCh7QNmB5exK0DKI2DmiQCW3AML3r4qFHzRHadJraG6WrCQaoByueXv-CqcOZlXlthBkQOC3pwUCcowVCxMm-4fawhn7ZbfkwHSGItr1eU8AEYxxuwGh1RVfTXe9sBWnZmku14V1YJ8xPm_AWWzL7JjmX8cpc="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software / Data Mining",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou correlatas. Fundamentos de lógica de programação, Python, banco de dados (SQL) e noções de Machine Learning. Horário de 6h/dia flexível para estudantes.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEIEGS9VS8a0mmpa4a-7Vxx6NUr7DkSyzy0R8b7-CMZl6VQy3TrVAjgyGlsoodXthg7Y_Xn_LS-FbjI_-_OeG8126ILlGX0DXfbKNOVR24eowV-d9V0YnHPxe0PMBvbMgPqfcJQ6SpxZj7FCPouss2pjXxsgv_T6oJTjYAgvOjHPo42LaEW"
-      },
-      {
-        "empresa": "Teknisa",
-        "cargo": "Estagiário de Programação Full Stack",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Ciência da Computação, Engenharia de Software, Sistemas de Informação ou afins. Conhecimento em JavaScript, Python, React, lógica e modelagem relacional. 30h semanais (6h/dia), compatível com estudantes do turno da manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHfmcPAxuwTcbxTecv4fo3z9itrvKaKyxBCi7meRkrNa0X4VVcPy8yqL9iL9r-CKnsp9BTR_xFZQMfaVipjmzJR-oI5hjcP2PzVvhi-Kfre-khBaneYR3eMeZUsrqgVhVMPu-iZBVL-5Leo3dV-VYmTc0SYI4MQdSPNJyk="
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 21:21:30",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 603,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "S4ETeck",
-        "cargo": "Estágio em Engenharia de Software / Sistemas Embarcados",
-        "modalidade": "Belo Horizonte - MG (Presencial / Híbrido)",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou áreas afins; lógica de programação, C/C++, depuração e testes de software para sistemas embarcados; turno da tarde / flexível compatível com contraturno.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGn6-zGoCW_RolNXSjhdiMQErVIJ5k4db3C5k4Z5r_cHpTqNNYUInLOmZSbYmdM0CoNgxMZJB5J-s7ILgncNwBdUsMb93Vuo55k6hdoumFSUzk0HIT3KPHbDXZ7eppLcpSQhW0NXxS7PCcmjtxQIvectwjvS4x9Dy1pAbB20A=="
-      },
-      {
-        "empresa": "Mais Dados Digital",
-        "cargo": "Estágio em Desenvolvimento (.NET e SQL)",
-        "modalidade": "Contagem - MG (Híbrido)",
-        "requisitos": "Cursando a partir do 3º período em Ciência da Computação, Engenharia de Software ou Sistemas de Informação; lógica de programação, noções de .NET e bancos de dados SQL; auxílio no desenvolvimento, documentação e testes; jornada flexível para o contraturno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEuvhzNJzgcM1gVplVBBBZ5hQ8u1tmCPxk5XGGVmsk47jp1cuqdkcoBr9rZ8DccjzH9KJsGs_S97nq217JX39m8ccIthu45xL2E93GswOc9Ukx_cOsW_3vQwKf_fg8H"
-      },
-      {
-        "empresa": "Thoughtworks",
-        "cargo": "Programa de Entrada / Estágio em Desenvolvimento de Software e Dados",
-        "modalidade": "100% Remoto / Belo Horizonte - MG",
-        "requisitos": "Estudantes de graduação a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou correlatas; fundamentos de lógica, programação, arquitetura de software e interesse em desenvolvimento ágil e dados; jornada flexível compatível com o turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGCpsoon1N9bLvpX5z0J3PHX2pbeXlfbdUnfmkByI26fOFVuQgxwDxE8TV6Gl5oODnYsjQThBD2zoUMhoDg4AiNwoXdfVzdqSAuiTOn-ltj7mR8EflKFBOKMMtX-3PhVmJR3zqnJFhNjSa-yUa8t24="
-      },
-      {
-        "empresa": "Google Brasil",
-        "cargo": "Software Engineering Intern Program (SWE+ / Estágio em Engenharia de Software)",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Presencial)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação ou áreas afins (a partir do 3º período); conhecimentos em algoritmos, estruturas de dados, linguagens de programação (C++, Java, Python ou Go); jornada de estágio compatível com turno da tarde / horário de estudos flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzrUtOyACZsrwRUkx2CY0IRDDn6-wbjYjB_xub2YYS0SUymfZgrkCDEF-WDGjYqx7bxhw8uXCDif0rQrrir_iIWg3u7bo8K9UdOIutLNYATq-1ZJmv5G3t5DaB8OvnWDLPUReEOrQSemc="
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 20:24:21",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 774,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "22/10/2026, 19:13:19",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 112,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Concert Technologies S.A.",
-        "cargo": "Estágio em Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto / Belo Horizonte - MG",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou áreas afins; conhecimentos básicos em lógica, Angular, C#/.NET e Git; carga horária de 6h/dia com turno vespertino (tarde) e horário flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFn2wDel0i1d-VseFQ_8kq0qqB2vsKwFMfOUXSyShgfVkRNm3xiTMzLIglSPpWw-X75GBdDxaIXjiS_O9_5vFkdbhN9FsXAWQS-Uknej-NnbWdwgKwdhxR-AdB6qmMl-jLpqicKHOw="
-      },
-      {
-        "empresa": "TAGNA Tecnologia e Automação Industrial",
-        "cargo": "Estágio em Desenvolvimento de Software",
-        "modalidade": "Remoto / Belo Horizonte - MG",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou correlatas; noções de desenvolvimento, testes e validação de funcionalidades de software; horário flexível compatível com turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjfiTtM0113ekjENtll3JC2UpEPXQIdl5nxjjuL4TBrziddkTb7ld4oQE1TmJiL2fM7a9Tf3uf_FDcJ34CmLYyFVFFjaD2UDQrxa3gw1l4e4-k_ydpC34sAS74WZLSdkI2kVPEg9M_LozlDDPL4s6Hm0OD5Iwhjw5zpezvOI_AYRELYHV462NA09SYh9gyDQqT9Y14oJwxrvbP0A=="
-      },
-      {
-        "empresa": "BWTECH",
-        "cargo": "Estágio em Desenvolvimento Full Stack",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Flexível)",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou Sistemas de Informação; lógica de programação, JavaScript/React, SQL, Python ou C#; horário flexível compatível com contraturno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGxUL42ZJqqrFE5pkQgbBuvxJkM2FM6Fl7N8aDn4VgxcFe1zsUYezwirEm1ZJCaOnAx421aT_cDy0keIYkHzYDiVvJi_XSnkur_sPDd_Xona2Acd5EujvlLLhi7I_LoEcwJreODj1DJyfbemSD74Uo1XxZYXICexeNKkRH0XunTgwN7AdsAe8LuMRjMow=="
-      },
-      {
-        "empresa": "BugKillers / WarmUP",
-        "cargo": "Estágio em Inteligência Artificial e Automação",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou áreas de TI; interesse em IA generativa, testes, automação e ferramentas modernas de IA; 100% remoto com jornada flexível para o contraturno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFINY2YAQf7Tv9f_wLn-ZHk4Hb-jPOswa7fCzyR5xSKZqt5_JCZAUiOoYC6KmZVBrDk0aTbOVhQ6TnALSCmTAS6aRl-BFSghVj_GpC4nHMdY4zCiidULhTPbs8j4aV9hx4_kKHJRIvmP532rp3-CgM5GkrRH8pIogXfKr9kuJiVLpjIZF6ZXQG_xSvC"
-      },
-      {
-        "empresa": "Wabtec Corporation",
-        "cargo": "Estágio em Engenharia de Software e Projetos de TI",
-        "modalidade": "Contagem - MG (Híbrido / Flexível)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou Sistemas de Informação (a partir do 3º período); apoio ao ciclo de software e governança/projetos técnicos; 30h semanais com horários flexíveis para turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGxjIkh_hrZ43D6ZEAk5z3KzTGRbLpSW2tEZEzvQsnORpjV1dg7y4MBkttszrspdjHX9sKp_9tgkg5tQ6_bd6_MH8zvTbHPsmzPdYW9OB-qHoCdGfujKpgQxUOj60KRajvb1clyW3wv0x1Mc7DTnIsmQjK1UL74i46VVsE1xXsj5U_MwN9omHtcT_B7kYtBUxyNt6UCShQ="
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 18:21:57",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 630,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Avenue Code",
-        "cargo": "AC&D Internship - Programa de Estágio em Desenvolvimento de Software",
-        "modalidade": "Belo Horizonte - MG (Híbrido)",
-        "requisitos": "Cursando a partir do 3º ou 4º semestre em Sistemas de Informação, Ciência da Computação, Engenharia de Software ou correlatas; disponibilidade de 30h semanais com turno da tarde (ou horário flexível); interesse em desenvolvimento Java, Web/UI, APIs e DevOps com mentoria técnica.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzd1gmE0Kq-wfWgvuZ06hox1XrQo-YXYqB90byLmKSvsM7TnrdQGp9adej5CkfX_WNeYYAd3EYhmGyg5ELiu1DvvqFRTtBPGT3XHYhq0NS7xH7zbBLiTa4u6_7oIie"
-      },
-      {
-        "empresa": "NTT DATA Brasil",
-        "cargo": "Programa de Estágio em Tecnologia (Engenharia de Software e Dados)",
-        "modalidade": "Remoto / Híbrido",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Análise e Desenvolvimento de Sistemas ou afins (a partir do 3º período); disponibilidade de 6h diárias com turno flexível/vespertino; foco em desenvolvimento de software, modernização de sistemas e engenharia de dados.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGS2DuKz3SIYtK_jOQNJdIm1gIaHKTm9Ify88jAWFu44Zv9OFVyurLOWLih5XT9WbsWr7lxBQt34dLH2tixIULehSHV0W2ksd8Fqy_QNuw430v3m1WWzFjg3kOqgTcL2X36DIRLONBg4jo="
-      },
-      {
-        "empresa": "Stefanini",
-        "cargo": "Estágio em Tecnologia (Inteligência Artificial, Automação e Dados)",
-        "modalidade": "Remoto / Híbrido",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatas; apoio no desenvolvimento de assistentes com IA/chatbots, automações com Python, criação de dashboards (Grafana/Kibana) e integração de APIs em nuvem; horário flexível de 6h diárias (compatível com turno da tarde).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFv4ptg1ARlsWdabP9UZwfyr8tykr0cr10aINeUPI1fQiI9fIx6lYDKKySeyk8Ej88MCzQAolKqqT_w_69TQnw-8T8ldID3u39cZ0TfzpfIVzT_MPa8MAirV9gRt8w08XkrkB75qINOzEifao26GYWZrEAuAxNiykjtNEpS_g=="
-      },
-      {
-        "empresa": "Belgo Arames",
-        "cargo": "Estagiário(a) em Análise de Dados e Power BI",
-        "modalidade": "Contagem - MG (Híbrido / Presencial)",
-        "requisitos": "Estudante a partir do 3º período em Engenharia de Software, Ciência de Dados, Sistemas de Informação ou correlatas; atuação com análise de dados, ETL e desenvolvimento de painéis no Power BI; carga horária de 6h/dia com turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEGNeB3Lzbk38tKNqhx_i-8bKdEzdWmDEwt7OdEyMazQ810Khbgl4d4bFCazz6R1Np_tDx6qoWdcN_z1w8nmLRIDfIJgpZdSwLS-EKZ5gkX-05HNX3o5he9DyfSUPDKSv_Wqmt99vRT9HXZB9DJ6hbM1B6Ze37Z7p1L"
-      },
-      {
-        "empresa": "SMS group",
-        "cargo": "Estágio em Engenharia de Sistemas (Automação, Dados e IA)",
-        "modalidade": "Belo Horizonte - MG (Híbrido)",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Sistemas de Informação ou Ciência da Computação; desenvolvimento de automações (scripts, plugins, integrações) e aplicação de IA generativa e análise de dados; 6h diárias com turno flexível/tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEekUMakf2lgdWbXCYtxeRpRZdKlFo3M33p3wYQGW7KC6ni1SbfFF3sMdEv2ceG42pkwFnakOl4-Kwsy00SWHLgqIW5myItJWq_MI4jKy1vb0Na8wKZKv4p9iHmm7I_ssPmeydDDMs3d7U2HccKoBd40DsLuIvhCRa3udRk6PkfniZOq22FmW69dIGS_eXy5h5nd9Q414Wz-X1yJA=="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Automação de Testes e Desenvolvimento de Software",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou afins; lógica de programação, orientação a objetos, estruturas de dados e interesse em ferramentas de apoio ao desenvolvimento assistidas por IA; 6h/dia com horário flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF1P3kOLHPLr-kBAo1c7-vACaZfCZ2lZmDrw4pfUan8vjniXhSmgSkwCTb9AHUSGbHuMSy2t-LDRqL1DEROtExGLSYjQdGhno3mp6V1ezap_DazuwNMDobX89-Jmgkfwcv_IH0lTu6GcQ1o1EzxDrXE-GMKDy_kTmokKveWZjFLCbfHJrvh"
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software e Data Mining",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação ou correlatas (a partir do 3º semestre); lógica de programação, Python, banco de dados relacional (SQL) e interesse em técnicas de Machine Learning e mineração de dados; 6h diárias em horário flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFsB1XeUc9zbmGp-8qW3s8IAAWemmRPBL-VoXY08F5Lu3tJhS7XA3weIKjRCz054cFJ-_7-Kfqv6Si3tJm4LVf-FP1fxOzHb_poGC3dsmbldhmXWZbRgT8qUYTglJ0Zbeb8ogBuM4O3xnIQUrJkaFznPOguDDYFNbmQPNXhJ-W-K0HtOGWn"
-      },
-      {
-        "empresa": "dti digital",
-        "cargo": "Pessoa Desenvolvedora de Software - Foco Geral ou IA (Estágio)",
-        "modalidade": "Belo Horizonte - MG (Híbrido)",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins; lógica de programação, orientação a objetos, familiaridade com C#/.NET, Java, Node.js ou React/Angular e noções de IA; 30 horas semanais em horário flexível compatível com o turno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH-c5I6UpsXU4eltFOtpcBcIr3ZlFf2EA6F2cANgmDpXpKzvQ37G4wdDVamWAhJmE8UQZcQPtd0PGZv9UxltG6HH91U-icmA0HDl-cATf9d1snepzpyuVLvOxFjkdCwdB-5rwiXPKUqK42_-_Kv_0vAGAG1re7T69NUP9Bn-CmKMHd6npYh2BYTB71NQuURZkgaG0M4xXOmIiX1oAq4r9LxrCwDF_9HjPRrXrFnDK9eFGAxrEhG7wJfRwjzHojYZB9Ry9e2BOMNVsHN"
-      },
-      {
-        "empresa": "dti digital",
-        "cargo": "Estágio em Engenharia e Análise de Dados",
-        "modalidade": "Belo Horizonte - MG (Híbrido)",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou afins; lógica de programação, fundamentos de SQL e Python, versionamento de código com Git e apoio no desenvolvimento/manutenção de pipelines de dados e dashboards; 30h semanais com horários flexíveis (compatível com turno da tarde).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGIXkAXq6Zlj3gJSC6stHQ_a5lIetLk7S50T5pdnGUalnWopgfissA_YHQmCH-xlgLAcJu5umB2rH4IGhIBN6_--UtgPwwZxORhsXM3dqbXCJ6NxAPyxiBsFZrE7jVNGsisSC_0vyZQRz0nq6k2cuyQhtGul04wDFZhESapVt-TwA=="
-      },
-      {
-        "empresa": "Mamba Treinamentos",
-        "cargo": "Estágio em Desenvolvimento de Software e Aplicações Web/Mobile",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Flexível)",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou afins; lógica de programação, integração de APIs REST, Git/GitHub e interesse no desenvolvimento de soluções digitais; horário compatível com contraturno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEZcTQ5k2CdPFGS-DS3g1WSSRx-Y3-0xcXwaYRky1jaAHIS3d97bsKf9GFk7evhWcK90Q5P-HJAzQUF3gOcWJdyOYnWhxk58lhNcHVKJoFp29T0yVR2A-kr75xzmLlwIFFwQKF9MV9GZFOpOpMyjs5X7xRnu5zsvQC4CghiV7eqI94="
-      },
-      {
-        "empresa": "Squadra Digital",
-        "cargo": "Banco de Talentos / Estágio em Tecnologia e Desenvolvimento de Software",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Presencial)",
-        "requisitos": "Cursando graduação a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou Sistemas de Informação; base em lógica de programação, interesse em linguagens modernas (C#, Java, Python ou JavaScript) e metodologias ágeis; jornada de 6h/dia flexível para conciliar com estudos pela manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlLGbyt4CkEt81_sE_ZsZgDGR3kkPpCLfDX1ditpJqF-nYJJf84t_iysPHZ5XrnED0FuMxnlQGN5P9pgqiWdWxyPopOQBRSvNorh6sraesOf9Fj3nVNlhl39KBnw9XaK3M5jSmAg=="
-      },
-      {
-        "empresa": "ICEx / DCC UFMG",
-        "cargo": "Estágio em Desenvolvimento de Software e Sistemas Web",
-        "modalidade": "Belo Horizonte - MG (Campus Pampulha / Híbrido)",
-        "requisitos": "Cursando a partir do 2º/3º período em Ciência da Computação, Engenharia de Software, Sistemas de Informação ou correlatas; lógica de programação, desenvolvimento web, noções de C# ou Python e SQL; carga horária de 20h a 30h semanais com turno da tarde / flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6sqaQ2HxS8u0yLlT2Rntnzf42EOwgzVM-y7M6qxNgeZ02EFt2ls0VOW3ZzGVpfs4jKxIYhLRsJaPhsiKKiVvulCXY7uwwL7OIjdB1jkh7eEXC1wB78BsPcbRJDyXHfFC-_iyo4pkWbE5wOfsSQJH2aLxE0WbuNzI9ylV6Q3-nYNrl0jHRZGLQKsjZfOf7yqJRNw=="
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 17:14:48",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 201,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Concert Technologies S.A.",
-        "cargo": "Estágio em Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando a partir do 3º semestre de Engenharia de Software, Ciência da Computação ou afins; lógica de programação, interesse em IA e desenvolvimento web (Python, SQL); jornada de 6h com horário flexível (compatível com turno da tarde).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHYBebHxvNz6Z1yXB356jxZiElpn7UCsyRYDXSKlGjxNHmKx3ZMMxxg1aKF9dx84dUblanL4LUJJ9pIBHuwCcFnhJzbspKEJBTdDKNrpRvWGULbmsBu6l4k7TimvcwWn4PubFr_56E="
-      },
-      {
-        "empresa": "Belgo Arames",
-        "cargo": "Estágio em Engenharia de Dados",
-        "modalidade": "Presencial / Híbrido (Contagem - MG)",
-        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação ou áreas afins (3º período em diante); noções de ETL/ELT, modelagem de dados e nuvem Azure; disponibilidade para 6h/dia no turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoZPoRKNycxswnb5Gqw9hnL_5tN2cqbsoh9OLNYkT-zBAdO2bKf7Jf5fR14hRMMNHLSpGSs3Tu5DcJvQTK4FUTBEwfiN962rTYlZ-cdX2PLWjRmY3fX7f8oReu4NNA6cK2id0twyJfD3Kw3wQY8c0uBITljHzNew48oI5G"
-      },
-      {
-        "empresa": "Grupo Fácil",
-        "cargo": "Programa de Estágio em Inteligência Artificial",
-        "modalidade": "Belo Horizonte - MG (Híbrido/Presencial)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação ou TI (a partir do 3º período); lógica de programação e interesse em soluções com IA; carga horária de 30h semanais no turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEXrpjJgG41g0CRt79aJ9eRDDgnPFc1Fy-XvPC3Y1dyAg8H_mmwYVfcUfsDyUoMPZXSvEsRw6xk0Wet6LwNsbHZPbeyUB9RqNf-TrSvCw_d8hbd3TShzARNwSnH4cS1ftHdo0CUhciLqKqjB8JTzQeh3I_KiKenIoLKOiZ4ovDZwbpPI1fRd_dRMxzGo_IXU6m2RXM1V52jh3_zl1U87mYz20g5Kg7b6dk="
-      },
-      {
-        "empresa": "BWTech",
-        "cargo": "Estágio em Desenvolvimento Full Stack",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Remoto)",
-        "requisitos": "Estudante de Engenharia de Software, Sistemas de Informação ou áreas afins (3º período); conhecimentos em JavaScript, React, SQL, Python ou C#; 30h semanais com turno flexível / tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFNTqvb-DrMlTa8HARFhgeSvSQ86vRTjIfQGyl7mCghod71FwwxfHEHrM-B2rxzurgsppg3DNKZgBJ0uHokSJZWWQEGL_Bqo3TfoThuSXFOKzQ5GOz_-1fw-O_yoShFnARugsplcgTn50xQpj0FgWJ1AHb1YGk1FSetJHTbDap-SGcwJifEZJe5"
-      },
-      {
-        "empresa": "Teknisa",
-        "cargo": "Estagiário de Programação Full Stack",
-        "modalidade": "Belo Horizonte - MG",
-        "requisitos": "Cursando a partir do 3º período de Engenharia de Software ou Ciência da Computação; fundamentos de programação web (JavaScript, React, Python/SQL); horário vespertino/tarde (6h diárias).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHHRuENwfk_dS5Ie5-yTy2R4w7wxgAse6Bapi3EDhKPwrUHQRTo-z6CaLogbkty7frXZdJolPdw3pVrH03QlD530lCITiEA0csVwzPgjLLr_A4F6pRRHKGRX34TBNYKAT4Fg7N1gkK7NuJfqnn7LembgfU3lL3KbYNTR9Y="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Automação de Testes / Desenvolvimento de Software",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou correlatas (a partir do 3º semestre); conceitos de Java ou Python, lógica e automação; 6 horas diárias em horário flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGtlrQUqtwUzdsxSTAdBseMcSLmEf9p06HgFR7ICCfeqOpyooHmrAP7Z_cgGi3IpV2onjSIORvvRScbFLU1b8bmIH8ek263w90jA9vKxBkwZ7FHdUDdM4CLSeNyHCR9rfKymf_hlViGJIDecj614NIhxQOqMF2M1z0UK9ybmOpcWgNTrILV"
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software / Data Mining",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou afins (3º semestre); lógica de programação, Python, banco de dados SQL e interesse em Machine Learning / dados; carga horária flexível de 6h/dia.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEh90CicpCQTDblu3GL18yKmH0N96teO7-X1f1eB3xBHjy5X8U9hGsMpf4Ow43-wRn4_JmnHEg51H51-gen9kjZoPPOVC9Yz36wpXKYI8OjMVMatTVc80vdt-RPZ98Wkyl9_9pWdEE77zvkJwAIqeOa-WpDv4wVKXXO6lhaRwmLzdoAtUe7"
-      },
-      {
-        "empresa": "Domo Inovação (Banco Mercantil)",
-        "cargo": "Estágio | Data Science and Analytics",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência de Dados ou TI (a partir do 3º período); conhecimentos em SQL, Python e análise de dados; 30h semanais com flexibilidade de horário / turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGxKC3e5jZH7aakI3KflyPRk-LZZP-n_9qnEujJAd_69W6b5P91oke0w4LIDIni1hf8MBIluM_28pW1ZWAPPYaD-xci6RpR-486ovsyOpfMN9qx-s7jGmAw77nVLxcyADlbvm5TO9J5k8EOKCH7AsWz8lzvgdV3qr8="
-      },
-      {
-        "empresa": "Grupo MAG",
-        "cargo": "Estágio em Tecnologia da Informação",
-        "modalidade": "Remoto",
-        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação ou correlatos (3º semestre); noções de desenvolvimento (Python, APIs, SQL) e interesse em IA; 6 horas diárias flexíveis.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEivpMWDlW69rEQRn8oVlArVEC0UnY198gzvKDz0tqUorvFZ6KTEBv6CIiO5nmr1lN6tFtsC0M6V9siT-y9q5OsKatjy4qHiXz2RP3njcdkBSGofVOGwoYJeDdKtWKtgg-_ve13LPkkyk_-AB39-FIAuxf_wRvUCrUhaSzkFS5EJvUxNBU7lfvFFGJk"
-      },
-      {
-        "empresa": "SPC Brasil",
-        "cargo": "Estágio em Desenvolvimento de Sistemas",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Engenharia de Software, Sistemas de Informação ou áreas correlatas (3º período); orientação a objetos, Java ou SQL; 30h semanais em modelo remoto com jornada flexível / turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHYsm6PmygW-v_X5_Xw3jQbVfvbqRytOIvbFARue0K27L5wBLaX40pOSWyl2mkMknH2IsYxwQ4z7zSj1T2VHmSO4rw5waNtAOdCPNWpyKmlxs1znzJGw8KzBYjwhXE="
-      },
-      {
-        "empresa": "Sambatech",
-        "cargo": "Estágio em Inteligência Artificial Aplicada",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação ou afins (a partir do 3º semestre); interesse em IA generativa, Python e LLMs; carga horária de 6h/dia com horário flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFLPcBGCl7VJYgtJN2KNaMvngsjTu_Hu8nms1nTcXbq-Jg_GZoO5KIblMFrpXSCQ0coMgBS82b-H-5AwUJyemk3NnlmmWo_wjIGK36yjH92q1ZecWisogTyEHbJgRTS"
-      },
-      {
-        "empresa": "Beumer Latinoamericana",
-        "cargo": "Estágio em Desenvolvimento de Software - IA e Automação",
-        "modalidade": "Belo Horizonte - MG (Santa Lúcia)",
-        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação ou áreas afins (3º período); lógica de programação, conhecimentos em Python/Java e automação; 6h diárias no turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHj5TwajIhc7hSQXNlWoFGqZQwQ4uynBkexy6_EvR8OUO77WXzkNosPEILiD6mg8Eu10ph4zS5MlUfsJNSfHr1TBiV5CnB3-pQe-vn040CA5GF41XJrJnWRNdAG9-_I"
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 16:14:33",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 186,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Teknisa",
-        "cargo": "Estagiário de Programação Full Stack",
-        "modalidade": "Belo Horizonte - MG (Híbrido/Presencial)",
-        "requisitos": "Estudante de Ciência da Computação, Sistemas de Informação ou Engenharia de Software (3º semestre compatível). Conhecimentos em lógica, desenvolvimento Web (JavaScript, CSS, HTML, Python, React, SQL). Turno da tarde ou flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFDXnQ2RpFgCdgucu6rngakXIrc2J49P55gh02zvpyb82yuPO7lCMz09_JbpyWhc2cBnO9zoCSfuAMdpud6Htr3xoZkE0kD8xDIVgo8nPPHUZZ7EpI4Y_gwyaL5C9UxH1YJpf56EV-2EPhUDqBofbhsx7X34GkSrTeSWg=="
-      },
-      {
-        "empresa": "SPC Brasil",
-        "cargo": "Estagiário(a) de Desenvolvimento de Sistemas",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Ciência da Computação, Engenharia de Software ou áreas correlatas (a partir do 3º período). Noções de Java, SQL e orientação a objetos. Turno da tarde/flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE48Nd7zR8kSUKIvuQVwkuYzOXjl7JDZBYITgGoBkwjTGFtmumIDf7W7fqGMVtMVXc9n83gd2JMOz93NdPzh1d5VlboXOVDJoQXJvrPnJoq3uqfsHGOtoHtUBIjsg=="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento Web",
-        "modalidade": "Remoto",
-        "requisitos": "Superior em andamento em Engenharia de Software, Ciência da Computação ou TI. Conhecimentos básicos em JavaScript/TypeScript, HTML/CSS, Git e interesse em frameworks Web (Angular/Spring Boot). Horário compatível com turno matutino de estudos (6h/dia à tarde).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHPATVdFwLUSqA0AU_grtfAcgK0HIRMa_MT9A-xbotPReRTyOIbHfLERzmtF0pUruBZhxs5mPOshLKbp4uckxk1BKubAbgACPLDq7cwOATNJ_BOpea7--52ZbOOrvKS5tBmia7H"
-      },
-      {
-        "empresa": "Valenet",
-        "cargo": "Estagiário de Tecnologia (Desenvolvimento, Dados e IA)",
-        "modalidade": "Remoto / Híbrido MG",
-        "requisitos": "Graduação em andamento em TI, Engenharia de Software ou correlatas. Conhecimento em consultas SQL, lógica de programação, interesse em automação e APIs de IA. Turno da tarde ou flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFemxm2vNYvOZXHJ0MuaEqW6bdKcXP23bjbss56ibri_kXF_a6DfbYn_LSco8vDiJCh5eupFZaSAPLArWYFnKMh8H8yqyckjn_XIDGh98CKO9Nz-0P4oQmjYzII7cwJ_Cro8-pRjNpd1PecvT9XcESwNltSK0T-TOcJOkonV7NrqQU6fA=="
-      },
-      {
-        "empresa": "Positivo Tecnologia",
-        "cargo": "Estágio em Inteligência Artificial com Foco em Desenvolvimento de Software",
-        "modalidade": "Remoto / Híbrido",
-        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação ou áreas afins (3º semestre compatível). Conhecimento básico em Python, lógica e conceitos de Machine Learning / IA Generativa. Horário da tarde (6h diárias).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGC4673udXZzNNraLSM-NaNiJabb6iFy2TGoC5llJ4Gx6_49AQkNsNzWuFPoQH34mfm82vXj1TO3rJylGPMYeRjpsa_KaRlLIJ0LlOv6MrLz29cPBJV5HCH6aziqEz1YfvpAEVNaSThxgk3CmLgCNhMY2XzEglQp2qer8Y_VX3n3AxefMSaIJtNefbstXDnyxL4LncPos6DG45GbsIeSFa0-EE="
-      },
-      {
-        "empresa": "SMS group",
-        "cargo": "Estágio Engenharia de Sistemas",
-        "modalidade": "Belo Horizonte - MG (Híbrido)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou cursos de exatas. Lógica de programação, automação de processos/scripts e análise de dados. Horário da tarde (estudos pela manhã).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHfOzSkVVFKKcR-IVxZo9Aa1fKoB5Mm-7U20Ane7WW6ePukZ_7qd9gJfMpEpMnxYm9nwc_t47RiZRt-s30Q_c-VCQ4VfEWRWo7MatHW0FWHfez-tBARwPPhMAMuvU-6gg7fV6QWjjRGQbXFss3GBiTZxgIkDdzioou44_V3AUS2wDcXO7kuUCGFSl9P94TS54buaFX0tE7VPhsQ"
-      },
-      {
-        "empresa": "Concert Technologies S.A.",
-        "cargo": "Estágio em Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto / Belo Horizonte - MG",
-        "requisitos": "Estudante a partir do 3º período de TI, Ciência da Computação ou Engenharia de Software. Interesse em Inteligência Artificial e evolução para desenvolvimento Full Stack (Angular, .NET, Python, SQL). Turno vespertino/flexível (30h/semana).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlFsNkInNquXYTGbhe8TGMdjoBl0_HR7XXy9LOgnMgVN4THS8oEHLMbMMCkzUtAd6ha2M3aJYXanlfoIq96ZXbQMs3iMjnxEtKmmOzkHf6PhykrFPr_kvEzs4TXeLUuOFkB7hUxJo="
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 15:14:14",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 167,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Grupo MAG",
-        "cargo": "Estágio em Tecnologia da Informação (Desenvolvimento / IA)",
-        "modalidade": "Remoto (Turno flexível / 6h diárias)",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (compatível com 3º semestre); apoio ao desenvolvimento de APIs e aplicações utilizando Node.js, Python, Angular ou React Native; interesse em soluções de Inteligência Artificial e computação em nuvem.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFco_uI8TyOgLw_sUuvleVi7CITuGtqKmMGPaLuJWcElQbxNhuj7NMEMAJylT2zuBHCKa5cAcj4ZWls-6giqlGEYlDdabwRkjJf4cvkdFVmg7sdKFY3sqrC9IWKiQWyVRw2FFP5hzoeOgfR408pe2PjuMWFKex93F9UflEat1wLt54pg4oKdLUjga1U"
-      },
-      {
-        "empresa": "BEUMER Latinoamericana Equipamentos",
-        "cargo": "Estágio em Desenvolvimento de Software - IA e Automação",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Turno da tarde ou flexível)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou afins (compatível com 3º período); boa base em lógica de programação e algoritmos; interesse no desenvolvimento de softwares voltados para inteligência artificial e automação de processos industriais/logísticos.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG-zTeSSxjaaC2GPVeyevNiGZvqncpLl-LVZ_b0XX3yqB6DOfhoCv3dxivIT9jgWlgzXI30XMwdzOTlV86_kebGpPIQxtrEb03PQhS6wn141akFqxNPyS7k8BoFtfv2K48NWKWfWjdPfeQnDpui13eCBYG6AMtdT6hW8mHsK5yeuffFpcAYwOc1JK4S0VlZnbA="
-      },
-      {
-        "empresa": "BWTECH",
-        "cargo": "Estágio em Desenvolvimento Full Stack",
-        "modalidade": "Belo Horizonte - MG (Presencial/Híbrido - Turno da tarde / Horário flexível)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou afins (aluno a partir do 3º período); lógica de programação, orientação a objetos e bancos de dados; conhecimentos em JavaScript, React, SQL, C#, Python ou APIs REST.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHc74lb62ChU3gE6RT0bFMkcKjTN-5W5tpletbvaL977-Uys18KqUe-gZ3ZqXHN0RVR-Dc_vyHbT--JrLlkPqjHKO9WakwMyzjVEP5vGE4O1cJeDkBEXg8wT2dmUpqtTT6Pi0dGCQ9sjLvB93QL7uVFJwdCnLH-yyu1usZW3PxbW_y8XkRSLbRFayCpFxpS"
-      },
-      {
-        "empresa": "dti digital",
-        "cargo": "Pessoa Desenvolvedora de Software - Foco em IA - Estágio",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Horário flexível compatível com turno vespertino)",
-        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas de exatas/tecnologia (a partir do 3º semestre); raciocínio lógico, vontade de aprender desenvolvimento ágil e soluções focadas em IA generativa e machine learning.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHnHWb180wRNXiqK1--Rxuj-JSUlCPQ9OyUBvXQQBJcbEQ8sYujJr4Vy68bSBEgQ-Vl4RrQzfot5NFKy92VE9mFV7KQwe9RaTdnMH9J3o-Ow3Pm3Dkpq4HCMX3tD046EpJ6ZfUaTPjkSmdz5aYYOGYiNzYmlWqUEWJ3FG7HG4XIt26yC4jH8keXWhwpFX-JJpyQs5mK7o4PyL17USNDneZPlNa-ysCjui1EL1MLKkJlcT_OGWEYU24RFf9STZg="
-      },
-      {
-        "empresa": "dti digital",
-        "cargo": "Pessoa Desenvolvedora Drupal / Web - Estágio",
-        "modalidade": "Belo Horizonte - MG (Híbrido / Horário flexível compatível com a tarde)",
-        "requisitos": "Estudante de graduação em tecnologia (Engenharia de Software, Ciência da Computação, Sistemas de Informação); conhecimentos básicos em desenvolvimento Web (HTML, CSS, JavaScript, PHP ou CMS Drupal); compatível com grade matutina.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFAeJ3Wem4HZKSNtazGWHMUo66yEIOTa8kzxe6JrSKdYLXTeqc-4AIDaqrrl0EJGn7NJMhi8UnYiLcHMIAVoGDZpeh9l35YZMfjA60YF49FZy02r9etCi9U-KUOzTw2CjRwbYcmWPUOB8W3rnThWshBgn1yt1ci2uJ_b3jevJNpRsLcMbUHRo-qFvr8CN5ZEwj7yu0="
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 14:14:26",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 455,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "RNP (Rede Nacional de Ensino e Pesquisa)",
-        "cargo": "Estagiário de Engenharia de IA",
-        "modalidade": "Remoto (Horário flexível/tarde)",
-        "requisitos": "Cursando Ciência da Computação, Engenharia de Software, Sistemas de Informação ou áreas afins; lógica de programação; fundamentos de IA Generativa e LLMs (prompt engineering, RAG); Git/GitHub; noções de APIs REST.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQECWv-wCB-IPXOoZhPkc6_JwuZ6kUpHNXPdsnxtFMMjzzsCSoabg2kCbyeuXizKXACyD6-TPHP_cdLLhnx7LR_Zu0kN4viSS2IlD__R8k4BZ7gzxmz38Mk="
-      },
-      {
-        "empresa": "SMS group",
-        "cargo": "Estágio Engenharia de Sistemas",
-        "modalidade": "Híbrido (Belo Horizonte - MG / Horário flexível)",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou afins; lógica de programação e scripts de automação (Python, C#); interesse em IA e automação; inglês avançado.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG5hUzmQqm9VNlmh952eIHlV9FXnnsR6mBRifQelECABIziK6FyYq2uY7S_nB-lJkJK7daTZTo1UvQjsevuaP3MTWufcXWApyVHYltMR7XXciTRBAtovth4PaDOko5y2WYbx1408UACAxq20Xg5De-3fRv1f81DHC7506hNEZMXbY_R6Vb92E763ECyb5wV2u3SK7g0Qfbaw2vGrw=="
-      },
-      {
-        "empresa": "Teknisa",
-        "cargo": "Estagiário de Programação Full Stack [BH]",
-        "modalidade": "Híbrido (Belo Horizonte - MG / Turno tarde ou flexível)",
-        "requisitos": "Cursando Ciência da Computação, Sistemas de Informação ou correlatas; conhecimentos em desenvolvimento front-end e back-end (JavaScript, Python, React, HTML, CSS); noções de SQL.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFbIEc4Ud3T18u78q38drY8DTEtR9o-5n4ndZ8iMIYe7sPAOJSqLz8af2kAU1l_gAD5MJEdvZyeqmY1ryJHLG4EWdwqh1TBvzWX1nOf0KBK9kh7l9wHgq9MJzAGzUda7L12kkR6hKub8TzqCMAuxDCOgsLS45SzvXqhezk="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Automação de Testes / Desenvolvimento de Software",
-        "modalidade": "Remoto (Horário flexível)",
-        "requisitos": "Graduação em Engenharia de Software, Ciência da Computação ou Sistemas de Informação; desenvolvimento Java e Python; plataforma Android; conhecimento ou interesse em ferramentas assistidas por IA (ex: Gemini Code Assist).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG85riMD121CEQvjdyJ590CB-5fwtFyKRyz-fMPJ6PIPfqZvTX9j7w2x2db0JPbkwgYLiIvYYoiRI9c82e04QeX86yn7g02PJWbftOlHpxAo5qqYxksaM5Milt4cAWJtBrXFio869l7F2m6ml5ETzEJJRoyghMuZJVcIJQAhtj4a0dkrizr="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software / Data Mining",
-        "modalidade": "Remoto (Horário flexível)",
-        "requisitos": "Cursando Ensino Superior em Ciência da Computação, Sistemas de Informação ou Engenharias; lógica de programação, Python, SQL/bancos de dados relacionais e conceitos de Machine Learning.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMJtrcm0I5ppHtouOH6w9US4Z63qOXOLLm9soPbAHYuC_tR47J31DKLOXSsR8A2Ff8L4jHHYOuTczSENugNRb_sM8H7o0nMImObUQC5-krLyk79ZJHtFrR_F_hCXX2wrZccUMPkGmKMjl1lUcb9bwN7T4qBrVzgfF9f2VGwQxoJpcTPcOL="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento Web",
-        "modalidade": "Remoto (Horário flexível)",
-        "requisitos": "Cursando Ciência da Computação, Sistemas de Informação ou áreas afins; noções de JavaScript, TypeScript, HTML/CSS; interesse em Angular, Java/Spring Boot e Git.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGBSw1LLmg9jN9TvHugEKcRfvs8kyy4DAlIrj7KCLpzEWu-msgDouRkykSMSyTeecKE_LydkLt7ZAAU-otIFcELal3nw7kJkunzJBBJ29mMMcdcOnfrVGWYBIf8rN-U4u1GbKvLPi7t6fTe0qdIE2n8wH9V4XQ0a3hB5HZnq0GayKfjaSv2="
-      }
-    ]
-  },
-  {
-    "timestamp": "22/10/2026, 00:13:51",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 145,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Valenet",
-        "cargo": "Estágio em Tecnologia (Desenvolvimento, Dados e IA)",
-        "modalidade": "Híbrido / Belo Horizonte - MG",
-        "requisitos": "Cursando a partir do 3º semestre em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins; disponibilidade para estágio no turno da tarde ou flexível; conhecimentos em desenvolvimento de sistemas, consultas SQL e interesse em automações com IA.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFxOi3zJwpC_Y1H8qfbJiKkMlchidNStj1EW86XQbhYxHXKXqOUs2sp3NEU2ocSMNVYY38wsqLjvES7LrleKHiPE-7uZy7EVWLsaGD9TmXlKSX91w5yNgLgbnQ7LSZlepBlm7WgA43zVv5R4w08a_usTqlftEns_G6YEPWNn502Yzzoe5Y="
-      },
-      {
-        "empresa": "Domo Inovação (Banco Mercantil)",
-        "cargo": "Estágio | Data Science and Analytics",
-        "modalidade": "Remoto",
-        "requisitos": "Estudantes a partir do 3º semestre de Engenharia de Software, Ciência da Computação, Estatística ou áreas de TI; turno da tarde ou horário flexível (6h/dia); boa capacidade analítica, interesse em engenharia de dados, modelagem analítica e consultas.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvR_AIUVyFHuTKDwJvt5rkjjdIwR3vTbJkTLzlprPTkuCptW-QfkcqIIaGCbrZC65nnixWcAeQ7kUGjJGMsxSAatGWl6zYuf2bhKuq0xcDaVbWJAgZ7L-oo06HOap0Z8E8ajOEWUXddDphNEC9f9YSZC60pzYUQWA="
-      },
-      {
-        "empresa": "SPC Brasil",
-        "cargo": "Estágio em Desenvolvimento de Sistemas",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou Análise de Sistemas; disponibilidade para atuar no turno da tarde ou horário flexível; fundamentos de orientação a objetos, lógica de programação e banco de dados SQL.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEz9mmJ774MHIFpy6lQTX-rXm5voEKHnuJFWYoyNYIp0XCkj_5WMCMx6KS4Z1QHUKCX0fuSBccgG7QmVDgPp5wVRruPSgSyuYU5rNiF5z7xJRBqlsD3rEzpd5opArI="
-      },
-      {
-        "empresa": "Concert Technologies",
-        "cargo": "Estágio em Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto / Belo Horizonte - MG",
-        "requisitos": "A partir do 3º semestre em Engenharia de Software, Ciência da Computação ou áreas afins; disponibilidade para o turno da tarde; interesse e noções em desenvolvimento Full Stack, tratamento e rotulagem de dados para modelos de IA.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEzNRvMA1IHuRnDHmNAAzHBEj7l7ftkoqu4eX2x9BgVIupGDUCIrAeepWjgR0tlQC81mGOg06be_lfnsh-VTSBu40zUrAnt0aJfdDhWhGAUrBQjPWxCHAUjRstieqNKDstj4A4JXA=="
-      },
-      {
-        "empresa": "Grupo MAG",
-        "cargo": "Estágio em Tecnologia da Informação (Cloud, Desenvolvimento, Dados e IA)",
-        "modalidade": "Remoto / Flexível",
-        "requisitos": "Graduação em andamento (a partir do 3º semestre) em Engenharia de Software, TI ou correlatas; turno da tarde ou flexível; interesse em Cloud, APIs, bancos de dados e inteligência artificial generativa.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEaCavFKzYM3yYwLN15yLGaQZOPD3x_urwGazPs8RSMM35SCpLvB-RcaoPWwDaM049q_ERRlPnlPyAJS9bnVhgECAaEpHudUdsHQJRhayqQbKvw4QIXbVcNQPvOvyUXjuaW2DvZykNLbREyhZeAfe2i_-xD9OWjVicLJYNRuAKmxD4svPQSw_ojBJW4"
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 23:26:07",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 355,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "SPC Brasil",
-        "cargo": "Estagiário(a) de Desenvolvimento de Sistemas",
-        "modalidade": "Remoto",
-        "requisitos": "Estudantes a partir do 3º período em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou ADS; conhecimento em lógica de programação, orientação a objetos, SQL e Java; turno vespertino ou carga horária flexível de 6h compatível com turno matutino de aulas.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG4P4IP5hj6ErFO-1BURpJVm39mlLLtMNPJ74bupZa7yMJ9TvKqE1Rjpo63exagjW0SI0X8THODEfGbQ4GDvhwzFLhj5sKeFfgaZNxbs9P4GD0l85xuZPNS-O_SKyA="
-      },
-      {
-        "empresa": "Ativa GR",
-        "cargo": "Estagiário(a) de TI (Desenvolvimento de Sistemas)",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando ensino superior em Ciência da Computação, Engenharia de Software ou correlatas (a partir do 3º semestre); apoio no desenvolvimento e manutenção de sistemas, controle de versão (Git) e bancos de dados; modelo 100% home office com horário flexível compatível com quem estuda pela manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEVuqWwX5C6STfMpydSE4ObkwMNwU-S_8HOFJoNr0q1Eiml6BbvKFK6jlNWgInABhFey1kW5Rv3xFwgLLPb04qdEvX7D3tkElslzQoCHAh8ogrp2zg_WAZg1hcIMBpX-L611QqGgDdNyt4JshlXIeBRWESYlAIrJlLW5ZI="
-      },
-      {
-        "empresa": "Serasa Experian",
-        "cargo": "Programa de Estágio - Engenharia de Software e Dados",
-        "modalidade": "Remoto",
-        "requisitos": "Estudantes de graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas de Dados (previsão de formatura compatível com alunos a partir do 3º semestre); foco em desenvolvimento de software, automação e engenharia/ciência de dados; jornada de 6h/dia flexível para conciliar com estudos no período da manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHGuKH-KyO95B5gmZdWUjtNKHuVpHeLNahG36XM30KWoB2twRFbbV3I0DvPrTbTGXkg_uhjgBwM2oXraTQaZOrnE1bQXCtYfkEP5HX5AYrjH636_7srrLy5oECo7h1bqKWpK9bqf6NTK4dpxXsrwLu5izHKrG13"
-      },
-      {
-        "empresa": "Positivo Tecnologia",
-        "cargo": "Estágio em Inteligência Artificial com Foco em Desenvolvimento de Software",
-        "modalidade": "Remoto",
-        "requisitos": "Estudantes a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou afins; interesse em IA Generativa, lógica de programação e desenvolvimento de aplicações; carga horária compatível com estudante do turno matutino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGOAsm5sy5b9P2qSpZcHc516p3LP6F4cDjK-4oT5VLSKBL8pkt4_M5bbrxJsWCsjvj8CUSk82Dsa7m7fQlSrjbgDLfOn1uZVZdWTsgf6lgcC6pQzDugCVbQ_0d4faDoQWa71TxnqPaGm8bXDXx8zo6dvzTkvH62b-KaNmVKyTHNbLVN2umW6hU4p5CHgbI1YK4I7rrmTkjMpDCUfHFNdHAC95zm"
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software / Data Mining",
-        "modalidade": "Remoto / Híbrido",
-        "requisitos": "Cursando graduação na área de computação ou engenharias (a partir do 3º período); conhecimentos de lógica de programação, Python, modelagem de dados SQL e noções de Machine Learning; carga horária de 6h diárias no período da tarde ou flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHVoE-HTyl37DrXfRk7xp8B3pH1SIIJ9uInFyLK41twkxcCPVyxeQ8dzeGFDzLrwvl1v_DOrB4cKptEjzOzm2jOJf0ZJTX6CYJ3Xod-DYiHKKSvWVie3cO__VTitGvooUcMSfRCddRBof5Ex6X933wD1--DOtpgkaD0zHGKk0peMMom_6UZ"
-      },
-      {
-        "empresa": "Radix Engenharia e Software",
-        "cargo": "Estágio em Desenvolvimento e Engenharia de Software (Programa Geração Desafio)",
-        "modalidade": "Remoto",
-        "requisitos": "Estudantes de Ciência da Computação, Engenharia de Software ou Sistemas de Informação a partir do 3º semestre; projetos de tecnologia e desenvolvimento de sistemas; jornada de 6 horas/dia flexível compatível com o turno da manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHGyZ_sVw1W_s8XQoRzc9EM7sHcGpCA7ikhxOp3g9qw9LTfP-FTxYZq1bN3H2ZTrGonSMbn5iOP_Xko8sP-9wHXD2k8twA8DTGdm0CETvQIvKXttYQC0Hwyio9Fokc9188IzpvYYn8OEFnE_hBzXf7gW54xOFlJHx9fV8mYVpk="
-      },
-      {
-        "empresa": "Usiminas",
-        "cargo": "Programa de Estágio - Tecnologia da Informação / Engenharia de Software",
-        "modalidade": "Presencial / Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Estudantes de Ensino Superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins (a partir do 3º/4º período); atuação em projetos digitais e sistemas corporativos; turno vespertino ou carga horária compatível com aulas de manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG3QdNrpAHL0hDcmfRpNLBjcXc5cNyw3ArOYQj7hdygZXk1qaTn_4ay33FL2laXmY5toKTxSXNADBo2jLr4NDAc8nJC8bO75gABedFVtmtcho2hSiVdI1jUBH4DyTUHTddt-4XMz5BFhyds3s2pgZF2YJGCFeg_IOsF0zb-jfSUF2yBjsDTlhl7tdWOEybF"
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 20:13:31",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 124,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Concert Technologies S.A.",
-        "cargo": "Estágio em Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Ciência da Computação, Engenharia de Software, Sistemas de Informação ou correlatas (a partir do 3º período); conhecimentos em lógica, Angular, Git, desejável Python e SQL; jornada flexível compatível com quem estuda no turno da manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGREnXbvFwZX0Dg_wwQWlWZpRlBSRULx52MXUI58XLhek3EH_R3gszZp8wGlXV1XuY5acNYKNVaNY_npD5KoOzAbScnwfQw_RnZaf-jJr8bKLVXso2x3IYo6eNaqG9tP05bb8mhIfs="
-      },
-      {
-        "empresa": "Teknisa",
-        "cargo": "Estágio em Programação Full Stack",
-        "modalidade": "Híbrido / Presencial (Belo Horizonte - MG)",
-        "requisitos": "Ensino superior em andamento em Engenharia de Software, Ciência da Computação ou afins (a partir do 3º semestre); raciocínio lógico, fundamentos de front-end (HTML/CSS/JS) e back-end (Python ou React/SQL); disponibilidade de 6h diárias no período da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHGQQPRi-jZhXIdVSBJ0z2xNdzt59oAgEijLrrQfGpyU7TSw8mYXcGBM7uthytQZQs2F3enJdDn0KEppqST9-YKRJe_gsFZXsjC2CpawAwAwPCuGgIsvm8knEWE9S_2jkTXRaI9lpR_oFG9PTE-_cUd_taJCJ9bfVe6ApI="
-      },
-      {
-        "empresa": "G7 Editora e Sistemas Gerenciais",
-        "cargo": "Estagiário(a) em Desenvolvimento Full Stack (.NET)",
-        "modalidade": "Remoto",
-        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação ou ADS (a partir do 3º período); interesse em C#/.NET, front-end, criação de APIs e bancos relacionais; horário de 6h diárias flexível/vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGGCLVtX96zm3m-P2oifi_rM6RicHjW_kNDxx0CyF9UVXHLOYmJfDq8hakkuMChFxkmXHLBI5P4a-CMEAV3OiQiw651NiIrdfhqCpdWLShPamBVYkHQq6cVeSC1Aqj_"
-      },
-      {
-        "empresa": "Beumer Latinoamericana",
-        "cargo": "Estágio em Desenvolvimento de Software - IA e Automação",
-        "modalidade": "Híbrido / Presencial (Belo Horizonte - MG)",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou correlatas; noções em linguagens como Python, C# ou Java voltadas para automação e IA; carga horária de 6h no período da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE0AhBF3AVGBoABpZh5GJZBG1GrxSy0sC7qot3-dfmJXJVWTwSDVzXXoZxj8I4a7j5Oy-tLOsLTi8vcVnjFulnDaPnivZgUoHa1KPnH4_16m8d9WtjYuNlp_oN1mlVE="
-      },
-      {
-        "empresa": "Shakers Consultoria",
-        "cargo": "Estágio em Desenvolvimento Front-end",
-        "modalidade": "Remoto",
-        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação ou correlatas (a partir do 3º semestre); conhecimentos em HTML, CSS, JavaScript e interfaces modernas; carga horária de 6h flexível compatível com estudos no turno da manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEy1980ucbeT9yfnkn05_UGpTyVMOzi6RA-9SO3Dq9RSnLJz2JxWzUZHWuyU3FgcEUvA09IAlZCkdsTKEvscm7johi45lN_loMuGi4HJ9OhT4MnDA7NNBBwSfcLGOws="
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 19:14:15",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 168,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Concert Technologies S.A.",
-        "cargo": "Estágio em Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto (sede em Belo Horizonte - MG)",
-        "requisitos": "Cursando Engenharia de Software, Sistemas de Informação, Ciência da Computação ou ADS (aberto a partir do 3º semestre); noções de lógica de programação, Angular, Git, com diferenciais em Python, C#/.NET e SQL; horário flexível de 6h diárias (compatível com turno matutino de estudos).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHWO2iiUT26CaoJjLzdqysmsqHAuAzNojYgfc2bUhg0uwlOJ67kW-IsdKAQ_T_SRcpZwRfTQxQsgDGo_m5JAZPyqeN1OnQvNVijoq3xNu4GqU7DfnAbeTWHvwqjihEsZvnkXka73Cs="
-      },
-      {
-        "empresa": "BWTECH",
-        "cargo": "Estágio em Desenvolvimento Full Stack",
-        "modalidade": "Híbrido / Remoto (Belo Horizonte - MG)",
-        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação ou afins a partir do 3º período; conhecimentos básicos em JavaScript, React, Python ou C#, APIs REST e bancos relacionais SQL; jornada de 6h com flexibilidade/turno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGKuky_HvL1PvzBrszZkpRy2c1ZpMdLS2Zrp_3zUbqFVpcUDdxCKkW_N8rganD43jt5fyIb28XognX3B4S8OWMoxHMEr3U1wIsX_WEJWvwvI-GqRPabDVyZytLLQhGjVytT1udA79zrBfhsPWnaPizfDoN7Es7CEWgJOxxiOjsgARiZviY="
-      },
-      {
-        "empresa": "4mti",
-        "cargo": "Estágio em Desenvolvimento de Software (Python)",
-        "modalidade": "Presencial / Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação ou Sistemas de Informação (3º semestre); base em Python e frameworks de desenvolvimento; horário vespertino (tarde), ideal para quem estuda pela manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGYa_tgqZPgGi3cQvZiU78JzXxCPyx8hg0hGBhJUBR809TPB8Y7RdJW-0Az0kdU8ymZ5eFSbyfUUe_oXck_VthuKhpY-6YLt2DRUllGHW7EusfldiJJnkRhRQi0ZXgiKOHxPyhMeHEM2aiI3SyGSW0u"
-      },
-      {
-        "empresa": "MOST Specialist Technologies",
-        "cargo": "Estágio em Automação, IA e Processamento de Linguagem Natural (NLP)",
-        "modalidade": "Híbrido / Presencial (Belo Horizonte - MG)",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou correlatas; noções em Python, bibliotecas de automação e interesse em Inteligência Artificial / Machine Learning; carga horária de 6h/dia flexível no período da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHYxwcESqnj_UcNFwOQyITijq8rZ7ycrF7ViVF0NVrtqI8lbZkY7-IZ8pbo05mFyVe4e_mMGqLzzIZrBEVKZrzPslByYmKIPa4zb3qRN3tcDYvmPUscJzYiyoL-NQC1Qil-x5UZEDkvLwh__iFJW_kRQoqiN9yJAPCe9UvXWLPedLEPJ94ruQwMZx-1aZHlk_1SHw=="
-      },
-      {
-        "empresa": "Vertem",
-        "cargo": "Estágio em Engenharia de Dados",
-        "modalidade": "Remoto",
-        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatas (a partir do 3º semestre); lógica sólida, SQL, scripts em Python para rotinas de ETL/dados; jornada flexível de 6h diárias.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVXKxNcmMlU-lJEQFOSBvoVLNT4rQysaaRDOoV7NbMMjeK4otFLNI-VZY8aIP36sVVR1IjuRgNcN4xF9KPxgm9WP6qvi7Af9vFgojsn5uAhSYnIfC92ERk1wUo-uRlFgwlsZMi4XE8d__FbR2hyECofY_Ye8t3etJu2RsMLIGgQMFtdyp6b2Tp1CRE_r_TQipppsx5EKyQlvKBsMBgAuDqCcQ8pCD6wIOzwa4="
-      },
-      {
-        "empresa": "Domo Inovação (Banco Mercantil)",
-        "cargo": "Estágio em Data Science e Analytics",
-        "modalidade": "Remoto",
-        "requisitos": "Ensino superior em andamento em Engenharia de Software, Ciência da Computação ou TI a partir do 3º período; interesse em análise exploratória, SQL e Python/R; horário flexível de 6 horas compatível com estudos matutinos.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQjMcnrTtj_i8ulNGVK1BFzTtcbiMlX5Ve3-_K9nqjH599CVk6MW1Kmsm41kkH87-Ia4lVF1BgksbIRj5OrhD_CFZFD2PfRt5O3AFd5N-r-D-ZL7jmhPOhE3dkK9FHkhzc86deBUVv5TYf2qEmR8jpQSQdeFjQ0ws="
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 18:13:51",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 143,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Concert Technologies S.A.",
-        "cargo": "Estágio em Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Ciência da Computação, Sistemas de Informação, Engenharia de Software ou áreas afins (aberto ao 3º semestre / mínimo 1 ano para formatura); lógica de programação, Angular, .NET ou Python e Git; horário flexível compatível com contraturno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFrG8nbN5nGJwaYOnLuMnjJ2KcQfDWxGnrTONksHBI2JXK5TBq50-PeVxDH3Z_KjGIOf1WORgjH80zB1AS3ugncx8hsVpUWFeYeaAsc_9SHBkGEjMkX-hN-eRy3j2m_LspCl5DB7Fo="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software / Data Mining",
-        "modalidade": "Remoto",
-        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação ou afins (a partir do 3º período); conhecimentos em lógica, Python e SQL, interesse em análise de dados e Machine Learning; carga horária de 6h/dia flexível ou vespertina.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQN6EYcea27BvSLfk95EzK9n0QaARPwJRLboZlMX623M_qtHU2jXQL8uJjXx02O6LeJQZQXhm7BFi950gl6KxSXEkGX_f1_3AgoZ0-FEO06iUJdErhQRg8aEKqN5DnMBCvAu7El08k8Ax2FwM-xxS7yHjrMF-4fO4wnBNYyjSF0k1QpfCw"
-      },
-      {
-        "empresa": "SMS group",
-        "cargo": "Estágio em Engenharia de Sistemas e Automação",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Engenharia de Software, Engenharia de Sistemas ou Ciência da Computação a partir do 3º período; lógica de programação, interesse em automação de processos, scripts em Python ou C#; disponibilidade para 6h diárias no turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFTBgE5i0U5y-Y0EyRuLTCIdN4zAIsZ5zPf6T2m0K2i1oesm-ueAjsTN5MJnPxId5vla_bY8q1aFyx4MPWWlTQ1xqiq46BSHuvRCvNNF-zZ3au0bh5NdqlRqHfS3JbZaPm_N6Z_fG_u4PvFQqIy54LBT7DL8NP2h1YnROCR0TdFne-XGoRnTnrosUs6iXOEP63z3y_5_g5lZt-R"
-      },
-      {
-        "empresa": "Valenet",
-        "cargo": "Estagiário de Tecnologia (Desenvolvimento, Dados e IA)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Superior em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatas (a partir do 3º semestre); noções de SQL, lógica de programação, interesse em integração com LLMs/IA e scripts em Python; turno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGXn_vitt6lrXKszvrbMrlNWlzhrJbsG94-Gy7mkwtF5wJbuWiuSJneypBgjvnJvTYoUT0bzC09Sn8nhG5KQRS4aaZSF4qvYgLSl5ks7qzU3PJPc8t5eqSHoUs5-_sTbiqHS-EyE9hI3-KCrGjd4CyNJpvKY6hE6d592xebzqPUkt25X8I="
-      },
-      {
-        "empresa": "Grupo MAG",
-        "cargo": "Estágio em Tecnologia da Informação (Desenvolvimento e Cloud)",
-        "modalidade": "Híbrido / Remoto",
-        "requisitos": "Ensino superior em andamento em Engenharia de Software, Ciência da Computação, ADS ou afins a partir do 3º semestre; interesse em desenvolvimento de APIs, Cloud Azure, Python ou Node.js; carga horária flexível/vespertina de 6 horas diárias.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrfDD1F3ZyFR4CJBir6hzXbkWwtV4bgkWIquy34307JZHAEVOVaiEzNP8UG6xvxijAmUeQ74sODddtbXVszJ-7jYNMwvD2rhFWVNe4T8EsmXLAjnGUnqDGiOO0C0EnsI-89S9Pxl8RmrTTicK_TcSgSgE22IGjGbuwX44LDtZdYHt-zxrQZsgc2oE="
-      },
-      {
-        "empresa": "Teknisa",
-        "cargo": "Estagiário de Programação Full Stack",
-        "modalidade": "Híbrido / Presencial (Belo Horizonte - MG)",
-        "requisitos": "Graduação cursando em Engenharia de Software, Ciência da Computação ou afins (aberto ao 3º período); base em desenvolvimento, HTML/CSS, JavaScript, React ou Python; horário no turno da tarde (compatível com quem estuda pela manhã).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFThmSiZpNr_6nPj9NX_IcEASCeG3AwoNpVP2ZR-gN8_0BtjUKHzF4IL0gC1i7ZmM5SjZgi6cAvOBIJKVGdgdBVgtpqJx52Qms3uxB1MukbDddzSoGXKb2YUG6sywLBzBWOEaBEogQu5JJSPcBOzlj_zuY5p2dyBf3SJw=="
-      },
-      {
-        "empresa": "Belgo Arames",
-        "cargo": "Estagiário de TI e Soluções Digitais (Área Industrial)",
-        "modalidade": "Presencial / Híbrido (Contagem - MG)",
-        "requisitos": "Cursando Engenharia de Software, Sistemas de Informação, Ciência da Computação ou correlatas (a partir do 3º semestre); conhecimento básico em TypeScript, Python ou C#, interesse em sistemas industriais e bancos de dados; jornada vespertina (6h diárias).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEmktTU_UCWBqB7v-_J5i6M9Mn-NkGbqd06Jlj8T4XI0ZDfhXgUnMEwKNgYDJFax9zfzTGjA6O4ITMREDvPxn793UGwm7hf0HzmWU-Omi2qZVYra22D76R96uu-IxruRrHqPbx-8QcniHOY8eau5CkGIiUK_bI7Bvk="
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 17:19:29",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 482,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "GFT Technologies",
-        "cargo": "Programa GFT Start - Estágio em Desenvolvimento de Software e Dados",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (compatível com 3º semestre); raciocínio lógico, fundamentos de orientação a objetos (Java, C# ou .NET) e bancos de dados relacionais; carga horária de 6h diárias flexível/turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvNryWSiE1bOURkolt7PJa79EwmYRuA1ubcenB_-1IijLphGL7lUwzMM_0o5OWFd4eJeYk_lJVyDJhfsweFpf2GV7JS5UUnEppT15Tv7IZFw3C-RXEpX24SBZYdDE="
-      },
-      {
-        "empresa": "Avanade Brasil",
-        "cargo": "Programa Decola Tech - Estágio em Desenvolvimento (.NET / IA / Cloud)",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando Ensino Superior a partir do 3º semestre em Engenharia de Software, Ciência da Computação ou áreas afins de TI; lógica de programação, interesse no ecossistema de nuvem e tecnologias Microsoft (.NET, C#, Azure, IA aplicada); carga horária de 6h diárias flexível/vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHTe7CxdXKR5kBcezVxfQHoPmq4xnEZnOP5MCrg9XuTl3CyGREqctoJNp7zpP-znnNBs69HEsS2hkeDrQ1imXE2F-doLlEJbHX9P8o3WaRckWJBiwLWwq8rG3I="
-      },
-      {
-        "empresa": "SiDi",
-        "cargo": "Estágio em Ciência de Dados e Inteligência Artificial",
-        "modalidade": "100% Remoto / Híbrido",
-        "requisitos": "Ensino superior em andamento em Engenharia de Software, Ciência da Computação, Ciência de Dados ou áreas afins (compatível com 3º período); lógica de programação, Python, noções de Machine Learning e modelagem estatística; carga horária de 6h diárias com turno vespertino ou horário flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQd0zuIUsNf9xgAajpM9U6YWRjLC3ZCiKMsj-vj4RQ5rsPVx07mzwSpNqDgyXMzidxj9PWgX6uBcUCNlY1gc2muRYavLGwd33j4bFjl7UFVWeWCYUYg6gur3VxtF1Y1PKBYg1WDDPCI604_nQIijDvJTjjsqz6va_5gqyjNM44j_FKT0yqGgDlA7Of_R5fP8pVrfqLXrXdfTXHyh5gcQL1bA=="
-      },
-      {
-        "empresa": "Banco BS2",
-        "cargo": "Estágio Tech / Desenvolvimento e Inovação Digital",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Graduação em andamento a partir do 3º período em Engenharia de Software, Ciência da Computação ou cursos de tecnologia da informação; noções de lógica de programação, desenvolvimento web/APIs ou análise de dados; disponibilidade para 6h diárias no turno vespertino ou horário flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEtLsUmsGvcJyZ6L-fvo2d5DhQmHgIt1ARicMa7vu1Cp1bwMmaBkIEgxp_GG63y3A_Fu0czmbev66zT308EvdiUlZtqRFigteaSrd2IFS-JfreZ4jWJKfCLps9FspiZjzsSJnfgOVQHYJM1APb-CWqr-9PQbQoVLuz7RiMDr_royoJE6ackYxiujy2ENyctTRmIJJbuhMteRCl-jkzPNTYgh7mVnFJEbpsNZ1P0TESiSUyz-ypXWsx8-Fta_RCvVOZzYVpvKKLK6gJoabvKmgDgMIvxXZotcpJO3LXQHPgVQio9SZeJ7I2giBdDbm_qGbvM8Hc="
-      },
-      {
-        "empresa": "ArcelorMittal",
-        "cargo": "Estágio em TI e Engenharia de Dados",
-        "modalidade": "Híbrido / Presencial (Belo Horizonte e Contagem - MG)",
-        "requisitos": "Ensino superior em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins (aberto a estudantes do 3º semestre); apoio em soluções digitais, automações, bancos de dados e relatórios técnicos; jornada de 6h diárias compatível com o turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEne8yXOSByFEA6KPcG-2GyEkgBUWDI3ir3kNiSLXC8bUOG-hM1nYNi-TCLIksHaBEjhhCwQ-EtQMsg7Xmj3Ud9tDxKBikkd9bXtBv_qelkfCmfsZI6flaxCj2CU6HqS1Tv3Wp5cwQ3UzfwXu1oqlxBoiFcl3SqWLZPCns3aIGp8FwOq7rW57_gdF4tFEhcz7Oo"
-      },
-      {
-        "empresa": "Stellantis (Stellantis Financial Services)",
-        "cargo": "Estágio em Dados e Analytics / Business Intelligence",
-        "modalidade": "Presencial / Híbrido (Polo Betim / Região Metropolitana de BH)",
-        "requisitos": "Superior cursando em Engenharia de Software, Sistemas de Informação, Ciência da Computação ou Ciência de Dados (aberto a alunos do 3º semestre); manipulação de dados com SQL, construção de dashboards no Power BI, interesse em automação e algoritmos de IA; carga horária de 6h diárias compatível com contraturno vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGra0u-P1xLPbCdRq2TXNJsROVXhZYCDL3FqpPspcv7AwqrOjHmlXhlkRL9RJoKPeee1Ircw74fsbBrocXFboLG9Rp3WtZ1xKwkbd7Y1e7Mjm9CdSTs-N1jtJJpgp5NlYA_BWTfjPpNE0QXAQcmxXodgKUV8QGD8hkSADZxGc08r4uztbSqXwEaxj0rqQfNYyQu"
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 16:15:38",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 251,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "BWTECH",
-        "cargo": "Estágio em Desenvolvimento Full Stack",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Ensino Superior a partir do 3º período em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas; raciocínio lógico e conceitos de Orientação a Objetos; noções de banco de dados SQL; desejável contato com JavaScript, React, C# ou Python; carga horária de 6h diárias flexível/compatível com turno da tarde para estudantes do período matutino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6t8I9l8aAdtgMA4HzwMHdtZOHJRewbMZbsaHOje3pyZZF1mBUlLUA4FOFLXeiTybf54ChKGIVTR00mdVWdejHcM8AJvKlxNWnILDQkqsKR7OAzyMDeP4ITJlqjykkM5DJcS5-0w=="
-      },
-      {
-        "empresa": "Belgo Arames",
-        "cargo": "Estágio em Análise de Dados e Power BI (com Machine Learning)",
-        "modalidade": "Presencial / Híbrido (Contagem - MG)",
-        "requisitos": "Ensino Superior em andamento em Engenharia de Software, Ciência da Computação, Ciência de Dados ou áreas correlatas (compatível com 3º semestre); raciocínio analítico; noções de lógica de programação, modelagem de dados, Power BI e interesse em Machine Learning; carga horária de 6h diárias compatível com o turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHi9-_hzwdLhRWa3_1ncKiP7OYaK1LJMSO06rN6j6zG8t-DR9gwC6lQg6yBnKjw1LpLEQQ8YnZ4lBeHIL-Q6GINJpgBi5jIj_lHoC9agaUnOrxae31hRsvYTlAykumrBTtufqdcBh8zuAT4IO4yQ99ESVGTLc24-0CM"
-      },
-      {
-        "empresa": "SMS group",
-        "cargo": "Estágio em Engenharia de Sistemas (Automações e IA)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Ensino Superior a partir do 3º período em Engenharia de Software, Engenharia da Computação, Ciência da Computação ou afins; lógica de programação e automações com scripts (Python, C# ou PowerShell); interesse em IA generativa e machine learning; inglês intermediário/avançado; carga horária de 6h diárias compatível com turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHIztgSObvrpzSKnpbxR-vFrO5vV1ufZ7LFueLVfuNtr2q7AkCx8W-7fIESQL9UoByscd75y0EKO_oGiA9zJg_0lfJtnCpHQcyxJ-mR1LYuO-1BdKZuKbfwPsjbOSxaiKo2aMvfJ8aYw-YfhX3WSF8xwUh5wzsYHwTuAh0TdvtSOAdmvWxg30DZ9EFgVdzLHv05CFJau4DkWC8M"
-      },
-      {
-        "empresa": "Domo Inovação / Banco Mercantil",
-        "cargo": "Estágio em Data Science and Analytics",
-        "modalidade": "100% Remoto",
-        "requisitos": "Estar regularmente matriculado no Ensino Superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (compatível com 3º semestre, disponibilidade para 2 anos de estágio); SQL básico/intermediário, mentalidade orientada a dados e análise de métricas; carga horária de 6h diárias flexível/turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFnsP4i5LspXaLmMCVGkhOVw-a3BiaTrXtFtXb1BFOiNq9TXwaw8Sd_ZLAvYiLI6Is32Ys5hcAdljaeZqht3LATouJyXa3quPTW6_uR-IxwzPMQqwY_bA6G38C0e6vBK6Nv97YD1f3gcsTlM8wLglgzyZvNVhblYo50xf47oH-28OQ6QZyzHPoxa8c="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software / Data Mining",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Ciência da Computação ou áreas afins (compatível com 3º semestre); lógica de programação, Python, SQL e noções de Machine Learning/Mineração de Dados; inglês técnico; carga horária de 6h diárias flexível/turno da tarde para quem estuda pela manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEeAQueqOinaTkoIpyWWT9cCR6CP2lWZtKeLqxITDRCc9134tKGkMrKSi0BuEMu-5XEnKnTT2u2knV0sW_WmysmL0xizKREIY6oVUtS_0pXpNpgIQ1zm35NlqvsKnlxxnuOknhfD2k98mQPI2UQKajq_dkyy3qO0ylPFXcarKFFKd9tlK4="
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 15:26:15",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 888,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "21/10/2026, 14:17:54",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 387,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "ASC Solutions",
-        "cargo": "Estagiário(a) em Desenvolvimento Web/Mobile",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Ciência da Computação, Análise e Desenvolvimento de Sistemas ou áreas afins (compatível com 3º semestre); lógica de programação; noções teóricas ou práticas em HTML, CSS, JavaScript, C#, .NET Core e Angular; banco de dados SQL básico; carga horária flexível/remota compatível com estudantes do turno da manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFGRxwMYlTzfffVwKAzCrUEGUFCPla7tcXe4dce73E-ODJKJlTRaChQGXN6yDarAZ9kxLX537C6wMh-z2Z0oOkWqQBiG6no_3r0SNvvOiefUZuTeAvzcafLTsmHhrFYdElTTySM9n1OSNtaxwEIZtJQ298i89cKYlBloV729ag01p6GKm0Wt9mJtAv1QmMPrw=="
-      },
-      {
-        "empresa": "Sambatech",
-        "cargo": "Estágio em Inteligência Artificial Aplicada",
-        "modalidade": "Remoto / Híbrido (Região Metropolitana de BH / Nova Lima - MG)",
-        "requisitos": "Ensino superior em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (compatível com 3º semestre); interesse em IA Generativa, LLMs, RAG, automações e experimentação de agentes; raciocínio lógico e curiosidade técnica; carga horária de 6h diárias com flexibilidade de horário compatível com o turno da tarde para quem estuda pela manhã.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcZv6zjhML6s1EnwRFyn6C301VS_0xksiluPsC8eVg-WVB1vpQUPVfR32QSLv8wiYx6GKViJ6lE_SIvIjOKr8Gag0jSy2wyOBme_-N43zngvY1VxT5peJor0g2ajGS"
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 12:25:50",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 864,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "21/10/2026, 09:14:53",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 207,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "SMS group",
-        "cargo": "Estágio em Engenharia de Sistemas (Automações e IA Generativa)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação, Engenharia de Sistemas ou afins (a partir do 3º período). Lógica de programação, scripts/automação e interesse em IA generativa. Turno da tarde ou flexível (30h semanais).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjJmtKy2Q6twnODoN8KqOUC0Sfs80KI0U85MlAs29VJj3XZmXoST-asn_vAW1GOSYLsdGACPDA5syzZEh_8d1KjnzWAv6dHPynTOZGOQ55FTISYCWuPWSnXvbGvuFrJaVwbV0H40xgifwSO5eMTXQdfF-V7rC75g0apmV-DWYSdwrUniDbyjfRci2xMlEYqHQWdVAgZwZDDfBJ"
-      },
-      {
-        "empresa": "Teknisa",
-        "cargo": "Estagiário de Programação Full Stack",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Ciência da Computação, Engenharia de Software ou correlatos. Ciclo de desenvolvimento, lógica de programação e arquitetura de software. Compatível com 3º período, turno da tarde ou flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGD7ksOFxafsQIJRjmRZ-hWEJHRAj5Lnj7xdJrsH5q40txK0JH7frBic5-NnU3E2KgB8X_JKd9SClUJitKl1Js7aON8UFi_FCp5TEpI8tCUTtvNrxKF1Y-y6XVsvLxvyVy-bBOMSKxY7oCl5PGMZGAmewGgpT6nuYL-HA=="
-      },
-      {
-        "empresa": "Instituto de Pesquisas Eldorado",
-        "cargo": "Estágio em Desenvolvimento de Software e Data Mining",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatos. Python, SQL, bancos de dados relacionais e Machine Learning. Horário flexível (30h semanais).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFE6Rt-dlW-SDoacQGFJEZ-fRm_0sYj7PTJD6iOI2nGP9rXFdNBWCqPHCGbnK3vDLvJ8B8-p3jIbn7MrkvXWlBbelOETA1HrG9AGn3pL6ilsc3nasATcXALz87Lt0ks5g7qFa5wXJF2oZKbmtIfUJb-REdrp2eljQCAMAyAUp2bgOc1nk_E"
-      },
-      {
-        "empresa": "Banco Mercantil",
-        "cargo": "Estágio em Data Science and Analytics",
-        "modalidade": "Remoto",
-        "requisitos": "Estudantes de Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins. Engenharia de dados, painéis de indicadores e levantamento técnico. Turno flexível / tarde (30h semanais).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE3CJpH5X-77EyP2P-OJxrmAQm4pEkHPrxaYbwVbXj9kC3QTL0NmmgKru-n8aNlGLcrAxhKTmlEtLNcdHu8YHk1MWT6UAosoVkTJc_rGSiLrCbzYEdEQ6EJ47kmrqZbIweWP20FWfS9sEpGAr42Jm4eSi-v6OmMy9s="
-      },
-      {
-        "empresa": "Beumer Group",
-        "cargo": "Estágio em Desenvolvimento de Software (IA e Automação)",
-        "modalidade": "Presencial / Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou Sistemas de Informação (previsão de formação a partir de 2028). Python, C# ou Java, soluções de automação e integração de APIs. Turno da tarde ou flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEaOsPT3J5DUx_313qxafDImhsl7RDWh1iB_iEjwxwZUXAGXmYUWpTwXwIRUwvPDvZwagLEPjDnsc7zl2Bw4OiVggeuoadZSK7jmhqGu2ThV8O1Uj2-EyLsJCpwHC0="
-      }
-    ]
-  },
-  {
-    "timestamp": "21/10/2026, 08:47:19",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 257,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "DTI Digital",
-        "cargo": "Estágio em Desenvolvimento de Software e Inteligência Artificial",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Ciência da Computação ou afins. Lógica de programação, POO, noções de C#/.NET, Python ou Node, interesse em automação e IA. Horário compatível com turno da tarde/flexível (6h/dia).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHXKN7HJfUn4-S0XY4VpeCH_wKN7vxhzQuuU9hwnwfyJ7vQCeWE8uJcAXF5npRJgV5HSU6he25NSJRZWD-Yz72X1s3UQqpGSYcj_8xUqMW-a5aFC7QEj9EftrX1YgJ5s72atQszBS0HQMoEQkBDZyDyvmLMol81ilIM0s619LQJiWDh6yXbaIc8uGLjxFpjJtx3JYcGYnmlox7KSlUCKhmTxiVuHxkzv2-6LoKQGdY_pfUHRYAmogHKdKtKgyA="
-      },
-      {
-        "empresa": "Banco Inter",
-        "cargo": "Programa de Estágio Go Tech (Tecnologia, Desenvolvimento e Dados)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Estudantes a partir do 3º semestre em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatas. Lógica de desenvolvimento de software, APIs, consultas a bancos de dados ou interesse em Big Data. Disponibilidade para 6h diárias (turno da tarde ou horário flexível).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGIDa2NXPSUXOoHE0-_TflDpltcEfjGVe6TRdRubeTWTYiDD4CNGvcMJ2IGw1qY0ZXWtcBZnNc2LkQehCk_50PEhQphvY72Dq0e1Hgj7T7cZcyaZXizw2rINqMbcJLh0CZ3f4Di_pklJPC8sw=="
-      },
-      {
-        "empresa": "Valenet",
-        "cargo": "Estagiário de Tecnologia (Desenvolvimento, Dados e IA)",
-        "modalidade": "Remoto / Híbrido (MG)",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Sistemas de Informação, Ciência da Computação ou ADS (formatura a partir de 2027, compatível com 3º semestre). Desenvolvimento de software, rotinas SQL, automações e IA. Carga de 6h/dia no turno da tarde ou flexível.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6VJ4AlsHcAh6iX8DX1GVSSzf_-P32FzpD0WloossJN5vdvETi0Huu8jbAiO--BcynQuQzXKyfzUf43oTjgFamXEK6aJUHSAnNKF1roKwCUogH-LVF9IFEf8opL6zjwkiTtG3lXTsVnUwMUUDUUhRdb1A82flK0exVzR3WOAYlhEsCvw=="
-      },
-      {
-        "empresa": "Grupo MAG",
-        "cargo": "Estágio em Tecnologia da Informação (Desenvolvimento, Cloud e IA)",
-        "modalidade": "Remoto",
-        "requisitos": "Graduação a partir do 3º período em Ciência da Computação, Engenharia de Software ou correlatas. Interesse ou noções em Node.js, Python, SQL, Azure e soluções de IA. Carga horária de 6h flexível / compatível com o contraturno matutino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQtnAO_XRw_sB5FBjETqVOqmQqj-4vfPsRGTWoku1M35Jl-IB4jHKlo1BA1cww7Gls0c5PsIJx_tQxcs3YEDC68o2jpHWiYG46rdUQwwXGT8zpC9HzQP5XbUk2_2moyWJoCTL1Uq-Iste5AN9ujNiMXeq-dyGZJxnMNlWCCXqU4vqzDb636AVAnlg="
-      },
-      {
-        "empresa": "Méliuz",
-        "cargo": "Estágio em Estratégia, Dados e Analytics",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Sistemas de Informação, Ciência da Computação ou áreas exatas (3º período em diante). Perfil analítico, interesse em modelagem de dados, SQL e métricas. Turno da tarde ou flexível (30h semanais).",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFicINEEA4DXVTudn-Jra9vagpkgj_RnyXpoVo7Qy54_vb0G2AmlXhWZ8VxZZUeNCCJ5gY6b_FqmgWS_HTJvUg0uBXcUwJT--KS8ZEXhD1WL3eU-wIM9QLl6BbCmWeadC0nJCY_djY9sWtxsAXl5i40A75W0gHzcWU1"
-      }
-    ]
-  },
-  {
-    "timestamp": "20/10/2026, 23:15:30",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 243,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "BEUMER Group",
-        "cargo": "Estágio em Desenvolvimento de Software – IA e Automação",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Estar cursando Ciência da Computação, Engenharia de Software, Sistemas de Informação ou correlatas (formatura a partir de 2028 / compatível com 3º semestre). Lógica de programação, Python, C# ou Java, SQL, APIs e IA Generativa. Turno flexível/tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFSKPlrvN_Z-hIfzTzMv1w14daV3Igju4-3CnoXGVCVLYAskGrYdsMsj9-BkN3tv6z9V4fY6m3JP_3hIRMFd0usNVkdrT65VuzfosxcOzudj6Iz7v5K0VvyU2BfzYg="
-      },
-      {
-        "empresa": "Concert Technologies",
-        "cargo": "Estágio — Inteligência Artificial e Desenvolvimento Full Stack",
-        "modalidade": "100% Remoto",
-        "requisitos": "Estar cursando Engenharia de Software, Ciência da Computação ou afins (mínimo 1 ano para formatura, ideal para 3º semestre). Carga de 6h diárias com horário flexível. Lógica de programação, Angular, Git, noções de IA / apoio a time de dados e backend C#/.NET ou Python.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgrUlGZiS_Wa-cj9dJrC3PVMNIaLwGy_MtZ4ntLaZnUNuzr3UI8WF31POze04tM6cYDNBYilBw9V-KCw222O9nJ7IZZwxSSYdDyakPwXBomHyMCGdQ7WX1HNhCc6IXIa60eyMjhGs="
-      },
-      {
-        "empresa": "Valenet",
-        "cargo": "Estagiário de Tecnologia (Desenvolvimento, Dados e IA)",
-        "modalidade": "Remoto / Híbrido (MG)",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Sistemas de Informação, Ciência da Computação ou ADS (formatura a partir de 2027). Desenvolvimento de aplicações, APIs REST, consultas SQL, automações e IA. Carga de 6h compatível com horário de estudo.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQExvhNDuOQdtpp_gnWRbdxV_hflOc7KR08eHlPPCZnsPp8ZZJki805tGB4hCZD4CXc2gkpDE9w_IAgJIzBE7W9UX9cPTMQH0sXz26B06PYhbqVnYcEkbmKNGb6hPQ1MtLCMYOCZJzWCM5CKcwRiAIQD7sz4zrF4rH1vzrtuyYQUohMS4g--"
-      },
-      {
-        "empresa": "Ativa GR",
-        "cargo": "Estagiário(a) de TI (Desenvolvimento e Banco de Dados)",
-        "modalidade": "Remoto",
-        "requisitos": "Cursando Sistemas de Informação, Engenharia de Software ou correlatas. Lógica de programação, .NET/C# ou Python, bancos de dados SQL e automações. Carga horária flexível para estágio.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEIt4ofXLmcGtJjj_RJ2SPGy8E12aqGVoYP-o7V6DtfJaAql-mI10Ln98C3PTQH1T5Nfh_6Rg8y1n8U6cFFgJU4FhQAywrqh4fdnIPibqixIgjfieTpaLokQl5XzO1bA-HiPo4O4wWc6Xx9yWnszTp9hraDZRuXW6-YSw--"
-      },
-      {
-        "empresa": "Grupo MAG",
-        "cargo": "Estágio em Tecnologia da Informação (Desenvolvimento, Cloud e IA)",
-        "modalidade": "Remoto",
-        "requisitos": "Graduação a partir do 3º período em Ciência da Computação, Engenharia de Software ou Sistemas de Informação. Conhecimentos ou interesse em Azure Cloud, desenvolvimento (Node.js, Python), automação e IA. Horário de 6h diárias flexível/vespertino.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE8XSJxE5PIlykH3A6R5OvityXm4E5tl1kJRUH-ppx-disjGotgnvPAr_42x6ea4mDHcEgrZuGOq_KWMCbQkSIvLtYiDx013UKnHq6hSLHIlo1yPMd5ipINUYV937ZNX4pK4q3xshyylgHoYnxZA2IX5o2kbNmuteQQ13H3mrd8AJ8lra7ctGv3MF8-"
-      },
-      {
-        "empresa": "Belgo Arames",
-        "cargo": "Estágio em Análise de Dados e Machine Learning",
-        "modalidade": "Híbrido (Contagem - MG)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação, TI ou afins. Lógica de programação, modelagem de dados, Power BI e interesse em Machine Learning / IA aplicada a processos industriais. Jornada de 6h compatível com o turno da tarde.",
-        "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHCo1eB-xI7n1Nrj7Xrt99dv4FlOWLTyCWv2fAvnby8koJQPUaQ5g0xTc-qf5zuvZSHFeLKkJmEb31Hfad9egotwJ8Mg2nJHT6PJI1RvB1tJYp4TX30L9lkB_rnGEF-qHgTEJWL0mZiiz48nZEKD1R_wUJH-wJfXChY"
-      }
-    ]
   }
 ];

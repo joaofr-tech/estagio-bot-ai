@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Estágios</title>
+  <style>
+    /* -------------------------------------------------------------
+       APPLE HUMAN INTERFACE GUIDELINES (WWDC 2018–2026)
+       True Native Feel • System Typography • Dynamic Materials
+       ------------------------------------------------------------- */
+    :root {
+      /* Typography */
+      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "Helvetica Neue", sans-serif;
+      --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Helvetica Neue", sans-serif;
+      --font-mono: "SF Mono", Monaco, Menlo, Consolas, monospace;
+
+      /* Apple Light Palette (iOS / macOS HIG System Colors) */
+      --color-bg: #F2F2F7;
+      --color-surface: #FFFFFF;
+      --color-surface-translucent: rgba(255, 255, 255, 0.78);
+      --color-surface-hover: rgba(0, 0, 0, 0.02);
+      --color-surface-secondary: #F2F2F7;
+
+      --color-separator: rgba(60, 60, 67, 0.12);
+      --color-separator-opaque: #E5E5EA;
+
+      /* Labels */
+      --label-primary: #000000;
+      --label-secondary: #3C3C43;
+      --label-tertiary: #8A8A8E;
+      --label-quaternary: #C7C7CC;
+
+      /* System Tints */
+      --system-blue: #007AFF;
+      --system-blue-subtle: rgba(0, 122, 255, 0.1);
+      --system-green: #34C759;
+      --system-green-subtle: rgba(52, 199, 89, 0.12);
+      --system-orange: #FF9500;
+      --system-orange-subtle: rgba(255, 149, 0, 0.12);
+      --system-red: #FF3B30;
+      --system-red-subtle: rgba(255, 59, 48, 0.1);
+      --system-fill: rgba(120, 120, 128, 0.16);
+      --system-fill-secondary: rgba(120, 120, 128, 0.08);
+
+      /* Shadows & Elevation */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 0.5px 1px rgba(0, 0, 0, 0.03);
+      --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-card-hover: 0 10px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+      --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.08);
+
+      /* Radii */
+      --radius-card: 16px;
+      --radius-pill: 999px;
+      --radius-sm: 10px;
+
+      /* Springs & Easing */
+      --spring-press: cubic-bezier(0.2, 0.9, 0.3, 1);
+      --spring-slide: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #000000;
+        --color-surface: #1C1C1E;
+        --color-surface-translucent: rgba(28, 28, 30, 0.78);
+        --color-surface-hover: rgba(255, 255, 255, 0.03);
+        --color-surface-secondary: #2C2C2E;
+
+        --color-separator: rgba(84, 84, 88, 0.28);
+        --color-separator-opaque: #38383A;
+
+        --label-primary: #FFFFFF;
+        --label-secondary: #EBEBF5;
+        --label-tertiary: #8E8E93;
+        --label-quaternary: #48484A;
+
+        --system-blue: #0A84FF;
+        --system-blue-subtle: rgba(10, 132, 255, 0.16);
+        --system-green: #30D158;
+        --system-green-subtle: rgba(48, 209, 88, 0.16);
+        --system-orange: #FF9F0A;
+        --system-orange-subtle: rgba(255, 159, 10, 0.16);
+        --system-red: #FF453A;
+        --system-red-subtle: rgba(255, 69, 58, 0.16);
+        --system-fill: rgba(120, 120, 128, 0.32);
+        --system-fill-secondary: rgba(120, 120, 128, 0.18);
+
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+        --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.3);
+        --shadow-card-hover: 0 12px 28px -4px rgba(0, 0, 0, 0.5);
+        --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      .frosted-nav, .modal-sheet, .segmented-control, .toast-hud {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: var(--color-surface) !important;
+      }
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-text);
+      background-color: var(--color-bg);
+      color: var(--label-primary);
+      line-height: 1.45;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      letter-spacing: -0.01em;
+    }
+
+    /* -------------------------------------------------------------
+       NAVIGATION BAR (macOS / iOS Translucent Toolbar)
+       ------------------------------------------------------------- */
+    .frosted-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-surface-translucent);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 0.5px solid var(--color-separator);
+      transition: background-color 200ms ease;
+    }
+
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .app-glyph {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--label-primary);
+      color: var(--color-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-caption {
+      font-size: 0.72rem;
+      color: var(--label-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--system-green);
+    }
+
+    /* Apple Native Segmented Control */
+    .segmented-control {
+      position: relative;
+      display: inline-flex;
+      background: var(--system-fill-secondary);
+      padding: 2px;
+      border-radius: 9px;
+      user-select: none;
+      border: 0.5px solid var(--color-separator);
+    }
+
+    .segment-btn {
+      position: relative;
+      z-index: 2;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: var(--font-text);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--label-secondary);
+      padding: 0.35rem 0.85rem;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 140ms ease;
+    }
+
+    .segment-btn:active {
+      opacity: 0.7;
+    }
+
+    .segment-btn.active {
+      color: var(--label-primary);
+      font-weight: 600;
+    }
+
+    .segment-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 4px);
+      background: var(--color-surface);
+      border-radius: 7px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0.5px 1px rgba(0, 0, 0, 0.04);
+      transition: transform 220ms var(--spring-press), width 220ms var(--spring-press);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* -------------------------------------------------------------
+       MAIN CONTENT
+       ------------------------------------------------------------- */
+    main {
+      flex: 1;
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.25rem 1.25rem 4rem;
+    }
+
+    /* View Header */
+    .view-header {
+      margin-bottom: 1.75rem;
+    }
+
+    .view-large-title {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      color: var(--label-primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .view-subheadline {
+      font-size: 0.92rem;
+      color: var(--label-secondary);
+      font-weight: 400;
+    }
+
+    /* -------------------------------------------------------------
+       TODAY FOCUS CARD (Apple Activity / Health Card Style)
+       ------------------------------------------------------------- */
+    .today-card {
+      background: var(--color-surface);
+      border: 0.5px solid var(--color-separator);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .today-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--system-blue);
+    }
+
+    .progress-track-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .progress-track {
+      width: 100px;
+      height: 6px;
+      background: var(--system-fill);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--system-green);
+      border-radius: 999px;
+      transition: width 350ms var(--spring-slide);
+    }
+
+    .progress-count {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--label-secondary);
+    }
+
+    .today-headline {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .today-subtext {
+      font-size: 0.86rem;
+      color: var(--label-secondary);
+      line-height: 1.45;
+      max-width: 650px;
+    }
+
+    /* -------------------------------------------------------------
+       INSET TAB BAR (SCOPE CONTROLLER)
+       ------------------------------------------------------------- */
+    .scope-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      scrollbar-width: none;
+    }
+
+    .scope-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scope-pill {
+      background: var(--color-surface);
+      border: 0.5px solid var(--color-separator);
+      color: var(--label-secondary);
+      font-family: var(--font-text);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+      transition: all 150ms ease;
+    }
+
+    .scope-pill:hover {
+      color: var(--label-primary);
+      border-color: var(--color-separator-opaque);
+    }
+
+    .scope-pill:active {
+      transform: scale(0.97);
+    }
+
+    .scope-pill.active {
+      background: var(--label-primary);
+      color: var(--color-bg);
+      border-color: var(--label-primary);
+      font-weight: 600;
+    }
+
+    .scope-pill.active .scope-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: inherit;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .scope-pill.active .scope-count {
+        background: rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    .scope-count {
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      padding: 0.1rem 0.4rem;
+      border-radius: var(--radius-pill);
+      background: var(--system-fill);
+      color: var(--label-secondary);
+    }
+
+    /* -------------------------------------------------------------
+       CONTROLS (SPOTLIGHT SEARCH & MODALITY CHIPS)
+       ------------------------------------------------------------- */
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .search-field {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 36px;
+      padding: 0 2rem 0 2.2rem;
+      border-radius: var(--radius-sm);
+      background: var(--system-fill-secondary);
+      border: 0.5px solid transparent;
+      font-family: var(--font-text);
+      font-size: 0.85rem;
+      color: var(--label-primary);
+      outline: none;
+      transition: all 180ms ease;
+    }
+
+    .search-input:focus {
+      background: var(--color-surface);
+      border-color: var(--system-blue);
+      box-shadow: 0 0 0 3px var(--system-blue-subtle);
+    }
+
+    .search-input::placeholder {
+      color: var(--label-tertiary);
+    }
+
+    .search-glyph {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      color: var(--label-tertiary);
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 0.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--system-fill);
+      border: none;
+      color: var(--label-secondary);
+      font-size: 0.65rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modality-chips {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .filter-chip {
+      background: transparent;
+      border: 0.5px solid var(--color-separator);
+      color: var(--label-secondary);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .filter-chip:active {
+      transform: scale(0.96);
+    }
+
+    .filter-chip.active {
+      background: var(--system-fill);
+      color: var(--label-primary);
+      font-weight: 600;
+      border-color: transparent;
+    }
+
+    /* Subtitle count indicator */
+    .results-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      color: var(--label-tertiary);
+      margin-bottom: 1.25rem;
+      padding: 0 0.15rem;
+    }
+
+    /* -------------------------------------------------------------
+       JOBS LIST / CARDS (Apple Inset Grid)
+       ------------------------------------------------------------- */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .job-card {
+      background: var(--color-surface);
+      border: 0.5px solid var(--color-separator);
+      border-radius: var(--radius-card);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
+      transition: transform 200ms var(--spring-press), box-shadow 200ms ease, border-color 200ms ease;
+    }
+
+    .job-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(0, 122, 255, 0.2);
+    }
+
+    .job-card:active {
+      transform: scale(0.98);
+      transition: transform 100ms ease-out;
+    }
+
+    .job-card.is-applied {
+      border-left: 3px solid var(--system-green);
+    }
+
+    .job-card.is-closed {
+      opacity: 0.55;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-company {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--label-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tag-pill {
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.15rem 0.5rem;
+      border-radius: 5px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .tag-remote {
+      background: var(--system-green-subtle);
+      color: var(--system-green);
+    }
+
+    .tag-hybrid {
+      background: var(--system-orange-subtle);
+      color: var(--system-orange);
+    }
+
+    .tag-applied {
+      background: var(--system-green);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.3;
+      color: var(--label-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-snippet {
+      font-size: 0.82rem;
+      color: var(--label-secondary);
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 1.1rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      border-top: 0.5px solid var(--color-separator);
+      gap: 0.5rem;
+    }
+
+    .card-date {
+      font-size: 0.72rem;
+      color: var(--label-tertiary);
+      font-family: var(--font-mono);
+    }
+
+    .card-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .action-icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--system-fill-secondary);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--label-secondary);
+      font-size: 0.8rem;
+      transition: all 140ms ease;
+    }
+
+    .action-icon-btn:hover {
+      background: var(--system-fill);
+      color: var(--label-primary);
+    }
+
+    .action-icon-btn:active {
+      transform: scale(0.92);
+    }
+
+    .action-icon-btn.is-starred {
+      color: #FFB800;
+    }
+
+    /* Apple Button Primary */
+    .apple-btn-primary {
+      background: var(--system-blue);
+      color: #FFFFFF;
+      font-family: var(--font-text);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.42rem 0.85rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 122, 255, 0.3);
+      transition: transform 100ms ease, background-color 150ms ease;
+    }
+
+    .apple-btn-primary:active {
+      transform: scale(0.95);
+    }
+
+    .apple-btn-secondary {
+      background: var(--system-fill-secondary);
+      color: var(--label-primary);
+      box-shadow: none;
+    }
+
+    .apple-btn-secondary:hover {
+      background: var(--system-fill);
+    }
+
+    /* -------------------------------------------------------------
+       APPLE DETAIL SHEET / MODAL
+       ------------------------------------------------------------- */
+    .sheet-scrim {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      padding: 1.25rem;
+    }
+
+    .sheet-scrim.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-sheet {
+      background: var(--color-surface);
+      width: 100%;
+      max-width: 600px;
+      max-height: 88vh;
+      border-radius: 20px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-modal);
+      border: 0.5px solid var(--color-separator);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 280ms var(--spring-slide);
+      position: relative;
+    }
+
+    .sheet-scrim.visible .modal-sheet {
+      transform: translateY(0) scale(1);
+    }
+
+    .sheet-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--system-fill-secondary);
+      border: none;
+      color: var(--label-secondary);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 120ms ease;
+    }
+
+    .sheet-close-btn:hover {
+      background: var(--system-fill);
+      color: var(--label-primary);
+    }
+
+    .sheet-close-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* Modal Toolcard (Copiloto) */
+    .toolcard-panel {
+      background: var(--system-fill-secondary);
+      border: 0.5px solid var(--color-separator);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .toolcard-header {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--system-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .toolcard-desc {
+      font-size: 0.8rem;
+      color: var(--label-secondary);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .toolcard-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tool-btn {
+      background: var(--color-surface);
+      border: 0.5px solid var(--color-separator);
+      color: var(--label-primary);
+      font-family: var(--font-text);
+      font-size: 0.76rem;
+      font-weight: 500;
+      padding: 0.38rem 0.75rem;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.04);
+      transition: all 120ms ease;
+    }
+
+    .tool-btn:hover {
+      border-color: var(--system-blue);
+      color: var(--system-blue);
+    }
+
+    .tool-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* -------------------------------------------------------------
+       DYNAMIC ISLAND HUD / TOAST (iOS Capsule)
+       ------------------------------------------------------------- */
+    .toast-hud {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-60px);
+      background: rgba(0, 0, 0, 0.88);
+      color: #FFFFFF;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transition: transform 260ms var(--spring-press), opacity 200ms ease;
+      pointer-events: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .toast-hud {
+        background: rgba(255, 255, 255, 0.92);
+        color: #000000;
+      }
+    }
+
+    .toast-hud.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* -------------------------------------------------------------
+       INSET GROUPED LIST (macOS / iOS Table View)
+       ------------------------------------------------------------- */
+    .inset-grouped-table {
+      background: var(--color-surface);
+      border: 0.5px solid var(--color-separator);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .table-cell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.95rem 1.25rem;
+      border-bottom: 0.5px solid var(--color-separator);
+      font-size: 0.84rem;
+      gap: 1rem;
+    }
+
+    .table-cell:last-child {
+      border-bottom: none;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      color: var(--label-tertiary);
+      grid-column: 1 / -1;
+    }
+
+    .empty-symbol {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 0.75rem;
+      color: var(--label-quaternary);
+    }
+
+    .empty-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--label-secondary);
+      margin-bottom: 0.25rem;
+    }
+
+    .empty-desc {
+      font-size: 0.82rem;
+      color: var(--label-tertiary);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 0.5px solid var(--color-separator);
+      padding: 1.5rem 1.25rem;
+      font-size: 0.74rem;
+      color: var(--label-tertiary);
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DYNAMIC ISLAND TOAST HUD -->
+  <div class="toast-hud" id="toast-hud">
+    <svg id="toast-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toast-msg">Notificação</span>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="frosted-nav">
+    <div class="nav-inner">
+      <div class="brand-section">
+        <div class="app-glyph">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">Estágios</div>
+          <div class="brand-caption">
+            <span class="status-dot"></span>
+            <span id="nav-last-sync">Atualizado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segmented Controller -->
+      <div class="segmented-control" role="tablist">
+        <div class="segment-slider" id="segment-slider"></div>
+        <button class="segment-btn active" id="tab-vagas" onclick="switchAppleTab('vagas')">
+          <span>Oportunidades</span>
+        </button>
+        <button class="segment-btn" id="tab-historico" onclick="switchAppleTab('historico')">
+          <span>Histórico</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main>
+    <div class="view-header">
+      <h1 class="view-large-title" id="page-title">Radar de Estágios</h1>
+      <p class="view-subheadline">Engenharia de Software, Dados e IA • Turno compatível com a manhã livre</p>
+    </div>
+
+    <!-- 1. TODAY FOCUS CARD -->
+    <section class="today-card" id="today-focus-card">
+      <div class="today-card-top">
+        <div class="section-eyebrow">Meta Diária</div>
+        <div class="progress-track-wrapper">
+          <div class="progress-track">
+            <div class="progress-fill" id="focus-progress-fill" style="width: 0%;"></div>
+          </div>
+          <span class="progress-count" id="focus-progress-text">0 de 3</span>
+        </div>
+      </div>
+      <h2 class="today-headline">Candidaturas de Hoje</h2>
+      <p class="today-subtext">
+        Foque em aplicar para apenas 3 oportunidades selecionadas por dia. Use os atalhos de apresentação para eliminar preenchimentos manuais.
+      </p>
+    </section>
+
+    <!-- VIEW 1: VAGAS -->
+    <section id="view-vagas">
+      
+      <!-- SCOPE SELECTOR TABS -->
+      <div class="scope-bar">
+        <button class="scope-pill active" id="scope-focus" onclick="setScope('focus')">
+          <span>Hoje</span>
+          <span class="scope-count" id="badge-scope-focus">3</span>
+        </button>
+        <button class="scope-pill" id="scope-fila" onclick="setScope('fila')">
+          <span>Todas ativas</span>
+          <span class="scope-count" id="badge-scope-fila">0</span>
+        </button>
+        <button class="scope-pill" id="scope-aplicadas" onclick="setScope('aplicadas')">
+          <span>Candidatadas</span>
+          <span class="scope-count" id="badge-scope-aplicadas">0</span>
+        </button>
+        <button class="scope-pill" id="scope-favoritas" onclick="setScope('favoritas')">
+          <span>Salvas</span>
+          <span class="scope-count" id="badge-scope-favoritas">0</span>
+        </button>
+        <button class="scope-pill" id="scope-encerradas" onclick="setScope('encerradas')">
+          <span>Encerradas</span>
+          <span class="scope-count" id="badge-scope-encerradas">0</span>
+        </button>
+      </div>
+
+      <!-- FILTER & SEARCH BAR -->
+      <div class="filter-row">
+        <div class="search-field">
+          <svg class="search-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="text" 
+            id="apple-search-input" 
+            class="search-input" 
+            placeholder="Buscar por cargo, empresa ou skill..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="search-clear" id="btn-clear-search" onclick="clearSearch()">✕</button>
+        </div>
+
+        <div class="modality-chips">
+          <button class="filter-chip active" id="mod-all" onclick="setModality('all')">Todas</button>
+          <button class="filter-chip" id="mod-remoto" onclick="setModality('remoto')">Remoto</button>
+          <button class="filter-chip" id="mod-bh" onclick="setModality('bh')">BH e Região</button>
+        </div>
+      </div>
+
+      <!-- RESULTS COUNT -->
+      <div class="results-meta">
+        <span id="label-matching-count">Exibindo oportunidades</span>
+        <span>Turno: <strong>Tarde ou Flexível</strong></span>
+      </div>
+
+      <!-- JOBS GRID -->
+      <div class="jobs-grid" id="jobs-grid-container">
+        <!-- Renderizado dinamicamente -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: HISTÓRICO DE AUDITORIA -->
+    <section id="view-historico" class="hidden">
+      <div class="inset-grouped-table">
+        <div style="padding: 1.25rem 1.25rem 0.75rem; border-bottom: 0.5px solid var(--color-separator);">
+          <h3 style="font-size: 0.95rem; font-weight: 600;">Registro de Varreduras</h3>
+          <p style="font-size: 0.78rem; color: var(--label-tertiary); margin-top: 2px;">
+            Auditoria em segundo plano com deduplicação canônica ativa
+          </p>
+        </div>
+
+        <div id="runs-list-container">
+          <!-- Renderizado dinamicamente -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- APPLE DETAIL SHEET / MODAL -->
+  <div class="sheet-scrim" id="apple-sheet" onclick="handleScrimClick(event)">
+    <div class="modal-sheet" id="modal-content">
+      <button class="sheet-close-btn" onclick="closeSheet()">✕</button>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+        <span class="card-company" id="modal-empresa">EMPRESA</span>
+        <span class="tag-pill" id="modal-badge-modalidade">Modalidade</span>
+      </div>
+
+      <h2 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.25;" id="modal-cargo">
+        Título da Oportunidade
+      </h2>
+
+      <!-- ATALHOS RÁPIDOS DE CANDIDATURA -->
+      <div class="toolcard-panel">
+        <div class="toolcard-header">Atalhos de Candidatura</div>
+        <p class="toolcard-desc">
+          Copie seu texto de apresentação ou resumo de competências pronto para colar no formulário da vaga:
+        </p>
+        <div class="toolcard-actions">
+          <button class="tool-btn" onclick="copiarPitch()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Copiar Apresentação</span>
+          </button>
+          <button class="tool-btn" onclick="copiarSkills()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <span>Copiar Competências</span>
+          </button>
+          <button class="tool-btn" onclick="copiarContato()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Copiar Contato</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <div style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--label-tertiary); margin-bottom: 0.35rem;">
+          Requisitos & Detalhes
+        </div>
+        <p style="font-size: 0.88rem; color: var(--label-primary); line-height: 1.6; white-space: pre-wrap;" id="modal-requisitos">
+          Informações da vaga...
+        </p>
+      </div>
+
+      <div style="background: var(--system-fill-secondary); padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.78rem; color: var(--label-secondary);">
+        <div><strong>Data de Coleta:</strong> <span id="modal-data" style="font-family: var(--font-mono);">--</span></div>
+        <div style="margin-top: 3px;"><strong>Disponibilidade:</strong> Turno da tarde ou flexível de 6h diárias</div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 0.5px solid var(--color-separator);">
+        <div style="display: flex; gap: 0.45rem;">
+          <button class="filter-chip" onclick="marcarVagaModal('encerrada')" style="color: var(--system-red);">
+            Encerrada
+          </button>
+          <button class="filter-chip" id="modal-btn-star" onclick="alternarEstrelaModal()">
+            Salvar
+          </button>
+        </div>
+        
+        <button class="apple-btn-primary" id="modal-btn-aplicar" onclick="candidatarModal()" style="background: var(--system-green);">
+          <span>Abrir e Marcar como Candidatado ↗</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Estágios • Sistema com interface nativa e deduplicação canônica
+  </footer>
+
+  <!-- DATA SOURCES -->
+  <script src="historico_execucoes.js"></script>
+  <script src="banco_vagas.js"></script>
+
+  <script>
+    /* =============================================================
+       APPLE STATE CONTROLLER & USER ACTIONS STORE
+       ============================================================= */
+    const STORAGE_KEY = 'estagios_user_store';
+
+    function getUserStore() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveUserStore(store) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+      } catch (e) {}
+    }
+
+    function normalizarChave(empresa, cargo) {
+      const clean = (s) => (s || '')
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[\[\]\(\)\-\_\,\.\:\/\+\&\|\!\?\#\@]/g, ' ')
+        .replace(/\b(de|do|da|dos|das|em|para|com|e|bh|mg|remoto|hibrido|estagio|estagiario|estagiaria)\b/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      return `${clean(empresa)}::${clean(cargo)}`;
+    }
+
+    const rawJobs = (window.BANCO_VAGAS || []).slice();
+    const executionData = (window.HISTORICO_EXECUCOES || []).slice();
+
+    function getConsolidatedJobs() {
+      const map = new Map();
+      const store = getUserStore();
+
+      rawJobs.forEach(job => {
+        if (job.empresa && job.cargo) {
+          const key = normalizarChave(job.empresa, job.cargo);
+          if (!map.has(key)) {
+            const userState = store[key] || {};
+            const currentStatus = userState.status || (job.status || 'para_aplicar');
+            const dataAplicacao = userState.dataAplicacao || job.dataAplicacao;
+            const isStarred = !!userState.starred;
+
+            map.set(key, { 
+              ...job, 
+              canonicalKey: key,
+              status: currentStatus,
+              dataAplicacao: dataAplicacao,
+              starred: isStarred
+            });
+          }
+        }
+      });
+
+      return Array.from(map.values());
+    }
+
+    let allJobs = getConsolidatedJobs();
+    let currentScope = 'focus'; // 'focus', 'fila', 'aplicadas', 'favoritas', 'encerradas'
+    let currentModality = 'all'; // 'all', 'remoto', 'bh'
+    let searchQuery = '';
+    let activeJob = null;
+
+    // Toast HUD
+    let toastTimer = null;
+    function showToast(msg) {
+      const hud = document.getElementById('toast-hud');
+      document.getElementById('toast-msg').innerText = msg;
+      hud.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        hud.classList.remove('show');
+      }, 2600);
+    }
+
+    // Initialize UI
+    document.addEventListener("DOMContentLoaded", () => {
+      initSlider();
+      updateMetrics();
+      renderJobs();
+      renderHistory();
+      setupSearch();
+    });
+
+    // 1. SEGMENTED SWITCHER (Vagas vs Histórico)
+    function initSlider() {
+      const activeBtn = document.querySelector(".segment-btn.active");
+      const slider = document.getElementById("segment-slider");
+      if (activeBtn && slider) {
+        slider.style.width = `${activeBtn.offsetWidth}px`;
+        slider.style.transform = `translateX(${activeBtn.offsetLeft - 2}px)`;
+      }
+    }
+
+    function switchAppleTab(tab) {
+      const btnVagas = document.getElementById("tab-vagas");
+      const btnHist = document.getElementById("tab-historico");
+      const slider = document.getElementById("segment-slider");
+      const viewVagas = document.getElementById("view-vagas");
+      const viewHist = document.getElementById("view-historico");
+      const focusCard = document.getElementById("today-focus-card");
+      const pageTitle = document.getElementById("page-title");
+
+      if (tab === 'vagas') {
+        btnVagas.classList.add("active");
+        btnHist.classList.remove("active");
+        slider.style.width = `${btnVagas.offsetWidth}px`;
+        slider.style.transform = `translateX(${btnVagas.offsetLeft - 2}px)`;
+        viewVagas.classList.remove("hidden");
+        viewHist.classList.add("hidden");
+        focusCard.classList.remove("hidden");
+        pageTitle.innerText = "Radar de Estágios";
+      } else {
+        btnHist.classList.add("active");
+        btnVagas.classList.remove("active");
+        slider.style.width = `${btnHist.offsetWidth}px`;
+        slider.style.transform = `translateX(${btnHist.offsetLeft - 2}px)`;
+        viewHist.classList.remove("hidden");
+        viewVagas.classList.add("hidden");
+        focusCard.classList.add("hidden");
+        pageTitle.innerText = "Histórico de Varreduras";
+      }
+    }
+
+    // 2. SCOPE BAR CONTROLLER
+    function setScope(scope) {
+      currentScope = scope;
+      ['focus', 'fila', 'aplicadas', 'favoritas', 'encerradas'].forEach(s => {
+        const el = document.getElementById(`scope-${s}`);
+        if (el) el.classList.toggle('active', s === scope);
+      });
+
+      const focusCard = document.getElementById("today-focus-card");
+      if (scope === 'focus') {
+        focusCard.classList.remove("hidden");
+      }
+
+      renderJobs();
+    }
+
+    // 3. MODALITY FILTER
+    function setModality(mod) {
+      currentModality = mod;
+      ['all', 'remoto', 'bh'].forEach(m => {
+        const el = document.getElementById(`mod-${m}`);
+        if (el) el.classList.toggle('active', m === mod);
+      });
+      renderJobs();
+    }
+
+    // 4. METRICS & COUNTERS
+    function updateMetrics() {
+      const aplicadas = allJobs.filter(j => j.status === 'aplicada').length;
+      const favoritas = allJobs.filter(j => j.starred && j.status !== 'encerrada').length;
+      const encerradas = allJobs.filter(j => j.status === 'encerrada').length;
+      const pendentes = allJobs.filter(j => j.status === 'para_aplicar' || !j.status).length;
+
+      document.getElementById("badge-scope-fila").innerText = pendentes;
+      document.getElementById("badge-scope-aplicadas").innerText = aplicadas;
+      document.getElementById("badge-scope-favoritas").innerText = favoritas;
+      document.getElementById("badge-scope-encerradas").innerText = encerradas;
+
+      // Meta Diária
+      const progresso = Math.min(aplicadas, 3);
+      const pct = Math.round((progresso / 3) * 100);
+      document.getElementById("focus-progress-fill").style.width = `${pct}%`;
+      document.getElementById("focus-progress-text").innerText = `${progresso} de 3`;
+
+      const lastRun = executionData.length > 0 ? executionData[0].timestamp : "Hoje";
+      document.getElementById("nav-last-sync").innerText = `Atualizado: ${lastRun}`;
+    }
+
+    // 5. SPOTLIGHT SEARCH
+    function setupSearch() {
+      const input = document.getElementById("apple-search-input");
+      const clearBtn = document.getElementById("btn-clear-search");
+
+      input.addEventListener("input", (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        clearBtn.style.display = searchQuery ? "flex" : "none";
+        renderJobs();
+      });
+    }
+
+    function clearSearch() {
+      const input = document.getElementById("apple-search-input");
+      input.value = "";
+      searchQuery = "";
+      document.getElementById("btn-clear-search").style.display = "none";
+      input.focus();
+      renderJobs();
+    }
+
+    // 6. JOBS RENDERING
+    function renderJobs() {
+      const container = document.getElementById("jobs-grid-container");
+      const labelCount = document.getElementById("label-matching-count");
+
+      let filtered = allJobs.slice();
+
+      // Scope
+      if (currentScope === 'focus') {
+        filtered = filtered.filter(j => j.status === 'para_aplicar').slice(0, 3);
+      } else if (currentScope === 'fila') {
+        filtered = filtered.filter(j => j.status === 'para_aplicar');
+      } else if (currentScope === 'aplicadas') {
+        filtered = filtered.filter(j => j.status === 'aplicada');
+      } else if (currentScope === 'favoritas') {
+        filtered = filtered.filter(j => j.starred && j.status !== 'encerrada');
+      } else if (currentScope === 'encerradas') {
+        filtered = filtered.filter(j => j.status === 'encerrada');
+      }
+
+      // Modality
+      if (currentModality === 'remoto') {
+        filtered = filtered.filter(j => (j.modalidade || '').toLowerCase().includes('remoto'));
+      } else if (currentModality === 'bh') {
+        filtered = filtered.filter(j => {
+          const m = (j.modalidade || '').toLowerCase();
+          return m.includes('belo horizonte') || m.includes('bh') || m.includes('híbrido');
+        });
+      }
+
+      // Search Query
+      if (searchQuery) {
+        filtered = filtered.filter(j => {
+          const text = `${j.cargo} ${j.empresa} ${j.requisitos || ''} ${j.modalidade || ''}`.toLowerCase();
+          return text.includes(searchQuery);
+        });
+      }
+
+      labelCount.innerHTML = `Mostrando <strong>${filtered.length}</strong> oportunidade(s)`;
+
+      if (filtered.length === 0) {
+        let msgTitulo = "Nenhuma oportunidade encontrada";
+        let msgDesc = "Tente alternar o filtro ou limpar os termos de busca.";
+        if (currentScope === 'focus') {
+          msgTitulo = "Meta do dia concluída";
+          msgDesc = "Você já aplicou para as vagas de foco de hoje!";
+        } else if (currentScope === 'aplicadas') {
+          msgTitulo = "Nenhuma candidatura registrada";
+          msgDesc = "Abra uma oportunidade e selecione 'Candidatar-se'.";
+        }
+
+        container.innerHTML = `
+          <div class="empty-state">
+            <svg class="empty-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            <div class="empty-title">${msgTitulo}</div>
+            <div class="empty-desc">${msgDesc}</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map((job) => {
+        const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+        const tagClass = isRemoto ? 'tag-remote' : 'tag-hybrid';
+        const tagLabel = isRemoto ? 'Remoto' : (job.modalidade || 'BH / Híbrido');
+        const isApplied = job.status === 'aplicada';
+        const isClosed = job.status === 'encerrada';
+        const isStarred = !!job.starred;
+
+        const jobEncoded = encodeURIComponent(JSON.stringify(job));
+
+        return `
+          <div class="job-card ${isApplied ? 'is-applied' : ''} ${isClosed ? 'is-closed' : ''}" onclick="openSheet('${jobEncoded}')">
+            <div>
+              <div class="card-meta-row">
+                <span class="card-company">${job.empresa || 'Empresa'}</span>
+                <div style="display: flex; gap: 0.3rem;">
+                  ${isApplied ? `<span class="tag-pill tag-applied">Candidatado</span>` : ''}
+                  <span class="tag-pill ${tagClass}">${tagLabel}</span>
+                </div>
+              </div>
+              <h3 class="card-title">${job.cargo}</h3>
+              <p class="card-snippet">${job.requisitos || 'Sem descrição fornecida.'}</p>
+            </div>
+
+            <div class="card-footer">
+              <span class="card-date">${job.dataColeta ? job.dataColeta.split(',')[0] : 'Hoje'}</span>
+              
+              <div class="card-actions-group" onclick="event.stopPropagation()">
+                <button class="action-icon-btn ${isStarred ? 'is-starred' : ''}" title="Salvar" onclick="toggleStar('${job.canonicalKey}')">
+                  ${isStarred ? '★' : '☆'}
+                </button>
+                
+                ${isApplied 
+                  ? `<button class="apple-btn-primary apple-btn-secondary" onclick="openSheet('${jobEncoded}')">
+                      <span>Ver detalhes</span>
+                    </button>`
+                  : `<button class="apple-btn-primary" onclick="candidatarRapido('${job.canonicalKey}', '${job.link || ''}')">
+                      <span>Candidatar ↗</span>
+                    </button>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 7. STATUS & STORE ACTIONS
+    function setJobStatus(canonicalKey, newStatus) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      
+      current.status = newStatus;
+      if (newStatus === 'aplicada') {
+        current.dataAplicacao = new Date().toLocaleString('pt-BR');
+      }
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.status = newStatus;
+        if (newStatus === 'aplicada') {
+          job.dataAplicacao = current.dataAplicacao;
+        }
+      }
+
+      updateMetrics();
+      renderJobs();
+    }
+
+    function toggleStar(canonicalKey) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      current.starred = !current.starred;
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.starred = current.starred;
+      }
+
+      showToast(current.starred ? 'Oportunidade salva' : 'Removida das salvas');
+      updateMetrics();
+      renderJobs();
+    }
+
+    function candidatarRapido(canonicalKey, link) {
+      if (link) {
+        window.open(link, '_blank');
+      }
+      setJobStatus(canonicalKey, 'aplicada');
+      showToast('Candidatura registrada');
+    }
+
+    // 8. SHEET MODAL
+    function openSheet(encodedData) {
+      const job = JSON.parse(decodeURIComponent(encodedData));
+      activeJob = job;
+
+      document.getElementById("modal-empresa").innerText = job.empresa || "Empresa";
+      document.getElementById("modal-cargo").innerText = job.cargo || "Estágio";
+      document.getElementById("modal-requisitos").innerText = job.requisitos || "Requisitos não detalhados.";
+      document.getElementById("modal-data").innerText = job.dataColeta || "Recente";
+
+      const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+      const badge = document.getElementById("modal-badge-modalidade");
+      badge.className = `tag-pill ${isRemoto ? 'tag-remote' : 'tag-hybrid'}`;
+      badge.innerText = isRemoto ? 'Remoto' : (job.modalidade || 'Híbrido / BH');
+
+      const isStarred = !!job.starred;
+      document.getElementById("modal-btn-star").innerText = isStarred ? '★ Salva' : 'Salvar';
+
+      const isApplied = job.status === 'aplicada';
+      const applyBtn = document.getElementById("modal-btn-aplicar");
+      if (isApplied) {
+        applyBtn.innerHTML = '<span>Reabrir Link Oficial ↗</span>';
+      } else {
+        applyBtn.innerHTML = '<span>Abrir e Marcar como Candidatado ↗</span>';
+      }
+
+      document.getElementById("apple-sheet").classList.add("visible");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeSheet() {
+      document.getElementById("apple-sheet").classList.remove("visible");
+      document.body.style.overflow = "auto";
+      activeJob = null;
+    }
+
+    function handleScrimClick(e) {
+      if (e.target.id === "apple-sheet") {
+        closeSheet();
+      }
+    }
+
+    function candidatarModal() {
+      if (!activeJob) return;
+      if (activeJob.link) {
+        window.open(activeJob.link, '_blank');
+      }
+      setJobStatus(activeJob.canonicalKey, 'aplicada');
+      showToast('Candidatura registrada com sucesso');
+      closeSheet();
+    }
+
+    function marcarVagaModal(status) {
+      if (!activeJob) return;
+      setJobStatus(activeJob.canonicalKey, status);
+      showToast('Oportunidade arquivada como encerrada');
+      closeSheet();
+    }
+
+    function alternarEstrelaModal() {
+      if (!activeJob) return;
+      toggleStar(activeJob.canonicalKey);
+      document.getElementById("modal-btn-star").innerText = activeJob.starred ? '★ Salva' : 'Salvar';
+    }
+
+    // 9. TEXT GENERATORS
+    function copiarPitch() {
+      if (!activeJob) return;
+      const empresa = activeJob.empresa || "sua empresa";
+      const cargo = activeJob.cargo || "Estágio";
+
+      const pitch = `Olá! Me chamo João, estou no 3º período de Engenharia de Software e tenho grande interesse na oportunidade de ${cargo} na ${empresa}.
+
+Estudo regularmente no turno da manhã, tendo disponibilidade integral para o turno da tarde (ou carga flexível de 6h). Possuo sólida base prática em desenvolvimento de software, algoritmos, bancos de dados e ferramentas modernas (Python, JavaScript/React, SQL, Git e automações com IA).
+
+Sou proativo, aprendo rápido e busco uma oportunidade onde possa contribuir resolvendo desafios reais e evoluir junto com o time. Fico à disposição para uma conversa!`;
+
+      navigator.clipboard.writeText(pitch).then(() => {
+        showToast('Apresentação copiada para a área de transferência');
+      });
+    }
+
+    function copiarSkills() {
+      const skills = `Engenharia de Software (3º Semestre) • Turno da Tarde / Flexível (Manhã livre)
+Tecnologias: Python, JavaScript/TypeScript, React, SQL, Git/GitHub, APIs REST, Lógica e IA Aplicada.`;
+
+      navigator.clipboard.writeText(skills).then(() => {
+        showToast('Competências copiadas');
+      });
+    }
+
+    function copiarContato() {
+      const contato = `João Victor
+Área: Engenharia de Software / Desenvolvimento / Dados / IA
+Turno de Estudo: Manhã (Disponível para estágio à tarde ou flexível)`;
+
+      navigator.clipboard.writeText(contato).then(() => {
+        showToast('Contatos copiados');
+      });
+    }
+
+    // 10. HISTÓRICO
+    function renderHistory() {
+      const container = document.getElementById("runs-list-container");
+      if (executionData.length === 0) {
+        container.innerHTML = `<div class="table-cell" style="justify-content: center; color: var(--label-tertiary);">Nenhum histórico registrado.</div>`;
+        return;
+      }
+
+      container.innerHTML = executionData.map(run => {
+        const hasJobs = Array.isArray(run.vagas) && run.vagas.length > 0;
+        const count = hasJobs ? run.vagas.length : 0;
+        const badge = hasJobs 
+          ? `<span class="tag-pill tag-remote">+${count} nova(s)</span>`
+          : `<span class="tag-pill" style="background: var(--system-fill); color: var(--label-tertiary);">0</span>`;
+
+        return `
+          <div class="table-cell">
+            <div style="min-width: 0;">
+              <div style="font-weight: 500; color: var(--label-primary); margin-bottom: 2px;">
+                ${run.mensagem}
+              </div>
+              <div style="font-size: 0.72rem; color: var(--label-tertiary); font-family: var(--font-mono);">
+                ${run.timestamp} • Duração: ${run.duracaoSegundos || 30}s
+              </div>
+            </div>
+            <div>
+              ${badge}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  </script>
+</body>
+</html>

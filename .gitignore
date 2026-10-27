@@ -7,6 +7,8 @@ node_modules/
 # Logs e arquivos temporarios de execucao
 log_execucoes.txt
 novas_vagas.json
+*.backup.json
+temp_*.html
 
 # Sistema operacional
 .DS_Store

@@ -7,6 +7,7 @@ Agente autônomo baseado no **Google Antigravity CLI** que realiza buscas contí
 ## 📁 Estrutura do Projeto
 
 ```text
+├── index.html                 # Painel visual para GitHub Pages e acesso direto
 ├── dashboard.html             # Painel visual minimalista (abra com 2 cliques no navegador)
 ├── EmailTemplate.jsx          # Template React estilizado para e-mails (JSX Email)
 ├── enviar_vagas_pendentes.js  # Disparador de e-mail para vagas inéditas

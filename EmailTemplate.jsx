@@ -12,18 +12,24 @@ import {
   Preview
 } from '@jsx-email/all';
 
-const EmailTemplate = ({ vagas = [] }) => {
+const EmailTemplate = ({ vagas = [], totalNovas = 0, restantesNoDashboard = 0 }) => {
   return (
     <Html>
       <Head />
-      <Preview>Novas Oportunidades de Estágio Selecionadas</Preview>
+      <Preview>🎯 Suas Top Vagas Selecionadas • EstágioBot</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Text style={brandHeader}>ESTÁGIOBOT AI</Text>
-          <Text style={title}>Novas Vagas de Estágio</Text>
+          <Text style={brandHeader}>ESTÁGIOBOT AI • CURADORIA EXCLUSIVA</Text>
+          <Text style={title}>Top Oportunidades Selecionadas</Text>
           <Text style={subtitle}>
-            Identificamos {vagas.length} oportunidade(s) compatível(is) com seu turno de estudo (manhã livre) e seu perfil em Engenharia/Dados/IA.
+            Filtramos as vagas mais recentes e compatíveis com seu turno da manhã livre. Sem repetições e sem sobrecarga: foque em aplicar nestas oportunidades selecionadas.
           </Text>
+
+          <Section style={tipBox}>
+            <Text style={tipText}>
+              💡 <strong>Rastreie no Dashboard:</strong> Abra seu painel no computador para usar o <strong>Modo Foco</strong>, copiar pitchs prontos em 1 clique e marcar as vagas que já candidatou!
+            </Text>
+          </Section>
 
           <Section style={grid}>
             {vagas.map((vaga, index) => (
@@ -45,8 +51,14 @@ const EmailTemplate = ({ vagas = [] }) => {
             ))}
           </Section>
 
+          {restantesNoDashboard > 0 ? (
+            <Text style={restantesText}>
+              + {restantesNoDashboard} outra(s) oportunidade(s) catalogada(s) e organizadas no seu Dashboard.
+            </Text>
+          ) : null}
+
           <Text style={footer}>
-            Monitoramento autônomo • Painel atualizado em tempo real no seu computador.
+            EstágioBot AI • Filtro anti-repetição ativo • Painel atualizado em tempo real.
           </Text>
         </Container>
       </Body>
@@ -154,6 +166,29 @@ const button = {
   display: 'inline-block',
   padding: '8px 16px',
   fontWeight: '600',
+};
+
+const tipBox = {
+  backgroundColor: '#F0F7F4',
+  border: '1px solid #D1E5DD',
+  borderRadius: '8px',
+  padding: '12px 16px',
+  marginBottom: '20px',
+};
+
+const tipText = {
+  fontSize: '13px',
+  lineHeight: '1.45',
+  color: '#1E4338',
+  margin: '0',
+};
+
+const restantesText = {
+  fontSize: '13px',
+  color: '#5C6C65',
+  textAlign: 'center',
+  margin: '16px 0',
+  fontStyle: 'italic',
 };
 
 const footer = {
