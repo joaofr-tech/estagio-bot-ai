@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "01/11/2026, 17:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "01/11/2026, 16:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -471,12 +478,5 @@ window.HISTORICO_EXECUCOES = [
         "link": "https://www.linkedin.com/jobs/view/4484219957"
       }
     ]
-  },
-  {
-    "timestamp": "28/10/2026, 14:11:34",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 7,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
   }
 ];
