@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "01/11/2026, 16:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "01/11/2026, 15:11:28",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -471,34 +478,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 7,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "28/10/2026, 13:49:20",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 674,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "PlugIA",
-        "cargo": "Estágio: Dev Python com agentes de código (Claude Code, Codex, OpenCode)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Matrícula ativa em Engenharia de Software, Ciência da Computação, Sistemas ou áreas afins; uso semanal de agentes de código (Claude Code, Codex, OpenCode); Python intermediário, noções de Django, SQL e APIs de LLM; carga de 30h semanais com horário comercial flexível (compatível com turno da tarde).",
-        "link": "https://www.linkedin.com/jobs/view/4482531110"
-      },
-      {
-        "empresa": "Soutag",
-        "cargo": "Estagiário de Automação e IA",
-        "modalidade": "Presencial / Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação ou exatas; desenvolvimento de fluxos de automação (N8N com IA, Python, Make); integração de APIs entre sistemas; ferramentas de análise de dados (SQL, Excel avançado, Power BI); bolsa de R$ 2.000,00 + benefícios; jornada de 6h diárias flexível/vespertino.",
-        "link": "https://www.linkedin.com/jobs/view/4483778946"
-      },
-      {
-        "empresa": "Geopixel",
-        "cargo": "Estágio com ênfase em Banco de Dados",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando Ensino Superior em Análise de Dados, Engenharia de Software ou áreas afins (a partir do 2º ano); conhecimentos em bancos de dados relacionais e SQL; noções de lógica de programação (Python); noções de QGIS; carga horária de 6h diárias (compatível com estudos pela manhã).",
-        "link": "https://geopixel.gupy.io/jobs/12775883"
-      }
-    ]
   }
 ];

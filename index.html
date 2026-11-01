@@ -1367,6 +1367,23 @@
               <div class="goal-counter" id="meter-text-meta">0 de 3</div>
             </div>
           </div>
+
+          <!-- BANNER DE AÇÕES PENDENTES URGENTES (Testes / Entrevistas) -->
+          <div id="banner-acao-urgente" style="display: none; margin-top: 1.2rem; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px; padding: 1rem 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+              <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 1.5rem;">⚡</span>
+                <div>
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #92400e;" id="banner-acao-titulo">Testes Técnicos / Entrevistas Pendentes</div>
+                  <div style="font-size: 0.82rem; color: #b45309;" id="banner-acao-desc">Você possui processos seletivos aguardando ação (testes, desafios ou agendamento).</div>
+                </div>
+              </div>
+              <button class="btn-action-ink" onclick="navigateToScreen('02'); switchSubTab02('pendentes');" style="background: #92400e; border-color: #78350f; font-size: 0.8rem; padding: 0.5rem 0.9rem;">
+                <span>Ver Testes / Entrevistas</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -1450,6 +1467,10 @@
       <div class="wrap">
         <!-- Sub-abas da Tela 02 -->
         <div class="screen-tabs-bar">
+          <button class="sub-tab-btn" id="btn-subtab-pendentes" onclick="switchSubTab02('pendentes')">
+            <span style="color: #b45309; font-weight: 600;">⚡ Ações Pendentes (Testes / Entrevistas)</span>
+            <span class="tab-count" id="count-subtab-pendentes" style="color: #b45309; font-weight: 700;">(0)</span>
+          </button>
           <button class="sub-tab-btn active" id="btn-subtab-andamento" onclick="switchSubTab02('andamento')">
             <span>Em Andamento</span>
             <span class="tab-count" id="count-subtab-andamento">(0)</span>
@@ -1461,14 +1482,6 @@
           <button class="sub-tab-btn" id="btn-subtab-salvas" onclick="switchSubTab02('salvas')">
             <span>Vagas Salvas ★</span>
             <span class="tab-count" id="count-subtab-salvas">(0)</span>
-          </button>
-          <button class="sub-tab-btn" id="btn-subtab-encerradas" onclick="switchSubTab02('encerradas')">
-            <span style="color: #b91c1c;">Encerradas / Inexistentes ❌</span>
-            <span class="tab-count" id="count-subtab-encerradas" style="color: #b91c1c;">(0)</span>
-          </button>
-          <button class="sub-tab-btn" id="btn-subtab-descartadas" onclick="switchSubTab02('descartadas')">
-            <span style="color: #d97706;">Mismatch / Descartadas ⊘</span>
-            <span class="tab-count" id="count-subtab-descartadas" style="color: #d97706;">(0)</span>
           </button>
         </div>
 
@@ -2140,6 +2153,8 @@
               currentStatus = 'encerrada';
             } else if (isMismatch) {
               currentStatus = 'descartada';
+            } else if (job.status === 'acao_pendente' || userState.status === 'acao_pendente') {
+              currentStatus = 'acao_pendente';
             } else {
               currentStatus = userState.status || job.status || 'para_aplicar';
             }
@@ -2160,6 +2175,7 @@
             const inicioCandidatura = userState.inicioCandidatura || null;
             const tempoGastoSegundos = userState.tempoGastoSegundos || null;
             const candidaturaExterna = !!(userState.candidaturaExterna || job.candidaturaExterna);
+            const detalhesAcao = userState.detalhesAcao || job.detalhesAcao || null;
             const isStarred = !!userState.starred;
 
             const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
@@ -2183,6 +2199,7 @@
               inicioCandidatura: inicioCandidatura,
               tempoGastoSegundos: tempoGastoSegundos,
               candidaturaExterna: candidaturaExterna,
+              detalhesAcao: detalhesAcao,
               starred: isStarred
             });
           }
