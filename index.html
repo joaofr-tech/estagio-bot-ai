@@ -3,1189 +3,1950 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Estágios</title>
+  <meta name="theme-color" content="#f7f6f2">
+  <title>EstágioBot — Radar de Oportunidades &amp; Engenharia</title>
+  
+  <!-- Typography matching gabrielgreco.com: Editorial Serif + Clean Sans + Technical Monospace -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    /* -------------------------------------------------------------
-       APPLE HUMAN INTERFACE GUIDELINES (WWDC 2018–2026)
-       True Native Feel • System Typography • Dynamic Materials
-       ------------------------------------------------------------- */
+    /* =============================================================
+       GABRIEL GRECO DESIGN SYSTEM
+       Editorial Minimalist Paper Aesthetic · Hairline Lines · Decoupled Views
+       ============================================================= */
     :root {
-      /* Typography */
-      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "Helvetica Neue", sans-serif;
-      --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Helvetica Neue", sans-serif;
-      --font-mono: "SF Mono", Monaco, Menlo, Consolas, monospace;
+      --paper: #f7f6f2;
+      --paper-deep: #efeee8;
+      --paper-card: #ffffff;
+      --ink: #242420;
+      --ink-soft: #383731;
+      --muted: #716f68;
+      --faint: #9a978f;
+      --line: #d9d7cf;
+      --line-dark: #b8b5ac;
+      --green: #2f6f4e;
+      --green-subtle: #2f6f4e15;
+      --yellow: #f1df7d;
+      --yellow-subtle: #fffbe6;
+      --sidebar: 272px;
 
-      /* Apple Light Palette (iOS / macOS HIG System Colors) */
-      --color-bg: #F2F2F7;
-      --color-surface: #FFFFFF;
-      --color-surface-translucent: rgba(255, 255, 255, 0.78);
-      --color-surface-hover: rgba(0, 0, 0, 0.02);
-      --color-surface-secondary: #F2F2F7;
-
-      --color-separator: rgba(60, 60, 67, 0.12);
-      --color-separator-opaque: #E5E5EA;
-
-      /* Labels */
-      --label-primary: #000000;
-      --label-secondary: #3C3C43;
-      --label-tertiary: #8A8A8E;
-      --label-quaternary: #C7C7CC;
-
-      /* System Tints */
-      --system-blue: #007AFF;
-      --system-blue-subtle: rgba(0, 122, 255, 0.1);
-      --system-green: #34C759;
-      --system-green-subtle: rgba(52, 199, 89, 0.12);
-      --system-orange: #FF9500;
-      --system-orange-subtle: rgba(255, 149, 0, 0.12);
-      --system-red: #FF3B30;
-      --system-red-subtle: rgba(255, 59, 48, 0.1);
-      --system-fill: rgba(120, 120, 128, 0.16);
-      --system-fill-secondary: rgba(120, 120, 128, 0.08);
-
-      /* Shadows & Elevation */
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 0.5px 1px rgba(0, 0, 0, 0.03);
-      --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-      --shadow-card-hover: 0 10px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
-      --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.08);
-
-      /* Radii */
-      --radius-card: 16px;
-      --radius-pill: 999px;
-      --radius-sm: 10px;
-
-      /* Springs & Easing */
-      --spring-press: cubic-bezier(0.2, 0.9, 0.3, 1);
-      --spring-slide: cubic-bezier(0.16, 1, 0.3, 1);
+      --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+      --font-sans: "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", monospace;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --color-bg: #000000;
-        --color-surface: #1C1C1E;
-        --color-surface-translucent: rgba(28, 28, 30, 0.78);
-        --color-surface-hover: rgba(255, 255, 255, 0.03);
-        --color-surface-secondary: #2C2C2E;
-
-        --color-separator: rgba(84, 84, 88, 0.28);
-        --color-separator-opaque: #38383A;
-
-        --label-primary: #FFFFFF;
-        --label-secondary: #EBEBF5;
-        --label-tertiary: #8E8E93;
-        --label-quaternary: #48484A;
-
-        --system-blue: #0A84FF;
-        --system-blue-subtle: rgba(10, 132, 255, 0.16);
-        --system-green: #30D158;
-        --system-green-subtle: rgba(48, 209, 88, 0.16);
-        --system-orange: #FF9F0A;
-        --system-orange-subtle: rgba(255, 159, 10, 0.16);
-        --system-red: #FF453A;
-        --system-red-subtle: rgba(255, 69, 58, 0.16);
-        --system-fill: rgba(120, 120, 128, 0.32);
-        --system-fill-secondary: rgba(120, 120, 128, 0.18);
-
-        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-        --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.3);
-        --shadow-card-hover: 0 12px 28px -4px rgba(0, 0, 0, 0.5);
-        --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.6);
-      }
-    }
-
-    /* Accessibility */
-    @media (prefers-reduced-motion: reduce) {
-      *, ::before, ::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-      }
-    }
-
-    @media (prefers-reduced-transparency: reduce) {
-      .frosted-nav, .modal-sheet, .segmented-control, .toast-hud {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        background: var(--color-surface) !important;
-      }
-    }
-
-    /* Base Reset */
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      font-family: var(--font-text);
-      background-color: var(--color-bg);
-      color: var(--label-primary);
-      line-height: 1.45;
+      background-color: var(--paper);
+      color: var(--ink);
       min-height: 100vh;
       display: flex;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* =============================================================
+       FIXED SIDEBAR (5 Decoupled Screens)
+       ============================================================= */
+    .site-sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: var(--sidebar);
+      height: 100vh;
+      background: var(--paper-deep);
+      border-right: 1px solid var(--line);
+      padding: 2.2rem 1.6rem 1.8rem;
+      display: flex;
       flex-direction: column;
-      overflow-x: hidden;
-      letter-spacing: -0.01em;
+      z-index: 50;
+      overflow-y: auto;
     }
 
-    /* -------------------------------------------------------------
-       NAVIGATION BAR (macOS / iOS Translucent Toolbar)
-       ------------------------------------------------------------- */
-    .frosted-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--color-surface-translucent);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 0.5px solid var(--color-separator);
-      transition: background-color 200ms ease;
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid var(--line);
     }
 
-    .nav-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0.75rem 1.25rem;
+    .sidebar-identity {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand-section {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      gap: 0.85rem;
       text-decoration: none;
-      color: inherit;
+      color: var(--ink);
+      cursor: pointer;
     }
 
-    .app-glyph {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--label-primary);
-      color: var(--color-bg);
+    .identity-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-style: italic;
+      font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: var(--shadow-sm);
+      border-radius: 3px;
+      flex-shrink: 0;
     }
 
-    .brand-title {
-      font-family: var(--font-display);
+    .identity-copy {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .identity-copy strong {
       font-size: 1.05rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.02em;
-      line-height: 1.2;
     }
 
-    .brand-caption {
-      font-size: 0.72rem;
-      color: var(--label-tertiary);
+    .identity-copy small {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      margin-top: 2px;
+    }
+
+    .sidebar-status {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.55rem;
+      font-size: 0.74rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
     }
 
     .status-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: var(--system-green);
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.2);
+      flex-shrink: 0;
+      animation: pulseDot 2.8s infinite ease-in-out;
     }
 
-    /* Apple Native Segmented Control */
-    .segmented-control {
-      position: relative;
-      display: inline-flex;
-      background: var(--system-fill-secondary);
-      padding: 2px;
-      border-radius: 9px;
-      user-select: none;
-      border: 0.5px solid var(--color-separator);
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.2); }
+      50% { box-shadow: 0 0 0 6px rgba(47, 111, 78, 0.08); }
     }
 
-    .segment-btn {
-      position: relative;
-      z-index: 2;
-      background: transparent;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      font-family: var(--font-text);
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--label-secondary);
-      padding: 0.35rem 0.85rem;
-      border-radius: 7px;
+    /* Sidebar Navigation Links */
+    .sidebar-nav {
+      flex: 1;
+      padding: 1.8rem 0;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 0.35rem;
-      transition: color 140ms ease;
     }
 
-    .segment-btn:active {
-      opacity: 0.7;
-    }
-
-    .segment-btn.active {
-      color: var(--label-primary);
-      font-weight: 600;
-    }
-
-    .segment-slider {
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      height: calc(100% - 4px);
-      background: var(--color-surface);
-      border-radius: 7px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 0.5px 1px rgba(0, 0, 0, 0.04);
-      transition: transform 220ms var(--spring-press), width 220ms var(--spring-press);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* -------------------------------------------------------------
-       MAIN CONTENT
-       ------------------------------------------------------------- */
-    main {
-      flex: 1;
-      max-width: 980px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 2.25rem 1.25rem 4rem;
-    }
-
-    /* View Header */
-    .view-header {
-      margin-bottom: 1.75rem;
-    }
-
-    .view-large-title {
-      font-family: var(--font-display);
-      font-size: 2.1rem;
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.15;
-      color: var(--label-primary);
-      margin-bottom: 0.35rem;
-    }
-
-    .view-subheadline {
-      font-size: 0.92rem;
-      color: var(--label-secondary);
-      font-weight: 400;
-    }
-
-    /* -------------------------------------------------------------
-       TODAY FOCUS CARD (Apple Activity / Health Card Style)
-       ------------------------------------------------------------- */
-    .today-card {
-      background: var(--color-surface);
-      border: 0.5px solid var(--color-separator);
-      border-radius: var(--radius-card);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-card);
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .today-card-top {
+    .sidebar-links {
+      list-style: none;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.75rem;
+      flex-direction: column;
+      gap: 0.35rem;
     }
 
-    .section-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--system-blue);
-    }
-
-    .progress-track-wrapper {
+    .sidebar-link {
       display: flex;
       align-items: center;
       gap: 0.75rem;
-    }
-
-    .progress-track {
-      width: 100px;
-      height: 6px;
-      background: var(--system-fill);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: var(--system-green);
-      border-radius: 999px;
-      transition: width 350ms var(--spring-slide);
-    }
-
-    .progress-count {
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--label-secondary);
-    }
-
-    .today-headline {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.35rem;
-    }
-
-    .today-subtext {
-      font-size: 0.86rem;
-      color: var(--label-secondary);
-      line-height: 1.45;
-      max-width: 650px;
-    }
-
-    /* -------------------------------------------------------------
-       INSET TAB BAR (SCOPE CONTROLLER)
-       ------------------------------------------------------------- */
-    .scope-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      overflow-x: auto;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-      scrollbar-width: none;
-    }
-
-    .scope-bar::-webkit-scrollbar {
-      display: none;
-    }
-
-    .scope-pill {
-      background: var(--color-surface);
-      border: 0.5px solid var(--color-separator);
-      color: var(--label-secondary);
-      font-family: var(--font-text);
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 0.4rem 0.85rem;
-      border-radius: var(--radius-pill);
+      padding: 0.65rem 0.8rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      white-space: nowrap;
-      transition: all 150ms ease;
+      font-size: 0.9rem;
     }
 
-    .scope-pill:hover {
-      color: var(--label-primary);
-      border-color: var(--color-separator-opaque);
+    .sidebar-link:hover {
+      background: var(--paper);
+      color: var(--ink);
     }
 
-    .scope-pill:active {
-      transform: scale(0.97);
+    .sidebar-link.active {
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 600;
+      border: 1px solid var(--line);
     }
 
-    .scope-pill.active {
-      background: var(--label-primary);
-      color: var(--color-bg);
-      border-color: var(--label-primary);
+    .nav-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--faint);
+      width: 22px;
+      letter-spacing: 0.04em;
+    }
+
+    .sidebar-link.active .nav-number {
+      color: var(--green);
       font-weight: 600;
     }
 
-    .scope-pill.active .scope-count {
-      background: rgba(255, 255, 255, 0.25);
-      color: inherit;
+    .nav-label {
+      flex: 1;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .scope-pill.active .scope-count {
-        background: rgba(0, 0, 0, 0.25);
-      }
-    }
-
-    .scope-count {
-      font-size: 0.7rem;
+    .nav-badge {
       font-family: var(--font-mono);
-      padding: 0.1rem 0.4rem;
-      border-radius: var(--radius-pill);
-      background: var(--system-fill);
-      color: var(--label-secondary);
+      font-size: 0.68rem;
+      padding: 0.1em 0.45em;
+      border-radius: 3px;
+      background: var(--line);
+      color: var(--ink);
+      font-weight: 500;
     }
 
-    /* -------------------------------------------------------------
-       CONTROLS (SPOTLIGHT SEARCH & MODALITY CHIPS)
-       ------------------------------------------------------------- */
-    .filter-row {
+    .sidebar-link.active .nav-badge {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .sidebar-bottom {
+      border-top: 1px solid var(--line);
+      padding-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-availability {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* =============================================================
+       MAIN CONTENT CONTAINER
+       ============================================================= */
+    .site-main {
+      margin-left: var(--sidebar);
+      flex: 1;
+      width: calc(100% - var(--sidebar));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+      width: 100%;
+    }
+
+    /* Screen Views Wrapper */
+    .screen-view {
+      display: none;
+      width: 100%;
+      animation: fadeInView 0.18s ease-out;
+    }
+
+    .screen-view.active {
+      display: block;
+    }
+
+    @keyframes fadeInView {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Editorial Screen Headers */
+    .screen-header-block {
+      border-bottom: 1px solid var(--line);
+      padding: clamp(2.8rem, 4.5vw, 4.2rem) 0 clamp(1.8rem, 3vw, 2.8rem);
+    }
+
+    .screen-kicker {
+      margin-bottom: 1.1rem;
+    }
+
+    .screen-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .screen-desc {
+      color: var(--muted);
+      max-width: 720px;
+      margin-top: 1.1rem;
+      font-size: clamp(0.98rem, 1.25vw, 1.1rem);
+      line-height: 1.55;
+    }
+
+    /* Daily Goal Card (Screen 01) */
+    .goal-tracker-card {
+      margin-top: 1.8rem;
+      border: 1px solid var(--line);
+      background: var(--paper-deep);
+      padding: 1.3rem 1.6rem;
+      border-radius: 4px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
+      gap: 1.2rem;
     }
 
-    .search-field {
+    .goal-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .goal-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .goal-sub {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .goal-meter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 260px;
+    }
+
+    .goal-meter-bar {
       flex: 1;
-      min-width: 240px;
+      height: 8px;
+      background: var(--line);
+      border-radius: 4px;
+      overflow: hidden;
       position: relative;
+    }
+
+    .goal-meter-fill {
+      height: 100%;
+      background: var(--green);
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .goal-counter {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* Section Subheadings */
+    .sub-section-header {
+      margin: 2.8rem 0 1.4rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line-dark);
+      padding-bottom: 0.8rem;
+    }
+
+    .sub-section-header h3 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    /* Controls & Search */
+    .controls-box {
+      border: 1px solid var(--line);
+      background: var(--paper-deep);
+      padding: 1.2rem;
+      border-radius: 4px;
+      margin: 1.5rem 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .search-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .search-input-box {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.95rem;
+      color: var(--faint);
+      width: 15px;
+      height: 15px;
+      pointer-events: none;
     }
 
     .search-input {
       width: 100%;
-      height: 36px;
-      padding: 0 2rem 0 2.2rem;
-      border-radius: var(--radius-sm);
-      background: var(--system-fill-secondary);
-      border: 0.5px solid transparent;
-      font-family: var(--font-text);
-      font-size: 0.85rem;
-      color: var(--label-primary);
+      padding: 0.65rem 2.4rem 0.65rem 2.4rem;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--ink);
       outline: none;
-      transition: all 180ms ease;
+      transition: border-color 0.15s;
     }
 
     .search-input:focus {
-      background: var(--color-surface);
-      border-color: var(--system-blue);
-      box-shadow: 0 0 0 3px var(--system-blue-subtle);
+      border-color: var(--ink);
     }
 
-    .search-input::placeholder {
-      color: var(--label-tertiary);
-    }
-
-    .search-glyph {
+    .search-clear-btn {
       position: absolute;
-      left: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 14px;
-      height: 14px;
-      color: var(--label-tertiary);
-      pointer-events: none;
-    }
-
-    .search-clear {
-      position: absolute;
-      right: 0.6rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--system-fill);
-      border: none;
-      color: var(--label-secondary);
-      font-size: 0.65rem;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modality-chips {
-      display: flex;
-      gap: 0.35rem;
-    }
-
-    .filter-chip {
+      right: 0.75rem;
       background: transparent;
-      border: 0.5px solid var(--color-separator);
-      color: var(--label-secondary);
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 0.35rem 0.75rem;
-      border-radius: var(--radius-pill);
+      border: none;
+      color: var(--muted);
       cursor: pointer;
-      transition: all 140ms ease;
+      font-size: 0.85rem;
+      display: none;
+      padding: 0.2rem;
     }
 
-    .filter-chip:active {
-      transform: scale(0.96);
-    }
-
-    .filter-chip.active {
-      background: var(--system-fill);
-      color: var(--label-primary);
-      font-weight: 600;
-      border-color: transparent;
-    }
-
-    /* Subtitle count indicator */
-    .results-meta {
+    .filters-cluster {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.76rem;
-      color: var(--label-tertiary);
-      margin-bottom: 1.25rem;
-      padding: 0 0.15rem;
+      gap: 0.8rem;
     }
 
-    /* -------------------------------------------------------------
-       JOBS LIST / CARDS (Apple Inset Grid)
-       ------------------------------------------------------------- */
-    .jobs-grid {
+    .filter-subgroup {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-subgroup-label {
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      color: var(--faint);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .toggle-strip {
+      display: flex;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .toggle-btn {
+      border: none;
+      background: transparent;
+      padding: 0.3rem 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.69rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .toggle-btn:not(:last-child) {
+      border-right: 1px solid var(--line);
+    }
+
+    .toggle-btn:hover {
+      color: var(--ink);
+    }
+
+    .toggle-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    /* Sub Tabs (Screen 02) */
+    .screen-tabs-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--line);
+      padding: 1.2rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .sub-tab-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      padding: 0.5rem 1.1rem;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sub-tab-btn:hover {
+      background: var(--paper-deep);
+      color: var(--ink);
+    }
+
+    .sub-tab-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+      font-weight: 500;
+    }
+
+    .sub-tab-btn .tab-count {
+      font-size: 0.68rem;
+      opacity: 0.75;
+    }
+
+    /* =============================================================
+       JOBS TABLE & ROWS (gabrielgreco.com project-row style)
+       ============================================================= */
+    .jobs-table {
+      border-top: 1px solid var(--line-dark);
+      margin-bottom: 4rem;
+    }
+
+    .job-row {
+      border-bottom: 1px solid var(--line);
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 1.4rem;
+      padding: 2.2rem 1.2rem;
+      transition: padding 0.18s, background 0.18s;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .job-card {
-      background: var(--color-surface);
-      border: 0.5px solid var(--color-separator);
-      border-radius: var(--radius-card);
-      padding: 1.25rem;
-      box-shadow: var(--shadow-card);
+    .job-row:hover {
+      background: var(--paper-deep);
+      padding-left: 1.6rem;
+      padding-right: 1.6rem;
+    }
+
+    .job-number {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--faint);
+      padding-top: 0.45rem;
+      letter-spacing: 0.04em;
+    }
+
+    .job-row:hover .job-number {
+      color: var(--ink);
+    }
+
+    .job-content {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      position: relative;
-      transition: transform 200ms var(--spring-press), box-shadow 200ms ease, border-color 200ms ease;
+      gap: 0.4rem;
+      min-width: 0;
     }
 
-    .job-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-card-hover);
-      border-color: rgba(0, 122, 255, 0.2);
-    }
-
-    .job-card:active {
-      transform: scale(0.98);
-      transition: transform 100ms ease-out;
-    }
-
-    .job-card.is-applied {
-      border-left: 3px solid var(--system-green);
-    }
-
-    .job-card.is-closed {
-      opacity: 0.55;
-    }
-
-    .card-meta-row {
+    .job-top-meta {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+      gap: 0.6rem;
+      flex-wrap: wrap;
     }
 
-    .card-company {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--label-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .tag-pill {
-      font-size: 0.68rem;
-      font-weight: 500;
-      padding: 0.15rem 0.5rem;
-      border-radius: 5px;
+    .company-label {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
       letter-spacing: -0.01em;
-      white-space: nowrap;
     }
 
-    .tag-remote {
-      background: var(--system-green-subtle);
-      color: var(--system-green);
-    }
-
-    .tag-hybrid {
-      background: var(--system-orange-subtle);
-      color: var(--system-orange);
-    }
-
-    .tag-applied {
-      background: var(--system-green);
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-      line-height: 1.3;
-      color: var(--label-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .card-snippet {
-      font-size: 0.82rem;
-      color: var(--label-secondary);
-      line-height: 1.45;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      margin-bottom: 1.1rem;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.75rem;
-      border-top: 0.5px solid var(--color-separator);
-      gap: 0.5rem;
-    }
-
-    .card-date {
-      font-size: 0.72rem;
-      color: var(--label-tertiary);
+    .job-date {
       font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--faint);
     }
 
-    .card-actions-group {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .action-icon-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--system-fill-secondary);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--label-secondary);
-      font-size: 0.8rem;
-      transition: all 140ms ease;
-    }
-
-    .action-icon-btn:hover {
-      background: var(--system-fill);
-      color: var(--label-primary);
-    }
-
-    .action-icon-btn:active {
-      transform: scale(0.92);
-    }
-
-    .action-icon-btn.is-starred {
-      color: #FFB800;
-    }
-
-    /* Apple Button Primary */
-    .apple-btn-primary {
-      background: var(--system-blue);
-      color: #FFFFFF;
-      font-family: var(--font-text);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.42rem 0.85rem;
-      border-radius: var(--radius-pill);
-      border: none;
-      text-decoration: none;
+    .tag-badge {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      padding: 0.12em 0.5em;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+      border: 1px solid var(--line);
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0, 122, 255, 0.3);
-      transition: transform 100ms ease, background-color 150ms ease;
     }
 
-    .apple-btn-primary:active {
-      transform: scale(0.95);
+    .tag-badge.remote {
+      background: #edf7ed;
+      color: var(--green);
+      border-color: #c8e6c9;
     }
 
-    .apple-btn-secondary {
-      background: var(--system-fill-secondary);
-      color: var(--label-primary);
-      box-shadow: none;
+    .tag-badge.presencial {
+      background: #fbf5e6;
+      color: #92400e;
+      border-color: #fcd34d;
     }
 
-    .apple-btn-secondary:hover {
-      background: var(--system-fill);
+    .tag-badge.hybrid {
+      background: var(--paper-deep);
+      color: var(--muted);
     }
 
-    /* -------------------------------------------------------------
-       APPLE DETAIL SHEET / MODAL
-       ------------------------------------------------------------- */
-    .sheet-scrim {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 220ms ease;
-      padding: 1.25rem;
+    .tag-badge.turno {
+      background: #eef2ff;
+      color: #3730a3;
+      border-color: #c7d2fe;
     }
 
-    .sheet-scrim.visible {
-      opacity: 1;
-      pointer-events: auto;
+    .tag-badge.inscricao {
+      background: var(--yellow-subtle);
+      color: #78350f;
+      border-color: #fde68a;
     }
 
-    .modal-sheet {
-      background: var(--color-surface);
-      width: 100%;
-      max-width: 600px;
-      max-height: 88vh;
-      border-radius: 20px;
-      padding: 1.75rem;
-      box-shadow: var(--shadow-modal);
-      border: 0.5px solid var(--color-separator);
+    .tag-badge.andamento {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+    }
+
+    .tag-badge.applied {
+      background: var(--green);
+      color: var(--paper);
+      border-color: var(--green);
+    }
+
+    .job-title-line {
+      margin-top: 0.2rem;
+    }
+
+    .job-title-line h3 {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+      line-height: 1.22;
+      color: var(--ink);
+    }
+
+    .job-snippet {
+      max-width: 680px;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .job-actions-column {
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
-      transform: translateY(16px) scale(0.98);
-      transition: transform 280ms var(--spring-slide);
-      position: relative;
+      align-items: flex-end;
+      gap: 0.65rem;
+      padding-top: 0.35rem;
     }
 
-    .sheet-scrim.visible .modal-sheet {
-      transform: translateY(0) scale(1);
-    }
-
-    .sheet-close-btn {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--system-fill-secondary);
-      border: none;
-      color: var(--label-secondary);
-      font-size: 0.75rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 120ms ease;
-    }
-
-    .sheet-close-btn:hover {
-      background: var(--system-fill);
-      color: var(--label-primary);
-    }
-
-    .sheet-close-btn:active {
-      transform: scale(0.92);
-    }
-
-    /* Modal Toolcard (Copiloto) */
-    .toolcard-panel {
-      background: var(--system-fill-secondary);
-      border: 0.5px solid var(--color-separator);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .toolcard-header {
+    .btn-action-ink {
+      background: var(--ink);
+      color: var(--paper);
+      border: 1px solid var(--ink);
+      padding: 0.45rem 0.95rem;
+      font-family: var(--font-mono);
       font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--system-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.35rem;
-    }
-
-    .toolcard-desc {
-      font-size: 0.8rem;
-      color: var(--label-secondary);
-      margin-bottom: 0.75rem;
-      line-height: 1.4;
-    }
-
-    .toolcard-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .tool-btn {
-      background: var(--color-surface);
-      border: 0.5px solid var(--color-separator);
-      color: var(--label-primary);
-      font-family: var(--font-text);
-      font-size: 0.76rem;
       font-weight: 500;
-      padding: 0.38rem 0.75rem;
-      border-radius: var(--radius-pill);
+      letter-spacing: 0.04em;
+      border-radius: 3px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.04);
-      transition: all 120ms ease;
+      gap: 0.4rem;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
     }
 
-    .tool-btn:hover {
-      border-color: var(--system-blue);
-      color: var(--system-blue);
+    .btn-action-ink:hover {
+      background: var(--green);
+      border-color: var(--green);
     }
 
-    .tool-btn:active {
-      transform: scale(0.96);
+    .btn-confirm-success {
+      background: var(--green);
+      color: var(--paper);
+      border: 1px solid var(--green);
     }
 
-    /* -------------------------------------------------------------
-       DYNAMIC ISLAND HUD / TOAST (iOS Capsule)
-       ------------------------------------------------------------- */
-    .toast-hud {
-      position: fixed;
-      top: 1.25rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(-60px);
-      background: rgba(0, 0, 0, 0.88);
-      color: #FFFFFF;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 0.55rem 1.15rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.82rem;
+    .btn-confirm-success:hover {
+      background: #23543b;
+    }
+
+    .btn-action-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line-dark);
+      padding: 0.4rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-action-secondary:hover {
+      background: var(--paper-deep);
+    }
+
+    .job-icon-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--faint);
+      width: 32px;
+      height: 32px;
+      border-radius: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.15s ease;
+    }
+
+    .job-icon-btn:hover {
+      border-color: var(--line-dark);
+      color: var(--ink);
+    }
+
+    .job-icon-btn.is-starred {
+      color: #d97706;
+      border-color: #f59e0b;
+      background: var(--yellow-subtle);
+    }
+
+    .empty-state-box {
+      padding: 4.5rem 2rem;
+      text-align: center;
+      border: 1px dashed var(--line);
+      border-radius: 4px;
+      margin: 2.5rem 0;
+      background: var(--paper-deep);
+    }
+
+    .empty-state-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .empty-state-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* =============================================================
+       SCREEN 04: PARAMETERS FORM & REGION SELECTOR
+       ============================================================= */
+    .params-container {
+      margin: 2.5rem 0 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .params-card {
+      border: 1px solid var(--line);
+      background: var(--paper-deep);
+      border-radius: 4px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .params-card-header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.8rem;
+    }
+
+    .params-card-header h4 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
       font-weight: 500;
-      letter-spacing: -0.01em;
-      z-index: 2000;
+      color: var(--ink);
+    }
+
+    .params-card-header p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+
+    .params-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .param-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .param-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .param-input, .param-select {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      padding: 0.65rem 0.85rem;
+      border-radius: 3px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .param-input:focus, .param-select:focus {
+      border-color: var(--ink);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      padding-top: 0.3rem;
+    }
+
+    .checkbox-label {
       display: flex;
       align-items: center;
-      gap: 0.45rem;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
-      opacity: 0;
-      transition: transform 260ms var(--spring-press), opacity 200ms ease;
-      pointer-events: none;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--ink);
+      cursor: pointer;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .toast-hud {
-        background: rgba(255, 255, 255, 0.92);
-        color: #000000;
-      }
+    .checkbox-label input {
+      accent-color: var(--ink);
+      width: 16px;
+      height: 16px;
     }
 
-    .toast-hud.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    /* -------------------------------------------------------------
-       INSET GROUPED LIST (macOS / iOS Table View)
-       ------------------------------------------------------------- */
-    .inset-grouped-table {
-      background: var(--color-surface);
-      border: 0.5px solid var(--color-separator);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-    }
-
-    .table-cell {
+    /* Region / Cities interactive box */
+    .cidades-selector-box {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      border-radius: 3px;
+      padding: 1.2rem;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.95rem 1.25rem;
-      border-bottom: 0.5px solid var(--color-separator);
-      font-size: 0.84rem;
+      flex-direction: column;
       gap: 1rem;
     }
 
-    .table-cell:last-child {
-      border-bottom: none;
+    .cidades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.6rem;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 0.4rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 3px;
     }
 
-    /* Empty State */
-    .empty-state {
-      text-align: center;
-      padding: 4rem 1.5rem;
-      color: var(--label-tertiary);
-      grid-column: 1 / -1;
+    .selected-cities-preview {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink);
+      background: var(--paper-deep);
+      padding: 0.6rem 0.8rem;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+      line-height: 1.4;
     }
 
-    .empty-symbol {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 0.75rem;
-      color: var(--label-quaternary);
+    /* =============================================================
+       SCREEN 05: KPIS & ANALYTICS & 15-DAY TIMELINE
+       ============================================================= */
+    .kpi-container {
+      margin: 2.5rem 0 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
     }
 
-    .empty-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--label-secondary);
-      margin-bottom: 0.25rem;
+    .kpi-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
     }
 
-    .empty-desc {
+    .kpi-metric-card {
+      border: 1px solid var(--line);
+      background: var(--paper-deep);
+      border-radius: 4px;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .kpi-metric-num {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.04em;
+    }
+
+    .kpi-metric-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-metric-context {
       font-size: 0.82rem;
-      color: var(--label-tertiary);
+      color: var(--faint);
+      line-height: 1.4;
+      margin-top: 0.2rem;
     }
 
-    /* Footer */
-    footer {
-      border-top: 0.5px solid var(--color-separator);
-      padding: 1.5rem 1.25rem;
+    /* Timeline Chart Card */
+    .timeline-chart-card {
+      border: 1px solid var(--line);
+      background: var(--paper-deep);
+      border-radius: 4px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .timeline-chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.8rem;
+    }
+
+    .timeline-chart-header h4 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .timeline-svg-wrap {
+      width: 100%;
+      overflow-x: auto;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1rem 0.5rem;
+    }
+
+    .timeline-stats-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: var(--font-mono);
       font-size: 0.74rem;
-      color: var(--label-tertiary);
-      text-align: center;
+      color: var(--muted);
+      padding-top: 0.4rem;
     }
 
-    .hidden {
-      display: none !important;
+    .timeline-stats-footer strong {
+      color: var(--ink);
+    }
+
+    .kpi-deep-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .kpi-detail-card {
+      border: 1px solid var(--line);
+      background: var(--paper-deep);
+      border-radius: 4px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .kpi-detail-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.6rem;
+    }
+
+    .bar-stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .bar-stat-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .bar-stat-track {
+      height: 8px;
+      background: var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar-stat-fill {
+      height: 100%;
+      background: var(--ink);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    /* Modal / Drawer */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(36, 36, 32, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .modal-backdrop.visible {
+      display: flex;
+    }
+
+    .modal-sheet-panel {
+      width: 100%;
+      max-width: 600px;
+      height: 100vh;
+      background: var(--paper);
+      border-left: 1px solid var(--line-dark);
+      padding: 2.8rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.08);
+      animation: slideInSheet 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideInSheet {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.8rem;
+      right: 1.8rem;
+      background: transparent;
+      border: 1px solid var(--line);
+      width: 34px;
+      height: 34px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .modal-header-block {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.6rem;
+    }
+
+    .modal-company {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .modal-desc-box {
+      background: var(--paper-deep);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 1.2rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      white-space: pre-line;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 0.6rem;
+    }
+
+    .toast-hud {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.6rem 1.2rem;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.03em;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .toast-hud.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .site-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 1.2rem 1.4rem;
+      }
+      .sidebar-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .sidebar-nav { padding: 1rem 0 0.5rem; }
+      .sidebar-links { flex-direction: row; flex-wrap: wrap; gap: 0.4rem; }
+      .sidebar-link { padding: 0.45rem 0.65rem; font-size: 0.8rem; }
+      .sidebar-bottom { display: none; }
+      .site-main { margin-left: 0; width: 100%; }
+      .screen-title { font-size: 2.2rem; }
+      .job-row { grid-template-columns: 1fr; gap: 0.8rem; padding: 1.6rem 0.5rem; }
+      .job-actions-column { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .params-grid-2, .kpi-deep-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- DYNAMIC ISLAND TOAST HUD -->
+  <!-- =============================================================
+       SITE SIDEBAR (5 Decoupled Screens)
+       ============================================================= -->
+  <aside class="site-sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-identity" onclick="navigateToScreen('01')">
+        <span class="identity-mark">J</span>
+        <span class="identity-copy">
+          <strong>João Francisco</strong>
+          <small>estágio &bull; engenharia de software</small>
+        </span>
+      </div>
+
+      <div class="sidebar-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Radar Ativo &bull; UTC−3</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegação Desacoplada">
+      <ul class="sidebar-links">
+        <li>
+          <div class="sidebar-link active" id="nav-btn-01" onclick="navigateToScreen('01')">
+            <span class="nav-number">01</span>
+            <span class="nav-label">Meta do Dia</span>
+            <span class="nav-badge" id="badge-nav-abertas">0</span>
+          </div>
+        </li>
+        <li>
+          <div class="sidebar-link" id="nav-btn-02" onclick="navigateToScreen('02')">
+            <span class="nav-number">02</span>
+            <span class="nav-label">Candidaturas</span>
+            <span class="nav-badge" id="badge-nav-candidaturas">0</span>
+          </div>
+        </li>
+        <li>
+          <div class="sidebar-link" id="nav-btn-03" onclick="navigateToScreen('03')">
+            <span class="nav-number">03</span>
+            <span class="nav-label">Histórico de Buscas</span>
+            <span class="nav-badge" id="badge-nav-runs">0</span>
+          </div>
+        </li>
+        <li>
+          <div class="sidebar-link" id="nav-btn-04" onclick="navigateToScreen('04')">
+            <span class="nav-number">04</span>
+            <span class="nav-label">Parâmetros de Busca</span>
+            <span class="nav-badge" style="background: var(--line-dark); color: #fff;">Config</span>
+          </div>
+        </li>
+        <li>
+          <div class="sidebar-link" id="nav-btn-05" onclick="navigateToScreen('05')">
+            <span class="nav-number">05</span>
+            <span class="nav-label">Indicadores &amp; KPIs</span>
+            <span class="nav-badge" style="background: var(--yellow); color: #000;">Métricas</span>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-availability" id="sidebar-avail-text">
+        Disponível: Tarde / Noite / Flexível &bull; Presencial BH ou Remoto
+      </div>
+    </div>
+  </aside>
+
+  <!-- =============================================================
+       SITE MAIN CONTENT (Decoupled Screens 01 to 05)
+       ============================================================= -->
+  <main class="site-main">
+
+    <!-- ===========================================================
+         TELA 01: META DO DIA & VAGAS ABERTAS
+         =========================================================== -->
+    <section class="screen-view active" id="screen-view-01">
+      <header class="screen-header-block">
+        <div class="wrap">
+          <div class="screen-kicker mono">01 / ROTINA DIÁRIA &amp; DESCOBERTA</div>
+          <h1 class="screen-title">Meta do Dia &amp; Oportunidades.</h1>
+          <p class="screen-desc">
+            Três oportunidades selecionadas para você cumprir sua meta diária de hoje, além de todo o catálogo de vagas abertas para você escolher livremente.
+          </p>
+
+          <div class="goal-tracker-card">
+            <div class="goal-info">
+              <div class="goal-title">
+                <span>Meta Diária de Candidaturas</span>
+              </div>
+              <div class="goal-sub" id="label-meta-status">
+                0 de 3 candidaturas confirmadas hoje
+              </div>
+            </div>
+
+            <div class="goal-meter-wrap">
+              <div class="goal-meter-bar">
+                <div class="goal-meter-fill" id="meter-fill-meta"></div>
+              </div>
+              <div class="goal-counter" id="meter-text-meta">0 de 3</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="wrap">
+        <!-- SUB-SEÇÃO 1: AS 3 VAGAS DA META DE HOJE -->
+        <div class="sub-section-header">
+          <h3>Foco de Hoje (3 Vagas Prioritárias)</h3>
+          <span class="mono" style="font-size: 0.72rem;">Meta diária recomendada</span>
+        </div>
+        <div class="jobs-table" id="table-focus-jobs">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- SUB-SEÇÃO 2: TODAS AS OPORTUNIDADES ABERTAS -->
+        <div class="sub-section-header">
+          <h3>Todas as Vagas Abertas</h3>
+          <span class="mono" id="label-all-abertas-count">Carregando catálogo...</span>
+        </div>
+
+        <!-- Controles & Filtros para Todas as Vagas -->
+        <div class="controls-box">
+          <div class="search-row">
+            <div class="search-input-box">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input 
+                type="text" 
+                id="search-input-01" 
+                class="search-input" 
+                placeholder="Buscar por cargo, empresa, tecnologia (ex: React, Python) ou cidade/bairro..."
+                autocomplete="off"
+              >
+              <button class="search-clear-btn" id="btn-clear-01" onclick="clearSearch01()">✕</button>
+            </div>
+          </div>
+
+          <div class="filters-cluster">
+            <div class="filter-subgroup">
+              <span class="filter-subgroup-label">Turno:</span>
+              <div class="toggle-strip">
+                <button class="toggle-btn active" id="f-turno-all" onclick="setFilterTurno('all')">Todos</button>
+                <button class="toggle-btn" id="f-turno-tarde" onclick="setFilterTurno('tarde')">Tarde</button>
+                <button class="toggle-btn" id="f-turno-noite" onclick="setFilterTurno('noite')">Noite</button>
+                <button class="toggle-btn" id="f-turno-flex" onclick="setFilterTurno('flexivel')">Flexível</button>
+              </div>
+            </div>
+
+            <div class="filter-subgroup">
+              <span class="filter-subgroup-label">Localização:</span>
+              <div class="toggle-strip">
+                <button class="toggle-btn active" id="f-loc-all" onclick="setFilterLoc('all')">Todas</button>
+                <button class="toggle-btn" id="f-loc-remoto" onclick="setFilterLoc('remoto')">100% Remoto</button>
+                <button class="toggle-btn" id="f-loc-bh" onclick="setFilterLoc('bh')">Presencial / BH</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jobs-table" id="table-all-open-jobs">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         TELA 02: MINHAS CANDIDATURAS
+         =========================================================== -->
+    <section class="screen-view" id="screen-view-02">
+      <header class="screen-header-block">
+        <div class="wrap">
+          <div class="screen-kicker mono">02 / PIPELINE DE CANDIDATURAS</div>
+          <h1 class="screen-title">Minhas Candidaturas.</h1>
+          <p class="screen-desc">
+            Acompanhe as inscrições que estão em andamento, confirme suas aplicações concluídas e consulte suas vagas salvas.
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap">
+        <!-- Sub-abas da Tela 02 -->
+        <div class="screen-tabs-bar">
+          <button class="sub-tab-btn active" id="btn-subtab-andamento" onclick="switchSubTab02('andamento')">
+            <span>Em Andamento</span>
+            <span class="tab-count" id="count-subtab-andamento">(0)</span>
+          </button>
+          <button class="sub-tab-btn" id="btn-subtab-aplicadas" onclick="switchSubTab02('aplicadas')">
+            <span>Aplicadas / Concluídas</span>
+            <span class="tab-count" id="count-subtab-aplicadas">(0)</span>
+          </button>
+          <button class="sub-tab-btn" id="btn-subtab-salvas" onclick="switchSubTab02('salvas')">
+            <span>Vagas Salvas ★</span>
+            <span class="tab-count" id="count-subtab-salvas">(0)</span>
+          </button>
+        </div>
+
+        <!-- Container da Lista de Candidaturas -->
+        <div class="jobs-table" id="table-candidaturas">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         TELA 03: HISTÓRICO DE BUSCAS
+         =========================================================== -->
+    <section class="screen-view" id="screen-view-03">
+      <header class="screen-header-block">
+        <div class="wrap">
+          <div class="screen-kicker mono">03 / TELEMETRIA DO CRAWLER</div>
+          <h1 class="screen-title">Histórico de Varreduras.</h1>
+          <p class="screen-desc">
+            Registro imutável das execuções do bot, tempo de resposta e novas oportunidades catalogadas no radar.
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap" style="padding-top: 2rem;">
+        <div class="history-log-table" id="table-history-runs">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         TELA 04: PARÂMETROS DO CRAWLER (Turnos & Estado/Cidades Reativo)
+         =========================================================== -->
+    <section class="screen-view" id="screen-view-04">
+      <header class="screen-header-block">
+        <div class="wrap">
+          <div class="screen-kicker mono">04 / CONTROLE DETERMINÍSTICO</div>
+          <h1 class="screen-title">Parâmetros do Crawler.</h1>
+          <p class="screen-desc">
+            Ajuste as regras determinísticas de busca. Quando seu semestre mudar, seu turno da faculdade alterar ou se você mudar de estado/cidade, configure abaixo e o robô recalibrará as buscas imediatamente.
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap">
+        <div class="params-container">
+          
+          <!-- Bloco 1: Turnos de Estágio e Faculdade -->
+          <div class="params-card">
+            <div class="params-card-header">
+              <h4>Turnos &amp; Horários de Estágio</h4>
+              <p>Defina quais turnos de estágio você busca. Mesmo estudando de manhã, você pode selecionar manhã se desejar.</p>
+            </div>
+
+            <div class="params-grid-2">
+              <div class="param-field">
+                <label class="param-label" for="cfg-turno-faculdade">Turno de Estudo na Faculdade (Informativo):</label>
+                <select id="cfg-turno-faculdade" class="param-select" onchange="onTurnoFaculdadeChange(this.value)">
+                  <option value="Manhã" selected>Manhã</option>
+                  <option value="Tarde">Tarde</option>
+                  <option value="Noite">Noite</option>
+                </select>
+              </div>
+
+              <div class="param-field">
+                <label class="param-label">Turnos Procurados para Estágio:</label>
+                
+                <div style="margin-bottom: 0.6rem;">
+                  <label class="checkbox-label" style="font-weight: 600;">
+                    <input type="checkbox" id="chk-turno-todos" onchange="toggleTodosTurnos(this.checked)">
+                    <span>Disponível em Todos os Horários (Qualquer Turno)</span>
+                  </label>
+                </div>
+
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chk-turno-manha" onchange="onIndividualTurnoChange()"> Manhã
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chk-turno-tarde" checked onchange="onIndividualTurnoChange()"> Tarde (12h-18h / 13h-19h)
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chk-turno-noite" checked onchange="onIndividualTurnoChange()"> Noite / Noturno
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chk-turno-flex" checked onchange="onIndividualTurnoChange()"> Flexível (6h diárias)
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloco 2: Localização Reativa por Estado e Cidades -->
+          <div class="params-card">
+            <div class="params-card-header">
+              <h4>Localização &amp; Cidades por Estado</h4>
+              <p>Selecione o estado para carregar os polos metropolitanos e cidades disponíveis em caixas de seleção.</p>
+            </div>
+
+            <div class="params-grid-2">
+              <div class="param-field">
+                <label class="param-label" for="cfg-estado-select">Selecione o Estado:</label>
+                <select id="cfg-estado-select" class="param-select" onchange="onEstadoChange(this.value)">
+                  <option value="MG" selected>Minas Gerais (MG)</option>
+                  <option value="SP">São Paulo (SP)</option>
+                  <option value="RJ">Rio de Janeiro (RJ)</option>
+                  <option value="PR">Paraná (PR)</option>
+                  <option value="SC">Santa Catarina (SC)</option>
+                  <option value="RS">Rio Grande do Sul (RS)</option>
+                  <option value="DF">Distrito Federal (DF)</option>
+                  <option value="BA">Bahia (BA)</option>
+                  <option value="PE">Pernambuco (PE)</option>
+                  <option value="OUTRO">Outro Estado...</option>
+                </select>
+              </div>
+
+              <div class="param-field">
+                <label class="param-label">Modalidades de Trabalho Aceitas:</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chk-mod-presencial" checked> Aceitar Presencial
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chk-mod-hibrido" checked> Aceitar Híbrido
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chk-mod-remoto" checked> Aceitar 100% Remoto
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seletor de Cidades do Estado Selecionado -->
+            <div class="cidades-selector-box">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="checkbox-label" style="font-weight: 600;">
+                  <input type="checkbox" id="chk-todas-cidades-estado" onchange="toggleTodasCidades(this.checked)">
+                  <span id="label-todas-cidades">Selecionar todas as regiões do Estado</span>
+                </label>
+                <span class="mono" id="label-cidades-count">0 selecionada(s)</span>
+              </div>
+
+              <!-- Grid com as caixas de checkboxes das cidades -->
+              <div class="cidades-grid" id="container-cidades-checkboxes">
+                <!-- Injected via JS -->
+              </div>
+
+              <!-- Input para adicionar cidade customizada -->
+              <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.4rem;">
+                <input 
+                  type="text" 
+                  id="input-cidade-custom" 
+                  class="param-input" 
+                  placeholder="Adicionar outra cidade ou bairro (ex: Nova Lima - Vila da Serra)..."
+                  style="flex: 1;"
+                >
+                <button class="btn-action-secondary" type="button" onclick="adicionarCidadeCustom()">+ Adicionar Cidade</button>
+              </div>
+
+              <!-- Preview das Cidades Selecionadas -->
+              <div class="selected-cities-preview">
+                <span style="color: var(--faint);">Cidades configuradas para busca presencial/híbrida:</span><br>
+                <strong id="preview-cidades-selecionadas">Carregando...</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloco 3: Áreas e Semestre -->
+          <div class="params-card">
+            <div class="params-card-header">
+              <h4>Áreas de Atuação &amp; Período</h4>
+              <p>Palavras-chave e tecnologias prioritárias que guiam o prompt de descoberta do robô.</p>
+            </div>
+
+            <div class="params-grid-2">
+              <div class="param-field">
+                <label class="param-label" for="cfg-semestre-texto">Semestre / Formação:</label>
+                <input 
+                  type="text" 
+                  id="cfg-semestre-texto" 
+                  class="param-input" 
+                  value="3º período de Engenharia de Software (Formação: 2028)"
+                >
+              </div>
+
+              <div class="param-field">
+                <label class="param-label" for="cfg-candidato-nome">Nome do Candidato:</label>
+                <input 
+                  type="text" 
+                  id="cfg-candidato-nome" 
+                  class="param-input" 
+                  value="João Francisco"
+                >
+              </div>
+            </div>
+
+            <div class="param-field">
+              <label class="param-label" for="cfg-areas-texto">Áreas e Tecnologias Prioritárias:</label>
+              <input 
+                type="text" 
+                id="cfg-areas-texto" 
+                class="param-input" 
+                value="Engenharia de Software, Desenvolvimento Web/Full Stack/Backend/Frontend, Engenharia/Ciência de Dados, IA e Automação"
+              >
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+              <button class="btn-action-ink" onclick="salvarParametrosCrawler()">
+                <span>Salvar Novos Parâmetros do Crawler</span>
+                <span>✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         TELA 05: INDICADORES & KPIS (Gráfico Quinzenal, Áreas & Funil Real)
+         =========================================================== -->
+    <section class="screen-view" id="screen-view-05">
+      <header class="screen-header-block">
+        <div class="wrap">
+          <div class="screen-kicker mono">05 / TELEMETRIA &amp; ANALYTICS</div>
+          <h1 class="screen-title">Indicadores &amp; Performance.</h1>
+          <p class="screen-desc">
+            Métricas 100% auditadas e calculadas a partir das suas ações reais, sem valores fictícios ou estimativas artificiais.
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap">
+        <div class="kpi-container">
+          
+          <!-- Summary Cards com Validação Rigorosa -->
+          <div class="kpi-summary-grid">
+            <div class="kpi-metric-card">
+              <span class="kpi-metric-title">Tempo Médio por Vaga</span>
+              <div class="kpi-metric-num" id="kpi-tempo-medio">--</div>
+              <p class="kpi-metric-context" id="kpi-tempo-medio-context">Calculado após confirmar a 1ª candidatura.</p>
+            </div>
+
+            <div class="kpi-metric-card">
+              <span class="kpi-metric-title">Taxa de Conclusão</span>
+              <div class="kpi-metric-num" id="kpi-taxa-conclusao">--</div>
+              <p class="kpi-metric-context">Proporção de inscrições abertas que foram concluídas.</p>
+            </div>
+
+            <div class="kpi-metric-card">
+              <span class="kpi-metric-title">Meta de Hoje</span>
+              <div class="kpi-metric-num" id="kpi-meta-hoje">0/3</div>
+              <p class="kpi-metric-context">Candidaturas confirmadas hoje rumo à meta diária.</p>
+            </div>
+
+            <div class="kpi-metric-card">
+              <span class="kpi-metric-title">Total Aplicadas</span>
+              <div class="kpi-metric-num" id="kpi-total-aplicadas">0</div>
+              <p class="kpi-metric-context">Candidaturas concluídas acumuladas no histórico.</p>
+            </div>
+          </div>
+
+          <!-- GRÁFICO QUINZENAL DE CANDIDATURAS POR DIA -->
+          <div class="timeline-chart-card">
+            <div class="timeline-chart-header">
+              <div>
+                <h4>Histórico Quinzenal de Candidaturas</h4>
+                <p style="color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem;">
+                  Acompanhamento diário dos últimos 15 dias em relação à meta de 3 vagas/dia.
+                </p>
+              </div>
+              <span class="mono" style="font-size: 0.72rem; color: var(--green);">Linha tracejada: Meta (3/dia)</span>
+            </div>
+
+            <!-- SVG Line Chart Canvas -->
+            <div class="timeline-svg-wrap" id="container-timeline-chart">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div class="timeline-stats-footer" id="timeline-stats-footer">
+              <span>Total nos últimos 15 dias: <strong id="tl-total-15">0 vagas</strong></span>
+              <span>Média diária: <strong id="tl-media-15">0.0/dia</strong></span>
+              <span>Dias atingindo a meta (≥3): <strong id="tl-dias-meta">0 dias</strong></span>
+              <span>Maior pico em 1 dia: <strong id="tl-pico-dia">0 vagas</strong></span>
+            </div>
+          </div>
+
+          <!-- Deep Analytics: Funil Real & Distribuição por Área -->
+          <div class="kpi-deep-grid">
+            
+            <!-- FUNIL DE OPORTUNIDADES (Incluindo encerradas sem candidatura) -->
+            <div class="kpi-detail-card">
+              <h4 class="kpi-detail-title">Funil de Oportunidades</h4>
+
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span>1. Total Descobertas no Radar</span>
+                  <span id="kpi-funil-total">0</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" style="width: 100%; background: var(--ink);"></div>
+                </div>
+              </div>
+
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span>2. Vagas Abertas Disponíveis</span>
+                  <span id="kpi-funil-abertas">0</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-funil-abertas-bar" style="width: 0%; background: var(--line-dark);"></div>
+                </div>
+              </div>
+
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span>3. Inscrições em Andamento</span>
+                  <span id="kpi-funil-andamento">0</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-funil-andamento-bar" style="width: 0%; background: #2563eb;"></div>
+                </div>
+              </div>
+
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span>4. Candidaturas Concluídas</span>
+                  <span id="kpi-funil-concluidas">0</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-funil-concluidas-bar" style="width: 0%; background: var(--green);"></div>
+                </div>
+              </div>
+
+              <!-- VAGAS ENCERRADAS SEM CANDIDATURA -->
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span style="color: #b91c1c;">5. Encerradas Sem Candidatura</span>
+                  <span id="kpi-funil-encerradas" style="color: #b91c1c;">0</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-funil-encerradas-bar" style="width: 0%; background: #dc2626;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- DISTRIBUIÇÃO POR ÁREA / ESPECIALIDADE -->
+            <div class="kpi-detail-card">
+              <h4 class="kpi-detail-title">Distribuição por Área &amp; Especialidade</h4>
+              <div id="container-areas-dist" style="display: flex; flex-direction: column; gap: 0.9rem;">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Distribuição por Modelo de Trabalho -->
+          <div class="kpi-detail-card" style="margin-top: -0.7rem;">
+            <h4 class="kpi-detail-title">Distribuição por Modelo de Trabalho</h4>
+
+            <div class="bar-stat-row">
+              <div class="bar-stat-labels">
+                <span>100% Remoto</span>
+                <span id="kpi-dist-remoto-pct">0%</span>
+              </div>
+              <div class="bar-stat-track">
+                <div class="bar-stat-fill" id="kpi-dist-remoto-bar" style="width: 0%; background: var(--green);"></div>
+              </div>
+            </div>
+
+            <div class="bar-stat-row">
+              <div class="bar-stat-labels">
+                <span>Presencial</span>
+                <span id="kpi-dist-presencial-pct">0%</span>
+              </div>
+              <div class="bar-stat-track">
+                <div class="bar-stat-fill" id="kpi-dist-presencial-bar" style="width: 0%; background: #d97706;"></div>
+              </div>
+            </div>
+
+            <div class="bar-stat-row">
+              <div class="bar-stat-labels">
+                <span>Híbrido</span>
+                <span id="kpi-dist-hibrido-pct">0%</span>
+              </div>
+              <div class="bar-stat-track">
+                <div class="bar-stat-fill" id="kpi-dist-hibrido-bar" style="width: 0%; background: #6366f1;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================================
+       MODAL DE DETALHES DA VAGA (Clean Editorial)
+       ============================================================= -->
+  <div class="modal-backdrop" id="job-modal" onclick="handleScrimClick(event)">
+    <div class="modal-sheet-panel">
+      <button class="modal-close-btn" onclick="closeModal()" title="Fechar">✕</button>
+
+      <div class="modal-header-block">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
+          <span class="tag-badge" id="m-badge-loc">Remoto</span>
+          <span class="tag-badge turno" id="m-badge-turno">Turno: Tarde</span>
+          <span class="tag-badge inscricao" id="m-badge-prazo">Inscrições Abertas</span>
+        </div>
+        <h2 class="modal-title" id="m-cargo">Estágio</h2>
+        <div class="modal-company" id="m-empresa">Empresa</div>
+      </div>
+
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem;">
+        <div>
+          <span class="mono">Requisitos &amp; Descrição Completa</span>
+          <div class="modal-desc-box" id="m-requisitos">
+            Carregando descrição...
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+        <div style="display: flex; gap: 0.8rem;">
+          <button class="btn-action-ink" id="m-btn-inscrever" onclick="iniciarInscricaoModal()" style="flex: 1; justify-content: center;">
+            <span>Abrir Inscrição Oficial ↗</span>
+          </button>
+          <button class="job-icon-btn" id="m-btn-star" onclick="toggleStarModal()" style="width: 44px; height: 44px;" title="Salvar">
+            ★
+          </button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem;">
+          <button class="btn-action-secondary" onclick="marcarEncerradaModal()" style="color: #b91c1c; border-color: #fca5a5;">
+            Remover / Vaga Encerrada
+          </button>
+          <button class="btn-action-secondary" onclick="closeModal()">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST HUD -->
   <div class="toast-hud" id="toast-hud">
-    <svg id="toast-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
+    <span style="color: var(--green);">●</span>
     <span id="toast-msg">Notificação</span>
   </div>
 
-  <!-- NAVIGATION BAR -->
-  <header class="frosted-nav">
-    <div class="nav-inner">
-      <div class="brand-section">
-        <div class="app-glyph">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-          </svg>
-        </div>
-        <div>
-          <div class="brand-title">Estágios</div>
-          <div class="brand-caption">
-            <span class="status-dot"></span>
-            <span id="nav-last-sync">Atualizado</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Segmented Controller -->
-      <div class="segmented-control" role="tablist">
-        <div class="segment-slider" id="segment-slider"></div>
-        <button class="segment-btn active" id="tab-vagas" onclick="switchAppleTab('vagas')">
-          <span>Oportunidades</span>
-        </button>
-        <button class="segment-btn" id="tab-historico" onclick="switchAppleTab('historico')">
-          <span>Histórico</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- MAIN VIEWPORT -->
-  <main>
-    <div class="view-header">
-      <h1 class="view-large-title" id="page-title">Radar de Estágios</h1>
-      <p class="view-subheadline">Engenharia de Software, Dados e IA • Turno compatível com a manhã livre</p>
-    </div>
-
-    <!-- 1. TODAY FOCUS CARD -->
-    <section class="today-card" id="today-focus-card">
-      <div class="today-card-top">
-        <div class="section-eyebrow">Meta Diária</div>
-        <div class="progress-track-wrapper">
-          <div class="progress-track">
-            <div class="progress-fill" id="focus-progress-fill" style="width: 0%;"></div>
-          </div>
-          <span class="progress-count" id="focus-progress-text">0 de 3</span>
-        </div>
-      </div>
-      <h2 class="today-headline">Candidaturas de Hoje</h2>
-      <p class="today-subtext">
-        Foque em aplicar para apenas 3 oportunidades selecionadas por dia. Use os atalhos de apresentação para eliminar preenchimentos manuais.
-      </p>
-    </section>
-
-    <!-- VIEW 1: VAGAS -->
-    <section id="view-vagas">
-      
-      <!-- SCOPE SELECTOR TABS -->
-      <div class="scope-bar">
-        <button class="scope-pill active" id="scope-focus" onclick="setScope('focus')">
-          <span>Hoje</span>
-          <span class="scope-count" id="badge-scope-focus">3</span>
-        </button>
-        <button class="scope-pill" id="scope-fila" onclick="setScope('fila')">
-          <span>Todas ativas</span>
-          <span class="scope-count" id="badge-scope-fila">0</span>
-        </button>
-        <button class="scope-pill" id="scope-aplicadas" onclick="setScope('aplicadas')">
-          <span>Candidatadas</span>
-          <span class="scope-count" id="badge-scope-aplicadas">0</span>
-        </button>
-        <button class="scope-pill" id="scope-favoritas" onclick="setScope('favoritas')">
-          <span>Salvas</span>
-          <span class="scope-count" id="badge-scope-favoritas">0</span>
-        </button>
-        <button class="scope-pill" id="scope-encerradas" onclick="setScope('encerradas')">
-          <span>Encerradas</span>
-          <span class="scope-count" id="badge-scope-encerradas">0</span>
-        </button>
-      </div>
-
-      <!-- FILTER & SEARCH BAR -->
-      <div class="filter-row">
-        <div class="search-field">
-          <svg class="search-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input 
-            type="text" 
-            id="apple-search-input" 
-            class="search-input" 
-            placeholder="Buscar por cargo, empresa ou skill..."
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <button class="search-clear" id="btn-clear-search" onclick="clearSearch()">✕</button>
-        </div>
-
-        <div class="modality-chips">
-          <button class="filter-chip active" id="mod-all" onclick="setModality('all')">Todas</button>
-          <button class="filter-chip" id="mod-remoto" onclick="setModality('remoto')">Remoto</button>
-          <button class="filter-chip" id="mod-bh" onclick="setModality('bh')">BH e Região</button>
-        </div>
-      </div>
-
-      <!-- RESULTS COUNT -->
-      <div class="results-meta">
-        <span id="label-matching-count">Exibindo oportunidades</span>
-        <span>Turno: <strong>Tarde ou Flexível</strong></span>
-      </div>
-
-      <!-- JOBS GRID -->
-      <div class="jobs-grid" id="jobs-grid-container">
-        <!-- Renderizado dinamicamente -->
-      </div>
-    </section>
-
-    <!-- VIEW 2: HISTÓRICO DE AUDITORIA -->
-    <section id="view-historico" class="hidden">
-      <div class="inset-grouped-table">
-        <div style="padding: 1.25rem 1.25rem 0.75rem; border-bottom: 0.5px solid var(--color-separator);">
-          <h3 style="font-size: 0.95rem; font-weight: 600;">Registro de Varreduras</h3>
-          <p style="font-size: 0.78rem; color: var(--label-tertiary); margin-top: 2px;">
-            Auditoria em segundo plano com deduplicação canônica ativa
-          </p>
-        </div>
-
-        <div id="runs-list-container">
-          <!-- Renderizado dinamicamente -->
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- APPLE DETAIL SHEET / MODAL -->
-  <div class="sheet-scrim" id="apple-sheet" onclick="handleScrimClick(event)">
-    <div class="modal-sheet" id="modal-content">
-      <button class="sheet-close-btn" onclick="closeSheet()">✕</button>
-
-      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-        <span class="card-company" id="modal-empresa">EMPRESA</span>
-        <span class="tag-pill" id="modal-badge-modalidade">Modalidade</span>
-      </div>
-
-      <h2 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.25;" id="modal-cargo">
-        Título da Oportunidade
-      </h2>
-
-      <!-- ATALHOS RÁPIDOS DE CANDIDATURA -->
-      <div class="toolcard-panel">
-        <div class="toolcard-header">Atalhos de Candidatura</div>
-        <p class="toolcard-desc">
-          Copie seu texto de apresentação ou resumo de competências pronto para colar no formulário da vaga:
-        </p>
-        <div class="toolcard-actions">
-          <button class="tool-btn" onclick="copiarPitch()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            <span>Copiar Apresentação</span>
-          </button>
-          <button class="tool-btn" onclick="copiarSkills()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            <span>Copiar Competências</span>
-          </button>
-          <button class="tool-btn" onclick="copiarContato()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span>Copiar Contato</span>
-          </button>
-        </div>
-      </div>
-
-      <div style="margin-bottom: 1.25rem;">
-        <div style="font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--label-tertiary); margin-bottom: 0.35rem;">
-          Requisitos & Detalhes
-        </div>
-        <p style="font-size: 0.88rem; color: var(--label-primary); line-height: 1.6; white-space: pre-wrap;" id="modal-requisitos">
-          Informações da vaga...
-        </p>
-      </div>
-
-      <div style="background: var(--system-fill-secondary); padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.78rem; color: var(--label-secondary);">
-        <div><strong>Data de Coleta:</strong> <span id="modal-data" style="font-family: var(--font-mono);">--</span></div>
-        <div style="margin-top: 3px;"><strong>Disponibilidade:</strong> Turno da tarde ou flexível de 6h diárias</div>
-      </div>
-
-      <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 0.5px solid var(--color-separator);">
-        <div style="display: flex; gap: 0.45rem;">
-          <button class="filter-chip" onclick="marcarVagaModal('encerrada')" style="color: var(--system-red);">
-            Encerrada
-          </button>
-          <button class="filter-chip" id="modal-btn-star" onclick="alternarEstrelaModal()">
-            Salvar
-          </button>
-        </div>
-        
-        <button class="apple-btn-primary" id="modal-btn-aplicar" onclick="candidatarModal()" style="background: var(--system-green);">
-          <span>Abrir e Marcar como Candidatado ↗</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    Estágios • Sistema com interface nativa e deduplicação canônica
-  </footer>
-
-  <!-- DATA SOURCES -->
+  <!-- EXTERNAL DATA SCRIPTS -->
+  <script src="config_busca.js"></script>
   <script src="historico_execucoes.js"></script>
   <script src="banco_vagas.js"></script>
 
+  <!-- =============================================================
+       DASHBOARD CONTROLLER JAVASCRIPT
+       ============================================================= -->
   <script>
     /* =============================================================
-       APPLE STATE CONTROLLER & USER ACTIONS STORE
+       STATE & REPOSITORIES
        ============================================================= */
     const STORAGE_KEY = 'estagios_user_store';
+    const PARAMS_KEY = 'estagios_crawler_params';
+
+    // Base de Estados e Cidades Polos
+    const ESTADOS_REGIOES = {
+      "MG": {
+        nome: "Minas Gerais",
+        cidades: ["Belo Horizonte", "Contagem", "Betim", "Nova Lima", "Ibirité", "Sabará", "Santa Luzia", "Ribeirão das Neves", "Sete Lagoas", "Uberlândia", "Juiz de Fora", "Montes Claros", "Poços de Caldas"]
+      },
+      "SP": {
+        nome: "São Paulo",
+        cidades: ["São Paulo (Capital)", "Campinas", "São Bernardo do Campo", "Santo André", "São Caetano do Sul", "Osasco", "Barueri / Alphaville", "Guarulhos", "São José dos Campos", "Ribeirão Preto", "Sorocaba", "Santos"]
+      },
+      "RJ": {
+        nome: "Rio de Janeiro",
+        cidades: ["Rio de Janeiro (Capital)", "Niterói", "São Gonçalo", "Duque de Caxias", "Nova Iguaçu", "Petrópolis", "Volta Redonda"]
+      },
+      "PR": {
+        nome: "Paraná",
+        cidades: ["Curitiba", "Londrina", "Maringá", "São José dos Pinhais", "Ponta Grossa", "Cascavel", "Foz do Iguaçu"]
+      },
+      "SC": {
+        nome: "Santa Catarina",
+        cidades: ["Florianópolis", "Joinville", "Blumenau", "São José", "Chapecó", "Criciúma", "Itajaí"]
+      },
+      "RS": {
+        nome: "Rio Grande do Sul",
+        cidades: ["Porto Alegre", "Caxias do Sul", "Canoas", "São Leopoldo", "Novo Hamburgo", "Pelotas", "Santa Maria"]
+      },
+      "DF": {
+        nome: "Distrito Federal",
+        cidades: ["Brasília (Plano Piloto)", "Taguatinga", "Águas Claras", "Ceilândia", "Guará", "Gama"]
+      },
+      "BA": {
+        nome: "Bahia",
+        cidades: ["Salvador", "Feira de Santana", "Vitória da Conquista", "Camaçari", "Lauro de Freitas"]
+      },
+      "PE": {
+        nome: "Pernambuco",
+        cidades: ["Recife", "Jaboatão dos Guararapes", "Olinda", "Caruaru", "Porto de Galinhas"]
+      },
+      "OUTRO": {
+        nome: "Outro Estado",
+        cidades: []
+      }
+    };
 
     function getUserStore() {
       try {
@@ -1227,13 +1988,27 @@
             const userState = store[key] || {};
             const currentStatus = userState.status || (job.status || 'para_aplicar');
             const dataAplicacao = userState.dataAplicacao || job.dataAplicacao;
+            const inicioCandidatura = userState.inicioCandidatura || null;
+            const tempoGastoSegundos = userState.tempoGastoSegundos || null;
             const isStarred = !!userState.starred;
+
+            const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+            const isBH = (job.modalidade || '').toLowerCase().includes('belo horizonte') || (job.modalidade || '').toLowerCase().includes('bh') || (job.modalidade || '').toLowerCase().includes('minas');
+
+            const turnoFinal = job.turno || (isRemoto ? 'Tarde / Flexível' : 'Tarde (12h-18h / 13h-19h)');
+            const localFinal = job.localizacao || (isRemoto ? '100% Remoto' : (isBH ? 'Belo Horizonte / MG' : (job.modalidade || 'BH / Remoto')));
+            const prazoFinal = job.prazo || 'Inscrições Abertas';
 
             map.set(key, { 
               ...job, 
               canonicalKey: key,
+              turno: turnoFinal,
+              localizacao: localFinal,
+              prazo: prazoFinal,
               status: currentStatus,
               dataAplicacao: dataAplicacao,
+              inicioCandidatura: inicioCandidatura,
+              tempoGastoSegundos: tempoGastoSegundos,
               starred: isStarred
             });
           }
@@ -1244,10 +2019,15 @@
     }
 
     let allJobs = getConsolidatedJobs();
-    let currentScope = 'focus'; // 'focus', 'fila', 'aplicadas', 'favoritas', 'encerradas'
-    let currentModality = 'all'; // 'all', 'remoto', 'bh'
-    let searchQuery = '';
-    let activeJob = null;
+    let currentScreen = '01'; // '01', '02', '03', '04', '05'
+    let currentSubTab02 = 'andamento'; // 'andamento', 'aplicadas', 'salvas'
+    let search01Query = '';
+    let filter01Turno = 'all';
+    let filter01Loc = 'all';
+    let activeModalJob = null;
+
+    // Estado da seleção de cidades na tela 04
+    let selectedCitiesList = ["Belo Horizonte", "Contagem", "Betim", "Nova Lima", "Ibirité"];
 
     // Toast HUD
     let toastTimer = null;
@@ -1258,260 +2038,314 @@
       if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
         hud.classList.remove('show');
-      }, 2600);
+      }, 2800);
     }
 
-    // Initialize UI
+    // =============================================================
+    // INITIALIZATION
+    // =============================================================
     document.addEventListener("DOMContentLoaded", () => {
-      initSlider();
-      updateMetrics();
-      renderJobs();
-      renderHistory();
-      setupSearch();
+      carregarParametrosCrawler();
+      renderScreen01();
+      renderScreen02();
+      renderScreen03();
+      renderScreen05();
+      setupSearch01();
+      updateGlobalBadges();
     });
 
-    // 1. SEGMENTED SWITCHER (Vagas vs Histórico)
-    function initSlider() {
-      const activeBtn = document.querySelector(".segment-btn.active");
-      const slider = document.getElementById("segment-slider");
-      if (activeBtn && slider) {
-        slider.style.width = `${activeBtn.offsetWidth}px`;
-        slider.style.transform = `translateX(${activeBtn.offsetLeft - 2}px)`;
-      }
+    // =============================================================
+    // DECOUPLED SCREEN NAVIGATION
+    // =============================================================
+    function navigateToScreen(screenId) {
+      currentScreen = screenId;
+
+      ['01', '02', '03', '04', '05'].forEach(id => {
+        const btn = document.getElementById(`nav-btn-${id}`);
+        const view = document.getElementById(`screen-view-${id}`);
+        if (btn) btn.classList.toggle('active', id === screenId);
+        if (view) view.classList.toggle('active', id === screenId);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (screenId === '01') renderScreen01();
+      if (screenId === '02') renderScreen02();
+      if (screenId === '03') renderScreen03();
+      if (screenId === '05') renderScreen05();
+      updateGlobalBadges();
     }
 
-    function switchAppleTab(tab) {
-      const btnVagas = document.getElementById("tab-vagas");
-      const btnHist = document.getElementById("tab-historico");
-      const slider = document.getElementById("segment-slider");
-      const viewVagas = document.getElementById("view-vagas");
-      const viewHist = document.getElementById("view-historico");
-      const focusCard = document.getElementById("today-focus-card");
-      const pageTitle = document.getElementById("page-title");
+    // =============================================================
+    // TELA 01: META DO DIA & VAGAS ABERTAS
+    // =============================================================
+    function renderScreen01() {
+      // Vagas abertas disponíveis (exclui encerradas, aplicadas e em andamento!)
+      const openJobs = allJobs.filter(j => j.status === 'para_aplicar');
 
-      if (tab === 'vagas') {
-        btnVagas.classList.add("active");
-        btnHist.classList.remove("active");
-        slider.style.width = `${btnVagas.offsetWidth}px`;
-        slider.style.transform = `translateX(${btnVagas.offsetLeft - 2}px)`;
-        viewVagas.classList.remove("hidden");
-        viewHist.classList.add("hidden");
-        focusCard.classList.remove("hidden");
-        pageTitle.innerText = "Radar de Estágios";
+      // Foco de Hoje (3 primeiras vagas abertas)
+      const focusJobs = openJobs.slice(0, 3);
+      const containerFocus = document.getElementById('table-focus-jobs');
+
+      if (focusJobs.length === 0) {
+        containerFocus.innerHTML = `
+          <div class="empty-state-box">
+            <div class="empty-state-title">Parabéns! Nenhuma vaga pendente no foco.</div>
+            <div class="empty-state-desc">Você já iniciou candidatura para as vagas de foco de hoje. Escolha novas oportunidades no catálogo abaixo!</div>
+          </div>
+        `;
       } else {
-        btnHist.classList.add("active");
-        btnVagas.classList.remove("active");
-        slider.style.width = `${btnHist.offsetWidth}px`;
-        slider.style.transform = `translateX(${btnHist.offsetLeft - 2}px)`;
-        viewHist.classList.remove("hidden");
-        viewVagas.classList.add("hidden");
-        focusCard.classList.add("hidden");
-        pageTitle.innerText = "Histórico de Varreduras";
-      }
-    }
-
-    // 2. SCOPE BAR CONTROLLER
-    function setScope(scope) {
-      currentScope = scope;
-      ['focus', 'fila', 'aplicadas', 'favoritas', 'encerradas'].forEach(s => {
-        const el = document.getElementById(`scope-${s}`);
-        if (el) el.classList.toggle('active', s === scope);
-      });
-
-      const focusCard = document.getElementById("today-focus-card");
-      if (scope === 'focus') {
-        focusCard.classList.remove("hidden");
+        containerFocus.innerHTML = focusJobs.map((job, idx) => renderJobRowHTML(job, idx + 1, 'screen01')).join('');
       }
 
-      renderJobs();
-    }
+      // Todas as Vagas Abertas (com filtros)
+      let filteredAll = openJobs.slice();
 
-    // 3. MODALITY FILTER
-    function setModality(mod) {
-      currentModality = mod;
-      ['all', 'remoto', 'bh'].forEach(m => {
-        const el = document.getElementById(`mod-${m}`);
-        if (el) el.classList.toggle('active', m === mod);
-      });
-      renderJobs();
-    }
+      if (filter01Turno !== 'all') {
+        filteredAll = filteredAll.filter(j => {
+          const t = `${j.turno || ''} ${j.requisitos || ''}`.toLowerCase();
+          if (filter01Turno === 'tarde') return t.includes('tarde') || t.includes('13h') || t.includes('12h') || t.includes('flex');
+          if (filter01Turno === 'noite') return t.includes('noite') || t.includes('noturno') || t.includes('flex');
+          if (filter01Turno === 'flexivel') return t.includes('flex') || t.includes('6h') || t.includes('30h');
+          return true;
+        });
+      }
 
-    // 4. METRICS & COUNTERS
-    function updateMetrics() {
-      const aplicadas = allJobs.filter(j => j.status === 'aplicada').length;
-      const favoritas = allJobs.filter(j => j.starred && j.status !== 'encerrada').length;
-      const encerradas = allJobs.filter(j => j.status === 'encerrada').length;
-      const pendentes = allJobs.filter(j => j.status === 'para_aplicar' || !j.status).length;
+      if (filter01Loc === 'remoto') {
+        filteredAll = filteredAll.filter(j => (j.modalidade || '').toLowerCase().includes('remoto') || (j.localizacao || '').toLowerCase().includes('remoto'));
+      } else if (filter01Loc === 'bh') {
+        filteredAll = filteredAll.filter(j => {
+          const txt = `${j.modalidade || ''} ${j.localizacao || ''}`.toLowerCase();
+          return txt.includes('belo horizonte') || txt.includes('bh') || txt.includes('contagem') || txt.includes('betim') || txt.includes('presencial') || txt.includes('híbrido') || txt.includes('hibrido');
+        });
+      }
 
-      document.getElementById("badge-scope-fila").innerText = pendentes;
-      document.getElementById("badge-scope-aplicadas").innerText = aplicadas;
-      document.getElementById("badge-scope-favoritas").innerText = favoritas;
-      document.getElementById("badge-scope-encerradas").innerText = encerradas;
+      if (search01Query) {
+        filteredAll = filteredAll.filter(j => {
+          const text = `${j.cargo} ${j.empresa} ${j.requisitos || ''} ${j.modalidade || ''} ${j.localizacao || ''} ${j.turno || ''}`.toLowerCase();
+          return text.includes(search01Query);
+        });
+      }
 
-      // Meta Diária
-      const progresso = Math.min(aplicadas, 3);
+      const countLabel = document.getElementById('label-all-abertas-count');
+      if (countLabel) {
+        countLabel.innerText = `${filteredAll.length} vaga(s) disponível(is) para candidatura`;
+      }
+
+      const containerAll = document.getElementById('table-all-open-jobs');
+      if (filteredAll.length === 0) {
+        containerAll.innerHTML = `
+          <div class="empty-state-box">
+            <div class="empty-state-title">Nenhuma vaga encontrada com os filtros atuais</div>
+            <div class="empty-state-desc">Experimente alternar os filtros de turno ou limpar a busca.</div>
+          </div>
+        `;
+      } else {
+        containerAll.innerHTML = filteredAll.map((job, idx) => renderJobRowHTML(job, idx + 1, 'screen01')).join('');
+      }
+
+      // Meta Diária Real (baseada em aplicações feitas hoje)
+      const hojeStr = new Date().toLocaleDateString('pt-BR');
+      const aplicadasHoje = allJobs.filter(j => j.status === 'aplicada' && (j.dataAplicacao || '').includes(hojeStr)).length;
+      const progresso = Math.min(aplicadasHoje, 3);
       const pct = Math.round((progresso / 3) * 100);
-      document.getElementById("focus-progress-fill").style.width = `${pct}%`;
-      document.getElementById("focus-progress-text").innerText = `${progresso} de 3`;
 
-      const lastRun = executionData.length > 0 ? executionData[0].timestamp : "Hoje";
-      document.getElementById("nav-last-sync").innerText = `Atualizado: ${lastRun}`;
+      const fill = document.getElementById('meter-fill-meta');
+      const text = document.getElementById('meter-text-meta');
+      const statusLabel = document.getElementById('label-meta-status');
+
+      if (fill) fill.style.width = `${pct}%`;
+      if (text) text.innerText = `${aplicadasHoje} de 3`;
+      if (statusLabel) {
+        statusLabel.innerText = aplicadasHoje >= 3 
+          ? `Meta diária batida com sucesso! (${aplicadasHoje} candidaturas confirmadas hoje)` 
+          : `${aplicadasHoje} de 3 candidaturas confirmadas hoje`;
+      }
     }
 
-    // 5. SPOTLIGHT SEARCH
-    function setupSearch() {
-      const input = document.getElementById("apple-search-input");
-      const clearBtn = document.getElementById("btn-clear-search");
+    function setupSearch01() {
+      const input = document.getElementById('search-input-01');
+      const clearBtn = document.getElementById('btn-clear-01');
+      if (input) {
+        input.addEventListener('input', (e) => {
+          search01Query = e.target.value.toLowerCase().trim();
+          if (clearBtn) clearBtn.style.display = search01Query ? 'block' : 'none';
+          renderScreen01();
+        });
+      }
+    }
 
-      input.addEventListener("input", (e) => {
-        searchQuery = e.target.value.toLowerCase().trim();
-        clearBtn.style.display = searchQuery ? "flex" : "none";
-        renderJobs();
+    function clearSearch01() {
+      const input = document.getElementById('search-input-01');
+      if (input) {
+        input.value = '';
+        search01Query = '';
+        document.getElementById('btn-clear-01').style.display = 'none';
+        input.focus();
+        renderScreen01();
+      }
+    }
+
+    function setFilterTurno(turno) {
+      filter01Turno = turno;
+      ['all', 'tarde', 'noite', 'flex'].forEach(t => {
+        const el = document.getElementById(`f-turno-${t}`);
+        if (el) el.classList.toggle('active', t === (turno === 'flexivel' ? 'flex' : turno));
       });
+      renderScreen01();
     }
 
-    function clearSearch() {
-      const input = document.getElementById("apple-search-input");
-      input.value = "";
-      searchQuery = "";
-      document.getElementById("btn-clear-search").style.display = "none";
-      input.focus();
-      renderJobs();
+    function setFilterLoc(loc) {
+      filter01Loc = loc;
+      ['all', 'remoto', 'bh'].forEach(l => {
+        const el = document.getElementById(`f-loc-${l}`);
+        if (el) el.classList.toggle('active', l === loc);
+      });
+      renderScreen01();
     }
 
-    // 6. JOBS RENDERING
-    function renderJobs() {
-      const container = document.getElementById("jobs-grid-container");
-      const labelCount = document.getElementById("label-matching-count");
+    // =============================================================
+    // TELA 02: MINHAS CANDIDATURAS
+    // =============================================================
+    function switchSubTab02(tabName) {
+      currentSubTab02 = tabName;
+      ['andamento', 'aplicadas', 'salvas'].forEach(t => {
+        const btn = document.getElementById(`btn-subtab-${t}`);
+        if (btn) btn.classList.toggle('active', t === tabName);
+      });
+      renderScreen02();
+    }
 
-      let filtered = allJobs.slice();
+    function renderScreen02() {
+      const container = document.getElementById('table-candidaturas');
 
-      // Scope
-      if (currentScope === 'focus') {
-        filtered = filtered.filter(j => j.status === 'para_aplicar').slice(0, 3);
-      } else if (currentScope === 'fila') {
-        filtered = filtered.filter(j => j.status === 'para_aplicar');
-      } else if (currentScope === 'aplicadas') {
-        filtered = filtered.filter(j => j.status === 'aplicada');
-      } else if (currentScope === 'favoritas') {
-        filtered = filtered.filter(j => j.starred && j.status !== 'encerrada');
-      } else if (currentScope === 'encerradas') {
-        filtered = filtered.filter(j => j.status === 'encerrada');
-      }
+      const andamentoJobs = allJobs.filter(j => j.status === 'em_andamento');
+      const aplicadasJobs = allJobs.filter(j => j.status === 'aplicada');
+      const salvasJobs = allJobs.filter(j => j.starred && j.status !== 'encerrada');
 
-      // Modality
-      if (currentModality === 'remoto') {
-        filtered = filtered.filter(j => (j.modalidade || '').toLowerCase().includes('remoto'));
-      } else if (currentModality === 'bh') {
-        filtered = filtered.filter(j => {
-          const m = (j.modalidade || '').toLowerCase();
-          return m.includes('belo horizonte') || m.includes('bh') || m.includes('híbrido');
-        });
-      }
+      const countAndamento = document.getElementById('count-subtab-andamento');
+      const countAplicadas = document.getElementById('count-subtab-aplicadas');
+      const countSalvas = document.getElementById('count-subtab-salvas');
 
-      // Search Query
-      if (searchQuery) {
-        filtered = filtered.filter(j => {
-          const text = `${j.cargo} ${j.empresa} ${j.requisitos || ''} ${j.modalidade || ''}`.toLowerCase();
-          return text.includes(searchQuery);
-        });
-      }
+      if (countAndamento) countAndamento.innerText = `(${andamentoJobs.length})`;
+      if (countAplicadas) countAplicadas.innerText = `(${aplicadasJobs.length})`;
+      if (countSalvas) countSalvas.innerText = `(${salvasJobs.length})`;
 
-      labelCount.innerHTML = `Mostrando <strong>${filtered.length}</strong> oportunidade(s)`;
+      let targetList = [];
+      if (currentSubTab02 === 'andamento') targetList = andamentoJobs;
+      if (currentSubTab02 === 'aplicadas') targetList = aplicadasJobs;
+      if (currentSubTab02 === 'salvas') targetList = salvasJobs;
 
-      if (filtered.length === 0) {
-        let msgTitulo = "Nenhuma oportunidade encontrada";
-        let msgDesc = "Tente alternar o filtro ou limpar os termos de busca.";
-        if (currentScope === 'focus') {
-          msgTitulo = "Meta do dia concluída";
-          msgDesc = "Você já aplicou para as vagas de foco de hoje!";
-        } else if (currentScope === 'aplicadas') {
-          msgTitulo = "Nenhuma candidatura registrada";
-          msgDesc = "Abra uma oportunidade e selecione 'Candidatar-se'.";
+      if (targetList.length === 0) {
+        let msgTitle = "Nenhuma candidatura nesta seção";
+        let msgDesc = "Clique em 'Inscrição ↗' em qualquer vaga aberta da Tela 01 para iniciar.";
+        if (currentSubTab02 === 'andamento') {
+          msgTitle = "Nenhuma inscrição em andamento no momento";
+          msgDesc = "Ao clicar em 'Inscrição ↗' na Tela 01, a vaga vem para cá para você preenchê-la e depois confirmar.";
+        } else if (currentSubTab02 === 'aplicadas') {
+          msgTitle = "Nenhuma candidatura finalizada ainda";
+          msgDesc = "Confirme as vagas que estão 'Em Andamento' após enviar seu formulário oficial.";
+        } else if (currentSubTab02 === 'salvas') {
+          msgTitle = "Nenhuma vaga favoritada";
+          msgDesc = "Clique no ícone de estrela (★) para salvar oportunidades interessantes.";
         }
 
         container.innerHTML = `
-          <div class="empty-state">
-            <svg class="empty-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
-            <div class="empty-title">${msgTitulo}</div>
-            <div class="empty-desc">${msgDesc}</div>
+          <div class="empty-state-box">
+            <div class="empty-state-title">${msgTitle}</div>
+            <div class="empty-state-desc">${msgDesc}</div>
           </div>
         `;
         return;
       }
 
-      container.innerHTML = filtered.map((job) => {
-        const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
-        const tagClass = isRemoto ? 'tag-remote' : 'tag-hybrid';
-        const tagLabel = isRemoto ? 'Remoto' : (job.modalidade || 'BH / Híbrido');
-        const isApplied = job.status === 'aplicada';
-        const isClosed = job.status === 'encerrada';
-        const isStarred = !!job.starred;
-
-        const jobEncoded = encodeURIComponent(JSON.stringify(job));
-
-        return `
-          <div class="job-card ${isApplied ? 'is-applied' : ''} ${isClosed ? 'is-closed' : ''}" onclick="openSheet('${jobEncoded}')">
-            <div>
-              <div class="card-meta-row">
-                <span class="card-company">${job.empresa || 'Empresa'}</span>
-                <div style="display: flex; gap: 0.3rem;">
-                  ${isApplied ? `<span class="tag-pill tag-applied">Candidatado</span>` : ''}
-                  <span class="tag-pill ${tagClass}">${tagLabel}</span>
-                </div>
-              </div>
-              <h3 class="card-title">${job.cargo}</h3>
-              <p class="card-snippet">${job.requisitos || 'Sem descrição fornecida.'}</p>
-            </div>
-
-            <div class="card-footer">
-              <span class="card-date">${job.dataColeta ? job.dataColeta.split(',')[0] : 'Hoje'}</span>
-              
-              <div class="card-actions-group" onclick="event.stopPropagation()">
-                <button class="action-icon-btn ${isStarred ? 'is-starred' : ''}" title="Salvar" onclick="toggleStar('${job.canonicalKey}')">
-                  ${isStarred ? '★' : '☆'}
-                </button>
-                
-                ${isApplied 
-                  ? `<button class="apple-btn-primary apple-btn-secondary" onclick="openSheet('${jobEncoded}')">
-                      <span>Ver detalhes</span>
-                    </button>`
-                  : `<button class="apple-btn-primary" onclick="candidatarRapido('${job.canonicalKey}', '${job.link || ''}')">
-                      <span>Candidatar ↗</span>
-                    </button>`
-                }
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
+      container.innerHTML = targetList.map((job, idx) => renderJobRowHTML(job, idx + 1, 'screen02')).join('');
     }
 
-    // 7. STATUS & STORE ACTIONS
-    function setJobStatus(canonicalKey, newStatus) {
+    // =============================================================
+    // CANDIDATURA FLOW: INSCRIÇÃO -> EM ANDAMENTO -> CONFIRMADA
+    // =============================================================
+    function iniciarInscricao(canonicalKey, link) {
+      if (link) {
+        window.open(link, '_blank');
+      }
+
       const store = getUserStore();
       const current = store[canonicalKey] || {};
       
-      current.status = newStatus;
-      if (newStatus === 'aplicada') {
-        current.dataAplicacao = new Date().toLocaleString('pt-BR');
-      }
+      current.status = 'em_andamento';
+      current.inicioCandidatura = Date.now();
       store[canonicalKey] = current;
       saveUserStore(store);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
-        job.status = newStatus;
-        if (newStatus === 'aplicada') {
-          job.dataAplicacao = current.dataAplicacao;
-        }
+        job.status = 'em_andamento';
+        job.inicioCandidatura = current.inicioCandidatura;
       }
 
-      updateMetrics();
-      renderJobs();
+      showToast('Link aberto! Vaga movida para "02 / Candidaturas (Em Andamento)"');
+      updateGlobalBadges();
+      renderScreen01();
+      renderScreen02();
+      renderScreen05();
+    }
+
+    function confirmarCandidaturaConcluida(canonicalKey) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      
+      const agora = Date.now();
+      let tempoGasto = 0;
+
+      if (current.inicioCandidatura) {
+        tempoGasto = Math.max(15, Math.round((agora - current.inicioCandidatura) / 1000));
+      }
+
+      current.status = 'aplicada';
+      current.dataAplicacao = new Date().toLocaleString('pt-BR');
+      current.tempoGastoSegundos = tempoGasto;
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.status = 'aplicada';
+        job.dataAplicacao = current.dataAplicacao;
+        job.tempoGastoSegundos = tempoGasto;
+      }
+
+      const minutos = Math.floor(tempoGasto / 60);
+      const segundos = tempoGasto % 60;
+      const tempoStr = minutos > 0 ? `${minutos}m ${segundos}s` : `${segundos}s`;
+
+      showToast(`Candidatura confirmada com sucesso! (Tempo gasto: ${tempoStr})`);
+      updateGlobalBadges();
+      renderScreen01();
+      renderScreen02();
+      renderScreen05();
+    }
+
+    function moverDeVoltaParaAbertas(canonicalKey) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      
+      current.status = 'para_aplicar';
+      delete current.inicioCandidatura;
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.status = 'para_aplicar';
+        job.inicioCandidatura = null;
+      }
+
+      showToast('Vaga retornou para a lista de vagas abertas.');
+      updateGlobalBadges();
+      renderScreen01();
+      renderScreen02();
+      renderScreen05();
     }
 
     function toggleStar(canonicalKey) {
@@ -1526,143 +2360,165 @@
         job.starred = current.starred;
       }
 
-      showToast(current.starred ? 'Oportunidade salva' : 'Removida das salvas');
-      updateMetrics();
-      renderJobs();
+      showToast(current.starred ? 'Vaga favoritada' : 'Removida dos favoritos');
+      updateGlobalBadges();
+      if (currentScreen === '01') renderScreen01();
+      if (currentScreen === '02') renderScreen02();
     }
 
-    function candidatarRapido(canonicalKey, link) {
-      if (link) {
-        window.open(link, '_blank');
+    function removerVagaEncerrada(canonicalKey) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      current.status = 'encerrada';
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.status = 'encerrada';
       }
-      setJobStatus(canonicalKey, 'aplicada');
-      showToast('Candidatura registrada');
+
+      showToast('Vaga encerrada removida do radar.');
+      updateGlobalBadges();
+      renderScreen01();
+      renderScreen02();
+      renderScreen05();
     }
 
-    // 8. SHEET MODAL
-    function openSheet(encodedData) {
-      const job = JSON.parse(decodeURIComponent(encodedData));
-      activeJob = job;
-
-      document.getElementById("modal-empresa").innerText = job.empresa || "Empresa";
-      document.getElementById("modal-cargo").innerText = job.cargo || "Estágio";
-      document.getElementById("modal-requisitos").innerText = job.requisitos || "Requisitos não detalhados.";
-      document.getElementById("modal-data").innerText = job.dataColeta || "Recente";
-
+    // =============================================================
+    // ROW HTML GENERATOR (Clean Gabriel Greco Project-Row)
+    // =============================================================
+    function renderJobRowHTML(job, indexNum, contextScreen) {
       const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
-      const badge = document.getElementById("modal-badge-modalidade");
-      badge.className = `tag-pill ${isRemoto ? 'tag-remote' : 'tag-hybrid'}`;
-      badge.innerText = isRemoto ? 'Remoto' : (job.modalidade || 'Híbrido / BH');
+      const isPresencial = (job.modalidade || '').toLowerCase().includes('presencial');
+      const tagClass = isRemoto ? 'remote' : (isPresencial ? 'presencial' : 'hybrid');
+      const tagLabel = isRemoto ? '100% Remoto' : (job.localizacao || job.modalidade || 'BH / Presencial');
 
       const isStarred = !!job.starred;
-      document.getElementById("modal-btn-star").innerText = isStarred ? '★ Salva' : 'Salvar';
+      const jobEncoded = encodeURIComponent(JSON.stringify(job));
+      const indexStr = indexNum.toString().padStart(2, '0');
 
-      const isApplied = job.status === 'aplicada';
-      const applyBtn = document.getElementById("modal-btn-aplicar");
-      if (isApplied) {
-        applyBtn.innerHTML = '<span>Reabrir Link Oficial ↗</span>';
-      } else {
-        applyBtn.innerHTML = '<span>Abrir e Marcar como Candidatado ↗</span>';
+      let actionButtons = '';
+
+      if (contextScreen === 'screen01') {
+        actionButtons = `
+          <button class="btn-action-ink" onclick="iniciarInscricao('${job.canonicalKey}', '${job.link || ''}')">
+            <span>Inscrição</span>
+            <span>↗</span>
+          </button>
+          <div style="display: flex; gap: 0.4rem; align-items: center;">
+            <button class="job-icon-btn ${isStarred ? 'is-starred' : ''}" title="${isStarred ? 'Remover dos favoritos' : 'Favoritar'}" onclick="toggleStar('${job.canonicalKey}')">
+              ${isStarred ? '★' : '☆'}
+            </button>
+            <span class="mono" style="font-size: 0.68rem; cursor: pointer;" onclick="openJobModal('${jobEncoded}')">ver &rarr;</span>
+          </div>
+        `;
+      } else if (contextScreen === 'screen02') {
+        if (currentSubTab02 === 'andamento') {
+          let tempoDecorridoStr = "Iniciada recentemente";
+          if (job.inicioCandidatura) {
+            const min = Math.max(1, Math.round((Date.now() - job.inicioCandidatura) / 60000));
+            tempoDecorridoStr = `Aberta há ~${min} min`;
+          }
+
+          actionButtons = `
+            <button class="btn-action-ink btn-confirm-success" onclick="confirmarCandidaturaConcluida('${job.canonicalKey}')">
+              <span>Confirmar Candidatura</span>
+              <span>✓</span>
+            </button>
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+              <button class="btn-action-secondary" title="Reabrir link oficial" onclick="window.open('${job.link || ''}', '_blank')">Reabrir ↗</button>
+              <button class="btn-action-secondary" title="Mover de volta para abertas" onclick="moverDeVoltaParaAbertas('${job.canonicalKey}')">Desistir</button>
+            </div>
+            <span class="mono" style="font-size: 0.65rem; color: #2563eb;">${tempoDecorridoStr}</span>
+          `;
+        } else if (currentSubTab02 === 'aplicadas') {
+          let tempoFormatado = "--";
+          if (typeof job.tempoGastoSegundos === 'number' && job.tempoGastoSegundos > 0) {
+            const m = Math.floor(job.tempoGastoSegundos / 60);
+            const s = job.tempoGastoSegundos % 60;
+            tempoFormatado = m > 0 ? `${m}m ${s}s` : `${s}s`;
+          }
+
+          actionButtons = `
+            <span class="tag-badge applied">✓ Concluída</span>
+            <span class="mono" style="font-size: 0.67rem; color: var(--faint);">Tempo gasto: ${tempoFormatado}</span>
+            <span class="mono" style="font-size: 0.68rem; cursor: pointer;" onclick="openJobModal('${jobEncoded}')">detalhes &rarr;</span>
+          `;
+        } else if (currentSubTab02 === 'salvas') {
+          actionButtons = `
+            <button class="btn-action-ink" onclick="iniciarInscricao('${job.canonicalKey}', '${job.link || ''}')">
+              <span>Inscrição ↗</span>
+            </button>
+            <button class="job-icon-btn is-starred" onclick="toggleStar('${job.canonicalKey}')">★</button>
+          `;
+        }
       }
 
-      document.getElementById("apple-sheet").classList.add("visible");
-      document.body.style.overflow = "hidden";
+      return `
+        <article class="job-row" onclick="openJobModal('${jobEncoded}')">
+          <span class="job-number mono">${indexStr}</span>
+
+          <div class="job-content">
+            <div class="job-top-meta">
+              <span class="company-label">${job.empresa || 'Empresa'}</span>
+              <span class="job-date">&bull; ${job.dataColeta ? job.dataColeta.split(',')[0] : 'Hoje'}</span>
+              <span class="tag-badge ${tagClass}">📍 ${tagLabel}</span>
+              <span class="tag-badge turno">⏱️ ${job.turno || 'Tarde / Flexível'}</span>
+              <span class="tag-badge inscricao">📄 ${job.prazo || 'Inscrições Abertas'}</span>
+              ${job.status === 'em_andamento' ? '<span class="tag-badge andamento">⏳ Em Andamento</span>' : ''}
+              ${job.status === 'aplicada' ? '<span class="tag-badge applied">✓ Aplicada</span>' : ''}
+            </div>
+
+            <div class="job-title-line">
+              <h3>${job.cargo}</h3>
+            </div>
+
+            <p class="job-snippet">${job.requisitos || 'Sem descrição fornecida.'}</p>
+          </div>
+
+          <div class="job-actions-column" onclick="event.stopPropagation()">
+            ${actionButtons}
+          </div>
+        </article>
+      `;
     }
 
-    function closeSheet() {
-      document.getElementById("apple-sheet").classList.remove("visible");
-      document.body.style.overflow = "auto";
-      activeJob = null;
-    }
+    // =============================================================
+    // TELA 03: HISTÓRICO DE BUSCAS
+    // =============================================================
+    function renderScreen03() {
+      const container = document.getElementById('table-history-runs');
+      if (!container) return;
 
-    function handleScrimClick(e) {
-      if (e.target.id === "apple-sheet") {
-        closeSheet();
-      }
-    }
-
-    function candidatarModal() {
-      if (!activeJob) return;
-      if (activeJob.link) {
-        window.open(activeJob.link, '_blank');
-      }
-      setJobStatus(activeJob.canonicalKey, 'aplicada');
-      showToast('Candidatura registrada com sucesso');
-      closeSheet();
-    }
-
-    function marcarVagaModal(status) {
-      if (!activeJob) return;
-      setJobStatus(activeJob.canonicalKey, status);
-      showToast('Oportunidade arquivada como encerrada');
-      closeSheet();
-    }
-
-    function alternarEstrelaModal() {
-      if (!activeJob) return;
-      toggleStar(activeJob.canonicalKey);
-      document.getElementById("modal-btn-star").innerText = activeJob.starred ? '★ Salva' : 'Salvar';
-    }
-
-    // 9. TEXT GENERATORS
-    function copiarPitch() {
-      if (!activeJob) return;
-      const empresa = activeJob.empresa || "sua empresa";
-      const cargo = activeJob.cargo || "Estágio";
-
-      const pitch = `Olá! Me chamo João, estou no 3º período de Engenharia de Software e tenho grande interesse na oportunidade de ${cargo} na ${empresa}.
-
-Estudo regularmente no turno da manhã, tendo disponibilidade integral para o turno da tarde (ou carga flexível de 6h). Possuo sólida base prática em desenvolvimento de software, algoritmos, bancos de dados e ferramentas modernas (Python, JavaScript/React, SQL, Git e automações com IA).
-
-Sou proativo, aprendo rápido e busco uma oportunidade onde possa contribuir resolvendo desafios reais e evoluir junto com o time. Fico à disposição para uma conversa!`;
-
-      navigator.clipboard.writeText(pitch).then(() => {
-        showToast('Apresentação copiada para a área de transferência');
-      });
-    }
-
-    function copiarSkills() {
-      const skills = `Engenharia de Software (3º Semestre) • Turno da Tarde / Flexível (Manhã livre)
-Tecnologias: Python, JavaScript/TypeScript, React, SQL, Git/GitHub, APIs REST, Lógica e IA Aplicada.`;
-
-      navigator.clipboard.writeText(skills).then(() => {
-        showToast('Competências copiadas');
-      });
-    }
-
-    function copiarContato() {
-      const contato = `João Victor
-Área: Engenharia de Software / Desenvolvimento / Dados / IA
-Turno de Estudo: Manhã (Disponível para estágio à tarde ou flexível)`;
-
-      navigator.clipboard.writeText(contato).then(() => {
-        showToast('Contatos copiados');
-      });
-    }
-
-    // 10. HISTÓRICO
-    function renderHistory() {
-      const container = document.getElementById("runs-list-container");
       if (executionData.length === 0) {
-        container.innerHTML = `<div class="table-cell" style="justify-content: center; color: var(--label-tertiary);">Nenhum histórico registrado.</div>`;
+        container.innerHTML = `
+          <div class="empty-state-box">
+            <div class="empty-state-title">Nenhum log registrado ainda</div>
+            <div class="empty-state-desc">As varreduras automáticas horárias do crawler serão listadas aqui.</div>
+          </div>
+        `;
         return;
       }
 
-      container.innerHTML = executionData.map(run => {
+      container.innerHTML = executionData.map((run, idx) => {
         const hasJobs = Array.isArray(run.vagas) && run.vagas.length > 0;
         const count = hasJobs ? run.vagas.length : 0;
         const badge = hasJobs 
-          ? `<span class="tag-pill tag-remote">+${count} nova(s)</span>`
-          : `<span class="tag-pill" style="background: var(--system-fill); color: var(--label-tertiary);">0</span>`;
+          ? `<span class="tag-badge remote">+${count} nova(s) vaga(s)</span>`
+          : `<span class="tag-badge hybrid">0 vagas</span>`;
+
+        const numStr = (idx + 1).toString().padStart(2, '0');
 
         return `
-          <div class="table-cell">
+          <div class="job-row" style="cursor: default; padding: 1.4rem 1rem;">
+            <span class="mono" style="color: var(--faint);">${numStr}</span>
             <div style="min-width: 0;">
-              <div style="font-weight: 500; color: var(--label-primary); margin-bottom: 2px;">
+              <div style="font-weight: 600; color: var(--ink); font-size: 0.95rem;">
                 ${run.mensagem}
               </div>
-              <div style="font-size: 0.72rem; color: var(--label-tertiary); font-family: var(--font-mono);">
-                ${run.timestamp} • Duração: ${run.duracaoSegundos || 30}s
+              <div class="mono" style="font-size: 0.7rem; color: var(--faint); margin-top: 0.2rem;">
+                ${run.timestamp} &bull; Duração: ${run.duracaoSegundos || 30}s &bull; Status: ${run.status || 'OK'}
               </div>
             </div>
             <div>
@@ -1671,6 +2527,596 @@ Turno de Estudo: Manhã (Disponível para estágio à tarde ou flexível)`;
           </div>
         `;
       }).join('');
+    }
+
+    // =============================================================
+    // TELA 04: TURNOS & CIDADES REATIVAS POR ESTADO
+    // =============================================================
+    function onTurnoFaculdadeChange(turnoEstudo) {
+      const chkTodos = document.getElementById('chk-turno-todos');
+      if (chkTodos) chkTodos.checked = false;
+
+      const chkManha = document.getElementById('chk-turno-manha');
+      const chkTarde = document.getElementById('chk-turno-tarde');
+      const chkNoite = document.getElementById('chk-turno-noite');
+      const chkFlex = document.getElementById('chk-turno-flex');
+
+      if (turnoEstudo === 'Manhã') {
+        if (chkManha) chkManha.checked = false;
+        if (chkTarde) chkTarde.checked = true;
+        if (chkNoite) chkNoite.checked = true;
+        if (chkFlex) chkFlex.checked = true;
+      } else if (turnoEstudo === 'Tarde') {
+        if (chkManha) chkManha.checked = true;
+        if (chkTarde) chkTarde.checked = false;
+        if (chkNoite) chkNoite.checked = true;
+        if (chkFlex) chkFlex.checked = true;
+      } else if (turnoEstudo === 'Noite') {
+        if (chkManha) chkManha.checked = true;
+        if (chkTarde) chkTarde.checked = true;
+        if (chkNoite) chkNoite.checked = false;
+        if (chkFlex) chkFlex.checked = true;
+      }
+
+      showToast(`Turnos de estágio ajustados para quem estuda de ${turnoEstudo}.`);
+    }
+
+    function toggleTodosTurnos(checked) {
+      document.getElementById('chk-turno-manha').checked = checked;
+      document.getElementById('chk-turno-tarde').checked = checked;
+      document.getElementById('chk-turno-noite').checked = checked;
+      document.getElementById('chk-turno-flex').checked = checked;
+    }
+
+    function onIndividualTurnoChange() {
+      const m = document.getElementById('chk-turno-manha').checked;
+      const t = document.getElementById('chk-turno-tarde').checked;
+      const n = document.getElementById('chk-turno-noite').checked;
+      const f = document.getElementById('chk-turno-flex').checked;
+      document.getElementById('chk-turno-todos').checked = (m && t && n && f);
+    }
+
+    function onEstadoChange(uf) {
+      renderCidadesGrid(uf);
+    }
+
+    function renderCidadesGrid(uf) {
+      const container = document.getElementById('container-cidades-checkboxes');
+      const labelTodas = document.getElementById('label-todas-cidades');
+      const estadoObj = ESTADOS_REGIOES[uf] || ESTADOS_REGIOES["MG"];
+
+      labelTodas.innerText = `Selecionar todas as regiões de ${estadoObj.nome}`;
+
+      if (!estadoObj.cidades || estadoObj.cidades.length === 0) {
+        container.innerHTML = `
+          <div style="padding: 0.6rem; color: var(--muted); font-size: 0.82rem;">
+            Digite as cidades desejadas abaixo no campo customizado e clique em "+ Adicionar Cidade".
+          </div>
+        `;
+        updateCidadesPreview();
+        return;
+      }
+
+      container.innerHTML = estadoObj.cidades.map(cid => {
+        const isChecked = selectedCitiesList.includes(cid);
+        return `
+          <label class="checkbox-label" style="font-size: 0.8rem;">
+            <input type="checkbox" value="${cid}" ${isChecked ? 'checked' : ''} onchange="onCidadeCheckboxChange(this)">
+            <span>${cid}</span>
+          </label>
+        `;
+      }).join('');
+
+      updateCidadesPreview();
+    }
+
+    function onCidadeCheckboxChange(el) {
+      const cid = el.value;
+      if (el.checked) {
+        if (!selectedCitiesList.includes(cid)) selectedCitiesList.push(cid);
+      } else {
+        selectedCitiesList = selectedCitiesList.filter(c => c !== cid);
+      }
+      updateCidadesPreview();
+    }
+
+    function toggleTodasCidades(checked) {
+      const checkboxes = document.querySelectorAll('#container-cidades-checkboxes input[type="checkbox"]');
+      checkboxes.forEach(chk => {
+        chk.checked = checked;
+        const cid = chk.value;
+        if (checked) {
+          if (!selectedCitiesList.includes(cid)) selectedCitiesList.push(cid);
+        } else {
+          selectedCitiesList = selectedCitiesList.filter(c => c !== cid);
+        }
+      });
+      updateCidadesPreview();
+    }
+
+    function adicionarCidadeCustom() {
+      const input = document.getElementById('input-cidade-custom');
+      const val = input.value.trim();
+      if (!val) return;
+
+      if (!selectedCitiesList.includes(val)) {
+        selectedCitiesList.push(val);
+        input.value = '';
+        
+        // Adiciona checkbox ao grid
+        const container = document.getElementById('container-cidades-checkboxes');
+        const label = document.createElement('label');
+        label.className = 'checkbox-label';
+        label.style.fontSize = '0.8rem';
+        label.innerHTML = `
+          <input type="checkbox" value="${val}" checked onchange="onCidadeCheckboxChange(this)">
+          <span>${val}</span>
+        `;
+        container.prepend(label);
+
+        updateCidadesPreview();
+        showToast(`Cidade adicionada: ${val}`);
+      }
+    }
+
+    function updateCidadesPreview() {
+      const countEl = document.getElementById('label-cidades-count');
+      const previewEl = document.getElementById('preview-cidades-selecionadas');
+
+      if (countEl) countEl.innerText = `${selectedCitiesList.length} selecionada(s)`;
+      if (previewEl) {
+        previewEl.innerText = selectedCitiesList.length > 0 
+          ? selectedCitiesList.join(', ')
+          : 'Nenhuma cidade selecionada (Defina ao menos uma região para busca presencial)';
+      }
+    }
+
+    function salvarParametrosCrawler() {
+      const turnos = [];
+      const todosTurnos = document.getElementById('chk-turno-todos').checked;
+
+      if (todosTurnos) {
+        turnos.push("Disponível em todos os horários (Manhã, Tarde, Noite ou Flexível)");
+      } else {
+        if (document.getElementById('chk-turno-manha').checked) turnos.push("Manhã");
+        if (document.getElementById('chk-turno-tarde').checked) turnos.push("Tarde (12h-18h / 13h-19h)");
+        if (document.getElementById('chk-turno-noite').checked) turnos.push("Noite");
+        if (document.getElementById('chk-turno-flex').checked) turnos.push("Flexível (6h)");
+      }
+
+      const uf = document.getElementById('cfg-estado-select').value;
+      const estadoNome = (ESTADOS_REGIOES[uf] || {}).nome || uf;
+      const localizacaoFinal = selectedCitiesList.length > 0
+        ? `${estadoNome} (${selectedCitiesList.join(', ')})`
+        : estadoNome;
+
+      const params = {
+        candidato: document.getElementById('cfg-candidato-nome').value.trim() || "João Francisco",
+        periodo: document.getElementById('cfg-semestre-texto').value.trim() || "3º período de Engenharia de Software",
+        turnoFaculdade: document.getElementById('cfg-turno-faculdade').value,
+        turnosDisponiveis: turnos.length > 0 ? turnos : ["Tarde", "Flexível"],
+        estado: uf,
+        cidades: selectedCitiesList,
+        localizacao: localizacaoFinal,
+        aceitaPresencial: document.getElementById('chk-mod-presencial').checked,
+        aceitaHibrido: document.getElementById('chk-mod-hibrido').checked,
+        aceitaRemoto: document.getElementById('chk-mod-remoto').checked,
+        areasInteresse: document.getElementById('cfg-areas-texto').value.trim()
+      };
+
+      try {
+        localStorage.setItem(PARAMS_KEY, JSON.stringify(params));
+        
+        const availText = document.getElementById('sidebar-avail-text');
+        if (availText) {
+          availText.innerText = `Disponível: ${params.turnosDisponiveis.join(' / ')} • ${params.localizacao}`;
+        }
+
+        showToast('Parâmetros salvos com sucesso! O crawler adaptará as próximas buscas.');
+      } catch (e) {
+        showToast('Erro ao salvar configurações.');
+      }
+    }
+
+    function carregarParametrosCrawler() {
+      try {
+        const stored = localStorage.getItem(PARAMS_KEY);
+        const cfg = stored ? JSON.parse(stored) : (window.CONFIG_BUSCA || null);
+
+        if (cfg) {
+          if (cfg.candidato) document.getElementById('cfg-candidato-nome').value = cfg.candidato;
+          if (cfg.periodo) document.getElementById('cfg-semestre-texto').value = cfg.periodo;
+          if (cfg.turnoFaculdade) document.getElementById('cfg-turno-faculdade').value = cfg.turnoFaculdade;
+          if (cfg.areasInteresse) document.getElementById('cfg-areas-texto').value = cfg.areasInteresse;
+
+          if (cfg.estado) {
+            document.getElementById('cfg-estado-select').value = cfg.estado;
+          }
+
+          if (Array.isArray(cfg.cidades) && cfg.cidades.length > 0) {
+            selectedCitiesList = cfg.cidades;
+          }
+
+          if (Array.isArray(cfg.turnosDisponiveis)) {
+            const str = cfg.turnosDisponiveis.join(' ').toLowerCase();
+            const isAll = str.includes('todos os horários') || str.includes('qualquer turno');
+            
+            document.getElementById('chk-turno-todos').checked = isAll;
+            document.getElementById('chk-turno-manha').checked = isAll || str.includes('manhã') || str.includes('manha');
+            document.getElementById('chk-turno-tarde').checked = isAll || str.includes('tarde');
+            document.getElementById('chk-turno-noite').checked = isAll || str.includes('noite');
+            document.getElementById('chk-turno-flex').checked = isAll || str.includes('flex');
+          }
+
+          if (typeof cfg.aceitaPresencial === 'boolean') document.getElementById('chk-mod-presencial').checked = cfg.aceitaPresencial;
+          if (typeof cfg.aceitaHibrido === 'boolean') document.getElementById('chk-mod-hibrido').checked = cfg.aceitaHibrido;
+          if (typeof cfg.aceitaRemoto === 'boolean') document.getElementById('chk-mod-remoto').checked = cfg.aceitaRemoto;
+        }
+
+        const currentUF = document.getElementById('cfg-estado-select').value || 'MG';
+        renderCidadesGrid(currentUF);
+      } catch (e) {}
+    }
+
+    // =============================================================
+    // TELA 05: KPIS RIGOROSOS, GRÁFICO QUINZENAL & ÁREAS
+    // =============================================================
+    function renderScreen05() {
+      const aplicadas = allJobs.filter(j => j.status === 'aplicada');
+      const andamento = allJobs.filter(j => j.status === 'em_andamento');
+      const abertas = allJobs.filter(j => j.status === 'para_aplicar');
+      const encerradasSemCandidatura = allJobs.filter(j => j.status === 'encerrada' && !j.dataAplicacao);
+      const totalIniciadas = aplicadas.length + andamento.length;
+
+      // 1. TEMPO MÉDIO POR VAGA (Validação Estrita: sem número fictício!)
+      const tempos = aplicadas.map(j => j.tempoGastoSegundos).filter(t => typeof t === 'number' && t > 0);
+      const kpiTempo = document.getElementById('kpi-tempo-medio');
+      const kpiTempoCtx = document.getElementById('kpi-tempo-medio-context');
+
+      if (kpiTempo) {
+        if (aplicadas.length === 0 || tempos.length === 0) {
+          kpiTempo.innerText = '--';
+          if (kpiTempoCtx) kpiTempoCtx.innerText = 'Sem candidaturas concluídas para medir tempo.';
+        } else {
+          const mediaSeg = Math.round(tempos.reduce((a, b) => a + b, 0) / tempos.length);
+          const m = Math.floor(mediaSeg / 60);
+          const s = mediaSeg % 60;
+          kpiTempo.innerText = m > 0 ? `${m}m ${s}s` : `${s}s`;
+          if (kpiTempoCtx) kpiTempoCtx.innerText = `Baseado em ${tempos.length} candidatura(s) cronometrada(s).`;
+        }
+      }
+
+      // 2. TAXA DE CONCLUSÃO (Validação Estrita: '--' se 0 iniciadas)
+      const kpiTaxa = document.getElementById('kpi-taxa-conclusao');
+      if (kpiTaxa) {
+        if (totalIniciadas === 0) {
+          kpiTaxa.innerText = '--';
+        } else {
+          const taxa = Math.round((aplicadas.length / totalIniciadas) * 100);
+          kpiTaxa.innerText = `${taxa}%`;
+        }
+      }
+
+      // 3. META DO DIA & TOTAL APLICADAS
+      const hojeStr = new Date().toLocaleDateString('pt-BR');
+      const aplicadasHoje = aplicadas.filter(j => (j.dataAplicacao || '').includes(hojeStr)).length;
+
+      const kpiMeta = document.getElementById('kpi-meta-hoje');
+      if (kpiMeta) kpiMeta.innerText = `${aplicadasHoje}/3`;
+
+      const kpiTotal = document.getElementById('kpi-total-aplicadas');
+      if (kpiTotal) kpiTotal.innerText = aplicadas.length;
+
+      // 4. GRÁFICO QUINZENAL DE CANDIDATURAS
+      renderTimelineQuinzenal(aplicadas);
+
+      // 5. FUNIL DE OPORTUNIDADES (Incluindo vagas encerradas sem candidatura!)
+      const kpiFTotal = document.getElementById('kpi-funil-total');
+      const kpiFAbertas = document.getElementById('kpi-funil-abertas');
+      const kpiFAndamento = document.getElementById('kpi-funil-andamento');
+      const kpiFConcluidas = document.getElementById('kpi-funil-concluidas');
+      const kpiFEncerradas = document.getElementById('kpi-funil-encerradas');
+
+      const totalBanco = allJobs.length;
+
+      if (kpiFTotal) kpiFTotal.innerText = totalBanco;
+      if (kpiFAbertas) kpiFAbertas.innerText = abertas.length;
+      if (kpiFAndamento) kpiFAndamento.innerText = andamento.length;
+      if (kpiFConcluidas) kpiFConcluidas.innerText = aplicadas.length;
+      if (kpiFEncerradas) kpiFEncerradas.innerText = encerradasSemCandidatura.length;
+
+      const barAbertas = document.getElementById('kpi-funil-abertas-bar');
+      const barAndamento = document.getElementById('kpi-funil-andamento-bar');
+      const barConcluidas = document.getElementById('kpi-funil-concluidas-bar');
+      const barEncerradas = document.getElementById('kpi-funil-encerradas-bar');
+
+      const denom = Math.max(totalBanco, 1);
+      if (barAbertas) barAbertas.style.width = `${Math.round((abertas.length / denom) * 100)}%`;
+      if (barAndamento) barAndamento.style.width = `${Math.min(100, Math.round((andamento.length / denom) * 100) * 3)}%`;
+      if (barConcluidas) barConcluidas.style.width = `${Math.min(100, Math.round((aplicadas.length / denom) * 100) * 3)}%`;
+      if (barEncerradas) barEncerradas.style.width = `${Math.round((encerradasSemCandidatura.length / denom) * 100)}%`;
+
+      // 6. DISTRIBUIÇÃO POR ÁREA / ESPECIALIDADE
+      renderDistribuicaoAreas();
+
+      // 7. DISTRIBUIÇÃO POR MODELO DE TRABALHO
+      const validJobs = allJobs.filter(j => j.status !== 'encerrada');
+      const totalValidas = Math.max(validJobs.length, 1);
+
+      const remotoCount = validJobs.filter(j => (j.modalidade || '').toLowerCase().includes('remoto')).length;
+      const presencialCount = validJobs.filter(j => (j.modalidade || '').toLowerCase().includes('presencial')).length;
+      const hibridoCount = totalValidas - remotoCount - presencialCount;
+
+      const pRemoto = Math.round((remotoCount / totalValidas) * 100);
+      const pPresencial = Math.round((presencialCount / totalValidas) * 100);
+      const pHibrido = Math.max(0, 100 - pRemoto - pPresencial);
+
+      const dRemotoPct = document.getElementById('kpi-dist-remoto-pct');
+      const dRemotoBar = document.getElementById('kpi-dist-remoto-bar');
+      if (dRemotoPct) dRemotoPct.innerText = `${pRemoto}% (${remotoCount})`;
+      if (dRemotoBar) dRemotoBar.style.width = `${pRemoto}%`;
+
+      const dPresencialPct = document.getElementById('kpi-dist-presencial-pct');
+      const dPresencialBar = document.getElementById('kpi-dist-presencial-bar');
+      if (dPresencialPct) dPresencialPct.innerText = `${pPresencial}% (${presencialCount})`;
+      if (dPresencialBar) dPresencialBar.style.width = `${pPresencial}%`;
+
+      const dHibridoPct = document.getElementById('kpi-dist-hibrido-pct');
+      const dHibridoBar = document.getElementById('kpi-dist-hibrido-bar');
+      if (dHibridoPct) dHibridoPct.innerText = `${pHibrido}% (${hibridoCount})`;
+      if (dHibridoBar) dHibridoBar.style.width = `${pHibrido}%`;
+    }
+
+    // =============================================================
+    // GRÁFICO QUINZENAL SVG NATIVO
+    // =============================================================
+    function renderTimelineQuinzenal(aplicadas) {
+      const container = document.getElementById('container-timeline-chart');
+      if (!container) return;
+
+      // Gerar os últimos 15 dias
+      const days = [];
+      const today = new Date();
+      for (let i = 14; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const dayStr = d.toLocaleDateString('pt-BR');
+        const shortLabel = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+        
+        // Contar quantas aplicações ocorreram neste dia
+        const count = aplicadas.filter(j => (j.dataAplicacao || '').includes(dayStr)).length;
+        days.push({ dayStr, shortLabel, count });
+      }
+
+      const counts = days.map(d => d.count);
+      const totalPeriodo = counts.reduce((a, b) => a + b, 0);
+      const maxCount = Math.max(5, ...counts);
+      const diasMetaBatida = counts.filter(c => c >= 3).length;
+      const picoMax = Math.max(0, ...counts);
+      const mediaDiaria = (totalPeriodo / 15).toFixed(1);
+
+      // Atualizar footer stats
+      const tlTotal = document.getElementById('tl-total-15');
+      const tlMedia = document.getElementById('tl-media-15');
+      const tlDiasMeta = document.getElementById('tl-dias-meta');
+      const tlPico = document.getElementById('tl-pico-dia');
+
+      if (tlTotal) tlTotal.innerText = `${totalPeriodo} vagas`;
+      if (tlMedia) tlMedia.innerText = `${mediaDiaria}/dia`;
+      if (tlDiasMeta) tlDiasMeta.innerText = `${diasMetaBatida} de 15 dias`;
+      if (tlPico) tlPico.innerText = `${picoMax} vaga(s)`;
+
+      // Dimensões do SVG
+      const width = 740;
+      const height = 210;
+      const padLeft = 45;
+      const padRight = 35;
+      const padTop = 25;
+      const padBottom = 35;
+
+      const chartW = width - padLeft - padRight;
+      const chartH = height - padTop - padBottom;
+      const stepX = chartW / 14;
+
+      // Coordenadas dos pontos
+      const points = days.map((d, i) => {
+        const x = padLeft + i * stepX;
+        const y = padTop + chartH - (d.count / maxCount) * chartH;
+        return { ...d, x, y };
+      });
+
+      // Linha da Meta (y = 3)
+      const yMeta = padTop + chartH - (3 / maxCount) * chartH;
+
+      // Path SVG
+      const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+      const areaD = `${pathD} L ${points[14].x} ${padTop + chartH} L ${points[0].x} ${padTop + chartH} Z`;
+
+      // Montagem do SVG
+      container.innerHTML = `
+        <svg viewBox="0 0 ${width} ${height}" style="width: 100%; height: auto; min-width: 600px; display: block;" font-family="JetBrains Mono, monospace">
+          <!-- Linhas de Grid Horizontais -->
+          <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#d9d7cf" stroke-width="1" />
+          <line x1="${padLeft}" y1="${padTop}" x2="${width - padRight}" y2="${padTop}" stroke="#efeee8" stroke-width="1" stroke-dasharray="3" />
+
+          <!-- Linha de Meta Diária (3 vagas) -->
+          <line x1="${padLeft}" y1="${yMeta}" x2="${width - padRight}" y2="${yMeta}" stroke="#2f6f4e" stroke-width="1.5" stroke-dasharray="4" />
+          <text x="${width - padRight - 65}" y="${yMeta - 5}" font-size="10" fill="#2f6f4e" font-weight="600">META: 3/DIA</text>
+
+          <!-- Área sob a linha -->
+          <path d="${areaD}" fill="#f1df7d" fill-opacity="0.18" />
+
+          <!-- Linha de Dados Quinzenal -->
+          <path d="${pathD}" fill="none" stroke="#242420" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+          <!-- Pontos e Labels -->
+          ${points.map(p => {
+            const isGoal = p.count >= 3;
+            const fillColor = isGoal ? '#2f6f4e' : '#ffffff';
+            const strokeColor = isGoal ? '#2f6f4e' : '#242420';
+            return `
+              <g>
+                <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5" fill="${fillColor}" stroke="${strokeColor}" stroke-width="2">
+                  <title>${p.dayStr}: ${p.count} candidatura(s)${isGoal ? ' (Meta batida! 🎉)' : ''}</title>
+                </circle>
+                ${p.count > 0 ? `<text x="${p.x.toFixed(1)}" y="${(p.y - 8).toFixed(1)}" font-size="10" font-weight="600" text-anchor="middle" fill="#242420">${p.count}</text>` : ''}
+                <text x="${p.x.toFixed(1)}" y="${height - 12}" font-size="9.5" text-anchor="middle" fill="#716f68">${p.shortLabel}</text>
+              </g>
+            `;
+          }).join('')}
+
+          <!-- Eixo Y labels -->
+          <text x="${padLeft - 10}" y="${padTop + chartH + 3}" font-size="10" text-anchor="end" fill="#9a978f">0</text>
+          <text x="${padLeft - 10}" y="${yMeta + 3}" font-size="10" text-anchor="end" fill="#2f6f4e" font-weight="600">3</text>
+          <text x="${padLeft - 10}" y="${padTop + 4}" font-size="10" text-anchor="end" fill="#9a978f">${maxCount}</text>
+        </svg>
+      `;
+    }
+
+    // =============================================================
+    // CLASSIFICAÇÃO & DISTRIBUIÇÃO POR ÁREA
+    // =============================================================
+    function classificarAreaVaga(job) {
+      const text = ((job.cargo || '') + ' ' + (job.requisitos || '') + ' ' + (job.empresa || '')).toLowerCase();
+
+      if (text.includes('ciência de dados') || text.includes('data science') || text.includes('machine learning') || text.includes('genai') || text.includes('ai engineer') || text.includes('inteligência artificial') || text.includes('llm')) {
+        return 'Ciência de Dados & IA';
+      }
+      if (text.includes('dado') || text.includes('data') || text.includes('analytics') || text.includes('bi') || text.includes('sql') || text.includes('etl') || text.includes('power bi')) {
+        return 'Engenharia de Dados & BI';
+      }
+      if (text.includes('backend') || text.includes('back-end') || text.includes('java') || text.includes('python') || text.includes('node') || text.includes('api') || text.includes('.net') || text.includes('c#') || text.includes('golang') || text.includes('spring')) {
+        return 'Backend & APIs';
+      }
+      if (text.includes('frontend') || text.includes('front-end') || text.includes('react') || text.includes('web') || text.includes('angular') || text.includes('vue') || text.includes('typescript') || text.includes('css')) {
+        return 'Frontend & Web';
+      }
+      if (text.includes('fintech') || text.includes('banco') || text.includes('bank') || text.includes('financeir') || text.includes('pagamento') || text.includes('crédito') || text.includes('investimento')) {
+        return 'Fintech & Finanças';
+      }
+      if (text.includes('qa') || text.includes('teste') || text.includes('automação') || text.includes('devops') || text.includes('cloud') || text.includes('infra')) {
+        return 'QA, Automação & DevOps';
+      }
+      return 'Engenharia de Software Geral';
+    }
+
+    function renderDistribuicaoAreas() {
+      const container = document.getElementById('container-areas-dist');
+      if (!container) return;
+
+      const activeJobs = allJobs.filter(j => j.status !== 'encerrada');
+      const total = Math.max(activeJobs.length, 1);
+
+      const counts = {};
+      activeJobs.forEach(job => {
+        const area = classificarAreaVaga(job);
+        counts[area] = (counts[area] || 0) + 1;
+      });
+
+      const sortedAreas = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+
+      container.innerHTML = sortedAreas.map(area => {
+        const count = counts[area];
+        const pct = Math.round((count / total) * 100);
+        return `
+          <div class="bar-stat-row">
+            <div class="bar-stat-labels">
+              <span><strong>${area}</strong></span>
+              <span>${pct}% (${count} vagas)</span>
+            </div>
+            <div class="bar-stat-track">
+              <div class="bar-stat-fill" style="width: ${pct}%;"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // =============================================================
+    // GLOBAL BADGES
+    // =============================================================
+    function updateGlobalBadges() {
+      const openCount = allJobs.filter(j => j.status === 'para_aplicar').length;
+      const candCount = allJobs.filter(j => j.status === 'em_andamento' || j.status === 'aplicada').length;
+
+      const bAbertas = document.getElementById('badge-nav-abertas');
+      const bCand = document.getElementById('badge-nav-candidaturas');
+      const bRuns = document.getElementById('badge-nav-runs');
+
+      if (bAbertas) bAbertas.innerText = openCount;
+      if (bCand) bCand.innerText = candCount;
+      if (bRuns) bRuns.innerText = executionData.length;
+    }
+
+    // =============================================================
+    // MODAL HANDLERS
+    // =============================================================
+    function openJobModal(encodedJob) {
+      const job = JSON.parse(decodeURIComponent(encodedJob));
+      activeModalJob = job;
+
+      document.getElementById('m-empresa').innerText = job.empresa || 'Empresa';
+      document.getElementById('m-cargo').innerText = job.cargo || 'Estágio';
+      document.getElementById('m-requisitos').innerText = job.requisitos || 'Sem descrição detalhada.';
+
+      const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+      const isPresencial = (job.modalidade || '').toLowerCase().includes('presencial');
+      const locBadge = document.getElementById('m-badge-loc');
+      locBadge.className = `tag-badge ${isRemoto ? 'remote' : (isPresencial ? 'presencial' : 'hybrid')}`;
+      locBadge.innerText = `📍 ${job.localizacao || (isRemoto ? '100% Remoto' : 'Presencial / BH')}`;
+
+      document.getElementById('m-badge-turno').innerText = `⏱️ ${job.turno || 'Tarde / Flexível'}`;
+      document.getElementById('m-badge-prazo').innerText = `📄 ${job.prazo || 'Inscrições Abertas'}`;
+
+      const starBtn = document.getElementById('m-btn-star');
+      starBtn.innerText = job.starred ? '★' : '☆';
+      starBtn.className = `job-icon-btn ${job.starred ? 'is-starred' : ''}`;
+
+      const applyBtn = document.getElementById('m-btn-inscrever');
+      if (job.status === 'em_andamento') {
+        applyBtn.innerHTML = '<span>Confirmar Candidatura Concluída ✓</span>';
+      } else if (job.status === 'aplicada') {
+        applyBtn.innerHTML = '<span>Reabrir Inscrição Oficial ↗</span>';
+      } else {
+        applyBtn.innerHTML = '<span>Abrir Inscrição Oficial ↗</span>';
+      }
+
+      document.getElementById('job-modal').classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('job-modal').classList.remove('visible');
+      document.body.style.overflow = 'auto';
+      activeModalJob = null;
+    }
+
+    function handleScrimClick(e) {
+      if (e.target.id === 'job-modal') closeModal();
+    }
+
+    function iniciarInscricaoModal() {
+      if (!activeModalJob) return;
+      if (activeModalJob.status === 'em_andamento') {
+        confirmarCandidaturaConcluida(activeModalJob.canonicalKey);
+      } else {
+        iniciarInscricao(activeModalJob.canonicalKey, activeModalJob.link);
+      }
+      closeModal();
+    }
+
+    function toggleStarModal() {
+      if (!activeModalJob) return;
+      toggleStar(activeModalJob.canonicalKey);
+      const starBtn = document.getElementById('m-btn-star');
+      starBtn.innerText = activeModalJob.starred ? '★' : '☆';
+      starBtn.className = `job-icon-btn ${activeModalJob.starred ? 'is-starred' : ''}`;
+    }
+
+    function marcarEncerradaModal() {
+      if (!activeModalJob) return;
+      removerVagaEncerrada(activeModalJob.canonicalKey);
+      closeModal();
     }
   </script>
 </body>

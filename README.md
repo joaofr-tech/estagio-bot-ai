@@ -1,78 +1,134 @@
-# 🚀 EstágioBot AI
+# 🎯 Radar de Oportunidades & Estágios (EstágioBot)
 
-Agente autônomo baseado no **Google Antigravity CLI** que realiza buscas contínuas por vagas de estágio em Engenharia de Software, Dados e Inteligência Artificial. Filtra automaticamente oportunidades compatíveis com quem estuda no turno da manhã, alimenta um **Dashboard Local** minimalista e dispara notificações por **e-mail em React** sempre que novas vagas são encontradas.
+Um sistema autônomo e minimalista (estilo editorial *Paper & Ink*) para **descoberta, monitoramento e gestão de candidaturas de estágio em tecnologia** (Engenharia de Software, Dados, IA e Web).
 
----
-
-## 📁 Estrutura do Projeto
-
-```text
-├── index.html                 # Painel visual para GitHub Pages e acesso direto
-├── dashboard.html             # Painel visual minimalista (abra com 2 cliques no navegador)
-├── EmailTemplate.jsx          # Template React estilizado para e-mails (JSX Email)
-├── enviar_vagas_pendentes.js  # Disparador de e-mail para vagas inéditas
-├── gerenciador_vagas.js       # Gerenciamento do banco local e deduplicação
-├── registrar_log.js           # Registro de métricas e auditoria da IA
-├── banco_vagas.json           # Banco de dados local com todas as vagas catalogadas
-├── banco_vagas.js             # Bridge de dados para o dashboard
-├── historico_execucoes.js     # Histórico de varreduras e observabilidade
-├── executar_busca.ps1         # Script de execução horária acionado pelo Windows
-├── agendar_tarefas.ps1        # Script para registrar a rotina no Windows em 1 clique
-├── .env.example               # Modelo para variáveis de ambiente
-├── .gitignore                 # Arquivos ignorados pelo Git (node_modules, .env, etc.)
-└── package.json               # Dependências do projeto (Node.js)
-```
+Inclui um **Dashboard Local** completo com acompanhamento de metas diárias, funil de candidaturas, parâmetros determinísticos de busca por cidade/turno e métricas de eficiência (KPIs).
 
 ---
 
-## ⚡ Como Usar
+## ⚡ Início Rápido (Sem Instalação Complexa)
+
+### 1. Visualizar o Painel
+Para ver suas vagas e gerenciar candidaturas, você só precisa dar **dois cliques** no arquivo:
+* **[dashboard.html](dashboard.html)** (ou [index.html](index.html)) em qualquer navegador.
+
+Não precisa de servidor web nem banco de dados externo — funciona **100% localmente**.
+
+---
+
+## 🚀 Como Usar o Crawler (Busca Automática)
 
 ### 1. Pré-requisitos
 * [Node.js](https://nodejs.org/) (versão 18 ou superior)
-* [Google Antigravity CLI](https://antigravity.google/) instalado (`agy`)
-* Sistema operacional Windows (com PowerShell)
-* Conta Gmail com **Senha de Aplicativo (16 dígitos)** configurada (para envio de e-mails)
+* Windows com PowerShell
+* [Google Antigravity CLI](https://antigravity.google/) (`agy`) para a IA fazer a varredura autônoma na web
 
-### 2. Instalação
-Clone o repositório e instale as dependências:
+### 2. Instalação das Dependências
+Clone o repositório e instale os pacotes:
 ```bash
 git clone https://github.com/seu-usuario/automacao-busca-vagas.git
 cd automacao-busca-vagas
 npm install
 ```
 
-### 3. Configurar Credenciais de E-mail
-Copie o arquivo `.env.example` para `.env`:
-```bash
-cp .env.example .env
-```
-Preencha suas informações no `.env`:
-```env
-EMAIL_ADDRESS=seu_email@gmail.com
-EMAIL_PASSWORD=sua_senha_de_app_de_16_digitos
+### 3. Personalizar seus Parâmetros de Busca
+Você pode configurar seus parâmetros de duas formas:
+1. **Pelo Dashboard:** Abra a tela **`04 / Parâmetros de Busca`** no navegador, selecione seu estado, cidades, turno de estudo e clique em *Salvar*.
+2. **Direto no arquivo:** Edite o arquivo `config_busca.json`:
+```json
+{
+  "candidato": "Seu Nome",
+  "periodo": "3º período de Engenharia de Software",
+  "turnoFaculdade": "Manhã",
+  "turnosDisponiveis": ["Tarde (12h-18h / 13h-19h)", "Flexível (6h)"],
+  "estado": "MG",
+  "cidades": ["Belo Horizonte", "Contagem", "Betim", "Nova Lima"],
+  "aceitaPresencial": true,
+  "aceitaHibrido": true,
+  "aceitaRemoto": true,
+  "areasInteresse": "Engenharia de Software, Dados, IA e Desenvolvimento Web"
+}
 ```
 
-### 4. Ativar o Agendador no Windows
-Execute o script no PowerShell para agendar a rotina automática:
+### 4. Executar uma Varredura Manual
+Para rodar uma busca agora mesmo:
+```powershell
+powershell -ExecutionPolicy Bypass -File .\executar_busca.ps1
+```
+* O robô lê suas preferências no `config_busca.json`.
+* Varre as principais plataformas (Gupy, LinkedIn, Catho, portais oficiais).
+* Valida links diretos e salva apenas vagas inéditas no `banco_vagas.json`.
+
+### 5. Ativar Varredura Automática (Agendador do Windows)
+Para que o bot rode de forma autônoma de hora em hora em segundo plano:
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\agendar_tarefas.ps1
 ```
-
-O Windows cuidará do resto:
-* **De hora em hora:** A IA varre a internet silenciosamente em busca de novas vagas.
-* **Notificação imediata:** Se encontrar vagas inéditas, salva no banco local e dispara o e-mail em React.
-* **Silêncio se não houver novidades:** Nenhuma notificação desnecessária é gerada.
-* **Auto-Recuperação:** Se o PC estiver desligado na hora cheia, a busca roda assim que o computador ligar (`StartWhenAvailable`).
+> **Nota:** Se o computador estiver desligado na hora cheia, o Windows executa a busca automaticamente assim que o sistema for ligado.
 
 ---
 
-## 📊 Dashboard de Vagas & Observabilidade
-Dê **dois cliques** no arquivo `dashboard.html`:
-* Design minimalista com paleta em tom off-white e verde escuro (`#235347`).
-* Visualização de todas as oportunidades salvas com links diretos e verificados.
-* Busca rápida por tecnologias (`Python`, `SQL`, `IA generativa`, etc.) e filtros (`Remoto`, `BH`).
-* Aba de histórico com auditoria detalhada de cada ciclo da IA (tempo de execução, status e logs).
-* Auto-atualização inteligente no foco da aba ou a cada 60 segundos.
+## 🧭 As 5 Telas do Dashboard
+
+| Tela | O que faz |
+| :--- | :--- |
+| **01 / Meta do Dia** | Exibe as **3 vagas prioritárias de hoje** com medidor de meta diária + o catálogo de **todas as vagas abertas**. Clicar em *Inscrição ↗* abre o link oficial e move a vaga para *Em Andamento*. |
+| **02 / Candidaturas** | Gerencie suas vagas em 3 sub-abas: **Em Andamento** (com botão *Confirmar Candidatura ✓* que cronometra o tempo gasto), **Aplicadas/Concluídas** e **Salvas ★**. |
+| **03 / Histórico** | Log imutável de telemetria das varreduras (timestamp, duração em segundos e quantidade de novas vagas encontradas). |
+| **04 / Parâmetros** | Ajuste determinístico do crawler: escolha seu estado para carregar cidades em caixas de seleção, defina turnos disponíveis e modalidades aceitas. |
+| **05 / Indicadores (KPIs)** | Gráfico quinzenal de candidaturas diárias em linha (com linha de meta 3/dia), tempo médio gasto por vaga, taxa de conclusão, funil com vagas encerradas sem candidatura e distribuição por especialidade (Backend, Frontend, Dados, IA, QA). |
+
+---
+
+## 🧪 Suíte de Testes Automatizados
+
+O projeto possui testes automatizados cobrindo fluxo de candidaturas, integridade dos indicadores e parâmetros do crawler.
+
+Para rodar todos os testes:
+```bash
+npm test
+```
+
+---
+
+## 📁 Estrutura de Arquivos
+
+```text
+├── dashboard.html             # Painel visual editorial principal
+├── index.html                 # Espelho do dashboard (para GitHub Pages / Web)
+├── config_busca.json          # Configuração determinística lida pelo crawler
+├── config_busca.js            # Bridge de parâmetros para o dashboard
+├── banco_vagas.json           # Banco de dados local com todas as vagas
+├── banco_vagas.js             # Bridge de dados para o dashboard
+├── historico_execucoes.js     # Histórico de execuções do robô
+├── executar_busca.ps1         # Script PowerShell que orquestra a busca autônoma
+├── gerenciador_vagas.js       # Deduplicação canônica e persistência das vagas
+├── verificar_vagas_encerradas.js # Rotina de limpeza de vagas expiradas
+├── agendar_tarefas.ps1        # Agendador de tarefas do Windows
+├── tests/                     # Suíte de testes automatizados (npm test)
+│   ├── candidaturas.test.js
+│   ├── indicadores.test.js
+│   ├── parametros.test.js
+│   ├── crawler_gerenciador.test.js
+│   └── run_all_tests.js
+├── legacy/                    # Arquivos e testes exploratórios arquivados
+└── package.json               # Dependências e scripts Node.js
+```
+
+---
+
+## ✉️ Notificações por E-mail (Opcional)
+
+Se desejar receber alertas no e-mail a cada nova vaga encontrada:
+1. Copie o arquivo de exemplo:
+   ```bash
+   cp .env.example .env
+   ```
+2. Insira suas credenciais de e-mail (Gmail com senha de app de 16 dígitos):
+   ```env
+   EMAIL_ADDRESS=seu_email@gmail.com
+   EMAIL_PASSWORD=sua_senha_de_app_16_digitos
+   ```
 
 ---
 

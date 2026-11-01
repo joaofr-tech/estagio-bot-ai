@@ -12,26 +12,66 @@ if (Test-Path $vagasJson) {
     Remove-Item $vagasJson -Force
 }
 
+# Carregar parametros deterministicos de busca se existirem
+$configFile = Join-Path $PSScriptRoot "config_busca.json"
+$candidato = "Joao Francisco"
+$periodo = "3º periodo de Engenharia de Software"
+$turnoFaculdade = "MANHA"
+$turnosDisponiveis = "TARDE (12h-18h / 13h-19h), NOITE ou carga horaria FLEXIVEL de 6h"
+$localizacao = "Belo Horizonte e regiao metropolitana (Belo Horizonte, Contagem, Betim, Nova Lima, Ibirite)"
+$modalidadesAceitas = "Presencial em $localizacao, Hibrido ou 100% Remoto (Brasil)"
+$areas = "Engenharia de Software, Desenvolvimento Web/Full Stack/Backend/Frontend/Mobile, Engenharia/Ciencia de Dados, IA e Automacao"
+
+if (Test-Path $configFile) {
+    try {
+        $cfg = Get-Content $configFile -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($cfg.candidato) { $candidato = $cfg.candidato }
+        if ($cfg.periodo) { $periodo = $cfg.periodo }
+        if ($cfg.turnoFaculdade) { $turnoFaculdade = $cfg.turnoFaculdade.ToUpper() }
+        if ($cfg.turnosDisponiveis) { $turnosDisponiveis = ($cfg.turnosDisponiveis -join ", ") }
+        if ($cfg.localizacao) { $localizacao = $cfg.localizacao }
+        if ($cfg.areasInteresse) { $areas = $cfg.areasInteresse }
+
+        $mods = @()
+        if ($cfg.aceitaPresencial) { $mods += "Presencial em $localizacao" }
+        if ($cfg.aceitaHibrido) { $mods += "Hibrido em $localizacao" }
+        if ($cfg.aceitaRemoto) { $mods += "100% Remoto (Brasil)" }
+        if ($mods.Count -gt 0) { $modalidadesAceitas = ($mods -join " OU ") }
+    } catch {
+        Add-Content -Path $logPath -Value "Aviso: Falha ao ler config_busca.json, usando padrao."
+    }
+}
+
 $prompt = @"
-Voce e o Agente Especialista em Busca de Estagios de TI do Joao.
+Voce e o Agente Especialista em Busca de Estagios de TI do $candidato.
 Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SEM DUPLICIDADES:
 
-1. ESCOPO & PERFIL:
-   - Areas: Engenharia de Software, Desenvolvimento Web/Full Stack/Mobile, Engenharia/Ciencia de Dados, Inteligencia Artificial/Automacao.
-   - Localizacao: Remoto (Brasil) ou Presencial/Hibrido em Belo Horizonte e regiao metropolitana (Contagem, Betim, Ibirite, Sarzedo).
-   - Requisito obrigatorio de horario: Joao estuda no turno da MANHA (3º periodo de Engenharia de Software). A vaga DEVE ser no turno da TARDE (ex: 12h-18h, 13h-19h) ou com carga horaria FLEXIVEL de 6h diarias.
+1. ESCOPO & PERFIL DO CANDIDATO:
+   - Candidato: $candidato, estudante do $periodo.
+   - Areas de Interesse: $areas.
+   - Restricao Rigorosa de Horario: $candidato estuda regularmente no turno da $turnoFaculdade. Portanto, a vaga DEVE aceitar estagio no turno: $turnosDisponiveis.
+   - Modalidades e Localizacao aceitas: $modalidadesAceitas.
 
-2. VAGAS RECENTES & ATIVAS (EVITE VAGAS EXPIRADAS):
-   - Priorize vagas publicadas RECENTEMENTE (ultimas 24 a 72 horas / semana corrente) em plataformas ativas como Gupy, LinkedIn Jobs, Lever, Greenhouse, Catho, Vagas.com ou sites de carreiras das empresas.
-   - Ignore postagens antigas de semanas/meses atras que provavelmente ja foram preenchidas ou encerradas.
+2. VAGAS RECENTES & DETALHES DE INSCRICAO:
+   - Priorize vagas publicadas RECENTEMENTE em plataformas ativas como Gupy, LinkedIn Jobs, Lever, Greenhouse, Catho, Vagas.com ou sites oficiais das empresas.
+   - Forneca a URL real e direta da pagina de candidatura / inscricao (ex: https://empresa.gupy.io/job/... ou https://linkedin.com/jobs/view/...).
+   - Capture o prazo ou status da inscricao (ex: 'Inscricoes Abertas', 'Prazo: 15/11', 'Fluxo continuo').
+   - Identifique com clareza o turno exigido e a localizacao exata da vaga.
 
-3. LINKS DIRETOS & VALIDOS:
-   - Forneca a URL real e direta da pagina de candidatura (ex: https://empresa.gupy.io/job/... ou https://linkedin.com/jobs/view/...).
-   - Se o resultado vier com redirecionamento de busca, extraia e use o link direto da pagina da vaga para evitar links quebrados ou expirados.
-
-4. FORMATO DE SAIDA:
+3. FORMATO DE SAIDA:
    - Se encontrar novas vagas compativeis e ativas, salve-as EXATAMENTE em 'novas_vagas.json' como um array JSON puro contendo:
-     [ { "empresa": "...", "cargo": "...", "modalidade": "...", "requisitos": "...", "link": "..." } ]
+     [
+       {
+         "empresa": "Nome da Empresa",
+         "cargo": "Titulo do Cargo de Estagio",
+         "modalidade": "Remoto" ou "Presencial" ou "Hibrido",
+         "localizacao": "Belo Horizonte/MG (Bairro)", "Remoto - Brasil", etc.,
+         "turno": "Tarde (13h-19h)" ou "Noite" ou "Flexivel (6h)",
+         "prazo": "Inscricoes Abertas",
+         "requisitos": "Requisitos tecnicos e qualificacoes",
+         "link": "URL direta da candidatura"
+       }
+     ]
    - Se nao encontrar vagas novas e ativas com esses requisitos nesta rodada, apenas responda 'Nenhuma vaga nova nesta rodada.' e finalize silenciosamente sem criar o arquivo.
 "@
 
