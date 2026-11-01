@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "01/11/2026, 18:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "01/11/2026, 17:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -454,28 +461,6 @@ window.HISTORICO_EXECUCOES = [
         "modalidade": "Presencial / Híbrido (Belo Horizonte - MG)",
         "requisitos": "Cursando Engenharia de Software, Ciência da Computação, Engenharias ou TI (previsão de formatura entre 12/2027 e 12/2028, compatível com 3º período); apoio na análise, tratamento e consolidação de dados de diferentes ferramentas e sistemas; geração de insights analíticos de negócio; criação e manutenção de relatórios e dashboards para acompanhamento de indicadores; conhecimento intermediário/avançado em Excel; carga horária de 6h diárias flexíveis perfeitamente compatível com o turno vespertino/tarde.",
         "link": "https://www.linkedin.com/jobs/view/4484299240"
-      }
-    ]
-  },
-  {
-    "timestamp": "28/10/2026, 15:34:35",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1388,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Netglobe Cybersecurity",
-        "cargo": "Programa de Estágio 2027 - DevSecOps",
-        "modalidade": "Remoto / Híbrido (Horário Flexível)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins; conhecimentos básicos em lógica e desenvolvimento de software (Python, JavaScript ou Go), consumo e integração de APIs REST e Git; interesse em automação, DevSecOps e desenvolvimento de software orientado a IA (OpenAI Codex, Claude Code); carga horária de 6h/dia com horário flexível compatível com quem estuda no turno da manhã.",
-        "link": "https://www.linkedin.com/jobs/view/4483883319"
-      },
-      {
-        "empresa": "Visie Padrões Web",
-        "cargo": "Estagiário(a) em Testes (QA - Quality Assurance)",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando superior em Engenharia de Software, Ciência da Computação ou correlatas; interesse em qualidade de software, testes manuais e automatizados em aplicações web e APIs (Python ou JavaScript, Postman, pytest, Jest ou Selenium, Git); boa comunicação para atuação em equipe remota; carga horária de 6h diárias flexíveis perfeitamente compatível com a faculdade.",
-        "link": "https://www.linkedin.com/jobs/view/4484219957"
       }
     ]
   }
