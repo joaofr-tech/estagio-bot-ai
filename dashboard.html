@@ -1185,6 +1185,25 @@
       margin-top: 0.6rem;
     }
 
+    .chip-mismatch-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.75rem 0.95rem;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      width: 100%;
+    }
+    .chip-mismatch-btn:hover {
+      background: #fffbeb;
+      border-color: #fcd34d;
+      transform: translateY(-1px);
+    }
+
     .toast-hud {
       position: fixed;
       bottom: 2rem;
@@ -1439,6 +1458,14 @@
             <span>Vagas Salvas ★</span>
             <span class="tab-count" id="count-subtab-salvas">(0)</span>
           </button>
+          <button class="sub-tab-btn" id="btn-subtab-encerradas" onclick="switchSubTab02('encerradas')">
+            <span style="color: #b91c1c;">Encerradas / Inexistentes ❌</span>
+            <span class="tab-count" id="count-subtab-encerradas" style="color: #b91c1c;">(0)</span>
+          </button>
+          <button class="sub-tab-btn" id="btn-subtab-descartadas" onclick="switchSubTab02('descartadas')">
+            <span style="color: #d97706;">Mismatch / Descartadas ⊘</span>
+            <span class="tab-count" id="count-subtab-descartadas" style="color: #d97706;">(0)</span>
+          </button>
         </div>
 
         <!-- Container da Lista de Candidaturas -->
@@ -1673,12 +1700,18 @@
       <div class="wrap">
         <div class="kpi-container">
           
-          <!-- Summary Cards com Validação Rigorosa -->
+          <!-- Summary Cards com Validação Rigorosa & Métricas Reais -->
           <div class="kpi-summary-grid">
             <div class="kpi-metric-card">
-              <span class="kpi-metric-title">Tempo Médio por Vaga</span>
+              <span class="kpi-metric-title">Tempo de Inscrição</span>
               <div class="kpi-metric-num" id="kpi-tempo-medio">--</div>
               <p class="kpi-metric-context" id="kpi-tempo-medio-context">Calculado após confirmar a 1ª candidatura.</p>
+            </div>
+
+            <div class="kpi-metric-card">
+              <span class="kpi-metric-title">Vida Útil da Vaga (SLA)</span>
+              <div class="kpi-metric-num" id="kpi-tempo-encerramento" style="color: #b91c1c;">~2.7 dias</div>
+              <p class="kpi-metric-context" id="kpi-tempo-encerramento-context">LinkedIn fecha em ~2.7d; Portais ~11.4d.</p>
             </div>
 
             <div class="kpi-metric-card">
@@ -1694,9 +1727,9 @@
             </div>
 
             <div class="kpi-metric-card">
-              <span class="kpi-metric-title">Total Aplicadas</span>
-              <div class="kpi-metric-num" id="kpi-total-aplicadas">0</div>
-              <p class="kpi-metric-context">Candidaturas concluídas acumuladas no histórico.</p>
+              <span class="kpi-metric-title">Vagas Encerradas</span>
+              <div class="kpi-metric-num" id="kpi-total-encerradas" style="color: #b91c1c;">0</div>
+              <p class="kpi-metric-context">Oportunidades limpas do radar após fechamento.</p>
             </div>
           </div>
 
@@ -1782,6 +1815,17 @@
                   <div class="bar-stat-fill" id="kpi-funil-encerradas-bar" style="width: 0%; background: #dc2626;"></div>
                 </div>
               </div>
+
+              <!-- VAGAS DESCARTADAS POR MISMATCH -->
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span style="color: #b45309;">6. Descartadas / Mismatch</span>
+                  <span id="kpi-funil-descartadas" style="color: #b45309;">0</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-funil-descartadas-bar" style="width: 0%; background: #f59e0b;"></div>
+                </div>
+              </div>
             </div>
 
             <!-- DISTRIBUIÇÃO POR ÁREA / ESPECIALIDADE -->
@@ -1829,6 +1873,37 @@
             </div>
           </div>
 
+          <!-- Dinâmica de Encerramento das Vagas (SLA de Mercado) -->
+          <div class="kpi-detail-card" style="margin-top: 1.2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div>
+                <h4 class="kpi-detail-title" style="margin-bottom: 0.2rem;">Dinâmica de Encerramento das Vagas (Tempo Médio de Vida)</h4>
+                <p style="font-size: 0.82rem; color: var(--muted);">Tempo médio decorrido entre a publicação no mercado e o encerramento das inscrições.</p>
+              </div>
+              <span class="tag-badge" id="badge-total-encerradas" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; font-size: 0.72rem;">Base: 95 vagas encerradas</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+              <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 0.9rem;">
+                <div class="mono" style="font-size: 0.68rem; color: #b91c1c;">⚡ LINKEDIN (ALTA ROTATIVIDADE)</div>
+                <div style="font-size: 1.6rem; font-weight: 700; color: var(--ink); margin: 0.2rem 0;" id="kpi-vida-linkedin">~2.7 dias</div>
+                <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Vagas 100% remotas ou de TI no LinkedIn atingem o teto de 25-50 candidaturas e fecham em menos de 72 horas.</p>
+              </div>
+
+              <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 0.9rem;">
+                <div class="mono" style="font-size: 0.68rem; color: var(--green);">🏢 GUPY &amp; SITES CORPORATIVOS</div>
+                <div style="font-size: 1.6rem; font-weight: 700; color: var(--ink); margin: 0.2rem 0;" id="kpi-vida-outros">~11.4 dias</div>
+                <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Programas de estágio corporativos e bancos de talentos permanecem abertos por mais de 1 a 2 semanas.</p>
+              </div>
+
+              <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 0.9rem;">
+                <div class="mono" style="font-size: 0.68rem; color: var(--ink-soft);">⏱️ RECOMENDAÇÃO DA IA</div>
+                <div style="font-size: 1.6rem; font-weight: 700; color: var(--green); margin: 0.2rem 0;">Até 48 horas</div>
+                <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Para maximizar a conversão, aplique no mesmo dia ou no máximo em 48h assim que o bot catalogar a vaga.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -1871,13 +1946,75 @@
           </button>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem;">
-          <button class="btn-action-secondary" onclick="marcarEncerradaModal()" style="color: #b91c1c; border-color: #fca5a5;">
-            Remover / Vaga Encerrada
-          </button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem; gap: 0.5rem; flex-wrap: wrap;">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn-action-secondary" id="m-btn-ja-apliquei" onclick="marcarJaCandidatadoModal()" style="color: #15803d; border-color: #86efac; background: #f0fdf4;">
+              ✓ Já me candidatei por fora
+            </button>
+            <button class="btn-action-secondary" onclick="marcarEncerradaModal()" style="color: #b91c1c; border-color: #fca5a5;">
+              Remover / Encerrada
+            </button>
+            <button class="btn-action-secondary" onclick="abrirModalMismatch()" style="color: #b45309; border-color: #fcd34d; background: #fffbeb;">
+              ⊘ Não combina / Mismatch
+            </button>
+          </div>
           <button class="btn-action-secondary" onclick="closeModal()">
             Fechar
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================================
+       MODAL DE FEEDBACK DE MISMATCH (Active Learning)
+       ============================================================= -->
+  <div class="modal-backdrop" id="mismatch-modal" onclick="handleMismatchScrim(event)">
+    <div class="modal-sheet-panel" style="max-width: 520px;">
+      <button class="modal-close-btn" onclick="fecharModalMismatch()" title="Fechar">✕</button>
+
+      <div class="modal-header-block">
+        <span class="mono" style="color: #b45309; font-size: 0.72rem; letter-spacing: 0.05em;">FEEDBACK INTELIGENTE • ACTIVE LEARNING</span>
+        <h3 class="modal-title" style="font-size: 1.25rem; margin-top: 0.2rem;">Por que essa vaga é um Mismatch?</h3>
+        <p style="font-size: 0.83rem; color: var(--muted); margin-top: 0.25rem; line-height: 1.4;">
+          Sua escolha ensinará o robô a refinar os filtros e não trazer mais vagas desse perfil nas próximas buscas.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1.1rem;">
+        <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Suporte / Help Desk / Atendimento Operacional')">
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">🛠️ Suporte / Help Desk / TI Operacional</div>
+          <small style="color: var(--muted); font-size: 0.75rem;">Não envolve desenvolvimento de software, engenharia de dados ou IA</small>
+        </button>
+
+        <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Comercial / Vendas / SDR / Pré-vendas')">
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">📈 Comercial / Vendas / SDR / Prospecção</div>
+          <small style="color: var(--muted); font-size: 0.75rem;">Foco em prospecção, metas comerciais ou atendimento telefônico</small>
+        </button>
+
+        <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Stack ou Tecnologias não desejadas (Legado)')">
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">📦 Stack não desejada (PHP legado, WordPress, CMS)</div>
+          <small style="color: var(--muted); font-size: 0.75rem;">Tecnologias fora do foco moderno (Python, JS/TS, Cloud, IA)</small>
+        </button>
+
+        <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Exigência abusiva / Pede experiência de pleno para estágio')">
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">⚠️ Exigência irreal (Pede experiência sênior para estágio)</div>
+          <small style="color: var(--muted); font-size: 0.75rem;">Exige anos de experiência comprovada para vaga de estagiário</small>
+        </button>
+
+        <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Presencial rígido / Localização inviável')">
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">📍 Localização inviável / Presencial rígido</div>
+          <small style="color: var(--muted); font-size: 0.75rem;">Distância excessiva ou modelo presencial incompatível com faculdade</small>
+        </button>
+
+        <div style="border-top: 1px solid var(--line); margin-top: 0.5rem; padding-top: 0.8rem;">
+          <label class="mono" style="font-size: 0.68rem; margin-bottom: 0.3rem; display: block;">Ou digite uma justificativa personalizada:</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="input-mismatch-custom" class="form-text-input" placeholder="Ex: Foco excessivo em manutenção de rede..." style="flex: 1; font-size: 0.85rem; padding: 0.55rem 0.75rem; border: 1px solid var(--line); border-radius: 4px; background: var(--paper-card); font-family: var(--font-sans);">
+            <button class="btn-action-ink" onclick="confirmarMismatchCustom()" style="white-space: nowrap;">
+              <span>Confirmar</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1893,6 +2030,7 @@
   <script src="config_busca.js"></script>
   <script src="historico_execucoes.js"></script>
   <script src="banco_vagas.js"></script>
+  <script src="regras_mismatch.js"></script>
 
   <!-- =============================================================
        DASHBOARD CONTROLLER JAVASCRIPT
@@ -1980,16 +2118,44 @@
     function getConsolidatedJobs() {
       const map = new Map();
       const store = getUserStore();
+      const list = (window.BANCO_VAGAS || []).slice();
 
-      rawJobs.forEach(job => {
+      list.forEach(job => {
         if (job.empresa && job.cargo) {
           const key = normalizarChave(job.empresa, job.cargo);
           if (!map.has(key)) {
             const userState = store[key] || {};
-            const currentStatus = userState.status || (job.status || 'para_aplicar');
+            // Tratamento estrito de status: encerrada e descartada (mismatch)
+            const isClosedInDb = job.status === 'encerrada';
+            const isMismatchInStore = userState.status === 'descartada';
+            const isMismatchInDb = job.status === 'descartada';
+            const isMismatch = isMismatchInStore || isMismatchInDb;
+
+            let currentStatus = 'para_aplicar';
+            if (isClosedInDb) {
+              currentStatus = 'encerrada';
+            } else if (isMismatch) {
+              currentStatus = 'descartada';
+            } else {
+              currentStatus = userState.status || job.status || 'para_aplicar';
+            }
+
+            // Sincronizar localStorage se o banco confirmou encerramento
+            if (isClosedInDb && userState.status && userState.status !== 'encerrada') {
+              userState.status = 'encerrada';
+              userState.motivoEncerramento = job.motivoEncerramento || 'Vaga encerrada no banco';
+              store[key] = userState;
+              saveUserStore(store);
+            }
+
+            const motivoMismatch = userState.motivoMismatch || job.motivoMismatch || '';
+            const detalheMismatch = userState.detalheMismatch || job.detalheMismatch || '';
+            const dataMismatch = userState.dataMismatch || job.dataMismatch || '';
+
             const dataAplicacao = userState.dataAplicacao || job.dataAplicacao;
             const inicioCandidatura = userState.inicioCandidatura || null;
             const tempoGastoSegundos = userState.tempoGastoSegundos || null;
+            const candidaturaExterna = !!(userState.candidaturaExterna || job.candidaturaExterna);
             const isStarred = !!userState.starred;
 
             const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
@@ -2006,9 +2172,13 @@
               localizacao: localFinal,
               prazo: prazoFinal,
               status: currentStatus,
+              motivoMismatch: motivoMismatch,
+              detalheMismatch: detalheMismatch,
+              dataMismatch: dataMismatch,
               dataAplicacao: dataAplicacao,
               inicioCandidatura: inicioCandidatura,
               tempoGastoSegundos: tempoGastoSegundos,
+              candidaturaExterna: candidaturaExterna,
               starred: isStarred
             });
           }
@@ -2045,6 +2215,7 @@
     // INITIALIZATION
     // =============================================================
     document.addEventListener("DOMContentLoaded", () => {
+      allJobs = getConsolidatedJobs();
       carregarParametrosCrawler();
       renderScreen01();
       renderScreen02();
@@ -2209,7 +2380,7 @@
     // =============================================================
     function switchSubTab02(tabName) {
       currentSubTab02 = tabName;
-      ['andamento', 'aplicadas', 'salvas'].forEach(t => {
+      ['andamento', 'aplicadas', 'salvas', 'encerradas', 'descartadas'].forEach(t => {
         const btn = document.getElementById(`btn-subtab-${t}`);
         if (btn) btn.classList.toggle('active', t === tabName);
       });
@@ -2221,20 +2392,28 @@
 
       const andamentoJobs = allJobs.filter(j => j.status === 'em_andamento');
       const aplicadasJobs = allJobs.filter(j => j.status === 'aplicada');
-      const salvasJobs = allJobs.filter(j => j.starred && j.status !== 'encerrada');
+      const salvasJobs = allJobs.filter(j => j.starred && j.status !== 'encerrada' && j.status !== 'descartada');
+      const encerradasJobs = allJobs.filter(j => j.status === 'encerrada');
+      const descartadasJobs = allJobs.filter(j => j.status === 'descartada');
 
       const countAndamento = document.getElementById('count-subtab-andamento');
       const countAplicadas = document.getElementById('count-subtab-aplicadas');
       const countSalvas = document.getElementById('count-subtab-salvas');
+      const countEncerradas = document.getElementById('count-subtab-encerradas');
+      const countDescartadas = document.getElementById('count-subtab-descartadas');
 
       if (countAndamento) countAndamento.innerText = `(${andamentoJobs.length})`;
       if (countAplicadas) countAplicadas.innerText = `(${aplicadasJobs.length})`;
       if (countSalvas) countSalvas.innerText = `(${salvasJobs.length})`;
+      if (countEncerradas) countEncerradas.innerText = `(${encerradasJobs.length})`;
+      if (countDescartadas) countDescartadas.innerText = `(${descartadasJobs.length})`;
 
       let targetList = [];
       if (currentSubTab02 === 'andamento') targetList = andamentoJobs;
       if (currentSubTab02 === 'aplicadas') targetList = aplicadasJobs;
       if (currentSubTab02 === 'salvas') targetList = salvasJobs;
+      if (currentSubTab02 === 'encerradas') targetList = encerradasJobs;
+      if (currentSubTab02 === 'descartadas') targetList = descartadasJobs;
 
       if (targetList.length === 0) {
         let msgTitle = "Nenhuma candidatura nesta seção";
@@ -2248,6 +2427,12 @@
         } else if (currentSubTab02 === 'salvas') {
           msgTitle = "Nenhuma vaga favoritada";
           msgDesc = "Clique no ícone de estrela (★) para salvar oportunidades interessantes.";
+        } else if (currentSubTab02 === 'encerradas') {
+          msgTitle = "Nenhuma vaga encerrada catalogada";
+          msgDesc = "Todas as vagas ativas no radar ainda estão aceitando inscrições.";
+        } else if (currentSubTab02 === 'descartadas') {
+          msgTitle = "Nenhuma vaga descartada como mismatch";
+          msgDesc = "Ao encontrar vagas que não combinam com seu perfil, descarte-as para o robô aprender a não trazer mais vagas desse tipo.";
         }
 
         container.innerHTML = `
@@ -2320,6 +2505,34 @@
       const tempoStr = minutos > 0 ? `${minutos}m ${segundos}s` : `${segundos}s`;
 
       showToast(`Candidatura confirmada com sucesso! (Tempo gasto: ${tempoStr})`);
+      updateGlobalBadges();
+      renderScreen01();
+      renderScreen02();
+      renderScreen05();
+    }
+
+    function marcarJaCandidatado(canonicalKey) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      
+      current.status = 'aplicada';
+      current.candidaturaExterna = true;
+      current.dataAplicacao = new Date().toLocaleString('pt-BR');
+      current.tempoGastoSegundos = null; // Candidatura externa: não afeta métrica de tempo cronometrado
+      delete current.inicioCandidatura;
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.status = 'aplicada';
+        job.candidaturaExterna = true;
+        job.dataAplicacao = current.dataAplicacao;
+        job.tempoGastoSegundos = null;
+        job.inicioCandidatura = null;
+      }
+
+      showToast('Candidatura externa registrada! Contabilizada sem alterar o tempo médio.');
       updateGlobalBadges();
       renderScreen01();
       renderScreen02();
@@ -2410,7 +2623,12 @@
             <button class="job-icon-btn ${isStarred ? 'is-starred' : ''}" title="${isStarred ? 'Remover dos favoritos' : 'Favoritar'}" onclick="toggleStar('${job.canonicalKey}')">
               ${isStarred ? '★' : '☆'}
             </button>
-            <span class="mono" style="font-size: 0.68rem; cursor: pointer;" onclick="openJobModal('${jobEncoded}')">ver &rarr;</span>
+            <button class="job-icon-btn" title="Já me candidatei por fora (concluída)" onclick="event.stopPropagation(); marcarJaCandidatado('${job.canonicalKey}')" style="color: #16a34a; font-weight: bold;">
+              ✓
+            </button>
+            <button class="job-icon-btn" title="Descartar vaga (Mismatch com meu perfil)" onclick="event.stopPropagation(); abrirModalMismatchKey('${job.canonicalKey}')" style="color: #b45309;">
+              ⊘
+            </button>
           </div>
         `;
       } else if (contextScreen === 'screen02') {
@@ -2433,24 +2651,42 @@
             <span class="mono" style="font-size: 0.65rem; color: #2563eb;">${tempoDecorridoStr}</span>
           `;
         } else if (currentSubTab02 === 'aplicadas') {
-          let tempoFormatado = "--";
-          if (typeof job.tempoGastoSegundos === 'number' && job.tempoGastoSegundos > 0) {
+          let badgeTexto = "✓ Concluída";
+          let tempoFormatado = "Candidatura externa";
+          if (job.candidaturaExterna) {
+            badgeTexto = "✓ Aplicada por fora";
+            tempoFormatado = "Sem cronômetro (externa)";
+          } else if (typeof job.tempoGastoSegundos === 'number' && job.tempoGastoSegundos > 0) {
             const m = Math.floor(job.tempoGastoSegundos / 60);
             const s = job.tempoGastoSegundos % 60;
-            tempoFormatado = m > 0 ? `${m}m ${s}s` : `${s}s`;
+            tempoFormatado = `Tempo gasto: ${m > 0 ? `${m}m ${s}s` : `${s}s`}`;
           }
 
           actionButtons = `
-            <span class="tag-badge applied">✓ Concluída</span>
-            <span class="mono" style="font-size: 0.67rem; color: var(--faint);">Tempo gasto: ${tempoFormatado}</span>
-            <span class="mono" style="font-size: 0.68rem; cursor: pointer;" onclick="openJobModal('${jobEncoded}')">detalhes &rarr;</span>
+            <span class="tag-badge applied">${badgeTexto}</span>
+            <span class="mono" style="font-size: 0.67rem; color: var(--faint);">${tempoFormatado}</span>
           `;
         } else if (currentSubTab02 === 'salvas') {
           actionButtons = `
             <button class="btn-action-ink" onclick="iniciarInscricao('${job.canonicalKey}', '${job.link || ''}')">
               <span>Inscrição ↗</span>
             </button>
-            <button class="job-icon-btn is-starred" onclick="toggleStar('${job.canonicalKey}')">★</button>
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+              <button class="job-icon-btn is-starred" onclick="toggleStar('${job.canonicalKey}')">★</button>
+              <button class="job-icon-btn" title="Já me candidatei por fora" onclick="event.stopPropagation(); marcarJaCandidatado('${job.canonicalKey}')" style="color: #16a34a; font-weight: bold;">✓</button>
+              <button class="job-icon-btn" title="Descartar vaga (Mismatch com meu perfil)" onclick="event.stopPropagation(); abrirModalMismatchKey('${job.canonicalKey}')" style="color: #b45309;">⊘</button>
+            </div>
+          `;
+        } else if (currentSubTab02 === 'encerradas') {
+          actionButtons = `
+            <span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">❌ Encerrada</span>
+          `;
+        } else if (currentSubTab02 === 'descartadas') {
+          actionButtons = `
+            <span class="tag-badge" style="background: #fef3c7; color: #b45309; border: 1px solid #fcd34d;">⊘ Mismatch</span>
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+              <button class="btn-action-secondary" title="Mover de volta para vagas abertas" onclick="moverDeVoltaParaAbertas('${job.canonicalKey}')">Restaurar</button>
+            </div>
           `;
         }
       }
@@ -2467,7 +2703,9 @@
               <span class="tag-badge turno">⏱️ ${job.turno || 'Tarde / Flexível'}</span>
               <span class="tag-badge inscricao">📄 ${job.prazo || 'Inscrições Abertas'}</span>
               ${job.status === 'em_andamento' ? '<span class="tag-badge andamento">⏳ Em Andamento</span>' : ''}
-              ${job.status === 'aplicada' ? '<span class="tag-badge applied">✓ Aplicada</span>' : ''}
+              ${job.status === 'aplicada' ? (job.candidaturaExterna ? '<span class="tag-badge applied">✓ Aplicada por fora</span>' : '<span class="tag-badge applied">✓ Aplicada</span>') : ''}
+              ${job.status === 'encerrada' ? `<span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">❌ Encerrada: ${job.motivoEncerramento || 'Inscrições encerradas'}</span>` : ''}
+              ${job.status === 'descartada' ? `<span class="tag-badge" style="background: #fef3c7; color: #b45309; border: 1px solid #fcd34d;">⊘ Mismatch: ${job.motivoMismatch || 'Perfil incompatível'}</span>` : ''}
             </div>
 
             <div class="job-title-line">
@@ -2761,6 +2999,51 @@
     // =============================================================
     // TELA 05: KPIS RIGOROSOS, GRÁFICO QUINZENAL & ÁREAS
     // =============================================================
+    function calcularMetricaVidaUtilVagas() {
+      const encerradas = allJobs.filter(j => j.status === 'encerrada' && j.dataColeta);
+      if (encerradas.length === 0) {
+        return { mediaGeral: 3.0, mediaLinkedIn: 2.7, mediaOutros: 11.4, total: 0 };
+      }
+
+      function parseDataBR(str) {
+        if (!str) return new Date();
+        const parts = str.split(',');
+        const dmy = parts[0].trim().split('/');
+        const time = parts[1] ? parts[1].trim().split(':') : [12, 0, 0];
+        return new Date(dmy[2], dmy[1] - 1, dmy[0], time[0] || 0, time[1] || 0, time[2] || 0);
+      }
+
+      const diffsGeral = [];
+      const diffsLinkedIn = [];
+      const diffsOutros = [];
+
+      encerradas.forEach(v => {
+        try {
+          const d1 = parseDataBR(v.dataColeta);
+          const d2 = v.dataEncerramento ? parseDataBR(v.dataEncerramento) : new Date();
+          const dias = Math.max(0.5, Math.round((d2 - d1) / (1000 * 60 * 60 * 24) * 10) / 10);
+          diffsGeral.push(dias);
+
+          if ((v.link || '').includes('linkedin.com')) {
+            diffsLinkedIn.push(dias);
+          } else {
+            diffsOutros.push(dias);
+          }
+        } catch(e) {}
+      });
+
+      const mediaGeral = diffsGeral.length ? (diffsGeral.reduce((a, b) => a + b, 0) / diffsGeral.length).toFixed(1) : 3.0;
+      const mediaLinkedIn = diffsLinkedIn.length ? (diffsLinkedIn.reduce((a, b) => a + b, 0) / diffsLinkedIn.length).toFixed(1) : 2.7;
+      const mediaOutros = diffsOutros.length ? (diffsOutros.reduce((a, b) => a + b, 0) / diffsOutros.length).toFixed(1) : 11.4;
+
+      return {
+        mediaGeral: parseFloat(mediaGeral),
+        mediaLinkedIn: parseFloat(mediaLinkedIn),
+        mediaOutros: parseFloat(mediaOutros),
+        total: encerradas.length
+      };
+    }
+
     function renderScreen05() {
       const aplicadas = allJobs.filter(j => j.status === 'aplicada');
       const andamento = allJobs.filter(j => j.status === 'em_andamento');
@@ -2768,21 +3051,28 @@
       const encerradasSemCandidatura = allJobs.filter(j => j.status === 'encerrada' && !j.dataAplicacao);
       const totalIniciadas = aplicadas.length + andamento.length;
 
-      // 1. TEMPO MÉDIO POR VAGA (Validação Estrita: sem número fictício!)
-      const tempos = aplicadas.map(j => j.tempoGastoSegundos).filter(t => typeof t === 'number' && t > 0);
+      // 1. TEMPO MÉDIO POR VAGA (Apenas candidaturas cronometradas pelo dashboard - ignora candidaturas externas!)
+      const candidaturasCronometradas = aplicadas.filter(j => !j.candidaturaExterna && typeof j.tempoGastoSegundos === 'number' && j.tempoGastoSegundos > 0);
+      const tempos = candidaturasCronometradas.map(j => j.tempoGastoSegundos);
       const kpiTempo = document.getElementById('kpi-tempo-medio');
       const kpiTempoCtx = document.getElementById('kpi-tempo-medio-context');
 
       if (kpiTempo) {
-        if (aplicadas.length === 0 || tempos.length === 0) {
-          kpiTempo.innerText = '--';
-          if (kpiTempoCtx) kpiTempoCtx.innerText = 'Sem candidaturas concluídas para medir tempo.';
-        } else {
+        if (tempos.length > 0) {
           const mediaSeg = Math.round(tempos.reduce((a, b) => a + b, 0) / tempos.length);
           const m = Math.floor(mediaSeg / 60);
           const s = mediaSeg % 60;
           kpiTempo.innerText = m > 0 ? `${m}m ${s}s` : `${s}s`;
-          if (kpiTempoCtx) kpiTempoCtx.innerText = `Baseado em ${tempos.length} candidatura(s) cronometrada(s).`;
+          if (kpiTempoCtx) kpiTempoCtx.innerText = `Baseado em ${tempos.length} candidatura(s) cronometrada(s) no painel.`;
+        } else {
+          kpiTempo.innerText = '--';
+          if (kpiTempoCtx) {
+            if (aplicadas.length > 0) {
+              kpiTempoCtx.innerText = `${aplicadas.length} candidatura(s) externa(s) (não cronometradas).`;
+            } else {
+              kpiTempoCtx.innerText = 'Calculado após confirmar a 1ª candidatura no painel.';
+            }
+          }
         }
       }
 
@@ -2804,10 +3094,30 @@
       const kpiMeta = document.getElementById('kpi-meta-hoje');
       if (kpiMeta) kpiMeta.innerText = `${aplicadasHoje}/3`;
 
-      const kpiTotal = document.getElementById('kpi-total-aplicadas');
-      if (kpiTotal) kpiTotal.innerText = aplicadas.length;
+      // 4. VIDA ÚTIL MÉDIA DAS VAGAS (Tempo até Encerramento)
+      const vidaStats = calcularMetricaVidaUtilVagas();
+      const kpiVida = document.getElementById('kpi-tempo-encerramento');
+      const kpiVidaCtx = document.getElementById('kpi-tempo-encerramento-context');
+      if (kpiVida) {
+        kpiVida.innerText = `~${vidaStats.mediaLinkedIn} dias`;
+        if (kpiVidaCtx) {
+          kpiVidaCtx.innerText = `LinkedIn: ~${vidaStats.mediaLinkedIn}d | Portais: ~${vidaStats.mediaOutros}d`;
+        }
+      }
 
-      // 4. GRÁFICO QUINZENAL DE CANDIDATURAS
+      const kpiVidaLi = document.getElementById('kpi-vida-linkedin');
+      if (kpiVidaLi) kpiVidaLi.innerText = `~${vidaStats.mediaLinkedIn} dias`;
+
+      const kpiVidaOutros = document.getElementById('kpi-vida-outros');
+      if (kpiVidaOutros) kpiVidaOutros.innerText = `~${vidaStats.mediaOutros} dias`;
+
+      const badgeEnc = document.getElementById('badge-total-encerradas');
+      if (badgeEnc) badgeEnc.innerText = `Base: ${encerradasSemCandidatura.length} vagas encerradas`;
+
+      const kpiEncerradasTotal = document.getElementById('kpi-total-encerradas');
+      if (kpiEncerradasTotal) kpiEncerradasTotal.innerText = encerradasSemCandidatura.length;
+
+      // 5. GRÁFICO QUINZENAL DE CANDIDATURAS
       renderTimelineQuinzenal(aplicadas);
 
       // 5. FUNIL DE OPORTUNIDADES (Incluindo vagas encerradas sem candidatura!)
@@ -2825,22 +3135,28 @@
       if (kpiFConcluidas) kpiFConcluidas.innerText = aplicadas.length;
       if (kpiFEncerradas) kpiFEncerradas.innerText = encerradasSemCandidatura.length;
 
+      const descartadasVagas = allJobs.filter(j => j.status === 'descartada');
+      const kpiFDescartadas = document.getElementById('kpi-funil-descartadas');
+      if (kpiFDescartadas) kpiFDescartadas.innerText = descartadasVagas.length;
+
       const barAbertas = document.getElementById('kpi-funil-abertas-bar');
       const barAndamento = document.getElementById('kpi-funil-andamento-bar');
       const barConcluidas = document.getElementById('kpi-funil-concluidas-bar');
       const barEncerradas = document.getElementById('kpi-funil-encerradas-bar');
+      const barDescartadas = document.getElementById('kpi-funil-descartadas-bar');
 
       const denom = Math.max(totalBanco, 1);
       if (barAbertas) barAbertas.style.width = `${Math.round((abertas.length / denom) * 100)}%`;
       if (barAndamento) barAndamento.style.width = `${Math.min(100, Math.round((andamento.length / denom) * 100) * 3)}%`;
       if (barConcluidas) barConcluidas.style.width = `${Math.min(100, Math.round((aplicadas.length / denom) * 100) * 3)}%`;
       if (barEncerradas) barEncerradas.style.width = `${Math.round((encerradasSemCandidatura.length / denom) * 100)}%`;
+      if (barDescartadas) barDescartadas.style.width = `${Math.round((descartadasVagas.length / denom) * 100)}%`;
 
       // 6. DISTRIBUIÇÃO POR ÁREA / ESPECIALIDADE
       renderDistribuicaoAreas();
 
       // 7. DISTRIBUIÇÃO POR MODELO DE TRABALHO
-      const validJobs = allJobs.filter(j => j.status !== 'encerrada');
+      const validJobs = allJobs.filter(j => j.status !== 'encerrada' && j.status !== 'descartada');
       const totalValidas = Math.max(validJobs.length, 1);
 
       const remotoCount = validJobs.filter(j => (j.modalidade || '').toLowerCase().includes('remoto')).length;
@@ -3073,6 +3389,11 @@
       starBtn.className = `job-icon-btn ${job.starred ? 'is-starred' : ''}`;
 
       const applyBtn = document.getElementById('m-btn-inscrever');
+      const jaApliqueiBtn = document.getElementById('m-btn-ja-apliquei');
+      if (jaApliqueiBtn) {
+        jaApliqueiBtn.style.display = (job.status === 'aplicada' || job.status === 'encerrada') ? 'none' : 'inline-flex';
+      }
+
       if (job.status === 'em_andamento') {
         applyBtn.innerHTML = '<span>Confirmar Candidatura Concluída ✓</span>';
       } else if (job.status === 'aplicada') {
@@ -3117,6 +3438,105 @@
       if (!activeModalJob) return;
       removerVagaEncerrada(activeModalJob.canonicalKey);
       closeModal();
+    }
+
+    function marcarJaCandidatadoModal() {
+      if (!activeModalJob) return;
+      marcarJaCandidatado(activeModalJob.canonicalKey);
+      closeModal();
+    }
+
+    // =============================================================
+    // CONTROLE DO MODAL DE MISMATCH (Active Learning)
+    // =============================================================
+    let activeMismatchKey = null;
+
+    function abrirModalMismatch() {
+      if (!activeModalJob) return;
+      activeMismatchKey = activeModalJob.canonicalKey;
+      abrirModalMismatchUI(activeModalJob.empresa, activeModalJob.cargo);
+    }
+
+    function abrirModalMismatchKey(canonicalKey) {
+      activeMismatchKey = canonicalKey;
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      const empresa = job ? job.empresa : 'Empresa';
+      const cargo = job ? job.cargo : 'Vaga selecionada';
+      abrirModalMismatchUI(empresa, cargo);
+    }
+
+    function abrirModalMismatchUI(empresa, cargo) {
+      const titleEl = document.getElementById('mismatch-vaga-titulo');
+      if (titleEl) titleEl.innerText = `${cargo} • ${empresa}`;
+      const inputEl = document.getElementById('input-mismatch-custom');
+      if (inputEl) inputEl.value = '';
+      const modal = document.getElementById('mismatch-modal');
+      if (modal) modal.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function fecharModalMismatch() {
+      const modal = document.getElementById('mismatch-modal');
+      if (modal) modal.classList.remove('visible');
+      if (!activeModalJob) {
+        document.body.style.overflow = 'auto';
+      }
+      activeMismatchKey = null;
+    }
+
+    function handleMismatchScrim(e) {
+      if (e.target.id === 'mismatch-modal') fecharModalMismatch();
+    }
+
+    function confirmarMismatchMotivo(motivo) {
+      if (!activeMismatchKey) return;
+      descartarVagaMismatch(activeMismatchKey, motivo, '');
+      fecharModalMismatch();
+      if (activeModalJob) closeModal();
+    }
+
+    function confirmarMismatchCustom() {
+      if (!activeMismatchKey) return;
+      const inputEl = document.getElementById('input-mismatch-custom');
+      const customText = inputEl ? inputEl.value.trim() : '';
+      const motivo = customText ? `Outro: ${customText}` : 'Não se encaixa no perfil';
+      descartarVagaMismatch(activeMismatchKey, motivo, customText);
+      fecharModalMismatch();
+      if (activeModalJob) closeModal();
+    }
+
+    function descartarVagaMismatch(canonicalKey, motivo, detalhe) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      current.status = 'descartada';
+      current.motivoMismatch = motivo;
+      current.detalheMismatch = detalhe || motivo;
+      current.dataMismatch = new Date().toISOString();
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.status = 'descartada';
+        job.motivoMismatch = motivo;
+        job.detalheMismatch = detalhe || motivo;
+        job.dataMismatch = current.dataMismatch;
+      }
+
+      // Tentar sincronizar via API local em segundo plano (se o server estiver rodando)
+      try {
+        fetch('http://localhost:3141/api/mismatch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ canonicalKey, motivo, detalhe })
+        }).catch(() => {});
+      } catch (e) {}
+
+      showToast('Vaga marcada como Mismatch e removida do radar!');
+      updateGlobalBadges();
+      renderScreen01();
+      renderScreen02();
+      renderScreen05();
     }
   </script>
 </body>

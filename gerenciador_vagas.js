@@ -108,6 +108,18 @@ function salvarNovasVagas(jsonPath) {
     const jaExiste = chavesExistentes.has(chave) || (linkNormalizado && linksExistentes.has(linkNormalizado));
 
     if (!jaExiste) {
+      // Filtro preventivo de Mismatch baseado no aprendizado do candidato
+      let checagemMismatch = { proibido: false };
+      try {
+        const { verificarTermoProibido } = require('./gerenciar_mismatch');
+        checagemMismatch = verificarTermoProibido(`${vaga.cargo} ${vaga.requisitos || ''}`);
+      } catch (e) {}
+
+      if (checagemMismatch.proibido) {
+        console.log(`[Mismatch Preventivo] Vaga ignorada: "${vaga.cargo}" (${vaga.empresa}) - Termo proibido: "${checagemMismatch.termo}"`);
+        continue;
+      }
+
       const nova = {
         id: "vaga-" + Date.now() + "-" + Math.random().toString(36).substr(2, 5),
         empresa: vaga.empresa || "Empresa Confidencial",

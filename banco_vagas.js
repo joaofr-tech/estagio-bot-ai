@@ -19,7 +19,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4483488785",
     "dataColeta": "30/10/2026, 17:37:01",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:11:23",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1793388727056-456tq",
@@ -63,7 +65,9 @@ window.BANCO_VAGAS = [
     "link": "https://vagas.solides.com.br/vaga/944622",
     "dataColeta": "30/10/2026, 14:31:47",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1793381507735-bszhd",
@@ -85,7 +89,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4483080070",
     "dataColeta": "30/10/2026, 10:33:52",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:12:09",
+    "motivoEncerramento": "LinkedIn: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1793363632333-tpqha",
@@ -107,7 +113,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.agiel.com.br/estudante/vagas/?codigo=MG2026001863",
     "dataColeta": "29/10/2026, 20:29:35",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Vaga não encontrada"
   },
   {
     "id": "vaga-1793295265975-d9ql8",
@@ -217,7 +225,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4482531110",
     "dataColeta": "28/10/2026, 13:49:20",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:12:09",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1793143925254-v3k8f",
@@ -283,7 +293,9 @@ window.BANCO_VAGAS = [
     "link": "https://vagas.solides.com.br/vaga/944056",
     "dataColeta": "26/10/2026, 19:53:25",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1793048806271-3fdcn",
@@ -338,7 +350,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE84TjG39mN5r2qSklS9mW5JwoczHczRx8Fr8TQ0yMcYX3ThbSv7wieFFg2l_f9D4dVoyTgBMhsuaA741VnPp5D5fF4rK5m_6lAXXPbBodLSaNMifUfZRHlTq_mXPR4jWEad3X3_Qizl-StEXmHFUmkSO_c6X6zpXftqAWyGD88",
     "dataColeta": "25/10/2026, 14:14:49",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:12:09",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792948489736-xltxn",
@@ -349,7 +363,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlQlj9y3stQmuefx4RPbnjeEQiOEC7jKoSEljgt8Vu68tPrr4keKLZARivGEs4Ywz0hj2U6rTYGEMA7UdQHaVDXbqRR-rJQ9dGPFMzYpLtkp9guB594rI4MDBqsP7ErDdWFn_eWqTOaH6n40y4JPan6UAvWhzjdjnFiQ==",
     "dataColeta": "25/10/2026, 14:14:49",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:12:09",
+    "motivoEncerramento": "Gupy: Texto de vaga encerrada detectado"
   },
   {
     "id": "vaga-1792948489736-fy938",
@@ -360,7 +376,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEGL-yj26WMOWa4yW1DGugHwApab67412aCXSEpZI6jsR8ubw4Au8ryhyDZ1ybYbMUvWG1S4UYJtSWOM8k4u4VuI8eApcaz5yuiZ56tdsrOrA_wUM9ezMJRLPjXuWfpJOEb-aKIaryvrzDiHu06QtIj_qSP-5--6A5RbafkW4V0ZhCIcNt6qvkWb_ui3aP7jeEelDm-hQnUNOhV",
     "dataColeta": "25/10/2026, 14:14:49",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:12:09",
+    "motivoEncerramento": "Termo de encerramento detectado no anúncio (inscrições encerradas)"
   },
   {
     "id": "vaga-1792948489736-lwqk1",
@@ -371,7 +389,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG1o0DkUywHgUaQUSKR8qmmjqz93UWRhO-7oyeLnzFk7-Wv8V-0dmvHquAhIdBjKIvwwQINlRgM7AuFlDBPAtESkKglGKUz5Ycno3AXV_DJl56XQRQaJGKO2_9xUl3HAUhbqqmncOdDattgy-VEpI4fxTrNxzT3T7a0i4mrJuTC0vjmk-g=",
     "dataColeta": "25/10/2026, 14:14:49",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:12:09",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792948489736-yraxo",
@@ -382,7 +402,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGgJu65Kyy4HC0v86r96l6OVHO4zaWYJSPjs7OGykmgpYtFniIqADxIIfPb9t8w4o_ZYnxXZh95Stc0hAgcm2lOjCNHWoXTnFn7y47KN-ldwo9I0hVANHa-q2Uw2yJ6vqu0CuCJNZNaALEu-CXmNw87_fRHSmqPefl2dJH11ynQRm2Cs5PZXOk-O5uMrSVtAdLT7Vkdj1t-w919HTUCuss4ICdt0u4scJ37TIegFw==",
     "dataColeta": "25/10/2026, 14:14:49",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:12:09",
+    "motivoEncerramento": "Termo de encerramento detectado no anúncio (inscrições encerradas)"
   },
   {
     "id": "vaga-1792937603795-r2z0h",
@@ -459,7 +481,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETCV9C68gLhLNMUaNdrYNPezaT187aUW_aEUgvCCvAOOLfFa1sacsckFYlMoqFkyaX6CMY8w6pH2nAbNuiFq_Qaz-zJf44Y4G_-PrqbT4NPaV6G1Y51BEIUEgA80zDNMO0maEt2lrZAeP_F5ZWBoV2sc36QZFKbK8ZMRt4YSn_852Isogc7xWBmiimzMd-ZypLVjzJIzPs-Yn5",
     "dataColeta": "25/10/2026, 10:41:27",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792935687788-kedf3",
@@ -481,7 +505,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHXjgTB46gKKjSUnytn0AAhisO49uw2ymjmOebnww5efSSSxJIqQpgqQw3vZFQizI_l6Wm0lXZHiCMB0ympjwdu4P1rhanxw5TVgL5AhAqJjWv4xoaZvwA=",
     "dataColeta": "25/10/2026, 10:41:27",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792900033389-v1vfn",
@@ -525,7 +551,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHB5IN01Uy97lfkQJpCTvU3mRJSf0XtsaIHaOQFzqUV1pmZEY7LsOgaimd2n4zS0CFj5d5wjR260Cgq9EPYIAARJ1b7QyzT0hiNtoMywPlUXWhzyFk2FNg-LdR6DJpTYQ3vnmhm1qA9qP-1X_fGkJeHD00GSIpal4jk7kn8j-jZnagI9H1WFV4pRdODyKgo8-ii_srzHgKaQTuIsAmqhqO_FnGVyM7IFUuVMtk0A42PqEg3zKlz-mx2q28=",
     "dataColeta": "25/10/2026, 00:47:13",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792890849278-2kp6y",
@@ -547,7 +575,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHtDbSd_EhusWmx6SP-njKFNWwc_RecJ5C0vdwQ1pb07xWhxBFZUfWt5cLbxkRR6TpyEmzxhPZhZ3c48_z6oL8HitzyrU2yrAy7tx3af9LxJ-YwEJBJLZDwXztHrBLc",
     "dataColeta": "24/10/2026, 21:13:50",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792887230308-tk2nv",
@@ -558,7 +588,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH6YrDN7h2Ez4Ftkr-ExhJPKkXA1Z8NtR6oZerDr3b-W2z8C3k0MoRDjOckHATKHAS8x8JdIEUMvhgFhqWIp9AVwKhGi-r5uvI97ejGllFujB5V_XkuAOFTu6iZXvIqHF0DYzOkpQVU3yvMdt3s5ks0XrfFM5dvLNA_jA7SAshVUvkjWSvpMS1uv-W4cNmrXrChaOEaSmDHjY29Vw==",
     "dataColeta": "24/10/2026, 21:13:50",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792883702350-u48v4",
@@ -569,7 +601,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG192hsTYX7zfjZzEUZfMauY8K5Y56gDAAs-_0mf5ikIk_q4Q--3hqAn2BLZTYLh0JZRcan4LBetfTDYxHRCNDpdAaS5K8hoavcQNqDqbIk9w5fWQNMj9q69Y7j8uug",
     "dataColeta": "24/10/2026, 20:15:02",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792883702350-a5ofl",
@@ -591,7 +625,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHi2TBcCny9wgalazvmVecRCF1Xd_3Usry1c87OaK7tRluwkLdM17rclIDYn3gGMxV-l06blmLUZvGnWXpaaHrFpW6bnqXJjnKoZIdBKkLKWt11XW7u_7nuy6Ivzht8",
     "dataColeta": "24/10/2026, 19:21:19",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792880479651-i9vn1",
@@ -624,7 +660,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPECbSlQSvzXga3RTFprdrFKC7qggXsSX8yam5lPlzeempw2dVvYhNNjUvgMAO4-T421GIPyXRpQX83ixH0ME_6wMxJ7swA9bdKwXohgg_8XolcGgAg0LmONdwY6aOT-oTkvbSL-LBVQq5HHuumxTtgnV5wgsahbANSGq6Z2HKhGJGsODQkECFXXxekw94hyoGE6qiSlEnIEiI_A==",
     "dataColeta": "24/10/2026, 18:15:10",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792872818073-6lnm8",
@@ -657,7 +695,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGvIsyQOmeMH8WwsycXl-ClqJdUcL2x5zVQ5cNrWE7jKfnQq0INFqKP2uQu-dLuAi7pvZpLVRaQ0EUa17LKQRbnqxeew76hHo6dy1dYuoEpR6wFSQDjWG5g_ugmhifxi7-mDrsY2nHuXXhEWBpQu62RPpSDdNqpn0yzC7mqIIecvOAsO31lidc99Vz6",
     "dataColeta": "24/10/2026, 17:13:38",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792869263239-98j77",
@@ -668,7 +708,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGDLy4OCbsoRVXwRZNJbkM6led7yk96AOvse718230PHUIszR4L8L7-w7JK01mpz727aLmLzBHC76kabOpeBZDfgH7tjruqGreaRzb6Pgp866dYovBRWWXVq9rp5_EXGI6C135rciCTA3j47tfJREvdYV6cVY8bQx-r1oIW6V4E1BtkyEYP4PPrYtsPJTKvOF8XQFWKZ3kBP3_L_A==",
     "dataColeta": "24/10/2026, 16:14:23",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792869263239-21ufx",
@@ -679,7 +721,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFqZ2QlVGVsdHXlOxcHxyB6REpYTq_C0dSWOxOyYh_N1aboH6Ki362US8qaa8G9gQJ83HD6bukWVCLWLyvVBR81HFT5qBpVUs1h5URa3lBwJkWRdvfndGNU1MV0kYvGZFQwJxGlNQ==",
     "dataColeta": "24/10/2026, 16:14:23",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792869263239-afqnk",
@@ -701,7 +745,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFhgScWJIBmWQ_7jaUvO9k1hxmu5hDW-Nl720CKV7o8aKgK6oY-F5rGBDQI-hjLXKcUk9pT1xmWH7iyvPEYDCzr_9UcEEqEJfd6sjyK0sEAfOs-LlaJQAwY8S67YMmDKuSXAVeadVrsAXrfO68OuzShQ7yACR20NSbe0ObFIXtVYB1T4DUB=",
     "dataColeta": "24/10/2026, 15:16:12",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1792865772159-ny9zy",
@@ -712,7 +758,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHpvpNWquoG6ufS673c3_1MQz1PuA83CxP3Dw08pdpBueBp6yUlxuMXrNXfDX3zF9HrwwVHpRmSUVWXfrJNQifHq2ojL23sCA09mI0qK7w-5HjCSnzb13M=",
     "dataColeta": "24/10/2026, 15:16:12",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792865772158-cpeu2",
@@ -723,7 +771,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFpKO9Bre9tKTBX8LFD1_zgEKhV1CQjXbokgkmS0J5VEtbAUxGGjKHHDRejY4apYrZaQu9tEl22JpJyrUft64YYevNvFa1koC-VSxXCTr8kt-hs3wC5pPhaqGrgkIti7GnG3Rka3Xqf1s33p0Six_oMWBhhyat5ZFlnQvLAc5K2hGHHvOqe7o7lCJoJsZsm8MR1bWbdXJVLBFYFyA==",
     "dataColeta": "24/10/2026, 15:16:12",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792862082933-v9zrz",
@@ -789,7 +839,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFnZN5kcnS8EihQWv2i0xYko6NeJIs0vYRqj_jh53uYEDEbKV2ezvX1EAalfteHGMKt_wmHsV8EEEBvx4-lcFLpnFSNpHWKbqxwWQEPJRCuNWKt6hgtCg4XIqMtFtcFjIOIQonNg==",
     "dataColeta": "24/10/2026, 13:17:44",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792858664543-5yimy",
@@ -811,7 +863,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGhj1h6l4jHL5rxeVLXm0Q13YM03C0r5wze7vHMMhZXFhRWCiz_CiZtVe0VfLDnTaxoE3o1-EQNdEhy0IEy0W210lgcd7gvo6KYYsfajEwYSjjol2paJv3bvVmBwAqIMZdXJNpLf7p3Xn84nb2nwhF70-4g3Z2VghFru_8m",
     "dataColeta": "24/10/2026, 13:17:44",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792854838037-g5ypi",
@@ -855,7 +909,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHM3wbySe8-298XpN4A94N1Kn4SafhBM-Q7WGBx9JMW93wlHM5P_A-Je8rCK0J4dH7vt_QeKcmpg0N7uQd0Xt45Qcgxx-W095FS3bPbPBv9Uwup6BIqDK4T1L98zauDXxEy4P6WcvlzOuMTQV5m4RhZKK1pVDndlpY8KEEFfExBByw-Ib_obA9iQ4NCtumsc6Km-Fud0ANAZ03M",
     "dataColeta": "24/10/2026, 12:13:58",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792854838037-whrk3",
@@ -866,7 +922,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGFQ6PCg5V4Gx9xXWnWKR1iBRMfQ8lYsWTxahYNVvG0sBgO8afMDxxPNfYgFs65LhtC5fAOCq8aTF4AITiUqYIxZ2knYuyVAzOv52KR27T4lwLfQRgYTk5LPIfHKxkTYlJv7q_m5SbHDjvvK8QRtt6mbbVbtdthfEQY3gRLoo0aZggTN5kYv9Pi5Pk=",
     "dataColeta": "24/10/2026, 12:13:58",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792851465853-l9fh9",
@@ -976,7 +1034,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHUDWdPVVQzKH0i6-YERwihF2m-_hAFk5X9m6bjYMZknvYVXa2BNEBtfQOKik338_k7WpXdY_oMgqxlByiYBIWs0o74qVLuCyoEb7hQUZPU9M1i0hEZGM-7CoQH3L_Rt0JUA1rP5JAKAbU7PBtdP2WILXYLVP3a5SIHeYvrXF7k_s7gDVpLe9Jyielrwoex_HTJDmSO4TFbqtDTaDYRpl_TJPNCvTqTDGo=",
     "dataColeta": "23/10/2026, 22:27:07",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Vaga não encontrada"
   },
   {
     "id": "vaga-1792800845716-cvfnh",
@@ -998,7 +1058,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQENRLCl5eCK0HBUgCxwV7XJOLR3qGrMoZDuHT_Vt_8uoSngRet2Zb2SLkjMgX2t4_HWLIBfiTqOm-Ju3yEJjDwXBfh3f7mJz91NvarrBjKgx3M-haXCv5CImSUdg8N4d8U22IcdGttHLYSk2KgOWkJbp7uZD9WXS_NediQlWisZgqns1YBbtdU4-CRSSp36NqAYqPvnjklt3hhpRA==",
     "dataColeta": "23/10/2026, 21:14:05",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792800845716-ua0un",
@@ -1009,7 +1071,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEE1iVHkgEnsMp3VtDaUNVVAzy3LOGukKh-lawpQNY6c8V9tELgTrlp1KDfoxaajEEjj9YCg9n2nJT1Z30uJL4fOpy8ZW8JPMFzMb1GLCEJYK3IJ1gDX--1QAkmncrNnaRvj_Cbv8QiumdEjgqL111s0U6m1U6uPIMlMwcGIghFdutrUulSBxCdOXBF",
     "dataColeta": "23/10/2026, 21:14:05",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792800845716-v0dtv",
@@ -1042,7 +1106,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH4NGPA_zjZd9ySghZm-8hSaKQg0syEC9cCIA7z6WE_zc6sfjaHFPV7MmacH6yCJV6JsgrNDkmrIamuLLoYzQHJdYdHUyGARQWmIiBVA8a6LNB3wPdFTywt80RUS8Cv",
     "dataColeta": "23/10/2026, 19:14:43",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792793683473-qzvb4",
@@ -1053,7 +1119,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF7-iQkWFtMLe-0HLsc533QKQR_H3j4X701CYej__SkRXC8UjYZMItJF7u6xGDtnysy0dG6kezJEo6uzafDUCBfsSg5BwljJsPfM_2765KfOlHgQ8zYs2a1-sXg2pZL",
     "dataColeta": "23/10/2026, 19:14:43",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792793683473-dh4va",
@@ -1064,7 +1132,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF23rC2Rr1k0mpSM0uIXf674i8SNw-9N_edYW57QEW77RJEG70z76MA9DZQ-qt0s-6r5ppTNwZWbMCKHtMa2Xz-MtyoZm0HGTHnBFMBMs3pYr-50CAatmoTwXOtZqho",
     "dataColeta": "23/10/2026, 19:14:43",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792790080650-7wdmd",
@@ -1086,7 +1156,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGQZhNrO94g_mQ5b8vZOKwTBIqQFRuDh2gsnHUnnHMj4TjfkbOfZCkwhg9OD5dSF5vpL0YRXSL0a8CTQJ_aRXtbO4GXicxTwoOqzTkvAXUlaQ3lzIOc-5yiejADkV7LOXmPw4V25XcsEIzRaktlldDO6nWEPsX0VvpVTIZgkYdeEus1rrtZ-e4aseWf",
     "dataColeta": "23/10/2026, 18:14:40",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792790080649-l0xiy",
@@ -1097,7 +1169,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGh7B6Twr-cpSLeAvj7-FQb0Ab7UuDm2lmSIrC19iAqn_MMh1jme2ueYWcrn0Z6NwZy0vTv8XzJQkAGpyduPQBBuSB6AC3gdQ6EVw4Yxf1O-s4aTdFKA_muNd0IfItExiHv7LIEvSGqeD5IuQDFa7jhmaPEHvrvT5sW_xIILK7i-FY4sGYF52ofctwXO3Iy-sl5yfgKKA7z3JHEPg==",
     "dataColeta": "23/10/2026, 18:14:40",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792788050516-mhx6y",
@@ -1108,7 +1182,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmx1k_ygKMa3UK2JZsjZAP6B1p17v2KqYnmW7f9Za_uOV7J5ztWsq8-d179Fia7b5KZJfJycD-S8RGme1DHv8mjH-JAmiPl8kKtcCatQhIwv_M6WNL7iwOXaOpyOG1QpN0qKAqug==",
     "dataColeta": "23/10/2026, 17:40:50",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792788050516-nev8g",
@@ -1185,7 +1261,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFu6haEDMoc5gHmtM11PMlErICkUcNVCrwjF_jZyAulNQYOCZ3bi5faqNzeKADipCPWLTfq2WS9Z4tIVes_yVzNiuotHunHgUNsQgOj3qkGvqru2voUV-lnmwUyxp_MKlxq43XNeqicwRxiWsBIe4V1Lenc5d1WiFRzdzqZMpTEo8RcL9pXe87508KVboOXgnJ_Pm5id_aEvIEo1Q==",
     "dataColeta": "23/10/2026, 00:14:19",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792725259259-wn5aw",
@@ -1196,7 +1274,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcD5h0E0inHKJRsR5wdRBARQl1GYW0YNnqWGWWo0imWcazrDc1UPsIrAcHa6AGLrqduAPg9e25XT38QWSBBoRTqjCEMTJEmqqyBY_fWQp1wE-fgayjOSB2DC9a-KQI0WA7pTZO7CIBtwWxpCyKFGjyZturxul4jbaGelfDnP4ECjj2Tjd0uH5isFpv",
     "dataColeta": "23/10/2026, 00:14:19",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792714890247-865zu",
@@ -1339,7 +1419,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFv4ptg1ARlsWdabP9UZwfyr8tykr0cr10aINeUPI1fQiI9fIx6lYDKKySeyk8Ej88MCzQAolKqqT_w_69TQnw-8T8ldID3u39cZ0TfzpfIVzT_MPa8MAirV9gRt8w08XkrkB75qINOzEifao26GYWZrEAuAxNiykjtNEpS_g==",
     "dataColeta": "22/10/2026, 18:21:57",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792704117204-7acch",
@@ -1372,7 +1454,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFLPcBGCl7VJYgtJN2KNaMvngsjTu_Hu8nms1nTcXbq-Jg_GZoO5KIblMFrpXSCQ0coMgBS82b-H-5AwUJyemk3NnlmmWo_wjIGK36yjH92q1ZecWisogTyEHbJgRTS",
     "dataColeta": "22/10/2026, 17:14:48",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792700088165-eiihj",
@@ -1383,7 +1467,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHYsm6PmygW-v_X5_Xw3jQbVfvbqRytOIvbFARue0K27L5wBLaX40pOSWyl2mkMknH2IsYxwQ4z7zSj1T2VHmSO4rw5waNtAOdCPNWpyKmlxs1znzJGw8KzBYjwhXE=",
     "dataColeta": "22/10/2026, 17:14:48",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792700088165-f14nl",
@@ -1394,7 +1480,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEivpMWDlW69rEQRn8oVlArVEC0UnY198gzvKDz0tqUorvFZ6KTEBv6CIiO5nmr1lN6tFtsC0M6V9siT-y9q5OsKatjy4qHiXz2RP3njcdkBSGofVOGwoYJeDdKtWKtgg-_ve13LPkkyk_-AB39-FIAuxf_wRvUCrUhaSzkFS5EJvUxNBU7lfvFFGJk",
     "dataColeta": "22/10/2026, 17:14:48",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792700088165-jtt5r",
@@ -1416,7 +1504,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGC4673udXZzNNraLSM-NaNiJabb6iFy2TGoC5llJ4Gx6_49AQkNsNzWuFPoQH34mfm82vXj1TO3rJylGPMYeRjpsa_KaRlLIJ0LlOv6MrLz29cPBJV5HCH6aziqEz1YfvpAEVNaSThxgk3CmLgCNhMY2XzEglQp2qer8Y_VX3n3AxefMSaIJtNefbstXDnyxL4LncPos6DG45GbsIeSFa0-EE=",
     "dataColeta": "22/10/2026, 16:14:33",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792696473031-xa57c",
@@ -1427,7 +1517,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE48Nd7zR8kSUKIvuQVwkuYzOXjl7JDZBYITgGoBkwjTGFtmumIDf7W7fqGMVtMVXc9n83gd2JMOz93NdPzh1d5VlboXOVDJoQXJvrPnJoq3uqfsHGOtoHtUBIjsg==",
     "dataColeta": "22/10/2026, 16:14:33",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792692854109-r5uah",
@@ -1449,7 +1541,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHnHWb180wRNXiqK1--Rxuj-JSUlCPQ9OyUBvXQQBJcbEQ8sYujJr4Vy68bSBEgQ-Vl4RrQzfot5NFKy92VE9mFV7KQwe9RaTdnMH9J3o-Ow3Pm3Dkpq4HCMX3tD046EpJ6ZfUaTPjkSmdz5aYYOGYiNzYmlWqUEWJ3FG7HG4XIt26yC4jH8keXWhwpFX-JJpyQs5mK7o4PyL17USNDneZPlNa-ysCjui1EL1MLKkJlcT_OGWEYU24RFf9STZg=",
     "dataColeta": "22/10/2026, 15:14:14",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792692854109-jtgr0",
@@ -1471,7 +1565,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEaCavFKzYM3yYwLN15yLGaQZOPD3x_urwGazPs8RSMM35SCpLvB-RcaoPWwDaM049q_ERRlPnlPyAJS9bnVhgECAaEpHudUdsHQJRhayqQbKvw4QIXbVcNQPvOvyUXjuaW2DvZykNLbREyhZeAfe2i_-xD9OWjVicLJYNRuAKmxD4svPQSw_ojBJW4",
     "dataColeta": "22/10/2026, 00:13:51",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792635967054-3lrt1",
@@ -1515,7 +1611,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEVuqWwX5C6STfMpydSE4ObkwMNwU-S_8HOFJoNr0q1Eiml6BbvKFK6jlNWgInABhFey1kW5Rv3xFwgLLPb04qdEvX7D3tkElslzQoCHAh8ogrp2zg_WAZg1hcIMBpX-L611QqGgDdNyt4JshlXIeBRWESYlAIrJlLW5ZI=",
     "dataColeta": "21/10/2026, 23:26:07",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy: Texto de vaga encerrada ou inexistente detectado"
   },
   {
     "id": "vaga-1792624411226-jw5bt",
@@ -1526,7 +1624,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEy1980ucbeT9yfnkn05_UGpTyVMOzi6RA-9SO3Dq9RSnLJz2JxWzUZHWuyU3FgcEUvA09IAlZCkdsTKEvscm7johi45lN_loMuGi4HJ9OhT4MnDA7NNBBwSfcLGOws=",
     "dataColeta": "21/10/2026, 20:13:31",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1792624411226-8vqd3",
@@ -1537,7 +1637,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGGCLVtX96zm3m-P2oifi_rM6RicHjW_kNDxx0CyF9UVXHLOYmJfDq8hakkuMChFxkmXHLBI5P4a-CMEAV3OiQiw651NiIrdfhqCpdWLShPamBVYkHQq6cVeSC1Aqj_",
     "dataColeta": "21/10/2026, 20:13:31",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792620855105-46wux",
@@ -1548,7 +1650,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVXKxNcmMlU-lJEQFOSBvoVLNT4rQysaaRDOoV7NbMMjeK4otFLNI-VZY8aIP36sVVR1IjuRgNcN4xF9KPxgm9WP6qvi7Af9vFgojsn5uAhSYnIfC92ERk1wUo-uRlFgwlsZMi4XE8d__FbR2hyECofY_Ye8t3etJu2RsMLIGgQMFtdyp6b2Tp1CRE_r_TQipppsx5EKyQlvKBsMBgAuDqCcQ8pCD6wIOzwa4=",
     "dataColeta": "21/10/2026, 19:14:15",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792620855105-t2h11",
@@ -1625,7 +1729,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQd0zuIUsNf9xgAajpM9U6YWRjLC3ZCiKMsj-vj4RQ5rsPVx07mzwSpNqDgyXMzidxj9PWgX6uBcUCNlY1gc2muRYavLGwd33j4bFjl7UFVWeWCYUYg6gur3VxtF1Y1PKBYg1WDDPCI604_nQIijDvJTjjsqz6va_5gqyjNM44j_FKT0yqGgDlA7Of_R5fP8pVrfqLXrXdfTXHyh5gcQL1bA==",
     "dataColeta": "21/10/2026, 17:19:29",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792613969287-65g8o",
@@ -1658,7 +1764,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHIztgSObvrpzSKnpbxR-vFrO5vV1ufZ7LFueLVfuNtr2q7AkCx8W-7fIESQL9UoByscd75y0EKO_oGiA9zJg_0lfJtnCpHQcyxJ-mR1LYuO-1BdKZuKbfwPsjbOSxaiKo2aMvfJ8aYw-YfhX3WSF8xwUh5wzsYHwTuAh0TdvtSOAdmvWxg30DZ9EFgVdzLHv05CFJau4DkWC8M",
     "dataColeta": "21/10/2026, 16:15:38",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792610138285-dzdkz",
@@ -1702,7 +1810,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjJmtKy2Q6twnODoN8KqOUC0Sfs80KI0U85MlAs29VJj3XZmXoST-asn_vAW1GOSYLsdGACPDA5syzZEh_8d1KjnzWAv6dHPynTOZGOQ55FTISYCWuPWSnXvbGvuFrJaVwbV0H40xgifwSO5eMTXQdfF-V7rC75g0apmV-DWYSdwrUniDbyjfRci2xMlEYqHQWdVAgZwZDDfBJ",
     "dataColeta": "21/10/2026, 09:14:53",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792583239311-fcnec",
@@ -1724,7 +1834,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQtnAO_XRw_sB5FBjETqVOqmQqj-4vfPsRGTWoku1M35Jl-IB4jHKlo1BA1cww7Gls0c5PsIJx_tQxcs3YEDC68o2jpHWiYG46rdUQwwXGT8zpC9HzQP5XbUk2_2moyWJoCTL1Uq-Iste5AN9ujNiMXeq-dyGZJxnMNlWCCXqU4vqzDb636AVAnlg=",
     "dataColeta": "21/10/2026, 08:47:19",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792583239311-kz5l1",
@@ -1746,7 +1858,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHXKN7HJfUn4-S0XY4VpeCH_wKN7vxhzQuuU9hwnwfyJ7vQCeWE8uJcAXF5npRJgV5HSU6he25NSJRZWD-Yz72X1s3UQqpGSYcj_8xUqMW-a5aFC7QEj9EftrX1YgJ5s72atQszBS0HQMoEQkBDZyDyvmLMol81ilIM0s619LQJiWDh6yXbaIc8uGLjxFpjJtx3JYcGYnmlox7KSlUCKhmTxiVuHxkzv2-6LoKQGdY_pfUHRYAmogHKdKtKgyA=",
     "dataColeta": "21/10/2026, 08:47:19",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792548930521-roapb",
@@ -1768,7 +1882,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEIt4ofXLmcGtJjj_RJ2SPGy8E12aqGVoYP-o7V6DtfJaAql-mI10Ln98C3PTQH1T5Nfh_6Rg8y1n8U6cFFgJU4FhQAywrqh4fdnIPibqixIgjfieTpaLokQl5XzO1bA-HiPo4O4wWc6Xx9yWnszTp9hraDZRuXW6-YSw--",
     "dataColeta": "20/10/2026, 23:15:30",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1792548930521-kl8uf",
@@ -1790,7 +1906,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFSKPlrvN_Z-hIfzTzMv1w14daV3Igju4-3CnoXGVCVLYAskGrYdsMsj9-BkN3tv6z9V4fY6m3JP_3hIRMFd0usNVkdrT65VuzfosxcOzudj6Iz7v5K0VvyU2BfzYg=",
     "dataColeta": "20/10/2026, 23:15:30",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792541698889-0inr2",
@@ -1801,7 +1919,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEy9RQIubfP1B-OTg7WIUdTIO8IdkLoNu9xsjR9UDNeFfm7xOiHODDxnbdNd1gzdpXfdzlV_--85789Gs39cT4ups51AgrIK3HMPtub4y6QkYmd7zIwprKTt3OxbDToP9aHqv5BnRILzGEkzZZfa3bDiT-SqFbOPhWivJ3sXJnrVXWzFg==",
     "dataColeta": "20/10/2026, 21:14:58",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792538860175-2gs63",
@@ -1922,7 +2042,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFZfvRab_OTnPscKBwS-g4puriZOwWES-xB3UjgwEwErojZFjpSh-P8PjEKNYRi5X_BkgNGl-FdjHgdqz1QfWpLUxbY_UeHxGd8vthPnHNo_26thg67_4vRZTB1PaAg=",
     "dataColeta": "20/10/2026, 13:05:28",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1792512328573-auku5",
@@ -1933,7 +2055,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvAIT7MpXsz-Cf1xnaOEqa5uipb8re-OoJhtmMMkej3svuqxL3U-jvNdtnerTo9BShMpYNRoLriBtHgSm5rf6F9NTDa8oyEbbyXzhKi0tVZ7xWOSxTnJGeSMQ7fFFuRvMWZicZkw==",
     "dataColeta": "20/10/2026, 13:05:28",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792512328573-echc6",
@@ -1955,7 +2079,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFwBziOAODLWtuGQuAgn6410bR7Ry0mcw-ydnofP5uPBK1raWthLZkVo6lg2zWZq69JcPStkAYUBqgLeFUZX1Zon51olRtKYI8PwN8OhNDCwA6fJ704YDgkmpsFyxZARYN4klDhVIu1uKRXuOHJkgVoyMhXFY4oZHegkdo49A-7zZC_mKTIRYC0fJBsjXk00s_fiwgw7iI7uPtOg9XpgHw3jyFjvPxck3CdXT0=",
     "dataColeta": "20/10/2026, 01:13:12",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792469592338-68f0e",
@@ -2032,7 +2158,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH0zPJcRuUvoblLLh28ZCzKWocxxaManGIdIe3vbts4SE9M91a8TeW1Ic7XP1hXilZQzu4kbOmParha9A5UcgJX2oQVRkRhwv53TR5bwYS140HWcit8WjHZH3S8sr3CWS4xd-nLtz_t94t-W1nVLkkHJlezlEwKrxPt-niico5_z51RNWCrrssYePWety9OuYYACF6Rkb56PQYiVdsU5Yhg68=",
     "dataColeta": "19/10/2026, 23:46:52",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1792448173879-uta9k",
@@ -2054,7 +2182,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGkrMyrN7zHlDE5dz6kFUpt29T61ryFvPcRPzuXsr_TDYQbeCV8tmpBjfIB_XaLG0JxtY2tOGzwX2UE9UMYUEqFT51ll1OmFkfeWH1mmsE4so4mVOD-SW1kORnccWci",
     "dataColeta": "19/10/2026, 19:16:13",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792448173879-p9j3h",
@@ -2109,7 +2239,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFw06S0ZDWMMoo51sWmI0ysPUUZa8nWZzd5AZGBf-LIjR18L1CEskTQQ12b79piGnL4faM__DvrmwWxnW6Rt5IrZDjHeeShceOuvgcvCYGX0XEZVrXk_XdafDbkpc63etpxGf6Lfnw2mpC4AYqLtslt9asDY-g4XBrNGv8pQj5uolqst17hKt7RnxfQ6knTVF12eUezEtWWa6M58kz8UB0Xxh-ZyNi6",
     "dataColeta": "19/10/2026, 16:51:54",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792439514281-1wsdd",
@@ -2120,7 +2252,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrCC8O1r73zMYX0Pn-Y9kxqPBM9hscyNq7iC3GQsrNSovnaQTyZP-mePVsyOxYWPms8jf5pIKZzXoUjlw8zwZYtrDRxpnyaWsaaANlQN2DfJODAcFTyLhDSCyEFW2Kkx7txsyONSLISTiaPMlxB__zyGLgw8l35pHTE6PCwYqdkxD-Mr4aT1SYjGlHczlGSun4qfBUjRnJ6T70NDR-cW819T_1",
     "dataColeta": "19/10/2026, 16:51:54",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792379669202-capy4",
@@ -2142,7 +2276,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFHcXfc97hVHxRFmvkPMXe3X9KtCcDOdNjxdDWvUvBaRugTUsW3RZj1vtiGEjvTwGYtwz4qaFhRxX9Uj6LGWTzu08QoWZP1aELdCxTt2Wp8Ji_o5oodJ7f5DIBzXIwWf9POO-gct2GGEsJq4mUXS84NXAUm3kS7MoVPaVylOvCXJoFUCngqyohk7rNuQg14k4NTSPtMRlrjLezNhA==",
     "dataColeta": "18/10/2026, 21:17:00",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792369020609-a3pam",
@@ -2153,7 +2289,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGXU1CFriftqaAFnwL14mU4tVrEvesna82ODXyEsBVH1eTq8VoppzBySxr6cSPhANnfqemiWCpvtnEn0qw5QCOSLy6v5hd0jcsyTLwgL92QHdM8DbAwWBIa0xEg2ppaoFQgIYntHSSr4bfeNzQZ4tL0vWpQ2ZWG3HvH0eyHFhZWnoqmdVs=",
     "dataColeta": "18/10/2026, 21:17:00",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792356618503-p3lbw",
@@ -2197,7 +2335,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFeJ3NSP0x95V0ajwiqVlLZpUz56abO5QrfaXuiCQQiw91qcoyxOhpc-N_NsbpcL2zUudYNJ8xnULHSVR9EJCuTmumuuv6eHh0d9pxxOU3cckCvPzB-cyVm626rCp4OMtBGyPavHBDmZEvs8SJHCPFFSr9eaqyDF0p6xier1r6bT59wQZLdnsNiL0-z6cK_VrvPyhVUg==",
     "dataColeta": "18/10/2026, 01:48:31",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792298911747-e5o99",
@@ -2318,7 +2458,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFVtjA6K7bxYkqRHkqlu1CS-uFE-OZsSyJcPIzueLvPsIcl4oaVLF6rOB25HcnQS4L7zmh1U6pUsHIyveFihJysEngwf5vdDen8CpXyOMKAqm5Mf9TaFUYBrZ1kiaSH6c176SYEkkUdWBPDQvqSNGLsKkaVC9pjNjhEH86SD8putmYV3R9iQrb3Lzk3QkBaXifyEVV0AJ51_8DH9Ju9tC5hPVKxoqr4Dg==",
     "dataColeta": "17/10/2026, 17:21:50",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792268510455-hjzm3",
@@ -2483,7 +2625,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH_wtv5Y7wEdZlJWhFT21zx85M0IuJWM0IyHYBHWZVRLvKNWuRJ82JkS2QajpYeJs3p911H2pnnI2xoBQR09uycBEb8SA8otuiyQz9yTxyXhfkxnc5O0jMCSI-84UER0nLngMUeRm8j2YHjeCQfF1bD45HkUPN7I4KV2_LnetL5Hz0jaTFfkuM8wBbqtI2ucYUlVRgrHIGN418a",
     "dataColeta": "17/10/2026, 10:43:03",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792244584008-ys460",
@@ -2516,7 +2660,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE3M6bPq3HkBjOsJEqyHC7tOGASmBZXXq1U2iREqe34Bx5pVmmhgj56ZloP43uN73RnQjCwNQQr0ixBtl4_4rrh829Rp3-Kb2xlnCzxUmt_rEZNyib8Ddy9M8xJns6a",
     "dataColeta": "16/10/2026, 22:41:31",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792201291146-i8plp",
@@ -2549,7 +2695,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGH8ju9UE9iFWDosrpgqViaYj9MTMTE61Lyd6b1MvDmA2InS_1EUIVATj9ThcPfp987_lhSfRLRyklNZYbJHg_K79jGmOlLjQMtI3Vvdxt25DbFnP-J_AH2LMAdCf-MFjsxBb9FNQDEj5M3EpNgvXiJDQeHuEAwwn18K4m5x7wf14PyI7BlJt1JkxxbodVDyagvAnFyWxknqvwp",
     "dataColeta": "16/10/2026, 19:16:00",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1792186553520-wi385",
@@ -2571,7 +2719,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHHCHog2K8C833aQjlthG0KG3CloH0rYHLohdRqeQy6cB8ZRpjpOT_4iRNGBd4E-ITwBGmtju78yjVF9WunayqOAf3wpjsIjh_jeTDqwZ_dNn0OKjQ2ng8WqUr6o1c8",
     "dataColeta": "15/10/2026, 23:15:18",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792113601608-hfiu6",
@@ -2593,7 +2743,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHUipiesUiV17W5-6AsXFrSkXPqfPxt7R9zmo3ki_TOeRlIwwiy08E4d89Ob5anZVsALsOWC8i3cBUkKj2S-T5hIvsGAmzdxh51JxzCScP14-nkzd_JODGFhoHEtL9MIX-G8nkpaRO7GHS36bQSXtHPizG3M1GcEazsxza2gniQcWp2ogI3OdN0tSDqHiym5mrLW7fivcNEnngr3CmQ63S4aLDC4pM=",
     "dataColeta": "15/10/2026, 22:20:01",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1792113601608-fkx7r",
@@ -2604,7 +2756,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH50ZOyR_Zdg7nyCIXWsgjpCcQl9-VhAeuypMPexBgn8DAEv6bIutDygjCwxFapPdut7ltWvGXzzW6uUx4lQeNHsCLTYp7v9QggNVXD5jAsnM6zSCLKlSQyhMQi8cznbWABiCGEQ1pLeKsU3yUnEqRqbVU95N2E3oQKiuPEnl5JBJQJjCZJ6TtoyUH8L8WQhDCAYixXMOxK",
     "dataColeta": "15/10/2026, 22:20:01",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792106511857-cdlzb",
@@ -2615,7 +2769,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHiSzy1rKie_EWYuolNBGge5t4PK8kJg8CWHrPH8mCIG54HJpHFKcs7wGISWj5ojYxqzWDwN5QuDEBt3V6vObXPz5nlD3n3Ie3pGPFqT7vpMjumTdBG2WaLfcXybd_2zl0mdDQ_NTBFB9DGL-UuPvqFOcsqddfv5K0Vxm58sXmqJfedY6ZpnYNJWdcMhpOPKfTEBTs=",
     "dataColeta": "15/10/2026, 20:21:51",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792106511857-n05or",
@@ -2626,7 +2782,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE1hstc__cMnnuhG7L-o82zJSSurltQnjP9kRlN8IQqA6QbcNoB_59kdUzlJvmKqKgiDYM9NTbksoDxuk3jwrZfRhoP2rQSn640guLA0DOdJjp17rzFLS83F8CMBnJ7vmLs2dQJBO7YpL-61eOvUcBJW-T8U9kFcm5rdhO9Y3D4PgRrCFwdK4dAdA==",
     "dataColeta": "15/10/2026, 20:21:51",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792106511857-8rv34",
@@ -2637,7 +2795,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFkHecjl-JFFr8-_66fR1WgOoqGUTyMUc5X9eetmv-MIsjB9rJ4wVwIp1VvKmrPQNFS5IONePfCkvBvY_YL38dQkU7QiS42-KCT0QOgRq7ewGCVCSwl_5wjyh36K7cMfI-WEr_-rSBRcAAd6NGvZAaFEtsjmZLsLfy1jUWoHG2jfns8PU-IJVazC7LyZtr6uQ1UATEvquAUTdokHwEAe4UBs1eleXDm4ECL8g==",
     "dataColeta": "15/10/2026, 20:21:51",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792106511857-izgfh",
@@ -2648,7 +2808,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHZEzO2AUxGlkrgrgkZf96Xk0kVaGiMIifCUQU_6iUBOUjzeeP6yFKsojdM-446G5VGFswWAeOcIX2IA8WkrrOarjJ1lFJ7eUE4l1AzHOiaQbo_mVZUPJInuIf67fp2amBoZcfBMwY5OJAP2UA91Cl4R00jBdzrwgt3_l9I3dz-hn_f8FBOjTvVmzPMBvtn6TEtZkuiDPCHzyJ9evjFm71sFBcMm07IwWhp",
     "dataColeta": "15/10/2026, 20:21:51",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792106511857-mal5i",
@@ -2703,7 +2865,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjjy8JxISw3oU2YVs7dAr3XF9EPgAxGT_VgMkjSbDCnHUqbxjOLTPBVc6_jfWTOF5_rzkzqVXguv7u_FV2nHuq25f7fmyGAAGjPEWUkCgUtc9MLY7MkcouUdBVAmFzyGE9guVWm75ID014_0CIcp4NF5DzaUFvvDDxdSOZHLnXD31VeO8wq2nZrArJN32iy5bYljPfBlVXHkRpyRYj64rrEMx8L78TpNwcbDd9EWlCRqw=",
     "dataColeta": "14/10/2026, 23:23:17",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Vaga não encontrada"
   },
   {
     "id": "vaga-1792030997826-2k83m",
@@ -2714,7 +2878,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGSLOCItc2dTYtB3y0wuQRQjWfa3uEry-hDVJaBAz-PgpLsDyxOuo-b82C5nBtGHTHawq0uy23VuRw6n3UcRxVz14WXZ2OW8_G1X3nMmv5NZdkeUzqxz4KUxD31IKRx9BU186AoOlORDubklyvmuw==",
     "dataColeta": "14/10/2026, 23:23:17",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Candidaturas encerradas"
   },
   {
     "id": "vaga-1792030073979-qv0ks",
@@ -2747,7 +2913,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE-aXg9amMEf9UnFNKoWjNhc_RT50yALP2h2w0fLjSj9hLNj3ypYZIwgwEVafIaMboVtFf6eQdKgIOt0exsWVh7qoXY4mId4FnyAlPiVhdm--4g2jX0TQN8wSES2cMJ",
     "dataColeta": "14/10/2026, 23:07:53",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1792030073979-b1wa8",
@@ -2780,7 +2948,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmS2v4gsJ3L0nQ0tEN2Ho0RUFxJ76x7dAsBElcNxVxIfXkagukWQ79Pn7r_OUYXfUTBf2IgsMP57fk-1XFVXeQfYgVC2pBP3OBMI2KnY7Hz-GNar1mnS_WgSgsH1S1pqOn-oLrz6NEYB2vMkvZE9JcZCuth8UreZnfU5qhohJuEoB9HgqDvg==",
     "dataColeta": "14/10/2026, 14:58:42",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792000722206-dth5o",
@@ -2791,7 +2961,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEmio7mAZhDYNEyVF3pdi6N3fmNZtlIdDHYvpQ0zjwGgYTaOUcBlDyuUMym1Ft8zsaskyt5PMookUDNsDYWvEN1mgC6Hii4hRa9igTxzKQpl_EueKfnIKUm1tCybmusxFH1VAHqWMk5QOxbH2wDdERrkU5vWUYDde04gZSa-gHrH8tGKEWzXJqntofJ-QKmcTTXUZThvxU=",
     "dataColeta": "14/10/2026, 14:58:42",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1792000722206-82mjs",
@@ -2857,7 +3029,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHfkdSTCbPX9ZICd-jiGCdKnkGZzThw-cp2UvktAuqaz_Kh-4VmbFbGmbO-yKNIxQrwK3Z5cD0OPWpFQLJ3-4_CYwuaMVJYaiGUyt_K7nQ8MLR4yGQckF0Z_lYzXsfvQrmA-gNLChcNH_69aLkOUph1gPXv6iKbQXOTudTtvNZk2PiAOmXGXs4Jnq4wZQSp1puh96Xeft99SevgQT6t",
     "dataColeta": "13/10/2026, 21:24:00",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1791937440078-nzlkh",
@@ -2945,7 +3119,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGNVRCVkR58VZBq3u4U8jPuWrAyJ2F3tYeGe3dhzMSIdinDDTIcu2I3WshJ_LktR2qIf67jB11hYB2WP7B1t4yenG0D36YvViQczAEntZoaQdpalQ6RzR8aUKqoG2VvUFkydxvm2GuUd1mSxhSIQjMa1HICGXzyYRy1ImyJQ36BlIs4_JGgxiWEMvxrEAPKC_QHUTKRJSKdTUtAKQ==",
     "dataColeta": "13/10/2026, 18:19:39",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1791926379189-f9qm0",
@@ -3033,7 +3209,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE945JinUfB_VQz_rCoNTd4xkGt7O2FpMaU-w3f5I_QRBZe8iaLVXbd_JRURfnccwiw64pUmqkXh3vvJCTK50-5UoFxs6Fj28YWp10egMwR--purOpVtTXzxWc9QD36BZ9HdHwiyq_MubIwFLVlurVqoijp71xeYcaecnGOrG0i9ZNO26YB4w7eGe-OEZLqeMxAVPxcR6Jc23hbMMLekyczJ2m42WXaPsJJBcnc9Q==",
     "dataColeta": "12/10/2026, 22:29:28",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Página não encontrada (404)"
   },
   {
     "id": "vaga-1791854968802-04co4",
@@ -3154,7 +3332,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGS58OOAiSxW3RTW79IcV9dHHxQb6zNmR8hk01XIExYqznWbu8j6I1_XH8ZMsvvkCVjmDz1X7hpilKEGgnxzygNZEwaLJJIk2IV11nlAu0yj1kyr7butnO5Mh-agHDM",
     "dataColeta": "12/10/2026, 18:21:43",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1791836303972-0tl9o",
@@ -3165,7 +3345,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEmBc2tE7jiBijWiKn7mq6c8xl9f8hWnc8u7xuk5tBkDLojg7yQWcpdWsAZV7xNlTNb3rWF0gSBPu92KvDkmFvSCR791EtsX8z8d71bgc5NrqSN4voWdQ20g9A0OTX7",
     "dataColeta": "12/10/2026, 17:18:23",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1791836303972-wxx6i",
@@ -3176,7 +3358,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFvJE0tmelgpf-m4FunkEhSLsFZDEmis3uKVotGHoAdIxKcMxXq5bagC-kG_elyKhaJVYwRoIPKyCz7t2hRQsNcSC8e9unsdyPTeQhOHQ7B7Mvt5p3rXZBozYyAliGr",
     "dataColeta": "12/10/2026, 17:18:23",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1791836303972-8wmep",
@@ -3253,7 +3437,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEVaUCEws8v6ntmt8FXRphRSyxBI6eOfx9S2POFrkOxYUN54CzoOicJeOdWpMur5Q_2S3I9dMkDyiUrQVT7qEqwslVYQYxh9KEoxm9R-Jk0xpp6mfGxrxe6SFC1JBPuMnZGoAi0c4UnNAl-sLjtX3lJqV3N98bgqwbPl4nm",
     "dataColeta": "12/10/2026, 14:37:25",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy: Texto de vaga encerrada ou inexistente detectado"
   },
   {
     "id": "vaga-1791826645201-nywsn",
@@ -3275,7 +3461,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHbo9JLDNT1Sei5DFIrELWpoMxsumvP8KP7fEmfOATzf4xn-tAI2S3aw06cANgfovquNBf1YzQQwjEo3M_YiOZJhMKtfnokdj1N84JEndmDfG_vM_YAAAklwh1t2g==",
     "dataColeta": "12/10/2026, 14:37:25",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Gupy: Texto de vaga encerrada ou inexistente detectado"
   },
   {
     "id": "vaga-1791826645201-tzrn6",
@@ -3297,7 +3485,9 @@ window.BANCO_VAGAS = [
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFBHIpykYriZlG4N41W9-vXTmQLJcjn18-bJalSNv9G2C0Rx85MxcK-QzmReXgPXNPi56LefyZDxx9JPDuKBFj-tQ5n0YVUOtBFqUog_6Ui4QKbtfEY8PkKCxnH9JAq7Fr_SntBJLzMPMx0OPHn697hB60cNIkYCnBpj4DUs6Na6l6tHjSASwGKBksE3reK5Ghn3Om-4YZcVsMnTl4cDKSpow==",
     "dataColeta": "12/10/2026, 12:03:24",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "01/11/2026, 14:23:47",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1791817404172-8z207",

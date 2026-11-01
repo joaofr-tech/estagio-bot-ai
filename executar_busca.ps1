@@ -42,6 +42,25 @@ if (Test-Path $configFile) {
     }
 }
 
+# Carregar regras de mismatch e anti-padroes aprendidos
+$mismatchFile = Join-Path $PSScriptRoot "regras_mismatch.json"
+$regrasExclusaoTexto = ""
+if (Test-Path $mismatchFile) {
+    try {
+        $mismatchData = Get-Content $mismatchFile -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($mismatchData.termosNegativos -and $mismatchData.termosNegativos.Count -gt 0) {
+            $termosStr = ($mismatchData.termosNegativos -join ", ")
+            $regrasExclusaoTexto += "`n   - TERMOS E CARGOS ESTRITAMENTE PROIBIDOS (MISMATCH): $termosStr"
+        }
+        if ($mismatchData.regrasExclusao -and $mismatchData.regrasExclusao.Count -gt 0) {
+            $regrasStr = ($mismatchData.regrasExclusao | ForEach-Object { "     * $_" }) -join "`n"
+            $regrasExclusaoTexto += "`n   - REGRAS NEGATIVAS APRENDIDAS PELO HISTORICO DE REJEICOES:`n$regrasStr"
+        }
+    } catch {
+        Add-Content -Path $logPath -Value "Aviso: Falha ao ler regras_mismatch.json."
+    }
+}
+
 $prompt = @"
 Voce e o Agente Especialista em Busca de Estagios de TI do $candidato.
 Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SEM DUPLICIDADES:
@@ -50,10 +69,11 @@ Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SE
    - Candidato: $candidato, estudante do $periodo.
    - Areas de Interesse: $areas.
    - Restricao Rigorosa de Horario: $candidato estuda regularmente no turno da $turnoFaculdade. Portanto, a vaga DEVE aceitar estagio no turno: $turnosDisponiveis.
-   - Modalidades e Localizacao aceitas: $modalidadesAceitas.
+   - Modalidades e Localizacao aceitas: $modalidadesAceitas.$regrasExclusaoTexto
 
 2. VAGAS RECENTES & DETALHES DE INSCRICAO:
    - Priorize vagas publicadas RECENTEMENTE em plataformas ativas como Gupy, LinkedIn Jobs, Lever, Greenhouse, Catho, Vagas.com ou sites oficiais das empresas.
+   - FILTRO RIGOROSO DE MISMATCH: NUNCA traga vagas que se enquadrem nos termos proibidos ou regras negativas acima.
    - Forneca a URL real e direta da pagina de candidatura / inscricao (ex: https://empresa.gupy.io/job/... ou https://linkedin.com/jobs/view/...).
    - Capture o prazo ou status da inscricao (ex: 'Inscricoes Abertas', 'Prazo: 15/11', 'Fluxo continuo').
    - Identifique com clareza o turno exigido e a localizacao exata da vaga.
@@ -89,3 +109,25 @@ if (Test-Path $vagasJson) {
 } else {
     node registrar_log.js "SEM_VAGAS" $duration "Varredura realizada. Nenhuma vaga nova nesta rodada."
 }
+
+# Auditoria automatica de encerramento em vagas abertas (LinkedIn, Gupy, portais)
+Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Auditando status de encerramento das vagas em aberto..."
+node verificar_vagas_encerradas.js 30 >> $logPath 2>&1
+
+# Sincronizacao automatica com GitHub Pages
+Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Sincronizando dados com o GitHub Pages..."
+try {
+    Copy-Item -Path (Join-Path $PSScriptRoot "dashboard.html") -Destination (Join-Path $PSScriptRoot "index.html") -Force
+    git -C $PSScriptRoot add banco_vagas.* historico_execucoes.* regras_mismatch.* index.html dashboard.html
+    $pendingChanges = git -C $PSScriptRoot status --porcelain
+    if ($pendingChanges) {
+        git -C $PSScriptRoot commit -m "Auto: atualização diária de vagas e métricas [skip ci]"
+        git -C $PSScriptRoot push origin main
+        Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] GitHub Pages atualizado com sucesso via git push!"
+    } else {
+        Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Repositorio ja sincronizado."
+    }
+} catch {
+    Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Falha na sincronizacao com GitHub Pages: $_"
+}
+

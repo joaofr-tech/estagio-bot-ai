@@ -1,0 +1,17 @@
+{
+  "motivosFrequentes": {},
+  "termosNegativos": [
+    "suporte técnico",
+    "helpdesk",
+    "service desk",
+    "telemarketing",
+    "sdr",
+    "vendas"
+  ],
+  "regrasExclusao": [
+    "Vagas com foco em Suporte Técnico / Help Desk / Manutenção de Hardware",
+    "Vagas comerciais, prospecção SDR ou vendas de software",
+    "Vagas que exijam experiência prévia de pleno ou sênior para estagiário"
+  ],
+  "descartadas": []
+}

@@ -1,5 +1,19 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "01/11/2026, 15:11:28",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "01/11/2026, 14:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "01/11/2026, 13:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -484,43 +498,6 @@ window.HISTORICO_EXECUCOES = [
         "modalidade": "100% Remoto",
         "requisitos": "Cursando Ensino Superior em Análise de Dados, Engenharia de Software ou áreas afins (a partir do 2º ano); conhecimentos em bancos de dados relacionais e SQL; noções de lógica de programação (Python); noções de QGIS; carga horária de 6h diárias (compatível com estudos pela manhã).",
         "link": "https://geopixel.gupy.io/jobs/12775883"
-      }
-    ]
-  },
-  {
-    "timestamp": "27/10/2026, 20:32:05",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1238,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "MadeiraMadeira",
-        "cargo": "Estágio em AI Engineering",
-        "modalidade": "100% Remoto (Brasil)",
-        "requisitos": "Cursando superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins (compatível com 3º período); conhecimentos em Python (scripts e automações), SQL básico e consumo de APIs REST/webhooks; interesse prático em LLMs, IA Generativa e criação de agentes de IA; noções de fluxos de automação no N8N, Git e interfaces web (React/dashboards); carga horária flexível de 6h diárias (30h semanais) em modelo 100% remoto, compatível com o turno matutino de estudos; benefícios completos (cartão Flash para VA/VR, planos médico e odontológico, seguro de vida, auxílio educação e Wellhub).",
-        "link": "https://www.linkedin.com/jobs/view/4483686085"
-      },
-      {
-        "empresa": "Drogaria Araujo S/A",
-        "cargo": "Estágio em TI - OMS",
-        "modalidade": "Belo Horizonte - MG (Presencial / Centro)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Sistemas de Informação, Ciência da Computação ou afins (a partir do 3º/4º período); apoio à área de negócios na extração de dados, geração de relatórios e automações; conhecimentos desejáveis em Python, Java (Spring Boot), dados e inteligência artificial; horário no turno da tarde (parcial tardes) ou carga horária flexível de 6h diárias (segunda a sexta-feira); bolsa-auxílio de R$ 1.800,00 + vale-transporte e seguro de vida.",
-        "link": "https://www.linkedin.com/jobs/view/4483161448"
-      }
-    ]
-  },
-  {
-    "timestamp": "27/10/2026, 19:29:37",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1091,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "iFood",
-        "cargo": "Programa de Estágio - GenAI (Trilha AI Engineer)",
-        "modalidade": "100% Remoto (Brasil)",
-        "requisitos": "Cursando superior em Engenharia de Software, Ciência da Computação ou afins com formatura entre jul/2027 e jan/2029 (compatível com 3º período); conhecimentos em desenvolvimento de software, integração de soluções com IA/LLMs, APIs e automações; carga horária de 30h semanais (6h/dia) com modelo flexível/vespertino; bolsa-auxílio de R$ 5.200 + benefícios.",
-        "link": "https://job-boards.greenhouse.io/ifoodcarreiras/jobs/8901054002"
       }
     ]
   }
