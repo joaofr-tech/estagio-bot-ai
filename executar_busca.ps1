@@ -114,6 +114,10 @@ if (Test-Path $vagasJson) {
 Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Auditando status de encerramento das vagas em aberto..."
 node verificar_vagas_encerradas.js 30 >> $logPath 2>&1
 
+# Verificacao de e-mails para acoes pendentes (Testes / Entrevistas)
+Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Verificando e-mails para acoes pendentes (testes/entrevistas)..."
+node verificar_emails.js >> $logPath 2>&1
+
 # Sincronizacao automatica com GitHub Pages
 Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Sincronizando dados com o GitHub Pages..."
 try {

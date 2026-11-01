@@ -76,6 +76,19 @@ const server = http.createServer((req, res) => {
     return res.end(JSON.stringify(carregarRegrasMismatch()));
   }
 
+  // API: Disparar verificação de e-mails sob demanda
+  if (req.method === 'POST' && pathname === '/api/verificar-emails') {
+    const { verificarCaixaEntrada } = require('./verificar_emails');
+    verificarCaixaEntrada().then(resultado => {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(resultado));
+    }).catch(err => {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ sucesso: false, erro: err.message }));
+    });
+    return;
+  }
+
   // Servir arquivos estáticos (dashboard.html como raiz)
   let filePath = path.join(PROJECT_DIR, pathname === '/' ? 'dashboard.html' : pathname);
 

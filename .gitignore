@@ -3,6 +3,7 @@ node_modules/
 
 # Variaveis de ambiente sensiveis
 .env
+email_config.json
 
 # Logs e arquivos temporarios de execucao
 log_execucoes.txt

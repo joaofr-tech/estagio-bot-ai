@@ -1,0 +1,9 @@
+{
+  "email": "seu-email@gmail.com",
+  "appPassword": "abcd efgh ijkl mnop",
+  "host": "imap.gmail.com",
+  "port": 993,
+  "tls": true,
+  "intervaloMinutos": 60,
+  "ultimoCheck": null
+}

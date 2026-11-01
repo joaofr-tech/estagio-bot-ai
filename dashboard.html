@@ -2353,6 +2353,21 @@
           ? `Meta diária batida com sucesso! (${aplicadasHoje} candidaturas confirmadas hoje)` 
           : `${aplicadasHoje} de 3 candidaturas confirmadas hoje`;
       }
+
+      // Controle do Banner de Ações Urgentes (Testes / Entrevistas)
+      const pendentesGeral = allJobs.filter(j => j.status === 'acao_pendente');
+      const bannerUrgente = document.getElementById('banner-acao-urgente');
+      if (bannerUrgente) {
+        if (pendentesGeral.length > 0) {
+          bannerUrgente.style.display = 'block';
+          const bannerDesc = document.getElementById('banner-acao-desc');
+          if (bannerDesc) {
+            bannerDesc.innerText = `Você possui ${pendentesGeral.length} processo(s) com teste técnico ou entrevista aguardando sua resposta.`;
+          }
+        } else {
+          bannerUrgente.style.display = 'none';
+        }
+      }
     }
 
     function setupSearch01() {
@@ -2401,7 +2416,7 @@
     // =============================================================
     function switchSubTab02(tabName) {
       currentSubTab02 = tabName;
-      ['andamento', 'aplicadas', 'salvas', 'encerradas', 'descartadas'].forEach(t => {
+      ['pendentes', 'andamento', 'aplicadas', 'salvas'].forEach(t => {
         const btn = document.getElementById(`btn-subtab-${t}`);
         if (btn) btn.classList.toggle('active', t === tabName);
       });
@@ -2411,35 +2426,43 @@
     function renderScreen02() {
       const container = document.getElementById('table-candidaturas');
 
+      const pendentesJobs = allJobs.filter(j => j.status === 'acao_pendente');
       const andamentoJobs = allJobs.filter(j => j.status === 'em_andamento');
       const aplicadasJobs = allJobs.filter(j => j.status === 'aplicada');
       const salvasJobs = allJobs.filter(j => j.starred && j.status !== 'encerrada' && j.status !== 'descartada');
-      const encerradasJobs = allJobs.filter(j => j.status === 'encerrada');
-      const descartadasJobs = allJobs.filter(j => j.status === 'descartada');
 
+      const countPendentes = document.getElementById('count-subtab-pendentes');
       const countAndamento = document.getElementById('count-subtab-andamento');
       const countAplicadas = document.getElementById('count-subtab-aplicadas');
       const countSalvas = document.getElementById('count-subtab-salvas');
-      const countEncerradas = document.getElementById('count-subtab-encerradas');
-      const countDescartadas = document.getElementById('count-subtab-descartadas');
 
+      if (countPendentes) countPendentes.innerText = `(${pendentesJobs.length})`;
       if (countAndamento) countAndamento.innerText = `(${andamentoJobs.length})`;
       if (countAplicadas) countAplicadas.innerText = `(${aplicadasJobs.length})`;
       if (countSalvas) countSalvas.innerText = `(${salvasJobs.length})`;
-      if (countEncerradas) countEncerradas.innerText = `(${encerradasJobs.length})`;
-      if (countDescartadas) countDescartadas.innerText = `(${descartadasJobs.length})`;
+
+      // Se houver ações pendentes e a aba atual for 'andamento' vazia, focar em 'pendentes'
+      if (currentSubTab02 === 'andamento' && andamentoJobs.length === 0 && pendentesJobs.length > 0) {
+        currentSubTab02 = 'pendentes';
+        ['pendentes', 'andamento', 'aplicadas', 'salvas'].forEach(t => {
+          const btn = document.getElementById(`btn-subtab-${t}`);
+          if (btn) btn.classList.toggle('active', t === 'pendentes');
+        });
+      }
 
       let targetList = [];
+      if (currentSubTab02 === 'pendentes') targetList = pendentesJobs;
       if (currentSubTab02 === 'andamento') targetList = andamentoJobs;
       if (currentSubTab02 === 'aplicadas') targetList = aplicadasJobs;
       if (currentSubTab02 === 'salvas') targetList = salvasJobs;
-      if (currentSubTab02 === 'encerradas') targetList = encerradasJobs;
-      if (currentSubTab02 === 'descartadas') targetList = descartadasJobs;
 
       if (targetList.length === 0) {
         let msgTitle = "Nenhuma candidatura nesta seção";
         let msgDesc = "Clique em 'Inscrição ↗' em qualquer vaga aberta da Tela 01 para iniciar.";
-        if (currentSubTab02 === 'andamento') {
+        if (currentSubTab02 === 'pendentes') {
+          msgTitle = "Nenhum teste ou entrevista pendente!";
+          msgDesc = "O robô monitora sua caixa de entrada a cada 1 hora. Quando uma empresa convocar para testes ou agendamento, ela aparecerá aqui com prazo e link direto.";
+        } else if (currentSubTab02 === 'andamento') {
           msgTitle = "Nenhuma inscrição em andamento no momento";
           msgDesc = "Ao clicar em 'Inscrição ↗' na Tela 01, a vaga vem para cá para você preenchê-la e depois confirmar.";
         } else if (currentSubTab02 === 'aplicadas') {
@@ -2448,12 +2471,6 @@
         } else if (currentSubTab02 === 'salvas') {
           msgTitle = "Nenhuma vaga favoritada";
           msgDesc = "Clique no ícone de estrela (★) para salvar oportunidades interessantes.";
-        } else if (currentSubTab02 === 'encerradas') {
-          msgTitle = "Nenhuma vaga encerrada catalogada";
-          msgDesc = "Todas as vagas ativas no radar ainda estão aceitando inscrições.";
-        } else if (currentSubTab02 === 'descartadas') {
-          msgTitle = "Nenhuma vaga descartada como mismatch";
-          msgDesc = "Ao encontrar vagas que não combinam com seu perfil, descarte-as para o robô aprender a não trazer mais vagas desse tipo.";
         }
 
         container.innerHTML = `
@@ -2560,6 +2577,29 @@
       renderScreen05();
     }
 
+    function concluirAcaoPendente(canonicalKey) {
+      const store = getUserStore();
+      const current = store[canonicalKey] || {};
+      
+      current.status = 'aplicada';
+      current.etapaConcluida = true;
+      current.dataConclusaoEtapa = new Date().toLocaleString('pt-BR');
+      store[canonicalKey] = current;
+      saveUserStore(store);
+
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        job.status = 'aplicada';
+        job.etapaConcluida = true;
+      }
+
+      showToast('Etapa concluída com sucesso! Vaga arquivada em "Aplicadas / Concluídas".');
+      updateGlobalBadges();
+      renderScreen01();
+      renderScreen02();
+      renderScreen05();
+    }
+
     function moverDeVoltaParaAbertas(canonicalKey) {
       const store = getUserStore();
       const current = store[canonicalKey] || {};
@@ -2653,7 +2693,27 @@
           </div>
         `;
       } else if (contextScreen === 'screen02') {
-        if (currentSubTab02 === 'andamento') {
+        if (currentSubTab02 === 'pendentes') {
+          const det = job.detalhesAcao || {};
+          const tipoStr = det.tipo || 'Ação Necessária';
+          const prazoStr = det.prazo ? `Prazo: ${det.prazo}` : 'Prazo a definir';
+          const linkStr = det.link && det.link !== '#' ? det.link : (job.link || '#');
+          const isEntrevista = tipoStr.toLowerCase().includes('entrevista');
+
+          actionButtons = `
+            <div style="display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-end;">
+              <div style="display: flex; gap: 0.4rem;">
+                <button class="btn-action-ink" onclick="event.stopPropagation(); window.open('${linkStr}', '_blank')" style="background: #92400e; border-color: #78350f;">
+                  <span>${isEntrevista ? 'Agendar Entrevista ↗' : 'Fazer Teste ↗'}</span>
+                </button>
+                <button class="btn-action-ink btn-confirm-success" onclick="event.stopPropagation(); concluirAcaoPendente('${job.canonicalKey}')" title="Marcar etapa como concluída">
+                  <span>Concluído ✓</span>
+                </button>
+              </div>
+              <span class="mono" style="font-size: 0.65rem; color: #b45309; font-weight: 600;">⚡ ${prazoStr}</span>
+            </div>
+          `;
+        } else if (currentSubTab02 === 'andamento') {
           let tempoDecorridoStr = "Iniciada recentemente";
           if (job.inicioCandidatura) {
             const min = Math.max(1, Math.round((Date.now() - job.inicioCandidatura) / 60000));
@@ -2723,6 +2783,7 @@
               <span class="tag-badge ${tagClass}">📍 ${tagLabel}</span>
               <span class="tag-badge turno">⏱️ ${job.turno || 'Tarde / Flexível'}</span>
               <span class="tag-badge inscricao">📄 ${job.prazo || 'Inscrições Abertas'}</span>
+              ${job.status === 'acao_pendente' ? `<span class="tag-badge" style="background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; font-weight: 600;">⚡ ${job.detalhesAcao ? job.detalhesAcao.tipo : 'Ação Pendente'}</span>` : ''}
               ${job.status === 'em_andamento' ? '<span class="tag-badge andamento">⏳ Em Andamento</span>' : ''}
               ${job.status === 'aplicada' ? (job.candidaturaExterna ? '<span class="tag-badge applied">✓ Aplicada por fora</span>' : '<span class="tag-badge applied">✓ Aplicada</span>') : ''}
               ${job.status === 'encerrada' ? `<span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">❌ Encerrada: ${job.motivoEncerramento || 'Inscrições encerradas'}</span>` : ''}
@@ -3374,14 +3435,21 @@
     // =============================================================
     function updateGlobalBadges() {
       const openCount = allJobs.filter(j => j.status === 'para_aplicar').length;
-      const candCount = allJobs.filter(j => j.status === 'em_andamento' || j.status === 'aplicada').length;
+      const pendentesCount = allJobs.filter(j => j.status === 'acao_pendente').length;
+      const candCount = allJobs.filter(j => j.status === 'em_andamento' || j.status === 'aplicada' || j.status === 'acao_pendente').length;
 
       const bAbertas = document.getElementById('badge-nav-abertas');
       const bCand = document.getElementById('badge-nav-candidaturas');
       const bRuns = document.getElementById('badge-nav-runs');
 
       if (bAbertas) bAbertas.innerText = openCount;
-      if (bCand) bCand.innerText = candCount;
+      if (bCand) {
+        if (pendentesCount > 0) {
+          bCand.innerHTML = `${candCount} <span style="color:#b45309; font-weight:bold;">⚡${pendentesCount}</span>`;
+        } else {
+          bCand.innerText = candCount;
+        }
+      }
       if (bRuns) bRuns.innerText = executionData.length;
     }
 
@@ -3415,7 +3483,10 @@
         jaApliqueiBtn.style.display = (job.status === 'aplicada' || job.status === 'encerrada') ? 'none' : 'inline-flex';
       }
 
-      if (job.status === 'em_andamento') {
+      if (job.status === 'acao_pendente') {
+        const isEntrevista = job.detalhesAcao && job.detalhesAcao.tipo && job.detalhesAcao.tipo.includes('Entrevista');
+        applyBtn.innerHTML = `<span>${isEntrevista ? 'Agendar Entrevista ↗' : 'Acessar Teste Técnico ↗'}</span>`;
+      } else if (job.status === 'em_andamento') {
         applyBtn.innerHTML = '<span>Confirmar Candidatura Concluída ✓</span>';
       } else if (job.status === 'aplicada') {
         applyBtn.innerHTML = '<span>Reabrir Inscrição Oficial ↗</span>';
@@ -3439,7 +3510,10 @@
 
     function iniciarInscricaoModal() {
       if (!activeModalJob) return;
-      if (activeModalJob.status === 'em_andamento') {
+      if (activeModalJob.status === 'acao_pendente') {
+        const link = (activeModalJob.detalhesAcao && activeModalJob.detalhesAcao.link) ? activeModalJob.detalhesAcao.link : activeModalJob.link;
+        if (link && link !== '#') window.open(link, '_blank');
+      } else if (activeModalJob.status === 'em_andamento') {
         confirmarCandidaturaConcluida(activeModalJob.canonicalKey);
       } else {
         iniciarInscricao(activeModalJob.canonicalKey, activeModalJob.link);
