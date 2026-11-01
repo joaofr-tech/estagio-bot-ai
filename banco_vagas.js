@@ -8,7 +8,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4485341251",
     "dataColeta": "30/10/2026, 17:37:01",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "aplicada",
+    "candidaturaExterna": true,
+    "dataAplicacao": "01/11/2026, 11:51:41"
   },
   {
     "id": "vaga-1793392621169-9w76n",
@@ -159,7 +161,8 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4483877721",
     "dataColeta": "28/10/2026, 20:29:32",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "aplicada",
+    "candidaturaExterna": true
   },
   {
     "id": "vaga-1793216233457-effje",

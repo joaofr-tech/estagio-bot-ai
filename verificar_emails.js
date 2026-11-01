@@ -60,27 +60,25 @@ function normalizar(texto) {
     .trim();
 }
 
-// Termos que indicam recibos meramente informativos (DEVE DESCARTAR)
-const TERMOS_IGNORAR = [
+// Termos que indicam recibos meramente informativos de inscrição recebida
+const TERMOS_CONFIRMACAO_INSCRICAO = [
   'recebemos sua candidatura',
+  'candidatura recebida',
   'candidatura enviada com sucesso',
   'inscricao confirmada',
   'sua candidatura foi aceita',
   'candidatura realizada',
   'obrigado por se candidatar',
   'obrigado por seu interesse',
-  'agradecemos sua participacao',
-  'vagas recomendadas para voce',
-  'vagas similares',
-  'alertas de vagas'
+  'agradecemos sua participacao'
 ];
 
-// Termos que indicam AÇÃO REAL (DEVE CAPTURAR)
-const GATILHOS_ACAO = [
-  { tipo: 'Teste Técnico / Desafio', termos: ['teste tecnico', 'hackerrank', 'gupy testes', 'desafio tecnico', 'teste online', 'avaliacao tecnica', 'fit cultural', 'mindsight', 'codility'] },
-  { tipo: 'Entrevista / Agendamento', termos: ['convite para entrevista', 'agendamento de entrevista', 'calendly.com', 'google meet', 'microsoft teams', 'bate-papo com', 'entrevista com gestor', 'entrevista com rh'] },
-  { tipo: 'Avanço de Fase', termos: ['voce avancou', 'proxima etapa', 'parabens! voce foi selecionado para a etapa', 'etapa seguinte', 'aprovado para'] },
-  { tipo: 'Formulário / Dados Complementares', termos: ['formulario complementar', 'preenchimento obrigatorio', 'envio de documentos', 'informacoes adicionais necessarias'] }
+// Termos que indicam ação imediata e convocação real
+const GATILHOS_ACAO_IMEDIATA = [
+  { tipo: 'Teste Técnico / Desafio', termos: ['convite para teste', 'realize o teste', 'faca seu teste', 'seu teste esta disponivel', 'teste liberado', 'desafio tecnico liberado', 'link do teste', 'hackerrank.com/test', 'mindsight', 'codility'] },
+  { tipo: 'Entrevista / Agendamento', termos: ['convite para entrevista', 'agendamento de entrevista', 'escolha um horario', 'calendly.com/', 'agende sua entrevista', 'entrevista com gestor', 'entrevista tecnica agendamento'] },
+  { tipo: 'Avanço de Fase', termos: ['voce avancou para a fase', 'parabens! voce foi selecionado para a etapa seguinte', 'proxima etapa: teste', 'proxima etapa: entrevista'] },
+  { tipo: 'Formulário / Dados Complementares', termos: ['preenchimento obrigatorio', 'envio de documentos pendente', 'formulario complementar obrigatorio'] }
 ];
 
 /**
@@ -89,30 +87,49 @@ const GATILHOS_ACAO = [
 function analisarConteudoEmail(subject, textBody, htmlBody, from) {
   const normSubject = normalizar(subject);
   const normBody = normalizar(textBody || '');
-  const combined = `${normSubject} ${normBody}`;
+  const combined = `${normSubject} \n ${normBody}`;
 
-  // 1. Checar se é recibo passivo
-  const ehReciboPassivo = TERMOS_IGNORAR.some(t => normSubject.includes(t) || combined.includes(t));
-  
-  // 2. Checar se tem gatilho de ação concreta
+  // 1. Tentar identificar empresa no remetente ou assunto
+  let empresaIdentificada = '';
+  const gupyMatch = subject.match(/(.+?)\s+via\s+gupy/i) || from.match(/"?([^"<]+)"?\s*<.*gupy/i);
+  if (gupyMatch) {
+    empresaIdentificada = gupyMatch[1].trim();
+  } else {
+    const subjectParts = subject.split(/[-–—:|]/);
+    if (subjectParts.length > 1) {
+      empresaIdentificada = subjectParts[0].trim();
+    }
+  }
+
+  // 2. Checar se é uma chamada para AÇÃO REAL IMEDIATA
   let acaoDetectada = null;
-  for (const g of GATILHOS_ACAO) {
+  for (const g of GATILHOS_ACAO_IMEDIATA) {
     if (g.termos.some(t => combined.includes(t))) {
       acaoDetectada = g.tipo;
       break;
     }
   }
 
-  // Se for apenas recibo passivo sem nenhuma ação de teste/entrevista, ignorar!
-  if (ehReciboPassivo && !acaoDetectada) {
-    return null;
+  // 3. Checar se é recibo de candidatura confirmada (sem ação necessária agora)
+  const ehConfirmacaoInscricao = TERMOS_CONFIRMACAO_INSCRICAO.some(t => normSubject.includes(t) || combined.includes(t));
+
+  // Se o e-mail disser "não precisa se preocupar" ou for apenas aviso de recebimento sem teste ativo
+  const avisoSemAcao = combined.includes('nao precisa se preocupar') || combined.includes('vamos te atualizando') || combined.includes('em breve entraremos em contato');
+  
+  if (ehConfirmacaoInscricao && (avisoSemAcao || !acaoDetectada)) {
+    return {
+      tipoEvento: 'CONFIRMACAO_CANDIDATURA',
+      empresaIdentificada,
+      resumo: subject
+    };
   }
 
+  // Se não detectou ação imediata, ignorar (alertas, newsletters, recibos passivos)
   if (!acaoDetectada) {
     return null;
   }
 
-  // 3. Extrair link de ação relevante (HackerRank, Gupy, Calendly, Meet, Teams, Forms)
+  // 4. Extrair link de ação relevante (HackerRank, Gupy, Calendly, Meet, Teams, Forms)
   const fullContent = `${textBody || ''} ${htmlBody || ''}`;
   const linkRegex = /(https?:\/\/[^\s<>"']+)/gi;
   const links = fullContent.match(linkRegex) || [];
@@ -121,7 +138,6 @@ function analisarConteudoEmail(subject, textBody, htmlBody, from) {
   const linksPrioritarios = links.filter(l => {
     const lLower = l.toLowerCase();
     return lLower.includes('hackerrank.com') ||
-           lLower.includes('gupy.io') ||
            lLower.includes('calendly.com') ||
            lLower.includes('meet.google.com') ||
            lLower.includes('teams.microsoft.com') ||
@@ -134,7 +150,7 @@ function analisarConteudoEmail(subject, textBody, htmlBody, from) {
     linkAcao = linksPrioritarios[0].replace(/[.,;!)]+$/, '');
   }
 
-  // 4. Extrair prazo (Ex: "até 05/11", "prazo de 3 dias", "até às 18h do dia 04/11")
+  // 5. Extrair prazo (Ex: "até 05/11", "prazo de 3 dias", "até às 18h do dia 04/11")
   let prazoDetectado = 'Não especificado';
   const prazoMatch = fullContent.match(/at[ée]\s+(\d{1,2}[\/\-\.]\d{1,2}(?:[\/\-\.]\d{2,4})?)/i) ||
                      fullContent.match(/prazo\s+de\s+(\d+\s+dias)/i) ||
@@ -143,21 +159,8 @@ function analisarConteudoEmail(subject, textBody, htmlBody, from) {
     prazoDetectado = prazoMatch[0].trim();
   }
 
-  // 5. Tentar identificar empresa no remetente ou assunto
-  let empresaIdentificada = '';
-  // Se for da Gupy: ex "Empresa Tal via Gupy"
-  const gupyMatch = subject.match(/(.+?)\s+via\s+gupy/i) || from.match(/"?([^"<]+)"?\s*<.*gupy/i);
-  if (gupyMatch) {
-    empresaIdentificada = gupyMatch[1].trim();
-  } else {
-    // Tenta pegar antes de hífen ou traço no assunto
-    const subjectParts = subject.split(/[-–—:|]/);
-    if (subjectParts.length > 1) {
-      empresaIdentificada = subjectParts[0].trim();
-    }
-  }
-
   return {
+    tipoEvento: 'ACAO_PENDENTE',
     acaoDetectada,
     linkAcao,
     prazoDetectado,
@@ -225,8 +228,6 @@ async function verificarCaixaEntrada() {
       const analise = analisarConteudoEmail(subject, text, html, from);
 
       if (analise) {
-        registrarLog(`⚡ AÇÃO DETECTADA: [${analise.acaoDetectada}] - Assunto: "${subject}"`);
-        
         // Localizar a vaga correspondente no banco
         let vagaEncontrada = null;
         if (analise.empresaIdentificada) {
@@ -248,42 +249,59 @@ async function verificarCaixaEntrada() {
 
         const dataRecebimento = parsed.date ? parsed.date.toLocaleString('pt-BR') : new Date().toLocaleString('pt-BR');
 
-        if (vagaEncontrada) {
-          vagaEncontrada.status = 'acao_pendente';
-          vagaEncontrada.detalhesAcao = {
-            tipo: analise.acaoDetectada,
-            link: analise.linkAcao || vagaEncontrada.link,
-            prazo: analise.prazoDetectado,
-            assunto: subject,
-            dataRecebimento
-          };
-          acoesAtualizadas++;
-          registrarLog(`-> Vaga vinculada com sucesso: "${vagaEncontrada.cargo}" na empresa "${vagaEncontrada.empresa}"`);
-        } else {
-          // Processo externo não cadastrado: criar card de processo ativo para o candidato não perder
-          const novoId = `processo-email-${Date.now()}`;
-          const empresaNome = analise.empresaIdentificada || from.split('@')[0] || 'Empresa Externa';
-          banco.unshift({
-            id: novoId,
-            empresa: empresaNome,
-            cargo: `Processo Seletivo (${analise.acaoDetectada})`,
-            modalidade: 'Processo em Andamento',
-            localizacao: 'Aguardando Ação',
-            turno: 'Flexível',
-            requisitos: `Ação detectada via e-mail: ${subject}`,
-            link: analise.linkAcao || '#',
-            dataColeta: dataRecebimento,
-            status: 'acao_pendente',
-            detalhesAcao: {
+        // CASO 1: Recibo de confirmação de inscrição recebida -> mover para 'aplicada' sem pendência
+        if (analise.tipoEvento === 'CONFIRMACAO_CANDIDATURA') {
+          if (vagaEncontrada && vagaEncontrada.status === 'para_aplicar') {
+            vagaEncontrada.status = 'aplicada';
+            vagaEncontrada.candidaturaExterna = true;
+            vagaEncontrada.dataAplicacao = dataRecebimento;
+            acoesAtualizadas++;
+            registrarLog(`📩 Candidatura confirmada via e-mail: "${vagaEncontrada.cargo}" (${vagaEncontrada.empresa}). Movida para 'Aplicadas' sem pendência.`);
+          }
+          continue;
+        }
+
+        // CASO 2: Ação real necessária (Teste Técnico / Entrevista com prazo)
+        if (analise.tipoEvento === 'ACAO_PENDENTE') {
+          registrarLog(`⚡ CONVOCAÇÃO/AÇÃO DETECTADA: [${analise.acaoDetectada}] - Assunto: "${subject}"`);
+
+          if (vagaEncontrada) {
+            vagaEncontrada.status = 'acao_pendente';
+            vagaEncontrada.detalhesAcao = {
               tipo: analise.acaoDetectada,
-              link: analise.linkAcao || '#',
+              link: analise.linkAcao || vagaEncontrada.link,
               prazo: analise.prazoDetectado,
               assunto: subject,
               dataRecebimento
-            }
-          });
-          acoesAtualizadas++;
-          registrarLog(`-> Processo externo registrado para "${empresaNome}" para não perder o prazo.`);
+            };
+            acoesAtualizadas++;
+            registrarLog(`-> Vaga vinculada com sucesso: "${vagaEncontrada.cargo}" na empresa "${vagaEncontrada.empresa}"`);
+          } else {
+            // Processo externo não catalogado no banco: criar card de processo ativo para o candidato não perder
+            const novoId = `processo-email-${Date.now()}`;
+            const empresaNome = analise.empresaIdentificada || from.split('@')[0] || 'Empresa Externa';
+            banco.unshift({
+              id: novoId,
+              empresa: empresaNome,
+              cargo: `Processo Seletivo (${analise.acaoDetectada})`,
+              modalidade: 'Processo em Andamento',
+              localizacao: 'Aguardando Ação',
+              turno: 'Flexível',
+              requisitos: `Ação detectada via e-mail: ${subject}`,
+              link: analise.linkAcao || '#',
+              dataColeta: dataRecebimento,
+              status: 'acao_pendente',
+              detalhesAcao: {
+                tipo: analise.acaoDetectada,
+                link: analise.linkAcao || '#',
+                prazo: analise.prazoDetectado,
+                assunto: subject,
+                dataRecebimento
+              }
+            });
+            acoesAtualizadas++;
+            registrarLog(`-> Processo externo registrado para "${empresaNome}" para não perder o prazo.`);
+          }
         }
       }
     }
