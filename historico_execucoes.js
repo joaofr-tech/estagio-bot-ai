@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "01/11/2026, 19:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "01/11/2026, 18:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -448,20 +455,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 1056,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "28/10/2026, 16:37:13",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1546,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Aquila Consultoria em Gestão",
-        "cargo": "Estagiário de Dados",
-        "modalidade": "Presencial / Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando Engenharia de Software, Ciência da Computação, Engenharias ou TI (previsão de formatura entre 12/2027 e 12/2028, compatível com 3º período); apoio na análise, tratamento e consolidação de dados de diferentes ferramentas e sistemas; geração de insights analíticos de negócio; criação e manutenção de relatórios e dashboards para acompanhamento de indicadores; conhecimento intermediário/avançado em Excel; carga horária de 6h diárias flexíveis perfeitamente compatível com o turno vespertino/tarde.",
-        "link": "https://www.linkedin.com/jobs/view/4484299240"
-      }
-    ]
   }
 ];
