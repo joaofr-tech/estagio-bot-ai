@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "02/11/2026, 18:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "02/11/2026, 17:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -410,20 +417,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 1149,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "29/10/2026, 20:29:35",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1089,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "PRODEMGE",
-        "cargo": "Estágio em Sistemas de Informação / TI (Testes & QA de Software)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Graduação a partir do 2º período em Engenharia de Software, Sistemas de Informação, Ciência da Computação ou afins; conhecimentos em fundamentos de testes funcionais e exploratórios, lógica de programação, banco de dados, ferramentas de QA, metodologias ágeis e Java; horário das 12:00 às 18:00 (Turno da Tarde - 6h diárias); Bolsa de R$ 1.559,70 + Vale-Transporte + Seguro de Vida.",
-        "link": "https://www.agiel.com.br/estudante/vagas/?codigo=MG2026001863"
-      }
-    ]
   }
 ];
