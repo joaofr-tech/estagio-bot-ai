@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "02/11/2026, 17:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "02/11/2026, 16:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -418,12 +425,5 @@ window.HISTORICO_EXECUCOES = [
         "link": "https://www.agiel.com.br/estudante/vagas/?codigo=MG2026001863"
       }
     ]
-  },
-  {
-    "timestamp": "29/10/2026, 19:24:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 781,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
   }
 ];
