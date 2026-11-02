@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "02/11/2026, 14:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "02/11/2026, 13:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -416,13 +423,6 @@ window.HISTORICO_EXECUCOES = [
     "timestamp": "29/10/2026, 17:21:31",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 3186,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "29/10/2026, 15:27:44",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 818,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
   }
