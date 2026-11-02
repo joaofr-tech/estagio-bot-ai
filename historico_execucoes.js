@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "02/11/2026, 09:03:23",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 3,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "01/11/2026, 22:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -433,27 +440,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 1080,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "28/10/2026, 20:29:32",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1085,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "iFood",
-        "cargo": "Programa de Estágio - GenAI (Trilha AI Engineer / AI Builder)",
-        "modalidade": "Remoto (Brasil)",
-        "requisitos": "Estar regularmente matriculado em curso superior nas áreas de Engenharia de Software, Ciência da Computação ou afins (com previsão de formação entre julho/2027 e janeiro/2029); conhecimento em desenvolvimento de software, integração de sistemas com IA, modelos de linguagem (LLMs) ou automação de fluxos com agentes de IA; carga horária de 30 horas semanais (6 horas por dia flexíveis de segunda a sexta-feira); bolsa-auxílio de R$ 5.200,00.",
-        "link": "https://www.linkedin.com/jobs/view/4483877721"
-      },
-      {
-        "empresa": "Drogaria Araujo S/A",
-        "cargo": "Estágio em Automação TI",
-        "modalidade": "Presencial (Belo Horizonte - MG / Centro)",
-        "requisitos": "Cursando graduação na área de TI (Engenharia de Software, Ciência da Computação ou áreas correlatas); manutenção e diagnóstico de hardware/software (Windows e Linux), suporte a sistemas corporativos e inventário de ativos de TI na rede; Excel básico; horário no turno da TARDE (6h diárias de segunda a sexta-feira, das 12h/13h em diante, compatível com aulas pela manhã); bolsa-auxílio de R$ 1.800,00 + Vale-Transporte e Seguro de Vida.",
-        "link": "https://www.catho.com.br/vagas/estagio-automacao-ti/39018541"
-      }
-    ]
   }
 ];
