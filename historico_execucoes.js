@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "02/11/2026, 12:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "02/11/2026, 11:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -433,12 +440,5 @@ window.HISTORICO_EXECUCOES = [
         "link": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-desenvolvimento-trainee-at-levty-4478076125"
       }
     ]
-  },
-  {
-    "timestamp": "29/10/2026, 13:58:03",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 1077,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
   }
 ];
