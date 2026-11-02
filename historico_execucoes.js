@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "02/11/2026, 13:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "02/11/2026, 12:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -418,27 +425,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 818,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "29/10/2026, 14:34:26",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1380,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Drogaria Araujo S/A",
-        "cargo": "Estágio em TI",
-        "modalidade": "Presencial (Belo Horizonte - MG / Centro)",
-        "requisitos": "Cursando graduação na área de TI (Engenharia de Software, Ciência da Computação, Sistemas de Informação ou ADS); sólida lógica de programação, conhecimento prático em Java (Spring Boot) e Python, bancos de dados (SQL); apoio na sustentação de sistemas, resolução de bugs, desenvolvimento de automações para áreas de negócio e dashboards analíticos; 6h diárias com horário flexível (compatível com turno matutino de aulas); Bolsa de R$ 1.800,00 + VT + Seguro de vida.",
-        "link": "https://www.catho.com.br/vagas/estagio-em-ti/38966468"
-      },
-      {
-        "empresa": "LEVTY",
-        "cargo": "Estagiário(a) de Desenvolvimento (Trainee)",
-        "modalidade": "Híbrido / Presencial (Belo Horizonte - MG)",
-        "requisitos": "Cursando ensino superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas; lógica de programação, JavaScript moderno, bancos de dados (Mongo-like / Elasticsearch), APIs REST e interesse em IA; desenvolvimento e sustentação de código na plataforma SYDLE ONE; carga horária de 30h semanais com horário flexível (compatível com turno da manhã); benefícios flexíveis, VR, VT, TotalPass, PLR e plano de saúde.",
-        "link": "https://br.linkedin.com/jobs/view/estagi%C3%A1rio-a-de-desenvolvimento-trainee-at-levty-4478076125"
-      }
-    ]
   }
 ];
