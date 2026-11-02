@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "01/11/2026, 22:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "01/11/2026, 21:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -448,12 +455,5 @@ window.HISTORICO_EXECUCOES = [
         "link": "https://www.catho.com.br/vagas/estagio-automacao-ti/39018541"
       }
     ]
-  },
-  {
-    "timestamp": "28/10/2026, 19:47:04",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 2137,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
   }
 ];
