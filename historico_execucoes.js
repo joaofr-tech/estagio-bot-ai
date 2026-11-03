@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "03/11/2026, 07:30:18",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 4,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "02/11/2026, 21:33:07",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -394,20 +401,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 2529,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "30/10/2026, 10:33:52",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1346,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Mestria Automação e Tecnologia",
-        "cargo": "Estágio em Desenvolvimento de Sistemas Embarcados e Firmware",
-        "modalidade": "Presencial (Belo Horizonte - MG / Bairro Nova Suíssa)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Engenharia de Controle e Automação ou áreas afins (a partir do 3º período); conhecimentos básicos em lógica de programação e C/C++; interesse em firmware, microcontroladores (ESP32/Arduino) e automação industrial; diferenciais em Python, Git, IoT e protocolos de comunicação (UART, I²C, SPI, BLE). Carga horária de 6h flexíveis/a combinar (compatível com turno da tarde para quem estuda pela manhã).",
-        "link": "https://www.linkedin.com/jobs/view/4483080070"
-      }
-    ]
   }
 ];
