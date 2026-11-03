@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "03/11/2026, 14:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "03/11/2026, 13:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -394,12 +401,5 @@ window.HISTORICO_EXECUCOES = [
         "link": "https://vagas.solides.com.br/vaga/944622"
       }
     ]
-  },
-  {
-    "timestamp": "30/10/2026, 13:25:21",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 835,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
   }
 ];

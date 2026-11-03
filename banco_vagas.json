@@ -161,8 +161,15 @@
     "link": "https://www.linkedin.com/jobs/view/4483877721",
     "dataColeta": "28/10/2026, 20:29:32",
     "notificada": true,
-    "status": "aplicada",
-    "candidaturaExterna": true
+    "status": "acao_pendente",
+    "candidaturaExterna": true,
+    "detalhesAcao": {
+      "tipo": "Teste Técnico / Desafio",
+      "link": "https://www.linkedin.com/jobs/view/4483877721",
+      "prazo": "Não especificado",
+      "assunto": "iFood | GenAI 2027 | Testes obrigatórios até 06/11",
+      "dataRecebimento": "03/11/2026, 13:39:33"
+    }
   },
   {
     "id": "vaga-1793216233457-effje",
