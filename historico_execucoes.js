@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "03/11/2026, 19:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "03/11/2026, 18:41:20",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -341,27 +348,5 @@ window.HISTORICO_EXECUCOES = [
     "duracaoSegundos": 699,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
     "vagas": []
-  },
-  {
-    "timestamp": "30/10/2026, 17:37:01",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1534,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "NYBANQ",
-        "cargo": "IT / Software Engineering Intern – API & Integrations",
-        "modalidade": "100% Remoto (Brasil)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Tecnologia da Informação ou área afim; conhecimentos em integração de sistemas, APIs RESTful, HTTP, JSON e Webhooks; proficiência em Python, JavaScript/TypeScript ou Node.js; documentação e testes de endpoints (Postman, Swagger/OpenAPI); Git/GitHub; regime 100% remoto com jornada de 6h diárias (30h semanais) e horário flexível.",
-        "link": "https://www.linkedin.com/jobs/view/4483488785"
-      },
-      {
-        "empresa": "Amigoz",
-        "cargo": "Programa de Estágio Amigoz 2027 (Trilha de Tecnologia e Produtos)",
-        "modalidade": "Remoto / Híbrido (Minas Gerais)",
-        "requisitos": "Estudante de graduação a partir do 2º/3º semestre em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins (previsão de formação entre jun/2028 e dez/2028); atuação nas frentes de Tecnologia, Desenvolvimento de Produtos e Projetos; carga horária de 6 horas diárias com horário flexível; bolsa-auxílio e pacote completo de benefícios.",
-        "link": "https://www.linkedin.com/jobs/view/4485341251"
-      }
-    ]
   }
 ];
