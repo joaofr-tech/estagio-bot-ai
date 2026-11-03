@@ -1,5 +1,19 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "03/11/2026, 18:41:20",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "03/11/2026, 16:22:55",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "03/11/2026, 15:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -347,43 +361,6 @@ window.HISTORICO_EXECUCOES = [
         "modalidade": "Remoto / Híbrido (Minas Gerais)",
         "requisitos": "Estudante de graduação a partir do 2º/3º semestre em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins (previsão de formação entre jun/2028 e dez/2028); atuação nas frentes de Tecnologia, Desenvolvimento de Produtos e Projetos; carga horária de 6 horas diárias com horário flexível; bolsa-auxílio e pacote completo de benefícios.",
         "link": "https://www.linkedin.com/jobs/view/4485341251"
-      }
-    ]
-  },
-  {
-    "timestamp": "30/10/2026, 16:32:07",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1240,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Onfly",
-        "cargo": "Onfly Summer Undergraduate 2027",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Estudantes cursando graduação a partir do 2º/3º período (1º ano concluído) em Engenharia de Software, Ciência da Computação ou afins; disponibilidade para modelo híbrido em BH; foco em projetos reais com tecnologia, dados e inovação; comunicação e perfil analítico.",
-        "link": "https://onfly.gupy.io/jobs/12813687"
-      },
-      {
-        "empresa": "REGISTROCOM.COM",
-        "cargo": "Estágio em JAVA - Home Office",
-        "modalidade": "100% Remoto",
-        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas; conhecimentos básicos em Java, HTML e MySQL; suporte ao desenvolvimento e execução de testes em sistemas Java.",
-        "link": "https://www.catho.com.br/vagas/estagio-em-java-home-office/37337623"
-      }
-    ]
-  },
-  {
-    "timestamp": "30/10/2026, 15:38:44",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1637,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "dti digital",
-        "cargo": "Pessoa Engenheira Martech - Estágio (Modelo Híbrido)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas; noções de SQL, HTML e CSS; interesse em Martech, réguas de comunicação, segmentação de dados e fluxos de automação (Adobe Campaign / Infobip); inglês avançado; carga horária de 6h diárias (30h semanais) com horário flexível entre 8h e 19h (compatível com turno da tarde para quem estuda pela manhã); bolsa de R$ 1.200,00 + VR/VA de R$ 890,00/mês.",
-        "link": "https://www.linkedin.com/jobs/view/4484564293"
       }
     ]
   }
