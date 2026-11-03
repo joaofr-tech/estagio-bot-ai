@@ -429,7 +429,9 @@
     "link": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQECerPBIzs6rJvOL3Q2T4H2N0MMoSFTPamNZ7GPzJGgxZKLoK8n6CJ-FUjIOjCaSq00ecFhQ6bjAujKjNOFa84rb4XSapbonwK_2wMSvure_RnJFg9FeE-3i9ugaXt0D6Yd1LLaEfK4lnO1EDCitazHncsm0TtTM1Qpf2YQbwnLvqiS9kTy",
     "dataColeta": "25/10/2026, 11:13:23",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "03/11/2026, 12:31:40",
+    "motivoEncerramento": "Gupy status: 'closed'"
   },
   {
     "id": "vaga-1792937603795-hg578",
