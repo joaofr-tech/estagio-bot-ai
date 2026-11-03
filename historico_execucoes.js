@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "03/11/2026, 15:11:27",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "03/11/2026, 14:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -377,28 +384,6 @@ window.HISTORICO_EXECUCOES = [
         "modalidade": "Híbrido (Belo Horizonte - MG)",
         "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas; noções de SQL, HTML e CSS; interesse em Martech, réguas de comunicação, segmentação de dados e fluxos de automação (Adobe Campaign / Infobip); inglês avançado; carga horária de 6h diárias (30h semanais) com horário flexível entre 8h e 19h (compatível com turno da tarde para quem estuda pela manhã); bolsa de R$ 1.200,00 + VR/VA de R$ 890,00/mês.",
         "link": "https://www.linkedin.com/jobs/view/4484564293"
-      }
-    ]
-  },
-  {
-    "timestamp": "30/10/2026, 14:31:47",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1221,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "Atlas Governance",
-        "cargo": "Pessoa Estagiária de Governança de SI & Automação com IA",
-        "modalidade": "Remoto (100% Home Office - Brasil)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas afins (a partir do 3º período); interesse e vivência em ferramentas de Inteligência Artificial generativa, LLMs e construção de agentes/automações de processos; apoio na organização de dados e evidências técnicas e conformidade de segurança; boa comunicação escrita e organização documental. Carga horária de 6h flexíveis/a combinar (compatível com turno da tarde para quem estuda pela manhã).",
-        "link": "https://atlas-governance.gupy.io/jobs/12813721"
-      },
-      {
-        "empresa": "Instituto Aquila de Gestão",
-        "cargo": "Estagiário de Dados",
-        "modalidade": "Híbrido (Belo Horizonte - MG / Belvedere)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação ou Engenharias correlatas com previsão de formatura entre 12/2027 e 12/2028 (3º período); perfil analítico, organização e proatividade; conhecimentos intermediários a avançados em Excel e noções de ferramentas de BI e bancos de dados (SQL); atuação na extração e consolidação de dados corporativos, cruzamento de bases, desenvolvimento de relatórios e dashboards analíticos para apoio à tomada de decisão data-driven. Jornada de 6h flexíveis/a combinar (compatível com turno da tarde); bolsa de R$ 1.500,00 + VT, VR, VA, assistência médica e odontológica, seguro de vida e Gympass.",
-        "link": "https://vagas.solides.com.br/vaga/944622"
       }
     ]
   }
