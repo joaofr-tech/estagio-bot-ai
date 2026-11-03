@@ -1,5 +1,12 @@
 window.HISTORICO_EXECUCOES = [
   {
+    "timestamp": "02/11/2026, 21:33:07",
+    "status": "SEM_VAGAS",
+    "duracaoSegundos": 30,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
     "timestamp": "02/11/2026, 20:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
@@ -400,21 +407,6 @@ window.HISTORICO_EXECUCOES = [
         "modalidade": "Presencial (Belo Horizonte - MG / Bairro Nova Suíssa)",
         "requisitos": "Cursando graduação em Engenharia de Software, Engenharia de Controle e Automação ou áreas afins (a partir do 3º período); conhecimentos básicos em lógica de programação e C/C++; interesse em firmware, microcontroladores (ESP32/Arduino) e automação industrial; diferenciais em Python, Git, IoT e protocolos de comunicação (UART, I²C, SPI, BLE). Carga horária de 6h flexíveis/a combinar (compatível com turno da tarde para quem estuda pela manhã).",
         "link": "https://www.linkedin.com/jobs/view/4483080070"
-      }
-    ]
-  },
-  {
-    "timestamp": "30/10/2026, 09:33:52",
-    "status": "VAGAS_SALVAS",
-    "duracaoSegundos": 1346,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "dti digital",
-        "cargo": "AI Engineer - Estágio (Modelo Híbrido)",
-        "modalidade": "Híbrido (Belo Horizonte - MG)",
-        "requisitos": "Cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou similares; conhecimentos em HTML, CSS, JavaScript e Git; forte interesse em Inteligência Artificial generativa, LLMs e construção de agentes/skills/hooks; automação de processos com ferramentas como Claude Code e Cursor; jornada de 6h diárias (30h semanais) com horário flexível entre 8h e 19h (compatível com turno da tarde); bolsa de R$ 1.200,00 + VR/VA de R$ 890,00/mês.",
-        "link": "https://www.linkedin.com/jobs/view/4484551716"
       }
     ]
   }
