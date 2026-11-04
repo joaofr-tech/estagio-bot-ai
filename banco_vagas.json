@@ -224,7 +224,9 @@
     "link": "https://www.linkedin.com/jobs/view/4483778946",
     "dataColeta": "28/10/2026, 13:49:20",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "03/11/2026, 22:11:27",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1793206160904-a1slo",
