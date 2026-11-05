@@ -2,6 +2,7 @@ const { runCandidaturasTests } = require('./candidaturas.test');
 const { runIndicadoresTests } = require('./indicadores.test');
 const { runParametrosTests } = require('./parametros.test');
 const { runCrawlerGerenciadorTests } = require('./crawler_gerenciador.test');
+const { runObservabilidadeTests } = require('./observabilidade.test');
 
 function runAll() {
   const start = Date.now();
@@ -14,6 +15,7 @@ function runAll() {
     runIndicadoresTests();
     runParametrosTests();
     runCrawlerGerenciadorTests();
+    runObservabilidadeTests();
 
     const elapsed = Date.now() - start;
     console.log('\n====================================================');

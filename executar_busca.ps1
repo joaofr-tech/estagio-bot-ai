@@ -96,13 +96,23 @@ Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SE
 "@
 
 $result = $prompt | agy --dangerously-skip-permissions 2>&1
+$exitCode = $LASTEXITCODE
 Add-Content -Path $logPath -Value $result
 
 $end = Get-Date
 $duration = [math]::Round(($end - $start).TotalSeconds)
 Add-Content -Path $logPath -Value "[$($end.ToString('dd/MM/yyyy HH:mm:ss'))] Varredura concluida em $duration s."
 
-if (Test-Path $vagasJson) {
+# Detecção de Anomalias e Falhas de Observabilidade
+$resultadoStr = if ($result) { ($result -join "`n") } else { "" }
+$temErroExplicito = ($exitCode -ne 0) -or ($resultadoStr -match "(?i)(error:|exception:|unexpected argument|unauthorized|fatal:|failed to start|crash)")
+$execucaoAnomalaRapida = ($duration -lt 15) -and -not (Test-Path $vagasJson) -and ($temErroExplicito -or [string]::IsNullOrWhiteSpace($resultadoStr))
+
+if ($temErroExplicito -or $execucaoAnomalaRapida) {
+    $msgErro = if ($resultadoStr -match "(?i)(error:.*|unexpected argument.*)") { $matches[0] } elseif ($exitCode -ne 0) { "Processo encerrou com código de erro $exitCode." } else { "Execução anômala ultrarrápida ($duration s) sem retorno." }
+    Add-Content -Path $logPath -Value "[$($end.ToString('dd/MM/yyyy HH:mm:ss'))] ❌ ALERTA DE OBSERVABILIDADE: $msgErro"
+    node registrar_log.js "ERRO_CRAWLER" $duration "Falha no crawler: $msgErro"
+} elseif (Test-Path $vagasJson) {
     node gerenciador_vagas.js salvar novas_vagas.json
     node registrar_log.js "VAGAS_SALVAS" $duration "Novas oportunidades catalogadas!" novas_vagas.json
     node enviar_vagas_pendentes.js >> $logPath 2>&1

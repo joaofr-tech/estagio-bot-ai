@@ -1384,6 +1384,23 @@
               </button>
             </div>
           </div>
+
+          <!-- BANNER DE ALERTA DE OBSERVABILIDADE DO CRAWLER -->
+          <div id="banner-crawler-falha" style="display: none; margin-top: 1.2rem; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 6px; padding: 1rem 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+              <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <span style="font-size: 1.5rem;">⚠️</span>
+                <div>
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #991b1b;" id="banner-crawler-titulo">Alerta de Observabilidade: Falha no Crawler</div>
+                  <div style="font-size: 0.82rem; color: #b91c1c;" id="banner-crawler-desc">O robô encerrou com erro ou duração anômala na última execução.</div>
+                </div>
+              </div>
+              <button class="btn-action-ink" onclick="navigateToScreen('03');" style="background: #991b1b; border-color: #7f1d1d; font-size: 0.8rem; padding: 0.5rem 0.9rem;">
+                <span>Ver Telemetria &amp; Logs</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -1506,8 +1523,11 @@
         </div>
       </header>
 
-      <div class="wrap" style="padding-top: 2rem;">
-        <div class="history-log-table" id="table-history-runs">
+      <div class="wrap" style="padding-top: 1.5rem;">
+        <div id="crawler-health-container">
+          <!-- Rendered via JS -->
+        </div>
+        <div class="history-log-table" id="table-history-runs" style="margin-top: 1.5rem;">
           <!-- Rendered via JS -->
         </div>
       </div>
@@ -2389,6 +2409,21 @@
           bannerUrgente.style.display = 'none';
         }
       }
+
+      // Controle do Banner de Observabilidade do Crawler (Falha / Anomalia)
+      const bannerCrawler = document.getElementById('banner-crawler-falha');
+      if (bannerCrawler) {
+        const health = getCrawlerHealth();
+        if (health.status === 'error') {
+          bannerCrawler.style.display = 'block';
+          const titulo = document.getElementById('banner-crawler-titulo');
+          const desc = document.getElementById('banner-crawler-desc');
+          if (titulo) titulo.innerText = `⚠️ Alerta de Observabilidade: ${health.label}`;
+          if (desc) desc.innerText = `${health.desc} (Última tentativa: ${health.timestamp || 'recente'})`;
+        } else {
+          bannerCrawler.style.display = 'none';
+        }
+      }
     }
 
     function setupSearch01() {
@@ -2845,11 +2880,148 @@
     }
 
     // =============================================================
-    // TELA 03: HISTÓRICO DE BUSCAS
+    // OBSERVABILIDADE & SAÚDE DO CRAWLER
+    // =============================================================
+    function getCrawlerHealth() {
+      if (executionData.length === 0) {
+        return {
+          status: 'healthy',
+          icon: '🟢',
+          color: 'var(--green)',
+          label: 'Aguardando Inicialização',
+          desc: 'Nenhuma varredura registrada ainda no sistema.',
+          duracao: 0,
+          timestamp: 'Recente'
+        };
+      }
+
+      const lastRun = executionData[0];
+      const isLastRunErro = lastRun.isErro || (lastRun.status && (lastRun.status.includes('ERRO') || lastRun.status.includes('FALHA')));
+
+      // Avaliar tempo decorrido desde a última varredura
+      let horasDesdeUltima = 0;
+      try {
+        const parts = (lastRun.timestamp || '').split(', ');
+        if (parts.length === 2) {
+          const dParts = parts[0].split('/');
+          const tParts = parts[1].split(':');
+          const lastDate = new Date(dParts[2], dParts[1] - 1, dParts[0], tParts[0], tParts[1], tParts[2]);
+          horasDesdeUltima = (Date.now() - lastDate.getTime()) / 3600000;
+        }
+      } catch (e) {}
+
+      if (isLastRunErro) {
+        return {
+          status: 'error',
+          icon: '🔴',
+          color: '#b91c1c',
+          label: 'Falha no Crawler Detectada',
+          desc: lastRun.mensagem || 'A última varredura encerrou com erro no processo.',
+          duracao: lastRun.duracaoSegundos !== undefined ? lastRun.duracaoSegundos : 0,
+          timestamp: lastRun.timestamp
+        };
+      }
+
+      // Execução anômala (< 15s sem nenhuma vaga retornada com status de erro ou vazia)
+      if (lastRun.duracaoSegundos !== undefined && lastRun.duracaoSegundos < 15 && (!lastRun.vagas || lastRun.vagas.length === 0) && lastRun.status === 'ERRO_CRAWLER') {
+        return {
+          status: 'error',
+          icon: '🔴',
+          color: '#b91c1c',
+          label: 'Execução Anômala (< 15s)',
+          desc: 'O crawler encerrou imediatamente sem buscar vagas na web.',
+          duracao: lastRun.duracaoSegundos,
+          timestamp: lastRun.timestamp
+        };
+      }
+
+      // Crawler inativo por mais de 3 horas
+      if (horasDesdeUltima > 3) {
+        return {
+          status: 'warning',
+          icon: '🟡',
+          color: '#b45309',
+          label: `Inativo há ~${Math.round(horasDesdeUltima)} horas`,
+          desc: 'O agendador horário pode estar pausado ou a máquina desligada.',
+          duracao: lastRun.duracaoSegundos || 0,
+          timestamp: lastRun.timestamp
+        };
+      }
+
+      const duracaoStr = lastRun.duracaoSegundos !== undefined ? `${Math.round(lastRun.duracaoSegundos)}s` : 'OK';
+      return {
+        status: 'healthy',
+        icon: '🟢',
+        color: 'var(--green)',
+        label: 'Operacional & Saudável',
+        desc: `Última varredura concluída com sucesso (${duracaoStr}). Agendamento automático ativo.`,
+        duracao: lastRun.duracaoSegundos || 30,
+        timestamp: lastRun.timestamp
+      };
+    }
+
+    // =============================================================
+    // TELA 03: HISTÓRICO DE BUSCAS & TELEMETRIA
     // =============================================================
     function renderScreen03() {
       const container = document.getElementById('table-history-runs');
+      const healthContainer = document.getElementById('crawler-health-container');
       if (!container) return;
+
+      const health = getCrawlerHealth();
+
+      if (healthContainer) {
+        const totalRuns = executionData.length;
+        const totalFalhas = executionData.filter(r => r.isErro || (r.status && (r.status.includes('ERRO') || r.status.includes('FALHA')))).length;
+        const taxaSucesso = totalRuns > 0 ? Math.round(((totalRuns - totalFalhas) / totalRuns) * 100) : 100;
+        
+        // Média de duração de varreduras bem-sucedidas (ignora falhas ultrarrápidas de 0s)
+        const runsValidas = executionData.filter(r => typeof r.duracaoSegundos === 'number' && r.duracaoSegundos > 15);
+        let tempoMedioStr = '--';
+        if (runsValidas.length > 0) {
+          const media = Math.round(runsValidas.reduce((a, b) => a + b.duracaoSegundos, 0) / runsValidas.length);
+          const m = Math.floor(media / 60);
+          const s = media % 60;
+          tempoMedioStr = m > 0 ? `${m}m ${s}s` : `${s}s`;
+        }
+
+        healthContainer.innerHTML = `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 0.5rem;">
+            <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 1.2rem;">
+              <span class="mono" style="font-size: 0.7rem; color: var(--faint); text-transform: uppercase;">Saúde do Crawler</span>
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+                <span style="font-size: 1.15rem;">${health.icon}</span>
+                <span style="font-size: 1rem; font-weight: 700; color: ${health.color};">${health.label}</span>
+              </div>
+              <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.3;">${health.desc}</p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 1.2rem;">
+              <span class="mono" style="font-size: 0.7rem; color: var(--faint); text-transform: uppercase;">Última Execução</span>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-top: 0.4rem;">
+                ${health.timestamp ? (health.timestamp.split(', ')[1] || health.timestamp) : '--'}
+              </div>
+              <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem;">Data: ${health.timestamp ? health.timestamp.split(', ')[0] : '--'} &bull; ${health.duracao}s</p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 1.2rem;">
+              <span class="mono" style="font-size: 0.7rem; color: var(--faint); text-transform: uppercase;">Taxa de Confiabilidade</span>
+              <div style="font-size: 1.25rem; font-weight: 700; color: ${taxaSucesso < 90 ? '#b91c1c' : 'var(--green)'}; margin-top: 0.4rem;">
+                ${taxaSucesso}%
+              </div>
+              <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem;">${totalRuns - totalFalhas} sucessos em ${totalRuns} varreduras</p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 1.2rem;">
+              <span class="mono" style="font-size: 0.7rem; color: var(--faint); text-transform: uppercase;">Duração Média das Buscas</span>
+              <div style="font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-top: 0.4rem;">
+                ${tempoMedioStr}
+              </div>
+              <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem;">Frequência: A cada 1 hora</p>
+            </div>
+          </div>
+        `;
+      }
 
       if (executionData.length === 0) {
         container.innerHTML = `
@@ -2862,23 +3034,29 @@
       }
 
       container.innerHTML = executionData.map((run, idx) => {
+        const isErro = run.isErro || (run.status && (run.status.includes('ERRO') || run.status.includes('FALHA')));
         const hasJobs = Array.isArray(run.vagas) && run.vagas.length > 0;
         const count = hasJobs ? run.vagas.length : 0;
-        const badge = hasJobs 
-          ? `<span class="tag-badge remote">+${count} nova(s) vaga(s)</span>`
-          : `<span class="tag-badge hybrid">0 vagas</span>`;
+        
+        let badge = `<span class="tag-badge hybrid">0 vagas</span>`;
+        if (isErro) {
+          badge = `<span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; font-weight: 700;">❌ Falha (${run.duracaoSegundos !== undefined ? run.duracaoSegundos : 0}s)</span>`;
+        } else if (hasJobs) {
+          badge = `<span class="tag-badge remote">+${count} nova(s) vaga(s)</span>`;
+        }
 
+        const borderStyle = isErro ? 'border-left: 3px solid #ef4444; background: #fff5f5;' : '';
         const numStr = (idx + 1).toString().padStart(2, '0');
 
         return `
-          <div class="job-row" style="cursor: default; padding: 1.4rem 1rem;">
-            <span class="mono" style="color: var(--faint);">${numStr}</span>
+          <div class="job-row" style="cursor: default; padding: 1.4rem 1rem; ${borderStyle}">
+            <span class="mono" style="color: ${isErro ? '#b91c1c' : 'var(--faint)'};">${numStr}</span>
             <div style="min-width: 0;">
-              <div style="font-weight: 600; color: var(--ink); font-size: 0.95rem;">
+              <div style="font-weight: 600; color: ${isErro ? '#991b1b' : 'var(--ink)'}; font-size: 0.95rem;">
                 ${run.mensagem}
               </div>
               <div class="mono" style="font-size: 0.7rem; color: var(--faint); margin-top: 0.2rem;">
-                ${run.timestamp} &bull; Duração: ${run.duracaoSegundos || 30}s &bull; Status: ${run.status || 'OK'}
+                ${run.timestamp} &bull; Duração: ${run.duracaoSegundos !== undefined ? run.duracaoSegundos : 30}s &bull; Status: ${run.status || 'OK'}
               </div>
             </div>
             <div>
@@ -3490,7 +3668,16 @@
           bCand.innerText = candCount;
         }
       }
-      if (bRuns) bRuns.innerText = executionData.length;
+      if (bRuns) {
+        const health = getCrawlerHealth();
+        if (health.status === 'error') {
+          bRuns.innerHTML = `${executionData.length} <span style="color:#ef4444; font-weight:bold;">⚠️</span>`;
+        } else if (health.status === 'warning') {
+          bRuns.innerHTML = `${executionData.length} <span style="color:#b45309; font-weight:bold;">⚡</span>`;
+        } else {
+          bRuns.innerText = executionData.length;
+        }
+      }
     }
 
     // =============================================================
