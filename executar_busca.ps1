@@ -95,7 +95,7 @@ Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SE
    - Se nao encontrar vagas novas e ativas com esses requisitos nesta rodada, apenas responda 'Nenhuma vaga nova nesta rodada.' e finalize silenciosamente sem criar o arquivo.
 "@
 
-$result = agy -p $prompt --dangerously-skip-permissions
+$result = $prompt | agy --dangerously-skip-permissions 2>&1
 Add-Content -Path $logPath -Value $result
 
 $end = Get-Date
