@@ -266,7 +266,14 @@ async function verificarCaixaEntrada() {
           registrarLog(`⚡ CONVOCAÇÃO/AÇÃO DETECTADA: [${analise.acaoDetectada}] - Assunto: "${subject}"`);
 
           if (vagaEncontrada) {
+            // Se o candidato já concluiu exatamente essa etapa/assunto, não reabrir como pendente
+            if (vagaEncontrada.etapaConcluida && vagaEncontrada.detalhesAcao && vagaEncontrada.detalhesAcao.assunto === subject) {
+              registrarLog(`-> Ação já marcada como concluída anteriormente pelo candidato: "${subject}". Mantendo status atual.`);
+              continue;
+            }
+
             vagaEncontrada.status = 'acao_pendente';
+            vagaEncontrada.etapaConcluida = false;
             vagaEncontrada.detalhesAcao = {
               tipo: analise.acaoDetectada,
               link: analise.linkAcao || vagaEncontrada.link,

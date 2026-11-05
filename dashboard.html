@@ -1958,6 +1958,9 @@
           <button class="btn-action-ink" id="m-btn-inscrever" onclick="iniciarInscricaoModal()" style="flex: 1; justify-content: center;">
             <span>Abrir Inscrição Oficial ↗</span>
           </button>
+          <button class="btn-action-ink btn-confirm-success" id="m-btn-concluir-etapa" onclick="concluirEtapaModal()" style="display: none; justify-content: center;">
+            <span>Concluir Etapa ✓</span>
+          </button>
           <button class="job-icon-btn" id="m-btn-star" onclick="toggleStarModal()" style="width: 44px; height: 44px;" title="Salvar">
             ★
           </button>
@@ -2148,11 +2151,22 @@
             const isMismatchInDb = job.status === 'descartada';
             const isMismatch = isMismatchInStore || isMismatchInDb;
 
+            // Identificar se a etapa pendente já foi concluída pelo usuário
+            const isNewAction = job.status === 'acao_pendente' &&
+              userState.etapaConcluida &&
+              job.detalhesAcao &&
+              ((userState.ultimoAssuntoConcluido && job.detalhesAcao.assunto && job.detalhesAcao.assunto !== userState.ultimoAssuntoConcluido) ||
+               (userState.ultimaDataRecebimentoConcluida && job.detalhesAcao.dataRecebimento && job.detalhesAcao.dataRecebimento !== userState.ultimaDataRecebimentoConcluida));
+
+            const isEtapaConcluida = !isNewAction && !!(userState.etapaConcluida || job.etapaConcluida);
+
             let currentStatus = 'para_aplicar';
             if (isClosedInDb) {
               currentStatus = 'encerrada';
             } else if (isMismatch) {
               currentStatus = 'descartada';
+            } else if (isEtapaConcluida) {
+              currentStatus = userState.status || 'aplicada';
             } else if (job.status === 'acao_pendente' || userState.status === 'acao_pendente') {
               currentStatus = 'acao_pendente';
             } else {
@@ -2172,6 +2186,9 @@
             const dataMismatch = userState.dataMismatch || job.dataMismatch || '';
 
             const dataAplicacao = userState.dataAplicacao || job.dataAplicacao;
+            const dataConclusaoEtapa = userState.dataConclusaoEtapa || job.dataConclusaoEtapa || null;
+            const ultimoAssuntoConcluido = userState.ultimoAssuntoConcluido || job.ultimoAssuntoConcluido || '';
+            const ultimaDataRecebimentoConcluida = userState.ultimaDataRecebimentoConcluida || job.ultimaDataRecebimentoConcluida || '';
             const inicioCandidatura = userState.inicioCandidatura || null;
             const tempoGastoSegundos = userState.tempoGastoSegundos || null;
             const candidaturaExterna = !!(userState.candidaturaExterna || job.candidaturaExterna);
@@ -2192,6 +2209,10 @@
               localizacao: localFinal,
               prazo: prazoFinal,
               status: currentStatus,
+              etapaConcluida: isEtapaConcluida,
+              dataConclusaoEtapa: dataConclusaoEtapa,
+              ultimoAssuntoConcluido: ultimoAssuntoConcluido,
+              ultimaDataRecebimentoConcluida: ultimaDataRecebimentoConcluida,
               motivoMismatch: motivoMismatch,
               detalheMismatch: detalheMismatch,
               dataMismatch: dataMismatch,
@@ -2580,18 +2601,34 @@
     function concluirAcaoPendente(canonicalKey) {
       const store = getUserStore();
       const current = store[canonicalKey] || {};
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       
       current.status = 'aplicada';
       current.etapaConcluida = true;
       current.dataConclusaoEtapa = new Date().toLocaleString('pt-BR');
+      if (job && job.detalhesAcao) {
+        current.ultimoAssuntoConcluido = job.detalhesAcao.assunto || '';
+        current.ultimaDataRecebimentoConcluida = job.detalhesAcao.dataRecebimento || '';
+      }
       store[canonicalKey] = current;
       saveUserStore(store);
 
-      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
         job.status = 'aplicada';
         job.etapaConcluida = true;
+        job.dataConclusaoEtapa = current.dataConclusaoEtapa;
+        job.ultimoAssuntoConcluido = current.ultimoAssuntoConcluido;
+        job.ultimaDataRecebimentoConcluida = current.ultimaDataRecebimentoConcluida;
       }
+
+      // Sincronizar com o backend local se estiver ativo
+      try {
+        fetch('http://localhost:3141/api/concluir-etapa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ canonicalKey })
+        }).catch(() => {});
+      } catch (e) {}
 
       showToast('Etapa concluída com sucesso! Vaga arquivada em "Aplicadas / Concluídas".');
       updateGlobalBadges();
@@ -2734,7 +2771,10 @@
         } else if (currentSubTab02 === 'aplicadas') {
           let badgeTexto = "✓ Concluída";
           let tempoFormatado = "Candidatura externa";
-          if (job.candidaturaExterna) {
+          if (job.etapaConcluida) {
+            badgeTexto = "✓ Etapa Concluída";
+            tempoFormatado = job.dataConclusaoEtapa ? `Concluída em: ${job.dataConclusaoEtapa}` : "Etapa / Teste finalizado";
+          } else if (job.candidaturaExterna) {
             badgeTexto = "✓ Aplicada por fora";
             tempoFormatado = "Sem cronômetro (externa)";
           } else if (typeof job.tempoGastoSegundos === 'number' && job.tempoGastoSegundos > 0) {
@@ -2785,7 +2825,7 @@
               <span class="tag-badge inscricao">📄 ${job.prazo || 'Inscrições Abertas'}</span>
               ${job.status === 'acao_pendente' ? `<span class="tag-badge" style="background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; font-weight: 600;">⚡ ${job.detalhesAcao ? job.detalhesAcao.tipo : 'Ação Pendente'}</span>` : ''}
               ${job.status === 'em_andamento' ? '<span class="tag-badge andamento">⏳ Em Andamento</span>' : ''}
-              ${job.status === 'aplicada' ? (job.candidaturaExterna ? '<span class="tag-badge applied">✓ Aplicada por fora</span>' : '<span class="tag-badge applied">✓ Aplicada</span>') : ''}
+              ${job.status === 'aplicada' ? (job.etapaConcluida ? '<span class="tag-badge applied">✓ Etapa Concluída</span>' : (job.candidaturaExterna ? '<span class="tag-badge applied">✓ Aplicada por fora</span>' : '<span class="tag-badge applied">✓ Aplicada</span>')) : ''}
               ${job.status === 'encerrada' ? `<span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">❌ Encerrada: ${job.motivoEncerramento || 'Inscrições encerradas'}</span>` : ''}
               ${job.status === 'descartada' ? `<span class="tag-badge" style="background: #fef3c7; color: #b45309; border: 1px solid #fcd34d;">⊘ Mismatch: ${job.motivoMismatch || 'Perfil incompatível'}</span>` : ''}
             </div>
@@ -3478,9 +3518,14 @@
       starBtn.className = `job-icon-btn ${job.starred ? 'is-starred' : ''}`;
 
       const applyBtn = document.getElementById('m-btn-inscrever');
+      const concluirEtapaBtn = document.getElementById('m-btn-concluir-etapa');
       const jaApliqueiBtn = document.getElementById('m-btn-ja-apliquei');
       if (jaApliqueiBtn) {
         jaApliqueiBtn.style.display = (job.status === 'aplicada' || job.status === 'encerrada') ? 'none' : 'inline-flex';
+      }
+
+      if (concluirEtapaBtn) {
+        concluirEtapaBtn.style.display = (job.status === 'acao_pendente') ? 'inline-flex' : 'none';
       }
 
       if (job.status === 'acao_pendente') {
@@ -3506,6 +3551,12 @@
 
     function handleScrimClick(e) {
       if (e.target.id === 'job-modal') closeModal();
+    }
+
+    function concluirEtapaModal() {
+      if (!activeModalJob) return;
+      concluirAcaoPendente(activeModalJob.canonicalKey);
+      closeModal();
     }
 
     function iniciarInscricaoModal() {

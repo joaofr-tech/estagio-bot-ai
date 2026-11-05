@@ -341,6 +341,18 @@ async function auditarVagasAtivas(options = {}) {
   return { encerradasCount, ativasCount, indeterminadasCount, totalEncerradas, totalAbertas };
 }
 
+/**
+ * Remove permanentemente vagas marcadas como encerradas da base.
+ */
+function expurgarVagasEncerradas() {
+  const banco = carregarBanco();
+  const ativas = banco.filter(v => v.status !== 'encerrada');
+  const removidas = banco.length - ativas.length;
+  salvarBanco(ativas);
+  console.log(`[Varredura de Encerramento] ${removidas} vaga(s) encerrada(s) expurgada(s) da base.`);
+  return ativas;
+}
+
 if (require.main === module) {
   const arg = process.argv[2];
   let limite = 9999;
@@ -360,6 +372,7 @@ if (require.main === module) {
 module.exports = {
   validarVaga,
   auditarVagasAtivas,
+  expurgarVagasEncerradas,
   verificarLinkedIn,
   verificarGupy,
   verificarGenerico

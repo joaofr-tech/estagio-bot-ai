@@ -8,6 +8,7 @@ const PROJECT_DIR = __dirname;
 
 const { descartarVaga, carregarRegrasMismatch } = require('./gerenciar_mismatch');
 const { salvarConfig } = require('./atualizar_config_busca');
+const { concluirEtapaVaga } = require('./gerenciador_vagas');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -74,6 +75,25 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET' && pathname === '/api/regras') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify(carregarRegrasMismatch()));
+  }
+
+  // API: Concluir etapa pendente
+  if (req.method === 'POST' && pathname === '/api/concluir-etapa') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const payload = JSON.parse(body);
+        const { canonicalKey } = payload;
+        const resultado = concluirEtapaVaga(canonicalKey);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ status: 'ok', resultado }));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ status: 'error', message: err.message }));
+      }
+    });
+    return;
   }
 
   // API: Disparar verificação de e-mails sob demanda

@@ -182,6 +182,29 @@ function atualizarStatusVaga(id, novoStatus) {
   return false;
 }
 
+function concluirEtapaVaga(canonicalKey) {
+  const banco = carregarBanco();
+  let encontrada = false;
+
+  for (const vaga of banco) {
+    const chave = gerarChaveCanonica(vaga);
+    if (chave === canonicalKey) {
+      vaga.status = 'aplicada';
+      vaga.etapaConcluida = true;
+      vaga.dataConclusaoEtapa = new Date().toLocaleString('pt-BR');
+      encontrada = true;
+      break;
+    }
+  }
+
+  if (encontrada) {
+    salvarBanco(banco);
+    console.log(`[Etapa Concluída] Vaga ${canonicalKey} atualizada no banco.`);
+  }
+
+  return encontrada;
+}
+
 if (require.main === module) {
   const comando = process.argv[2];
   const param = process.argv[3];
@@ -202,6 +225,7 @@ module.exports = {
   marcarComoNotificadas,
   limparDuplicatas,
   atualizarStatusVaga,
+  concluirEtapaVaga,
   gerarChaveCanonica,
   normalizarTexto
 };

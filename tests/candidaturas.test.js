@@ -56,6 +56,66 @@ function runCandidaturasTests() {
   job.status = 'encerrada';
   assert.strictEqual(job.status, 'encerrada');
   console.log('  ✓ Encerramento de vaga: status marcado como encerrada');
+
+  // 6. Ciclo de Ação Pendente (Conclusão e Imunidade ao F5 / Refresh)
+  const jobPendenteDb = {
+    empresa: "iFood",
+    cargo: "Programa de Estágio GenAI",
+    canonicalKey: "ifood::programa estagio genai",
+    status: "acao_pendente",
+    detalhesAcao: {
+      tipo: "Teste Técnico / Desafio",
+      assunto: "iFood | Teste Técnico Obrigatório",
+      dataRecebimento: "03/11/2026, 10:00:00"
+    }
+  };
+
+  // Usuário clica em 'Concluído'
+  const storeUser = {};
+  const currentEntry = storeUser[jobPendenteDb.canonicalKey] || {};
+  currentEntry.status = 'aplicada';
+  currentEntry.etapaConcluida = true;
+  currentEntry.dataConclusaoEtapa = '05/11/2026, 17:30:00';
+  currentEntry.ultimoAssuntoConcluido = jobPendenteDb.detalhesAcao.assunto;
+  currentEntry.ultimaDataRecebimentoConcluida = jobPendenteDb.detalhesAcao.dataRecebimento;
+  storeUser[jobPendenteDb.canonicalKey] = currentEntry;
+
+  // Simular consolidação pós-refresh (F5)
+  function consolidarStatus(dbJob, userState) {
+    const isClosedInDb = dbJob.status === 'encerrada';
+    const isMismatch = (userState && userState.status === 'descartada') || dbJob.status === 'descartada';
+
+    const isNewAction = dbJob.status === 'acao_pendente' &&
+      userState.etapaConcluida &&
+      dbJob.detalhesAcao &&
+      ((userState.ultimoAssuntoConcluido && dbJob.detalhesAcao.assunto && dbJob.detalhesAcao.assunto !== userState.ultimoAssuntoConcluido) ||
+       (userState.ultimaDataRecebimentoConcluida && dbJob.detalhesAcao.dataRecebimento && dbJob.detalhesAcao.dataRecebimento !== userState.ultimaDataRecebimentoConcluida));
+
+    const isEtapaConcluida = !isNewAction && !!(userState.etapaConcluida || dbJob.etapaConcluida);
+
+    if (isClosedInDb) return 'encerrada';
+    if (isMismatch) return 'descartada';
+    if (isEtapaConcluida) return userState.status || 'aplicada';
+    if (dbJob.status === 'acao_pendente' || userState.status === 'acao_pendente') return 'acao_pendente';
+    return userState.status || dbJob.status || 'para_aplicar';
+  }
+
+  const statusPosRefresh = consolidarStatus(jobPendenteDb, storeUser[jobPendenteDb.canonicalKey]);
+  assert.strictEqual(statusPosRefresh, 'aplicada', 'Após refresh, vaga com etapa concluída deve permanecer como aplicada');
+  console.log('  ✓ Ação pendente concluída: permanece como aplicada após reload da página');
+
+  // 7. Detecção de nova ação posterior (segunda fase / entrevista)
+  const jobNovoEmailDb = {
+    ...jobPendenteDb,
+    detalhesAcao: {
+      tipo: "Entrevista Técnica",
+      assunto: "iFood | Convocação para Entrevista com Gestor",
+      dataRecebimento: "10/11/2026, 09:00:00"
+    }
+  };
+  const statusNovoEmail = consolidarStatus(jobNovoEmailDb, storeUser[jobPendenteDb.canonicalKey]);
+  assert.strictEqual(statusNovoEmail, 'acao_pendente', 'Quando novo email com assunto diferente chega, deve reabrir acao_pendente');
+  console.log('  ✓ Nova convocação via e-mail: reabre corretamente ação pendente quando novo assunto é detectado');
 }
 
 module.exports = { runCandidaturasTests };
