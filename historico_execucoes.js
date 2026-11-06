@@ -1,12 +1,31 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "05/11/2026, 22:23:46",
-  "ultimoStatus": "SEM_VAGAS",
-  "duracaoSegundos": 740,
+  "ultimaExecucao": "06/11/2026, 13:29:03",
+  "ultimoStatus": "VAGAS_SALVAS",
+  "duracaoSegundos": 1057,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "06/11/2026, 13:29:03",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 1057,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Cimento Nacional",
+        "cargo": "Estágio - Tecnologia Industrial (Belo Horizonte)",
+        "modalidade": "Hibrido",
+        "localizacao": "Belo Horizonte/MG (Lourdes)",
+        "turno": "Flexivel (6h)",
+        "prazo": "Prazo: 15/11",
+        "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Sistemas de Informação ou áreas afins. Atuação com apoio na gestão de softwares industriais (MES, PIMS), modelagem e criação de dashboards industriais, geração de relatórios/estatísticas de ferramentas de inovação e organização de projetos.",
+        "link": "https://estagiocn.gupy.io/jobs/12742938"
+      }
+    ]
+  },
   {
     "timestamp": "05/11/2026, 22:23:46",
     "status": "SEM_VAGAS",
@@ -390,13 +409,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "01/11/2026, 14:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "01/11/2026, 13:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",

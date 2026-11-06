@@ -1,5 +1,19 @@
 [
   {
+    "id": "vaga-1793982543888-vil3a",
+    "empresa": "Cimento Nacional",
+    "cargo": "Estágio - Tecnologia Industrial (Belo Horizonte)",
+    "modalidade": "Hibrido",
+    "localizacao": "Belo Horizonte/MG (Lourdes)",
+    "turno": "Flexivel (6h)",
+    "prazo": "Prazo: 15/11",
+    "requisitos": "Cursando a partir do 3º período em Engenharia de Software, Sistemas de Informação ou áreas afins. Atuação com apoio na gestão de softwares industriais (MES, PIMS), modelagem e criação de dashboards industriais, geração de relatórios/estatísticas de ferramentas de inovação e organização de projetos.",
+    "link": "https://estagiocn.gupy.io/jobs/12742938",
+    "dataColeta": "06/11/2026, 13:29:03",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
     "id": "processo-email-1793924284276",
     "empresa": "Seu Token chegou!",
     "cargo": "Processo Seletivo (Teste Técnico / Desafio)",
@@ -1377,7 +1391,9 @@
     "dataPublicacao": "26/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-77-bvfcx",
@@ -1393,7 +1409,9 @@
     "dataPublicacao": "26/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-78-fz25h",
@@ -1409,7 +1427,9 @@
     "dataPublicacao": "04/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-79-9270v",
@@ -1425,7 +1445,9 @@
     "dataPublicacao": "07/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-80-3gltk",
@@ -1441,7 +1463,9 @@
     "dataPublicacao": "16/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-81-765t1",
@@ -1473,7 +1497,9 @@
     "dataPublicacao": "25/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "LinkedIn HTTP 404: Vaga não existe mais no LinkedIn"
   },
   {
     "id": "vaga-1793920056017-83-s68xj",
@@ -1489,7 +1515,9 @@
     "dataPublicacao": "28/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-84-9ne1w",
@@ -1505,7 +1533,9 @@
     "dataPublicacao": "28/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-85-iuf4v",
@@ -1537,7 +1567,9 @@
     "dataPublicacao": "30/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-87-uc9xm",
@@ -1553,7 +1585,9 @@
     "dataPublicacao": "30/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-88-sg1dx",
@@ -1569,7 +1603,9 @@
     "dataPublicacao": "30/04/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1793920056017-89-pxker",
@@ -1585,7 +1621,9 @@
     "dataPublicacao": "05/05/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-90-tjiha",
@@ -1601,7 +1639,9 @@
     "dataPublicacao": "05/05/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-91-rt4ri",
@@ -1617,7 +1657,9 @@
     "dataPublicacao": "19/05/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-92-gmva2",
@@ -1633,7 +1675,9 @@
     "dataPublicacao": "19/05/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "06/11/2026, 13:29:10",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-93-0l9lt",
