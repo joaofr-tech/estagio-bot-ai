@@ -989,7 +989,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "14/02/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-55-3pltn",
@@ -1005,7 +1007,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "21/02/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Página retornou HTTP 404 (vaga inexistente)"
   },
   {
     "id": "vaga-1793920056017-56-6pslc",
@@ -1021,7 +1025,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "28/02/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "LinkedIn: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1793920056017-57-34frz",
@@ -1037,7 +1043,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "28/02/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "LinkedIn HTTP 404: Vaga não existe mais no LinkedIn"
   },
   {
     "id": "vaga-1793920056017-58-h2lmf",
@@ -1053,7 +1061,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "28/02/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "LinkedIn HTTP 404: Vaga não existe mais no LinkedIn"
   },
   {
     "id": "vaga-1793920056017-59-fqa45",
@@ -1069,7 +1079,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "28/02/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "LinkedIn HTTP 404: Vaga não existe mais no LinkedIn"
   },
   {
     "id": "vaga-1793920056017-60-7m0f5",
@@ -1085,7 +1097,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "03/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-61-baapa",
@@ -1117,7 +1131,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "05/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-63-nssqk",
@@ -1133,7 +1149,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "07/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "LinkedIn HTTP 404: Vaga não existe mais no LinkedIn"
   },
   {
     "id": "vaga-1793920056017-64-9wrmm",
@@ -1149,7 +1167,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "07/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-65-7nfs6",
@@ -1165,7 +1185,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "10/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-66-l78sm",
@@ -1181,7 +1203,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "10/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-67-gfdoe",
@@ -1197,7 +1221,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "14/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-68-9ylpi",
@@ -1213,7 +1239,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "14/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-69-im1f5",
@@ -1261,7 +1289,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "19/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-72-tmq09",
@@ -1277,7 +1307,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "21/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-73-8zne8",
@@ -1293,7 +1325,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "21/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-74-91bi2",
@@ -1325,7 +1359,9 @@ window.BANCO_VAGAS = [
     "dataPublicacao": "24/03/2026",
     "fonte": "Planilha Comunitária (2026.1)",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "05/11/2026, 22:23:46",
+    "motivoEncerramento": "Anúncio finalizado: Inscrições encerradas"
   },
   {
     "id": "vaga-1793920056017-76-cwwa4",
