@@ -1,12 +1,61 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "07/11/2026, 14:08:42",
+  "ultimaExecucao": "07/11/2026, 15:23:10",
   "ultimoStatus": "VAGAS_SALVAS",
-  "duracaoSegundos": 1054,
+  "duracaoSegundos": 704,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "07/11/2026, 15:23:10",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 704,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Plug CRM",
+        "cargo": "Estágio - Programador Web com Rails",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Cursando Engenharia de Software, Sistemas de Informação ou áreas afins. Conhecimento em Ruby, Ruby on Rails, Orientação a Objetos, HTML5, CSS3, JavaScript e Git.",
+        "link": "https://br.linkedin.com/jobs/view/4358240078"
+      },
+      {
+        "empresa": "Cadence Design Systems",
+        "cargo": "Intern Product Validation Engineering: AI Quality Assurance (QA)",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Cursando Engenharia de Software, Ciência da Computação ou áreas afins. Validação de recursos orientados a IA, execução de testes automatizados, Python e garantia de qualidade de software.",
+        "link": "https://br.linkedin.com/jobs/view/4471959708"
+      },
+      {
+        "empresa": "1BMG - One Big Media Group",
+        "cargo": "Estagiário(a) em Automações e Análise de Dados",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Estudante de Engenharia de Software, Ciência da Computação ou áreas correlatas. Atuação no desenvolvimento de automações, dashboards e soluções com dados e inteligência artificial; familiaridade com Python e consumo de APIs.",
+        "link": "https://br.linkedin.com/jobs/view/4401070701"
+      },
+      {
+        "empresa": "Direcional Engenharia",
+        "cargo": "Estágio em Dados e Tecnologia",
+        "modalidade": "Hibrido",
+        "localizacao": "Belo Horizonte/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Cursando graduação em Engenharia de Software, Ciência de Dados, Ciência da Computação ou afins. Atuação com análise e tratamento de dados, BI, automação de processos, inovação e transformação digital.",
+        "link": "https://br.linkedin.com/jobs/view/4481382823"
+      }
+    ]
+  },
   {
     "timestamp": "07/11/2026, 14:08:42",
     "status": "VAGAS_SALVAS",
@@ -436,13 +485,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "01/11/2026, 18:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "01/11/2026, 17:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
