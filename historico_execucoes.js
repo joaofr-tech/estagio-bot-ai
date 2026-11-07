@@ -1,12 +1,51 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "06/11/2026, 17:29:02",
-  "ultimoStatus": "SEM_VAGAS",
-  "duracaoSegundos": 1056,
+  "ultimaExecucao": "07/11/2026, 14:08:42",
+  "ultimoStatus": "VAGAS_SALVAS",
+  "duracaoSegundos": 1054,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "07/11/2026, 14:08:42",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 1054,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Cadence Design Systems",
+        "cargo": "Intern: Software Engineering: Hardware Verification R&D",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte/MG (Savassi)",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação ou áreas correlatas com formatura prevista para 2028. Fundamentos em algoritmos e estruturas de dados, linguagem C++, interesse em scripting (Python/Tcl) e inglês intermediário/avançado para desenvolvimento de software R&D.",
+        "link": "https://www.linkedin.com/jobs/view/4469468698"
+      },
+      {
+        "empresa": "Komatsu",
+        "cargo": "Software Engineer Intern MTS BR",
+        "modalidade": "Hibrido",
+        "localizacao": "Belo Horizonte/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas. Conhecimento em lógica de programação, interesse em desenvolvimento e testes de software, carga horária de 20h a 30h semanais com horários flexíveis e inglês.",
+        "link": "https://www.linkedin.com/jobs/view/4479595732"
+      },
+      {
+        "empresa": "Exxata",
+        "cargo": "Estágio em Tecnologia, Visão Computacional e Automação",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte e Região, MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Estar regularmente matriculado em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas. Disponibilidade de 30 horas semanais em horário flexível; lógica de programação, interesse em soluções de visão computacional, automação de processos, tratamento e análise de dados; diferenciais em Python, APIs e bancos de dados.",
+        "link": "https://www.linkedin.com/jobs/view/4430148639"
+      }
+    ]
+  },
   {
     "timestamp": "06/11/2026, 17:29:02",
     "status": "SEM_VAGAS",
@@ -404,13 +443,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "01/11/2026, 17:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "01/11/2026, 16:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
