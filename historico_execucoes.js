@@ -1,12 +1,31 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "07/11/2026, 19:31:33",
-  "ultimoStatus": "SEM_VAGAS",
-  "duracaoSegundos": 1206,
+  "ultimaExecucao": "08/11/2026, 08:03:25",
+  "ultimoStatus": "VAGAS_SALVAS",
+  "duracaoSegundos": 840,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "08/11/2026, 08:03:25",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 840,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Artefact",
+        "cargo": "Intern Data Engineer Brazil",
+        "modalidade": "Remoto",
+        "localizacao": "Remoto - Brasil",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Estar cursando graduacao em Engenharia de Software, Ciencia da Computacao, Estatistica ou areas correlatas (formacao prevista a partir de Julho/2025 - compativel com 3º periodo); interesse em toda a cadeia de valor de dados (criacao de infraestruturas/plataformas, big data, machine learning, construcao de APIs REST, front-end e testes/CI-CD); perfil proativo, analitico e colaborativo; modalidade 100% home office (Free Office / Woba coworking) com carga horaria flexivel.",
+        "link": "https://job-boards.greenhouse.io/artefactjobs/jobs/8931797002"
+      }
+    ]
+  },
   {
     "timestamp": "07/11/2026, 19:31:33",
     "status": "SEM_VAGAS",
@@ -481,13 +500,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "01/11/2026, 22:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "01/11/2026, 21:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",

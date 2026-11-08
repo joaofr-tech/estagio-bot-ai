@@ -1,5 +1,19 @@
 window.BANCO_VAGAS = [
   {
+    "id": "vaga-1794135805707-yfv3j",
+    "empresa": "Artefact",
+    "cargo": "Intern Data Engineer Brazil",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Estar cursando graduacao em Engenharia de Software, Ciencia da Computacao, Estatistica ou areas correlatas (formacao prevista a partir de Julho/2025 - compativel com 3º periodo); interesse em toda a cadeia de valor de dados (criacao de infraestruturas/plataformas, big data, machine learning, construcao de APIs REST, front-end e testes/CI-CD); perfil proativo, analitico e colaborativo; modalidade 100% home office (Free Office / Woba coworking) com carga horaria flexivel.",
+    "link": "https://job-boards.greenhouse.io/artefactjobs/jobs/8931797002",
+    "dataColeta": "08/11/2026, 08:03:25",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
     "id": "vaga-1794075790259-cq0gx",
     "empresa": "Direcional Engenharia",
     "cargo": "Estágio em Dados e Tecnologia",
