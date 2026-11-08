@@ -1,5 +1,19 @@
 window.BANCO_VAGAS = [
   {
+    "id": "vaga-1794166127707-ipziu",
+    "empresa": "Blip",
+    "cargo": "Programa de Estágio Tech.AI 2027 (Desenvolvimento de Software, Engenharia de Dados e IA)",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas (Até 30/11/2026)",
+    "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas com conclusão prevista entre dez/2027 e dez/2028 (compatível com 3º período); lógica de programação (preferencialmente Python), consultas em bancos de dados relacionais com SQL, controle de versão Git/GitHub, integração e consumo de APIs REST; interesse em desenvolvimento de software, engenharia de dados ou IA aplicada; carga de 30 horas semanais com horário flexível (compatível com o turno da tarde/noite); não exige experiência prévia.",
+    "link": "https://lxp.comunidade.ada.tech/programas/estagio-ia-first-blip/inscricao",
+    "dataColeta": "08/11/2026, 16:28:47",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
     "id": "vaga-1794162599951-albex",
     "empresa": "Draiver",
     "cargo": "Estágio em Automação de Operações (Intern - Ops Automation)",

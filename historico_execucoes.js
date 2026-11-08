@@ -1,12 +1,31 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "08/11/2026, 15:30:00",
+  "ultimaExecucao": "08/11/2026, 16:28:47",
   "ultimoStatus": "VAGAS_SALVAS",
-  "duracaoSegundos": 1113,
+  "duracaoSegundos": 1041,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "08/11/2026, 16:28:47",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 1041,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Blip",
+        "cargo": "Programa de Estágio Tech.AI 2027 (Desenvolvimento de Software, Engenharia de Dados e IA)",
+        "modalidade": "Remoto",
+        "localizacao": "Remoto - Brasil",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas (Até 30/11/2026)",
+        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas com conclusão prevista entre dez/2027 e dez/2028 (compatível com 3º período); lógica de programação (preferencialmente Python), consultas em bancos de dados relacionais com SQL, controle de versão Git/GitHub, integração e consumo de APIs REST; interesse em desenvolvimento de software, engenharia de dados ou IA aplicada; carga de 30 horas semanais com horário flexível (compatível com o turno da tarde/noite); não exige experiência prévia.",
+        "link": "https://lxp.comunidade.ada.tech/programas/estagio-ia-first-blip/inscricao"
+      }
+    ]
+  },
   {
     "timestamp": "08/11/2026, 15:30:00",
     "status": "VAGAS_SALVAS",
@@ -509,13 +528,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "02/11/2026, 13:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "02/11/2026, 12:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
