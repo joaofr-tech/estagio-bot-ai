@@ -1,12 +1,31 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "08/11/2026, 14:29:22",
-  "ultimoStatus": "SEM_VAGAS",
-  "duracaoSegundos": 1075,
+  "ultimaExecucao": "08/11/2026, 15:30:00",
+  "ultimoStatus": "VAGAS_SALVAS",
+  "duracaoSegundos": 1113,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "08/11/2026, 15:30:00",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 1113,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Draiver",
+        "cargo": "Estágio em Automação de Operações (Intern - Ops Automation)",
+        "modalidade": "Remoto",
+        "localizacao": "Remoto - Brasil",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Proficiência em SQL para análise e consultas em bancos de dados relacionais; Habilidade para mapear processos e propor automações de fluxos operacionais da plataforma; Inglês intermediário/avançado para comunicação com times internacionais (Brasil, EUA, México, Canadá); Cursando Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatos.",
+        "link": "https://applicants.selenios.com/screening/intern-ops-automation-1aeccba4-02ac-41a5-846c-06c74bab161e"
+      }
+    ]
+  },
   {
     "timestamp": "08/11/2026, 14:29:22",
     "status": "SEM_VAGAS",
@@ -497,13 +516,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "02/11/2026, 12:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "02/11/2026, 11:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",

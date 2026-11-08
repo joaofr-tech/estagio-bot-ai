@@ -1,5 +1,19 @@
 window.BANCO_VAGAS = [
   {
+    "id": "vaga-1794162599951-albex",
+    "empresa": "Draiver",
+    "cargo": "Estágio em Automação de Operações (Intern - Ops Automation)",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Proficiência em SQL para análise e consultas em bancos de dados relacionais; Habilidade para mapear processos e propor automações de fluxos operacionais da plataforma; Inglês intermediário/avançado para comunicação com times internacionais (Brasil, EUA, México, Canadá); Cursando Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatos.",
+    "link": "https://applicants.selenios.com/screening/intern-ops-automation-1aeccba4-02ac-41a5-846c-06c74bab161e",
+    "dataColeta": "08/11/2026, 15:29:59",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
     "id": "vaga-1794135805707-yfv3j",
     "empresa": "Artefact",
     "cargo": "Intern Data Engineer Brazil",
