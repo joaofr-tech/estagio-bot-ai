@@ -14,7 +14,6 @@ verificar_vagas_encerradas.js
 registrar_log.js
 supabase_client.js
 EmailTemplate.jsx
-scripts/
 tests/
 scratch/
 legacy/

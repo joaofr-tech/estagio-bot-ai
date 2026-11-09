@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "node scripts/build_dashboard.js",
     "start": "node servidor.js",
     "test": "node tests/run_all_tests.js"
   },

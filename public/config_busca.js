@@ -1,0 +1,23 @@
+window.CONFIG_BUSCA = {
+  "candidato": "João Francisco",
+  "periodo": "3º período de Engenharia de Software",
+  "turnoFaculdade": "Manhã",
+  "turnosDisponiveis": [
+    "Tarde (12h-18h / 13h-19h)",
+    "Noite",
+    "Flexível (6h)"
+  ],
+  "estado": "MG",
+  "cidades": [
+    "Belo Horizonte",
+    "Contagem",
+    "Betim",
+    "Nova Lima",
+    "Ibirité"
+  ],
+  "localizacao": "Minas Gerais (Belo Horizonte, Contagem, Betim, Nova Lima, Ibirité)",
+  "aceitaPresencial": true,
+  "aceitaHibrido": true,
+  "aceitaRemoto": true,
+  "areasInteresse": "Engenharia de Software, Desenvolvimento Web/Full Stack/Backend/Frontend, Engenharia/Ciência de Dados, IA e Automação"
+};
