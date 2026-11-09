@@ -145,6 +145,12 @@ function salvarNovasVagas(jsonPath) {
 
   if (novasAdicionadas.length > 0) {
     console.log(`[Banco de Vagas] ${novasAdicionadas.length} nova(s) vaga(s) inédita(s) salva(s)!`);
+    try {
+      const { upsertVagasSupabase } = require('./supabase_client');
+      upsertVagasSupabase(novasAdicionadas).catch(err => {
+        console.warn('[Supabase] Falha ao sincronizar novas vagas:', err.message);
+      });
+    } catch (e) {}
   } else {
     console.log("[Banco de Vagas] Nenhuma vaga inédita encontrada nesta rodada (todas já catalogadas).");
   }

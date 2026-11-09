@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="100%" height="100%" style="background:#0c0e14; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="grad-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0e14" />
+      <stop offset="100%" stop-color="#141824" />
+    </linearGradient>
+    <linearGradient id="grad-server" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="grad-supabase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="grad-vercel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#311936" />
+      <stop offset="100%" stop-color="#1a0f1d" />
+    </linearGradient>
+    <linearGradient id="grad-api" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+    <filter id="glow-green" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#34d399" flood-opacity="0.3" />
+    </filter>
+
+    <!-- Markers for arrows -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#60a5fa" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#34d399" />
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#f472b6" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="680" fill="url(#grad-bg)" />
+
+  <!-- Outer Canvas Boundary -->
+  <rect x="30" y="30" width="940" height="620" rx="20" fill="none" stroke="#27272a" stroke-width="2" stroke-dasharray="8 6" />
+
+  <!-- Badge: Title / Execution Interval -->
+  <g transform="translate(60, 608)">
+    <rect width="210" height="30" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="1" />
+    <text x="15" y="20" fill="#a1a1aa" font-size="13" font-weight="600">⏱️ Execução: cada 1 hora</text>
+  </g>
+
+  <!-- ==================== 1. SERVER / CRAWLER ==================== -->
+  <g transform="translate(80, 110)">
+    <text x="110" y="0" text-anchor="middle" fill="#93c5fd" font-size="15" font-weight="700" letter-spacing="1">SERVER</text>
+    <text x="110" y="20" text-anchor="middle" fill="#64748b" font-size="12">(Notebook Antigo)</text>
+    
+    <rect x="0" y="35" width="230" height="290" rx="18" fill="url(#grad-server)" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)" />
+    
+    <!-- Crawler Icon / Box -->
+    <rect x="25" y="60" width="180" height="110" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+    <circle cx="115" cy="95" r="22" fill="#1e3a8a" />
+    <text x="115" y="102" text-anchor="middle" fill="#60a5fa" font-size="20">🤖</text>
+    <text x="115" y="142" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">crawler</text>
+    <text x="115" y="158" text-anchor="middle" fill="#94a3b8" font-size="12">Bot de Vagas</text>
+
+    <!-- Details -->
+    <rect x="20" y="195" width="190" height="65" rx="8" fill="#090d16" stroke="#1e293b" />
+    <text x="30" y="217" fill="#60a5fa" font-size="11" font-weight="700">🔐 SERVICE_ROLE_KEY</text>
+    <text x="30" y="235" fill="#94a3b8" font-size="11">• Executa em background</text>
+    <text x="30" y="249" fill="#94a3b8" font-size="11">• Salva no Supabase</text>
+
+    <rect x="20" y="275" width="190" height="32" rx="6" fill="#1e293b" />
+    <text x="115" y="296" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="600">Localhost / Node.js</text>
+  </g>
+
+  <!-- ==================== 2. API SUPABASE (CENTRAL) ==================== -->
+  <g transform="translate(430, 225)" filter="url(#glow-green)">
+    <!-- Rhombus / Diamond -->
+    <polygon points="70,0 140,70 70,140 0,70" fill="url(#grad-supabase)" stroke="#34d399" stroke-width="2.5" />
+    
+    <text x="70" y="65" text-anchor="middle" fill="#a7f3d0" font-size="13" font-weight="700" letter-spacing="1">API</text>
+    <text x="70" y="85" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="800">supabase</text>
+    <text x="70" y="103" text-anchor="middle" fill="#6ee7b7" font-size="11">REST / PostgREST</text>
+  </g>
+
+  <!-- ==================== 3. DATABASE ==================== -->
+  <g transform="translate(680, 75)">
+    <text x="115" y="0" text-anchor="middle" fill="#6ee7b7" font-size="15" font-weight="700" letter-spacing="1">DATABASE</text>
+    <text x="115" y="20" text-anchor="middle" fill="#64748b" font-size="12">(Cloud Postgres)</text>
+
+    <rect x="0" y="35" width="230" height="210" rx="18" fill="url(#grad-supabase)" stroke="#10b981" stroke-width="2" filter="url(#shadow)" />
+    
+    <circle cx="115" cy="80" r="22" fill="#064e3b" stroke="#059669" stroke-width="1.5" />
+    <text x="115" y="87" text-anchor="middle" fill="#34d399" font-size="18">🗄️</text>
+
+    <text x="115" y="125" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="800">supabase</text>
+    <text x="115" y="145" text-anchor="middle" fill="#a7f3d0" font-size="14" font-weight="600">w/ postgres</text>
+
+    <rect x="25" y="165" width="180" height="58" rx="8" fill="#022c22" stroke="#047857" />
+    <text x="115" y="188" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="700">Tabela: vagas</text>
+    <text x="115" y="208" text-anchor="middle" fill="#a7f3d0" font-size="11">RLS: Leitura pública</text>
+  </g>
+
+  <!-- ==================== 4. FRONTEND / VERCEL ==================== -->
+  <g transform="translate(680, 360)">
+    <text x="115" y="0" text-anchor="middle" fill="#f472b6" font-size="15" font-weight="700" letter-spacing="1">FRONTEND</text>
+    <text x="115" y="20" text-anchor="middle" fill="#64748b" font-size="12">(Global CDN)</text>
+
+    <rect x="0" y="35" width="230" height="225" rx="18" fill="url(#grad-vercel)" stroke="#ec4899" stroke-width="2" filter="url(#shadow)" />
+
+    <polygon points="115,65 135,98 95,98" fill="#ffffff" />
+    
+    <text x="115" y="130" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="800">vercel</text>
+    <text x="115" y="150" text-anchor="middle" fill="#fbcfe8" font-size="14" font-weight="600">for dashboard</text>
+
+    <rect x="20" y="170" width="190" height="70" rx="8" fill="#200d23" stroke="#50183e" />
+    <text x="115" y="193" text-anchor="middle" fill="#f472b6" font-size="12" font-weight="700">dashboard.html</text>
+    <text x="115" y="210" text-anchor="middle" fill="#fbcfe8" font-size="11">Acessível de celular e PC</text>
+    <text x="115" y="226" text-anchor="middle" fill="#d946ef" font-size="11">🌐 estagiobot.vercel.app</text>
+  </g>
+
+  <!-- ==================== 5. CONNECTING ARROWS & LABELS ==================== -->
+
+  <!-- Crawler -> API Supabase -->
+  <g>
+    <path d="M 310 295 L 420 295" stroke="#60a5fa" stroke-width="2.5" fill="none" marker-end="url(#arrow-blue)" />
+    <rect x="325" y="265" width="90" height="22" rx="4" fill="#0f172a" stroke="#1e3a8a" />
+    <text x="370" y="280" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="700">insert / upsert</text>
+  </g>
+
+  <!-- API Supabase -> Database -->
+  <g>
+    <path d="M 545 255 C 600 230, 620 200, 670 180" stroke="#34d399" stroke-width="2.5" fill="none" marker-end="url(#arrow-green)" />
+    <rect x="560" y="185" width="95" height="22" rx="4" fill="#064e3b" stroke="#059669" />
+    <text x="607" y="200" text-anchor="middle" fill="#a7f3d0" font-size="11" font-weight="700">persiste dados</text>
+  </g>
+
+  <!-- Frontend (Browser) -> API Supabase (Fetch GET) -->
+  <g>
+    <path d="M 680 480 C 600 470, 560 410, 520 370" stroke="#f472b6" stroke-width="2.5" fill="none" marker-end="url(#arrow-pink)" />
+    <rect x="545" y="445" width="115" height="24" rx="4" fill="#311936" stroke="#ec4899" />
+    <text x="602" y="461" text-anchor="middle" fill="#fbcfe8" font-size="11" font-weight="700">fetch() GET (vagas)</text>
+  </g>
+
+  <!-- Legend in bottom center -->
+  <g transform="translate(370, 608)">
+    <rect width="360" height="30" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="1" />
+    <circle cx="20" cy="15" r="5" fill="#60a5fa" />
+    <text x="32" y="19" fill="#94a3b8" font-size="11">Escrita Admin</text>
+    <circle cx="130" cy="15" r="5" fill="#34d399" />
+    <text x="142" y="19" fill="#94a3b8" font-size="11">Persistência</text>
+    <circle cx="230" cy="15" r="5" fill="#f472b6" />
+    <text x="242" y="19" fill="#94a3b8" font-size="11">Leitura Pública (Anon)</text>
+  </g>
+</svg>

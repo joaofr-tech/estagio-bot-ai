@@ -2071,6 +2071,8 @@
   <script src="historico_execucoes.js"></script>
   <script src="banco_vagas.js"></script>
   <script src="regras_mismatch.js"></script>
+  <script src="supabase_config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- =============================================================
        DASHBOARD CONTROLLER JAVASCRIPT
@@ -2274,8 +2276,48 @@
     }
 
     // =============================================================
-    // INITIALIZATION
+    // INITIALIZATION & SUPABASE CLOUD SYNC
     // =============================================================
+    async function carregarVagasSupabase() {
+      if (!window.SUPABASE_CONFIG || !window.SUPABASE_CONFIG.url || !window.SUPABASE_CONFIG.anonKey) return;
+      if (!window.supabase || typeof window.supabase.createClient !== 'function') return;
+
+      try {
+        const sbClient = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
+        const { data, error } = await sbClient
+          .from('vagas')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && Array.isArray(data) && data.length > 0) {
+          window.BANCO_VAGAS = data.map(v => ({
+            id: v.id,
+            empresa: v.empresa,
+            cargo: v.cargo,
+            modalidade: v.modalidade,
+            localizacao: v.localizacao,
+            turno: v.turno,
+            prazo: v.prazo,
+            requisitos: v.requisitos,
+            link: v.link,
+            dataColeta: v.data_coleta || v.dataColeta,
+            notificada: v.notificada,
+            status: v.status
+          }));
+
+          allJobs = getConsolidatedJobs();
+          if (currentScreen === '01') renderScreen01();
+          else if (currentScreen === '02') renderScreen02();
+          else if (currentScreen === '03') renderScreen03();
+          else if (currentScreen === '05') renderScreen05();
+          updateGlobalBadges();
+          console.log(`[Supabase] ☁️ ${data.length} vagas carregadas da nuvem em tempo real!`);
+        }
+      } catch (err) {
+        console.warn('[Supabase] Aviso ao sincronizar com nuvem:', err);
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       allJobs = getConsolidatedJobs();
       carregarParametrosCrawler();
@@ -2285,6 +2327,7 @@
       renderScreen05();
       setupSearch01();
       updateGlobalBadges();
+      carregarVagasSupabase();
     });
 
     // =============================================================
