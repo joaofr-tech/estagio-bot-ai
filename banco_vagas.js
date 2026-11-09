@@ -1,5 +1,33 @@
 window.BANCO_VAGAS = [
   {
+    "id": "vaga-1794184919068-g4az4",
+    "empresa": "Méliuz",
+    "cargo": "Estágio em Estratégia e Dados (IA / SQL)",
+    "modalidade": "Hibrido",
+    "localizacao": "Belo Horizonte/MG",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas com formatura a partir de dez/2027. Raciocínio lógico estruturado, análise de dados e modelagem. Diferenciais em ferramentas de Inteligência Artificial generativa (Claude Code, Codex) e consultas SQL.",
+    "link": "https://meliuz.gupy.io/jobs/11946183",
+    "dataColeta": "08/11/2026, 21:41:59",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794184919068-nrfo7",
+    "empresa": "Visagio",
+    "cargo": "Estágio em Desenvolvimento de Software (Visagio Talentos)",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Graduação em andamento a partir do 3º período em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatas. Lógica de programação, noções em linguagens como Java, Python, C#, Kotlin, Ruby ou TypeScript. Atuação em desenvolvimento full stack, front-end, back-end, engenharia de dados e automação de processos.",
+    "link": "https://vdev.gupy.io/jobs/11357264",
+    "dataColeta": "08/11/2026, 21:41:59",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
     "id": "vaga-1794166127707-ipziu",
     "empresa": "Blip",
     "cargo": "Programa de Estágio Tech.AI 2027 (Desenvolvimento de Software, Engenharia de Dados e IA)",

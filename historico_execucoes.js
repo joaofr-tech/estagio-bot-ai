@@ -1,12 +1,41 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "08/11/2026, 16:28:47",
+  "ultimaExecucao": "08/11/2026, 21:41:59",
   "ultimoStatus": "VAGAS_SALVAS",
-  "duracaoSegundos": 1041,
+  "duracaoSegundos": 1225,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "08/11/2026, 21:41:59",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 1225,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Visagio",
+        "cargo": "Estágio em Desenvolvimento de Software (Visagio Talentos)",
+        "modalidade": "Remoto",
+        "localizacao": "Remoto - Brasil",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Graduação em andamento a partir do 3º período em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou correlatas. Lógica de programação, noções em linguagens como Java, Python, C#, Kotlin, Ruby ou TypeScript. Atuação em desenvolvimento full stack, front-end, back-end, engenharia de dados e automação de processos.",
+        "link": "https://vdev.gupy.io/jobs/11357264"
+      },
+      {
+        "empresa": "Méliuz",
+        "cargo": "Estágio em Estratégia e Dados (IA / SQL)",
+        "modalidade": "Hibrido",
+        "localizacao": "Belo Horizonte/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas com formatura a partir de dez/2027. Raciocínio lógico estruturado, análise de dados e modelagem. Diferenciais em ferramentas de Inteligência Artificial generativa (Claude Code, Codex) e consultas SQL.",
+        "link": "https://meliuz.gupy.io/jobs/11946183"
+      }
+    ]
+  },
   {
     "timestamp": "08/11/2026, 16:28:47",
     "status": "VAGAS_SALVAS",
@@ -521,13 +550,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "02/11/2026, 14:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "02/11/2026, 13:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
