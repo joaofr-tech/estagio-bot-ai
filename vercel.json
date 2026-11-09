@@ -1,5 +1,8 @@
 {
   "cleanUrls": true,
+  "buildCommand": null,
+  "installCommand": "echo 'Static deployment'",
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/", "destination": "/dashboard.html" }
   ]
