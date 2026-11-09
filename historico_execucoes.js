@@ -1,12 +1,20 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "08/11/2026, 21:41:59",
-  "ultimoStatus": "VAGAS_SALVAS",
-  "duracaoSegundos": 1225,
+  "ultimaExecucao": "08/11/2026, 22:31:01",
+  "ultimoStatus": "SEM_VAGAS",
+  "duracaoSegundos": 1174,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "08/11/2026, 22:31:01",
+    "status": "SEM_VAGAS",
+    "isErro": false,
+    "duracaoSegundos": 1174,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
   {
     "timestamp": "08/11/2026, 21:41:59",
     "status": "VAGAS_SALVAS",
@@ -543,13 +551,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "02/11/2026, 15:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "02/11/2026, 14:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
