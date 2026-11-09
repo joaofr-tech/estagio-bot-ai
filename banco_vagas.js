@@ -1,5 +1,19 @@
 window.BANCO_VAGAS = [
   {
+    "id": "vaga-1794243217556-m7rpa",
+    "empresa": "BairesDev",
+    "cargo": "Work From Home Java Developer Intern",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Conhecimentos em Java e programacao orientada a objetos (POO); desenvolvimento e testes de aplicacoes em Java; raciocinio critico e resolucao de problemas; nivel intermediario/avancado de ingles; flexibilidade de horario e atuacao 100% remota.",
+    "link": "https://www.catho.com.br/vagas/work-from-home-java-developer-intern/38114765",
+    "dataColeta": "09/11/2026, 13:53:37",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
     "id": "vaga-1794184919068-g4az4",
     "empresa": "Méliuz",
     "cargo": "Estágio em Estratégia e Dados (IA / SQL)",

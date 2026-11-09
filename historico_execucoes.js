@@ -1,12 +1,31 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "08/11/2026, 22:31:01",
-  "ultimoStatus": "SEM_VAGAS",
-  "duracaoSegundos": 1174,
+  "ultimaExecucao": "09/11/2026, 13:53:37",
+  "ultimoStatus": "VAGAS_SALVAS",
+  "duracaoSegundos": 1350,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "09/11/2026, 13:53:37",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 1350,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "BairesDev",
+        "cargo": "Work From Home Java Developer Intern",
+        "modalidade": "Remoto",
+        "localizacao": "Remoto - Brasil",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Conhecimentos em Java e programacao orientada a objetos (POO); desenvolvimento e testes de aplicacoes em Java; raciocinio critico e resolucao de problemas; nivel intermediario/avancado de ingles; flexibilidade de horario e atuacao 100% remota.",
+        "link": "https://www.catho.com.br/vagas/work-from-home-java-developer-intern/38114765"
+      }
+    ]
+  },
   {
     "timestamp": "08/11/2026, 22:31:01",
     "status": "SEM_VAGAS",
@@ -544,13 +563,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "02/11/2026, 16:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "02/11/2026, 15:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
