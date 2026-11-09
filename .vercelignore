@@ -1,3 +1,4 @@
+server.js
 servidor.js
 gerenciador_vagas.js
 gerenciar_mismatch.js
@@ -8,6 +9,11 @@ iniciar_monitor_emails.vbs
 agendar_tarefas.ps1
 executar_busca.ps1
 atualizar_config_busca.js
+verificar_emails.js
+verificar_vagas_encerradas.js
+registrar_log.js
+supabase_client.js
+EmailTemplate.jsx
 scripts/
 tests/
 scratch/
