@@ -1,5 +1,13 @@
 ﻿Set-Location $PSScriptRoot
 
+# Auto-update: baixa automaticamente as ultimas melhorias do repositorio antes de iniciar
+try {
+    $pullResult = git -C $PSScriptRoot pull --rebase origin main 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        git -C $PSScriptRoot rebase --abort 2>&1 | Out-Null
+    }
+} catch {}
+
 $start = Get-Date
 $timestamp = $start.ToString("dd/MM/yyyy HH:mm:ss")
 $logPath = Join-Path $PSScriptRoot "log_execucoes.txt"

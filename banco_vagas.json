@@ -1,5 +1,33 @@
 [
   {
+    "id": "vaga-1794345944781-8yfmk",
+    "empresa": "Drogaria Araujo S/A",
+    "cargo": "Estágio de Governança de Arquitetura em TI",
+    "modalidade": "Presencial",
+    "localizacao": "Belo Horizonte/MG (Centro)",
+    "turno": "Tarde (13h-19h)",
+    "prazo": "Inscrições Abertas",
+    "requisitos": "Estar cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (a partir do 3º período); interesse em integração corporativa de sistemas, microsserviços, barramento corporativo, ETL e APIs; noções básicas de lógica de programação e banco de dados (SQL); diferenciais: noções de APIs REST, JSON, XML, Git, Python ou Java; disposição para aprender plataformas corporativas como MuleSoft e IBM DataStage.",
+    "link": "https://www.linkedin.com/jobs/view/4488009186",
+    "dataColeta": "10/11/2026, 18:25:44",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794336768522-46hb0",
+    "empresa": "Minas Tênis Clube",
+    "cargo": "Estágio de Informática (Desenvolvimento de sistemas)",
+    "modalidade": "Presencial",
+    "localizacao": "Belo Horizonte/MG (Bairro Lourdes)",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Cursando ensino superior em áreas de Tecnologia da Informação ou correlatas (a partir do 2º período); conhecimento em lógica de programação e familiaridade com linguagens como C# e JavaScript; conhecimentos básicos em banco de dados e SQL; noções de desenvolvimento de APIs REST; atuação no apoio ao desenvolvimento e manutenção de sistemas internos e aplicações web, construção e evolução de APIs e testes funcionais; carga horária de 6h diárias com horário a definir conforme a disponibilidade do estudante (Bolsa de R$ 1.621,00/mês + alimentação na empresa + VT + seguro).",
+    "link": "https://www.linkedin.com/jobs/view/4487817213",
+    "dataColeta": "10/11/2026, 15:52:48",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
     "id": "vaga-1794317529373-4tqd1",
     "empresa": "Pif Paf Alimentos",
     "cargo": "Estagiário(a) em Inteligência de Negócios (VMO)",

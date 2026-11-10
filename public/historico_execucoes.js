@@ -1,12 +1,66 @@
 window.CRAWLER_HEALTH = {
   "status": "healthy",
-  "ultimaExecucao": "10/11/2026, 14:21:08",
-  "ultimoStatus": "SEM_VAGAS",
-  "duracaoSegundos": 327,
+  "ultimaExecucao": "10/11/2026, 18:25:47",
+  "ultimoStatus": "VAGAS_SALVAS",
+  "duracaoSegundos": 858,
   "falhasConsecutivas": 0,
   "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
+  {
+    "timestamp": "10/11/2026, 18:25:47",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 858,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Drogaria Araujo S/A",
+        "cargo": "Estágio de Governança de Arquitetura em TI",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte/MG (Centro)",
+        "turno": "Tarde (13h-19h)",
+        "prazo": "Inscrições Abertas",
+        "requisitos": "Estar cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (a partir do 3º período); interesse em integração corporativa de sistemas, microsserviços, barramento corporativo, ETL e APIs; noções básicas de lógica de programação e banco de dados (SQL); diferenciais: noções de APIs REST, JSON, XML, Git, Python ou Java; disposição para aprender plataformas corporativas como MuleSoft e IBM DataStage.",
+        "link": "https://www.linkedin.com/jobs/view/4488009186"
+      }
+    ]
+  },
+  {
+    "timestamp": "10/11/2026, 17:24:59",
+    "status": "SEM_VAGAS",
+    "isErro": false,
+    "duracaoSegundos": 813,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "10/11/2026, 16:37:17",
+    "status": "SEM_VAGAS",
+    "isErro": false,
+    "duracaoSegundos": 1550,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
+  },
+  {
+    "timestamp": "10/11/2026, 15:52:50",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 2482,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Minas Tênis Clube",
+        "cargo": "Estágio de Informática (Desenvolvimento de sistemas)",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte/MG (Bairro Lourdes)",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Cursando ensino superior em áreas de Tecnologia da Informação ou correlatas (a partir do 2º período); conhecimento em lógica de programação e familiaridade com linguagens como C# e JavaScript; conhecimentos básicos em banco de dados e SQL; noções de desenvolvimento de APIs REST; atuação no apoio ao desenvolvimento e manutenção de sistemas internos e aplicações web, construção e evolução de APIs e testes funcionais; carga horária de 6h diárias com horário a definir conforme a disponibilidade do estudante (Bolsa de R$ 1.621,00/mês + alimentação na empresa + VT + seguro).",
+        "link": "https://www.linkedin.com/jobs/view/4487817213"
+      }
+    ]
+  },
   {
     "timestamp": "10/11/2026, 14:21:08",
     "status": "SEM_VAGAS",
@@ -831,34 +885,6 @@ window.HISTORICO_EXECUCOES = [
   },
   {
     "timestamp": "05/11/2026, 17:11:26",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "05/11/2026, 16:11:29",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 2,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "04/11/2026, 23:32:14",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "04/11/2026, 20:11:27",
-    "status": "SEM_VAGAS",
-    "duracaoSegundos": 30,
-    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
-    "vagas": []
-  },
-  {
-    "timestamp": "04/11/2026, 19:11:27",
     "status": "SEM_VAGAS",
     "duracaoSegundos": 30,
     "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
