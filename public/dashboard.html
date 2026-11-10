@@ -2318,6 +2318,44 @@
       }
     }
 
+    async function carregarHistoricoSupabase() {
+      if (!window.SUPABASE_CONFIG || !window.SUPABASE_CONFIG.url || !window.SUPABASE_CONFIG.anonKey) return;
+      if (!window.supabase || typeof window.supabase.createClient !== 'function') return;
+
+      try {
+        const sbClient = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
+        const { data, error } = await sbClient
+          .from('historico_execucoes')
+          .select('*')
+          .order('id', { ascending: false })
+          .limit(50);
+
+        if (!error && Array.isArray(data) && data.length > 0) {
+          executionData.length = 0;
+          data.forEach(r => {
+            const arrVagas = [];
+            for (let i = 0; i < (r.total_vagas || 0); i++) {
+              arrVagas.push({ placeholder: true });
+            }
+            executionData.push({
+              timestamp: r.timestamp,
+              status: r.status,
+              isErro: r.is_erro,
+              duracaoSegundos: r.duracao_segundos,
+              mensagem: r.mensagem,
+              vagas: arrVagas
+            });
+          });
+
+          if (currentScreen === '03') renderScreen03();
+          updateGlobalBadges();
+          console.log(`[Supabase] 📡 ${data.length} execuções de crawler carregadas da nuvem em tempo real!`);
+        }
+      } catch (err) {
+        console.warn('[Supabase] Aviso ao sincronizar telemetria com nuvem:', err);
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       allJobs = getConsolidatedJobs();
       carregarParametrosCrawler();
@@ -2328,6 +2366,7 @@
       setupSearch01();
       updateGlobalBadges();
       carregarVagasSupabase();
+      carregarHistoricoSupabase();
     });
 
     // =============================================================

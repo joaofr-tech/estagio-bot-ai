@@ -73,7 +73,7 @@ function limparDuplicatas() {
   return limpo;
 }
 
-function salvarNovasVagas(jsonPath) {
+async function salvarNovasVagas(jsonPath) {
   if (!fs.existsSync(jsonPath)) return [];
   let candidatas = [];
   try {
@@ -147,10 +147,10 @@ function salvarNovasVagas(jsonPath) {
     console.log(`[Banco de Vagas] ${novasAdicionadas.length} nova(s) vaga(s) inédita(s) salva(s)!`);
     try {
       const { upsertVagasSupabase } = require('./supabase_client');
-      upsertVagasSupabase(novasAdicionadas).catch(err => {
-        console.warn('[Supabase] Falha ao sincronizar novas vagas:', err.message);
-      });
-    } catch (e) {}
+      await upsertVagasSupabase(novasAdicionadas);
+    } catch (e) {
+      console.warn('[Supabase] Falha ao sincronizar novas vagas:', e.message);
+    }
   } else {
     console.log("[Banco de Vagas] Nenhuma vaga inédita encontrada nesta rodada (todas já catalogadas).");
   }
@@ -215,7 +215,12 @@ if (require.main === module) {
   const comando = process.argv[2];
   const param = process.argv[3];
   if (comando === 'salvar' && param) {
-    salvarNovasVagas(param);
+    salvarNovasVagas(param)
+      .then(() => process.exit(0))
+      .catch(err => {
+        console.error('[Banco de Vagas] Erro ao salvar novas vagas:', err);
+        process.exit(1);
+      });
   } else if (comando === 'pendentes') {
     console.log(JSON.stringify(obterPendentes(), null, 2));
   } else if (comando === 'limpar') {

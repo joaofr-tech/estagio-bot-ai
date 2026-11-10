@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { salvarExecucaoSupabase } = require('./supabase_client');
 
 const jsPath = path.join(__dirname, 'historico_execucoes.js');
 const status = process.argv[2] || 'SEM_VAGAS';
@@ -35,14 +36,16 @@ const dataFormatada = agora.toLocaleString('pt-BR');
 
 const isErro = status.includes('ERRO') || status.includes('FALHA') || (duracao < 15 && novasVagas.length === 0 && status !== 'SEM_VAGAS');
 
-historico.unshift({
+const novaExecucao = {
   timestamp: dataFormatada,
   status: status,
   isErro: isErro,
   duracaoSegundos: duracao,
   mensagem: mensagem,
   vagas: novasVagas
-});
+};
+
+historico.unshift(novaExecucao);
 
 if (historico.length > 50) {
   historico = historico.slice(0, 50);
@@ -71,4 +74,19 @@ const healthData = {
 const outputContent = `window.CRAWLER_HEALTH = ${JSON.stringify(healthData, null, 2)};\nwindow.HISTORICO_EXECUCOES = ${JSON.stringify(historico, null, 2)};\n`;
 
 fs.writeFileSync(jsPath, outputContent, 'utf8');
-console.log(`Observabilidade atualizada com sucesso. Status = ${healthStatus} (Duração: ${duracao}s)`);
+console.log(`Observabilidade local atualizada com sucesso. Status = ${healthStatus} (Duração: ${duracao}s)`);
+
+(async () => {
+  try {
+    await salvarExecucaoSupabase({
+      timestamp: dataFormatada,
+      status: status,
+      isErro: isErro,
+      duracaoSegundos: duracao,
+      mensagem: mensagem,
+      totalVagas: novasVagas.length
+    });
+  } catch (err) {
+    console.warn('[Supabase] Telemetria em nuvem não registrada:', err.message);
+  }
+})();

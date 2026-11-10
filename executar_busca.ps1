@@ -1,4 +1,4 @@
-Set-Location $PSScriptRoot
+﻿Set-Location $PSScriptRoot
 
 $start = Get-Date
 $timestamp = $start.ToString("dd/MM/yyyy HH:mm:ss")
@@ -128,20 +128,11 @@ node verificar_vagas_encerradas.js 30 >> $logPath 2>&1
 Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Verificando e-mails para acoes pendentes (testes/entrevistas)..."
 node verificar_emails.js >> $logPath 2>&1
 
-# Sincronizacao automatica com GitHub Pages
-Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Sincronizando dados com o GitHub Pages..."
+# Sincronizacao local e nuvem
 try {
     Copy-Item -Path (Join-Path $PSScriptRoot "dashboard.html") -Destination (Join-Path $PSScriptRoot "index.html") -Force
-    git -C $PSScriptRoot add banco_vagas.* historico_execucoes.* regras_mismatch.* index.html dashboard.html
-    $pendingChanges = git -C $PSScriptRoot status --porcelain
-    if ($pendingChanges) {
-        git -C $PSScriptRoot commit -m "Auto: atualização diária de vagas e métricas [skip ci]"
-        git -C $PSScriptRoot push origin main
-        Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] GitHub Pages atualizado com sucesso via git push!"
-    } else {
-        Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Repositorio ja sincronizado."
-    }
+    Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Ciclo concluido. Dados sincronizados com o Supabase."
 } catch {
-    Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Falha na sincronizacao com GitHub Pages: $_"
+    Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Aviso na atualizacao local: $_"
 }
 

@@ -46,7 +46,34 @@ async function upsertVagasSupabase(vagas) {
   }
 }
 
+async function salvarExecucaoSupabase(execucao) {
+  if (!supabase || !execucao) return false;
+
+  try {
+    const payload = {
+      timestamp: execucao.timestamp,
+      status: execucao.status,
+      is_erro: !!execucao.isErro,
+      duracao_segundos: execucao.duracaoSegundos || 0,
+      mensagem: execucao.mensagem || '',
+      total_vagas: execucao.totalVagas || 0
+    };
+
+    const { error } = await supabase.from('historico_execucoes').insert([payload]);
+    if (error) {
+      console.warn('[Supabase] Aviso ao registrar histórico no Supabase:', error.message);
+      return false;
+    }
+    console.log('[Supabase] 📡 Telemetria de execução registrada com sucesso na nuvem!');
+    return true;
+  } catch (err) {
+    console.warn('[Supabase] Erro de rede ao registrar telemetria:', err.message);
+    return false;
+  }
+}
+
 module.exports = {
   supabase,
-  upsertVagasSupabase
+  upsertVagasSupabase,
+  salvarExecucaoSupabase
 };
