@@ -14,6 +14,8 @@ if (Test-Path $vagasJson) {
 
 # Carregar parametros deterministicos de busca se existirem
 $configFile = Join-Path $PSScriptRoot "config_busca.json"
+$modelo = "gemini-3.8-flash-medium"
+$effort = "medium"
 $candidato = "Joao Francisco"
 $periodo = "3º periodo de Engenharia de Software"
 $turnoFaculdade = "MANHA"
@@ -25,6 +27,8 @@ $areas = "Engenharia de Software, Desenvolvimento Web/Full Stack/Backend/Fronten
 if (Test-Path $configFile) {
     try {
         $cfg = Get-Content $configFile -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($cfg.modelo) { $modelo = $cfg.modelo }
+        if ($cfg.effort) { $effort = $cfg.effort }
         if ($cfg.candidato) { $candidato = $cfg.candidato }
         if ($cfg.periodo) { $periodo = $cfg.periodo }
         if ($cfg.turnoFaculdade) { $turnoFaculdade = $cfg.turnoFaculdade.ToUpper() }
@@ -95,7 +99,8 @@ Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SE
    - Se nao encontrar vagas novas e ativas com esses requisitos nesta rodada, apenas responda 'Nenhuma vaga nova nesta rodada.' e finalize silenciosamente sem criar o arquivo.
 "@
 
-$result = $prompt | agy --dangerously-skip-permissions 2>&1
+Add-Content -Path $logPath -Value "[$timestamp] Executando agente com modelo: $modelo (effort: $effort)..."
+$result = $prompt | agy --model $modelo --effort $effort --dangerously-skip-permissions 2>&1
 $exitCode = $LASTEXITCODE
 Add-Content -Path $logPath -Value $result
 
