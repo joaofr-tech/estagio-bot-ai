@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎯 EstágioBot
+# 🎯 Sona
 ### Autonomous Job Hunter & Application Tracker for Tech Internships
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
@@ -17,15 +17,15 @@
 <br/>
 
 <!-- HERO VISUAL: Imagem em assets/dashboard_preview.png -->
-<img src="assets/dashboard_preview.png" alt="EstágioBot Dashboard Preview" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.12);" />
+<img src="assets/dashboard_preview.png" alt="Sona Dashboard Preview" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.12);" />
 
 </div>
 
 ---
 
-### 💡 Por que o EstágioBot?
+### 💡 Por que o Sona?
 
-Buscar estágio manualmente em dezenas de sites consome horas e gera candidaturas desorganizadas. O EstágioBot automatiza o ciclo completo:
+Buscar estágio manualmente em dezenas de sites consome horas e gera candidaturas desorganizadas. O Sona automatiza o ciclo completo:
 
 - **Busca Determinística & Anti-Duplicatas:** Varre Gupy, LinkedIn e portais oficiais, filtrando apenas vagas que batem com seu curso, turno e cidades de interesse.
 - **Zero Configuração de Servidor:** O dashboard roda 100% offline direto no navegador com persistência em JSON — sem precisar de Docker, banco externo ou conta na nuvem.

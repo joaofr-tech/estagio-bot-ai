@@ -22,3 +22,10 @@ banco_vagas.backup.json
 .env.example
 email_config.json
 email_config.example.json
+skills/
+.agents/
+preview-*.html
+prototipo-*.html
+vitrine_*.html
+schema_supabase.sql
+arquitetura_estagiobot.*

@@ -1,7 +1,7 @@
 {
-  "name": "estagio_bot",
+  "name": "sona",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sona — Autonomous Job Hunter & Application Tracker for Tech Internships",
   "scripts": {
     "build": "node scripts/build_dashboard.js",
     "start": "node servidor.js",

@@ -3,14 +3,35 @@ node_modules/
 
 # Variaveis de ambiente sensiveis
 .env
+.env*.local
+.env.local
 email_config.json
 
 # Logs e arquivos temporarios de execucao
+*.log
 log_execucoes.txt
 novas_vagas.json
 *.backup.json
+*.tmp
+*.bak
 temp_*.html
 scratch/
+
+# Prototipos e Previews de UI/Design (Padronizacao)
+preview-*.html
+preview_*.html
+prototipo-*.html
+prototipo_*.html
+vitrine_*.html
+public/preview-*.html
+public/preview_*.html
+public/prototipo-*.html
+public/prototipo_*.html
+public/vitrine_*.html
+
+# IDEs e Editores
+.vscode/
+.idea/
 
 # Sistema operacional
 .DS_Store

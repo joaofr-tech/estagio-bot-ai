@@ -3,42 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f7f6f2">
-  <title>EstágioBot — Radar de Oportunidades &amp; Engenharia</title>
+  <meta name="theme-color" content="#059669">
+  <title>Sona — Radar de Oportunidades &amp; Engenharia</title>
   
-  <!-- Favicon: Monograma Editorial 'J' com Beacon de Radar Ativo -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23242420'/%3E%3Ctext x='28' y='47' font-family='Georgia, serif' font-size='42' font-style='italic' font-weight='600' fill='%23f7f6f2' text-anchor='middle'%3EJ%3C/text%3E%3Ccircle cx='50' cy='14' r='5.5' fill='%2322c55e'/%3E%3C/svg%3E">
+  <!-- Favicon: Monolito S-O (Logo 4C) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23064E3B'/%3E%3Ccircle cx='32' cy='32' r='20' stroke='%2334D399' stroke-width='6' fill='none'/%3E%3Cpath d='M 32 12 C 22 12, 17 19, 22 26 C 27 33, 38 31, 42 38 C 47 46, 41 52, 32 52' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
   <link rel="alternate icon" href="favicon.svg">
   
   <!-- Typography matching gabrielgreco.com: Editorial Serif + Clean Sans + Technical Monospace -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
+    <style>
     /* =============================================================
-       GABRIEL GRECO DESIGN SYSTEM
-       Editorial Minimalist Paper Aesthetic · Hairline Lines · Decoupled Views
+       ORATRY DESIGN SYSTEM — ESTÁGIOBOT 2.0
+       Electric Cobalt Palette · Floating Glass · Smooth Pills · Deep Hierarchy
        ============================================================= */
     :root {
-      --paper: #f7f6f2;
-      --paper-deep: #efeee8;
-      --paper-card: #ffffff;
-      --ink: #242420;
-      --ink-soft: #383731;
-      --muted: #716f68;
-      --faint: #9a978f;
-      --line: #d9d7cf;
-      --line-dark: #b8b5ac;
-      --green: #2f6f4e;
-      --green-subtle: #2f6f4e15;
-      --yellow: #f1df7d;
-      --yellow-subtle: #fffbe6;
-      --sidebar: 272px;
+      /* =============================================================
+         ORATRY DESIGN SYSTEM — SONA 2.0 (SAGE / ESMERALDA NO TOM ATUAL)
+         Mesma Luminosidade, Saturação e Vibração do Azul Original
+         ============================================================= */
+      --brand-primary: #059669;
+      --brand-primary-hover: #047857;
+      --brand-primary-light: #ECFDF5;
+      --brand-primary-glow: rgba(5, 150, 105, 0.35);
+      --brand-primary-subtle: rgba(5, 150, 105, 0.08);
 
-      --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
-      --font-sans: "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      /* Sidebar Verde Esmeralda/Sálvia Luminoso (Idêntica saturação e vidro do Azul) */
+      /* Sidebar Verde Esmeralda/Sálvia Luminoso (Tom e Efeito Vidro Restaurados) */
+      --sidebar-bg: linear-gradient(180deg, #059669 0%, #046642 100%);
+      --sidebar-border: rgba(255, 255, 255, 0.16);
+      --sidebar-card: rgba(255, 255, 255, 0.14);
+      --sidebar-card-hover: rgba(255, 255, 255, 0.22);
+      --sidebar-card-border: rgba(255, 255, 255, 0.22);
+      --sidebar-link-active: rgba(255, 255, 255, 0.22);
+      --sidebar-link-hover: rgba(255, 255, 255, 0.10);
+      --sidebar-text: #FFFFFF;
+      --sidebar-text-muted: rgba(255, 255, 255, 0.78);
+      --sidebar-category: rgba(255, 255, 255, 0.50);
+
+      /* Canvas & Superfícies Flutuantes (Idêntico ao Canvas Original) */
+      --canvas-bg: #F4F7F6;
+      --canvas-card: #FFFFFF;
+      --canvas-card-subtle: #F8FAFA;
+
+      /* Tipografia Slate Neutra de Alto Contraste (Preservada do Original) */
+      --text-heading: #0F172A;
+      --text-body: #334155;
+      --text-muted: #64748B;
+      --text-faint: #94A3B8;
+
+      /* Bordas e Linhas Suaves */
+      --border-subtle: rgba(226, 232, 240, 0.85);
+      --border-strong: #CBD5E1;
+      --border-focus: #059669;
+
+      /* Acentos de Status */
+      --accent-emerald: #059669;
+      --accent-emerald-subtle: #ECFDF5;
+      --accent-emerald-text: #047857;
+      --accent-amber: #F59E0B;
+      --accent-amber-subtle: #FFFBEB;
+      --accent-amber-text: #B45309;
+      --accent-rose: #EF4444;
+      --accent-rose-subtle: #FEF2F2;
+      --accent-rose-text: #B91C1C;
+      --accent-indigo: #6366F1;
+      --accent-indigo-subtle: #EEF2FF;
+      --accent-indigo-text: #4F46E5;
+      --accent-cyan: #06B6D4;
+      --accent-cyan-subtle: #ECFEFF;
+
+      /* Geometria: Pílulas & Curvaturas Generosas */
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+      --radius-pill: 9999px;
+
+      /* Elevações & Sombras Suaves com Glow Esmeralda */
+      --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+      --shadow-card-hover: 0 14px 30px -4px rgba(5, 150, 105, 0.16), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+      --shadow-cta: 0 8px 24px -4px rgba(5, 150, 105, 0.42);
+      --shadow-float: 0 20px 45px -10px rgba(15, 23, 42, 0.16);
+
+      /* Tipografia Moderna */
+      --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+
+      /* Layout */
+      --sidebar: 276px;
+
+      /* Mapeamento para Compatibilidade de Classes Legadas */
+      --paper: var(--canvas-bg);
+      --paper-deep: var(--canvas-card-subtle);
+      --paper-card: var(--canvas-card);
+      --ink: var(--text-heading);
+      --ink-soft: var(--text-body);
+      --muted: var(--text-muted);
+      --faint: var(--text-faint);
+      --line: var(--border-subtle);
+      --line-dark: var(--border-strong);
+      --green: var(--accent-emerald);
+      --yellow: var(--accent-amber);
+      --yellow-subtle: var(--accent-amber-subtle);
+      --font-serif: var(--font-sans);
+      --bg-card: var(--canvas-card);
     }
 
     * {
@@ -49,8 +121,8 @@
 
     html {
       scroll-behavior: smooth;
-      background-color: var(--paper);
-      color: var(--ink);
+      background-color: var(--canvas-bg);
+      color: var(--text-body);
       font-family: var(--font-sans);
       font-size: 15px;
       line-height: 1.6;
@@ -59,202 +131,329 @@
     }
 
     body {
-      background-color: var(--paper);
-      color: var(--ink);
+      background-color: var(--canvas-bg);
+      color: var(--text-body);
       min-height: 100vh;
       display: flex;
+    }
+
+    /* Ponto Final Colorido de Destaque (Assinatura Oratry) */
+    .title-dot {
+      color: var(--brand-primary);
+      display: inline-block;
+      margin-left: -0.05em;
     }
 
     .mono {
       font-family: var(--font-mono);
       font-size: 0.73rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--muted);
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
     }
 
     /* =============================================================
-       FIXED SIDEBAR (5 Decoupled Screens)
+       FIXED SIDEBAR (Nova Estrutura com Paleta Sage / Esmeralda Original)
        ============================================================= */
     .site-sidebar {
       position: fixed;
       inset: 0 auto 0 0;
       width: var(--sidebar);
       height: 100vh;
-      background: var(--paper-deep);
-      border-right: 1px solid var(--line);
-      padding: 2.2rem 1.6rem 1.8rem;
+      background: var(--sidebar-bg);
+      padding: 1.25rem 1rem 1rem;
       display: flex;
       flex-direction: column;
       z-index: 50;
       overflow-y: auto;
+      box-shadow: 4px 0 24px rgba(5, 150, 105, 0.25);
+      border-right: 1px solid var(--sidebar-border);
     }
 
-    .sidebar-top {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-      padding-bottom: 1.8rem;
-      border-bottom: 1px solid var(--line);
+    /* Linha divisória sutil translúcida */
+    .sidebar-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.14);
+      margin: 0.85rem 0;
+      width: 100%;
     }
 
-    .sidebar-identity {
+    /* 1. TOPO: MARCA DO SAAS (LOGO + "SONA") */
+    .brand-header {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
-      text-decoration: none;
-      color: var(--ink);
-      cursor: pointer;
+      gap: 0.75rem;
+      padding: 0.2rem 0.4rem 0.3rem;
+      user-select: none;
     }
 
-    .identity-mark {
-      width: 38px;
-      height: 38px;
-      background: var(--ink);
-      color: var(--paper);
-      font-family: var(--font-serif);
-      font-size: 1.45rem;
-      font-style: italic;
-      font-weight: 500;
+    .brand-logo-svg {
+      width: 24px;
+      height: 24px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+    }
+
+    .brand-header:hover .brand-logo-svg {
+      transform: scale(1.08);
+      color: #E2E8F0;
+    }
+
+    .brand-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+    }
+
+    /* 2. WORKSPACE / PERFIL ATIVO (Estilo Isla / Abacate) */
+    .workspace-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.55rem 0.65rem;
+      background: var(--sidebar-card);
+      border: 1px solid var(--sidebar-card-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    .workspace-card:hover {
+      background: var(--sidebar-card-hover);
+      border-color: rgba(255, 255, 255, 0.32);
+      transform: translateY(-1px);
+    }
+
+    .workspace-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 3px;
       flex-shrink: 0;
+      color: #FFFFFF;
     }
 
-    .identity-copy {
+    .workspace-info {
       display: flex;
       flex-direction: column;
-      line-height: 1.15;
+      overflow: hidden;
+      line-height: 1.25;
     }
 
-    .identity-copy strong {
-      font-size: 1.05rem;
+    .workspace-name {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .workspace-handle {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.75);
+      font-family: var(--font-mono);
+      letter-spacing: -0.01em;
+    }
+
+    .workspace-switch-icon {
+      margin-left: auto;
+      color: rgba(255, 255, 255, 0.6);
+      transition: transform 0.2s ease;
+    }
+
+    .workspace-card:hover .workspace-switch-icon {
+      color: #FFFFFF;
+    }
+
+    /* Títulos de Categorias */
+    .nav-section-title {
+      font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .identity-copy small {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.03em;
-      margin-top: 2px;
-    }
-
-    .sidebar-status {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-size: 0.74rem;
-      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sidebar-category);
+      padding: 0.75rem 0.65rem 0.3rem;
       font-family: var(--font-mono);
     }
 
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.2);
-      flex-shrink: 0;
-      animation: pulseDot 2.8s infinite ease-in-out;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.2); }
-      50% { box-shadow: 0 0 0 6px rgba(47, 111, 78, 0.08); }
-    }
-
-    /* Sidebar Navigation Links */
+    /* Navegação */
     .sidebar-nav {
       flex: 1;
-      padding: 1.8rem 0;
+      padding: 0.2rem 0;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
     }
 
     .sidebar-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.25rem;
     }
 
     .sidebar-link {
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      padding: 0.65rem 0.8rem;
-      color: var(--ink-soft);
+      padding: 0.55rem 0.65rem;
+      color: var(--sidebar-text-muted);
       text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.15s, color 0.15s;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      position: relative;
+      user-select: none;
+      border: 1px solid transparent;
     }
 
     .sidebar-link:hover {
-      background: var(--paper);
-      color: var(--ink);
+      background: var(--sidebar-link-hover);
+      color: #FFFFFF;
+      transform: translateX(2px);
     }
 
     .sidebar-link.active {
-      background: var(--paper);
-      color: var(--ink);
+      background: var(--sidebar-link-active);
+      color: #FFFFFF;
       font-weight: 600;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     }
 
-    .nav-number {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--faint);
-      width: 22px;
-      letter-spacing: 0.04em;
+    .sidebar-icon {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+      opacity: 0.85;
+      flex-shrink: 0;
+      transition: opacity 0.15s ease;
     }
 
-    .sidebar-link.active .nav-number {
-      color: var(--green);
-      font-weight: 600;
+    .sidebar-link:hover .sidebar-icon,
+    .sidebar-link.active .sidebar-icon {
+      opacity: 1;
     }
 
     .nav-label {
       flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .nav-badge {
       font-family: var(--font-mono);
       font-size: 0.68rem;
-      padding: 0.1em 0.45em;
-      border-radius: 3px;
-      background: var(--line);
-      color: var(--ink);
-      font-weight: 500;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
     }
 
     .sidebar-link.active .nav-badge {
-      background: var(--ink);
-      color: var(--paper);
+      background: rgba(255, 255, 255, 0.32);
+      color: #FFFFFF;
     }
 
+    /* 3. BASE: PERFIL / LOGOUT */
     .sidebar-bottom {
-      border-top: 1px solid var(--line);
-      padding-top: 1.2rem;
+      margin-top: auto;
+      padding-top: 0.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.35rem;
     }
 
-    .sidebar-availability {
+    .user-footer-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0.5rem 0.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      margin-top: 0.2rem;
+    }
+
+    .user-avatar-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      line-height: 1.25;
+      flex: 1;
+    }
+
+    .user-name {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .user-email {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.75);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
       font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--muted);
-      line-height: 1.4;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .icon-action-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .icon-action-btn.logout {
+      color: #FCA5A5;
+    }
+
+    .icon-action-btn.logout:hover {
+      background: rgba(239, 68, 68, 0.28);
+      color: #FFFFFF;
+      transform: translateX(1px);
     }
 
     /* =============================================================
@@ -267,20 +466,21 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      background: var(--canvas-bg);
+      padding-bottom: 4rem;
     }
 
     .wrap {
-      max-width: 1080px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+      padding: 0 clamp(1.5rem, 3.5vw, 3rem);
       width: 100%;
     }
 
-    /* Screen Views Wrapper */
     .screen-view {
       display: none;
       width: 100%;
-      animation: fadeInView 0.18s ease-out;
+      animation: fadeInView 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .screen-view.active {
@@ -288,49 +488,69 @@
     }
 
     @keyframes fadeInView {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Editorial Screen Headers */
+    /* Cabeçalhos Modernos das Telas */
     .screen-header-block {
-      border-bottom: 1px solid var(--line);
-      padding: clamp(2.8rem, 4.5vw, 4.2rem) 0 clamp(1.8rem, 3vw, 2.8rem);
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: clamp(2.4rem, 4vw, 3.4rem) 0 clamp(1.6rem, 2.8vw, 2.4rem);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      margin-bottom: 1.8rem;
     }
 
     .screen-kicker {
-      margin-bottom: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .screen-kicker::before {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 2.5px;
+      background: var(--brand-primary);
+      border-radius: 2px;
     }
 
     .screen-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      color: var(--ink);
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      color: var(--text-heading);
     }
 
     .screen-desc {
-      color: var(--muted);
+      color: var(--text-muted);
       max-width: 720px;
-      margin-top: 1.1rem;
-      font-size: clamp(0.98rem, 1.25vw, 1.1rem);
-      line-height: 1.55;
+      margin-top: 0.6rem;
+      font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+      line-height: 1.6;
     }
 
-    /* Daily Goal Card (Screen 01) */
+    /* Card de Meta Diária (Estilo Oratry Flutuante) */
     .goal-tracker-card {
-      margin-top: 1.8rem;
-      border: 1px solid var(--line);
-      background: var(--paper-deep);
+      margin-top: 1.6rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       padding: 1.3rem 1.6rem;
-      border-radius: 4px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 1.2rem;
+      box-shadow: var(--shadow-card);
     }
 
     .goal-info {
@@ -340,19 +560,17 @@
     }
 
     .goal-title {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--ink);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-heading);
       display: flex;
       align-items: center;
       gap: 0.6rem;
     }
 
     .goal-sub {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
 
     .goal-meter-wrap {
@@ -364,16 +582,17 @@
 
     .goal-meter-bar {
       flex: 1;
-      height: 8px;
-      background: var(--line);
-      border-radius: 4px;
+      height: 10px;
+      background: #EEF2F6;
+      border-radius: var(--radius-pill);
       overflow: hidden;
       position: relative;
     }
 
     .goal-meter-fill {
       height: 100%;
-      background: var(--green);
+      background: linear-gradient(90deg, #059669, #34D399);
+      border-radius: var(--radius-pill);
       transition: width 0.4s ease;
       width: 0%;
     }
@@ -381,38 +600,42 @@
     .goal-counter {
       font-family: var(--font-mono);
       font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--ink);
+      font-weight: 700;
+      color: var(--brand-primary);
+      background: var(--brand-primary-light);
+      padding: 3px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(5, 150, 105, 0.12);
     }
 
-    /* Section Subheadings */
+    /* Subcabeçalhos de Seção */
     .sub-section-header {
-      margin: 2.8rem 0 1.4rem;
+      margin: 2.4rem 0 1.2rem;
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line-dark);
-      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
     }
 
     .sub-section-header h3 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 400;
-      letter-spacing: -0.03em;
-      color: var(--ink);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-heading);
     }
 
-    /* Controls & Search */
+    /* Box de Controles e Filtros */
     .controls-box {
-      border: 1px solid var(--line);
-      background: var(--paper-deep);
-      padding: 1.2rem;
-      border-radius: 4px;
-      margin: 1.5rem 0 2rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.4rem;
+      margin: 1.4rem 0 2rem;
+      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
+      gap: 1rem;
     }
 
     .search-row {
@@ -430,38 +653,40 @@
 
     .search-icon {
       position: absolute;
-      left: 0.95rem;
-      color: var(--faint);
-      width: 15px;
-      height: 15px;
+      left: 1.1rem;
+      color: var(--text-faint);
+      width: 18px;
+      height: 18px;
       pointer-events: none;
     }
 
     .search-input {
       width: 100%;
-      padding: 0.65rem 2.4rem 0.65rem 2.4rem;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 3px;
+      padding: 0.75rem 2.8rem 0.75rem 2.8rem;
+      background: #F8FAFD;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
       font-family: var(--font-sans);
       font-size: 0.9rem;
-      color: var(--ink);
+      color: var(--text-heading);
       outline: none;
-      transition: border-color 0.15s;
+      transition: all 0.2s ease;
     }
 
     .search-input:focus {
-      border-color: var(--ink);
+      background: #FFFFFF;
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.12);
     }
 
     .search-clear-btn {
       position: absolute;
-      right: 0.75rem;
+      right: 1rem;
       background: transparent;
       border: none;
-      color: var(--muted);
+      color: var(--text-muted);
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       display: none;
       padding: 0.2rem;
     }
@@ -471,236 +696,256 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 0.8rem;
+      gap: 1rem;
     }
 
     .filter-subgroup {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .filter-subgroup-label {
-      font-family: var(--font-mono);
-      font-size: 0.67rem;
-      color: var(--faint);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .toggle-strip {
-      display: flex;
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      overflow: hidden;
-      background: #ffffff;
-    }
-
-    .toggle-btn {
-      border: none;
-      background: transparent;
-      padding: 0.3rem 0.65rem;
-      font-family: var(--font-mono);
-      font-size: 0.69rem;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .toggle-btn:not(:last-child) {
-      border-right: 1px solid var(--line);
-    }
-
-    .toggle-btn:hover {
-      color: var(--ink);
-    }
-
-    .toggle-btn.active {
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    /* Sub Tabs (Screen 02) */
-    .screen-tabs-bar {
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--line);
-      padding: 1.2rem 0;
-      margin-bottom: 2rem;
-    }
-
-    .sub-tab-btn {
-      background: transparent;
-      border: 1px solid var(--line);
-      padding: 0.5rem 1.1rem;
-      border-radius: 3px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .sub-tab-btn:hover {
-      background: var(--paper-deep);
-      color: var(--ink);
-    }
-
-    .sub-tab-btn.active {
-      background: var(--ink);
-      color: var(--paper);
-      border-color: var(--ink);
-      font-weight: 500;
-    }
-
-    .sub-tab-btn .tab-count {
-      font-size: 0.68rem;
-      opacity: 0.75;
-    }
-
-    /* =============================================================
-       JOBS TABLE & ROWS (gabrielgreco.com project-row style)
-       ============================================================= */
-    .jobs-table {
-      border-top: 1px solid var(--line-dark);
-      margin-bottom: 4rem;
-    }
-
-    .job-row {
-      border-bottom: 1px solid var(--line);
-      grid-template-columns: 46px minmax(0, 1fr) auto;
-      align-items: start;
-      gap: 1.4rem;
-      padding: 2.2rem 1.2rem;
-      transition: padding 0.18s, background 0.18s;
-      display: grid;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .job-row:hover {
-      background: var(--paper-deep);
-      padding-left: 1.6rem;
-      padding-right: 1.6rem;
-    }
-
-    .job-number {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--faint);
-      padding-top: 0.45rem;
-      letter-spacing: 0.04em;
-    }
-
-    .job-row:hover .job-number {
-      color: var(--ink);
-    }
-
-    .job-content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      min-width: 0;
-    }
-
-    .job-top-meta {
       display: flex;
       align-items: center;
       gap: 0.6rem;
       flex-wrap: wrap;
     }
 
-    .company-label {
-      font-family: var(--font-sans);
+    .filter-subgroup-label {
+      font-size: 0.72rem;
       font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--ink);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Pílulas de Seleção (Toggle Strips estilo Segmented Control) */
+    .toggle-strip {
+      display: inline-flex;
+      background: #F1F5F9;
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      border: none;
+      gap: 2px;
+    }
+
+    .toggle-btn {
+      border: none;
+      background: transparent;
+      padding: 0.4rem 0.95rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .toggle-btn:hover {
+      color: var(--text-heading);
+    }
+
+    .toggle-btn.active {
+      background: #FFFFFF;
+      color: var(--brand-primary);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+      font-weight: 700;
+    }
+
+    /* Sub-abas da Tela 02 (Candidaturas) */
+    .screen-tabs-bar {
+      display: flex;
+      gap: 0.6rem;
+      border-bottom: none;
+      padding: 0.8rem 0 1.6rem;
+      flex-wrap: wrap;
+    }
+
+    .sub-tab-btn {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      padding: 0.55rem 1.2rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+    }
+
+    .sub-tab-btn:hover {
+      background: #F8FAFD;
+      color: var(--text-heading);
+      border-color: var(--border-strong);
+    }
+
+    .sub-tab-btn.active {
+      background: var(--brand-primary);
+      color: #FFFFFF;
+      border-color: var(--brand-primary);
+      box-shadow: 0 4px 16px rgba(5, 150, 105, 0.35);
+      font-weight: 700;
+    }
+
+    .sub-tab-btn .tab-count {
+      font-size: 0.72rem;
+      background: rgba(0, 0, 0, 0.06);
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+    }
+
+    .sub-tab-btn.active .tab-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* =============================================================
+       CARDS DE VAGAS (Estilo Oratry: Cartões Brancos Flutuantes com Squircle)
+       ============================================================= */
+    .jobs-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 3.5rem;
+      border: none;
+    }
+
+    .job-row {
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.6rem;
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1.25rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+
+    .job-row:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(5, 150, 105, 0.35);
+    }
+
+    .company-avatar-squircle {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #EEF4FF 0%, #E0E7FF 100%);
+      color: var(--brand-primary);
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(5, 150, 105, 0.16);
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.06);
+    }
+
+    .job-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+
+    .job-top-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .company-label {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--text-heading);
       letter-spacing: -0.01em;
     }
 
     .job-date {
       font-family: var(--font-mono);
       font-size: 0.68rem;
-      color: var(--faint);
+      color: var(--text-faint);
     }
 
+    /* Badges em Pílula (Pill Tags) */
     .tag-badge {
-      font-family: var(--font-mono);
-      font-size: 0.66rem;
-      padding: 0.12em 0.5em;
-      border-radius: 2px;
-      letter-spacing: 0.03em;
-      border: 1px solid var(--line);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.22rem 0.65rem;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.01em;
+      border: none;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
     }
 
     .tag-badge.remote {
-      background: #edf7ed;
-      color: var(--green);
-      border-color: #c8e6c9;
+      background: var(--accent-emerald-subtle);
+      color: var(--accent-emerald-text);
     }
 
     .tag-badge.presencial {
-      background: #fbf5e6;
-      color: #92400e;
-      border-color: #fcd34d;
+      background: var(--accent-amber-subtle);
+      color: var(--accent-amber-text);
     }
 
     .tag-badge.hybrid {
-      background: var(--paper-deep);
-      color: var(--muted);
+      background: #F1F5F9;
+      color: #475569;
     }
 
     .tag-badge.turno {
-      background: #eef2ff;
-      color: #3730a3;
-      border-color: #c7d2fe;
+      background: var(--accent-indigo-subtle);
+      color: var(--accent-indigo-text);
     }
 
     .tag-badge.inscricao {
-      background: var(--yellow-subtle);
-      color: #78350f;
-      border-color: #fde68a;
+      background: #F8FAFD;
+      color: #475569;
+      border: 1px solid var(--border-subtle);
     }
 
     .tag-badge.andamento {
-      background: #eff6ff;
-      color: #1d4ed8;
-      border-color: #bfdbfe;
+      background: #EFF6FF;
+      color: #1D4ED8;
     }
 
     .tag-badge.applied {
-      background: var(--green);
-      color: var(--paper);
-      border-color: var(--green);
+      background: #D1FAE5;
+      color: #065F46;
+      font-weight: 700;
     }
 
     .job-title-line {
-      margin-top: 0.2rem;
+      margin-top: 0.15rem;
     }
 
     .job-title-line h3 {
-      font-family: var(--font-serif);
-      font-size: 1.65rem;
-      font-weight: 400;
-      letter-spacing: -0.035em;
-      line-height: 1.22;
-      color: var(--ink);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--text-heading);
     }
 
     .job-snippet {
       max-width: 680px;
-      color: var(--muted);
-      margin-top: 0.4rem;
-      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      font-size: 0.86rem;
       line-height: 1.5;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -712,141 +957,145 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 0.65rem;
-      padding-top: 0.35rem;
+      gap: 0.55rem;
     }
 
+    /* Botão Primário em Pílula Azul Brilhante */
     .btn-action-ink {
-      background: var(--ink);
-      color: var(--paper);
-      border: 1px solid var(--ink);
-      padding: 0.45rem 0.95rem;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      border-radius: 3px;
+      background: var(--brand-primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.55rem 1.25rem;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: var(--radius-pill);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
       text-decoration: none;
-      transition: background 0.15s, color 0.15s;
+      box-shadow: var(--shadow-cta);
+      transition: all 0.18s ease;
       white-space: nowrap;
     }
 
     .btn-action-ink:hover {
-      background: var(--green);
-      border-color: var(--green);
+      background: var(--brand-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px -2px rgba(5, 150, 105, 0.5);
     }
 
     .btn-confirm-success {
-      background: var(--green);
-      color: var(--paper);
-      border: 1px solid var(--green);
+      background: var(--accent-emerald);
+      box-shadow: 0 6px 20px -2px rgba(16, 185, 129, 0.4);
     }
 
     .btn-confirm-success:hover {
-      background: #23543b;
+      background: #059669;
+      box-shadow: 0 8px 24px -2px rgba(16, 185, 129, 0.5);
     }
 
     .btn-action-secondary {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--line-dark);
-      padding: 0.4rem 0.8rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      border-radius: 3px;
+      background: #FFFFFF;
+      color: var(--text-body);
+      border: 1px solid var(--border-strong);
+      padding: 0.45rem 0.9rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.15s ease;
     }
 
     .btn-action-secondary:hover {
-      background: var(--paper-deep);
+      background: #F1F5F9;
+      color: var(--text-heading);
     }
 
     .job-icon-btn {
-      background: transparent;
-      border: 1px solid var(--line);
-      color: var(--faint);
-      width: 32px;
-      height: 32px;
-      border-radius: 3px;
+      background: #F8FAFD;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-pill);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       transition: all 0.15s ease;
     }
 
     .job-icon-btn:hover {
-      border-color: var(--line-dark);
-      color: var(--ink);
+      border-color: var(--border-strong);
+      color: var(--text-heading);
+      background: #EEF4FF;
     }
 
     .job-icon-btn.is-starred {
-      color: #d97706;
-      border-color: #f59e0b;
-      background: var(--yellow-subtle);
+      color: #D97706;
+      border-color: #FCD34D;
+      background: #FEF3C7;
     }
 
     .empty-state-box {
-      padding: 4.5rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
-      border: 1px dashed var(--line);
-      border-radius: 4px;
-      margin: 2.5rem 0;
-      background: var(--paper-deep);
+      border: 2px dashed var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin: 2rem 0;
+      background: #FFFFFF;
     }
 
     .empty-state-title {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
+      font-size: 1.35rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
-      color: var(--ink);
+      color: var(--text-heading);
     }
 
     .empty-state-desc {
       font-size: 0.88rem;
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
     /* =============================================================
-       SCREEN 04: PARAMETERS FORM & REGION SELECTOR
+       TELA 04: FORMULÁRIO DE PARÂMETROS
        ============================================================= */
     .params-container {
-      margin: 2.5rem 0 5rem;
+      margin: 1.5rem 0 4rem;
       display: flex;
       flex-direction: column;
-      gap: 1.8rem;
+      gap: 1.5rem;
     }
 
     .params-card {
-      border: 1px solid var(--line);
-      background: var(--paper-deep);
-      border-radius: 4px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       padding: 1.8rem;
+      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
     }
 
     .params-card-header {
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 0.8rem;
     }
 
     .params-card-header h4 {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: var(--ink);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-heading);
     }
 
     .params-card-header p {
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 0.85rem;
       margin-top: 0.2rem;
     }
@@ -864,27 +1113,30 @@
     }
 
     .param-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-body);
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
     .param-input, .param-select {
       width: 100%;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      padding: 0.65rem 0.85rem;
-      border-radius: 3px;
+      background: #F8FAFD;
+      border: 1px solid var(--border-strong);
+      padding: 0.75rem 0.95rem;
+      border-radius: 12px;
       font-family: var(--font-sans);
       font-size: 0.9rem;
-      color: var(--ink);
+      color: var(--text-heading);
       outline: none;
+      transition: all 0.18s ease;
     }
 
     .param-input:focus, .param-select:focus {
-      border-color: var(--ink);
+      background: #FFFFFF;
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
     }
 
     .checkbox-group {
@@ -899,21 +1151,20 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 0.88rem;
-      color: var(--ink);
+      color: var(--text-body);
       cursor: pointer;
     }
 
     .checkbox-label input {
-      accent-color: var(--ink);
+      accent-color: var(--brand-primary);
       width: 16px;
       height: 16px;
     }
 
-    /* Region / Cities interactive box */
     .cidades-selector-box {
-      border: 1px solid var(--line);
-      background: #ffffff;
-      border-radius: 3px;
+      border: 1px solid var(--border-subtle);
+      background: #F8FAFD;
+      border-radius: var(--radius-md);
       padding: 1.2rem;
       display: flex;
       flex-direction: column;
@@ -926,79 +1177,84 @@
       gap: 0.6rem;
       max-height: 200px;
       overflow-y: auto;
-      padding: 0.4rem;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 3px;
+      padding: 0.6rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
     }
 
     .selected-cities-preview {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--ink);
-      background: var(--paper-deep);
-      padding: 0.6rem 0.8rem;
-      border-radius: 3px;
-      border: 1px solid var(--line);
-      line-height: 1.4;
+      font-size: 0.78rem;
+      color: var(--text-body);
+      background: #FFFFFF;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      line-height: 1.45;
     }
 
     /* =============================================================
-       SCREEN 05: KPIS & ANALYTICS & 15-DAY TIMELINE
+       TELA 05: KPIS & ANALYTICS
        ============================================================= */
     .kpi-container {
-      margin: 2.5rem 0 5rem;
+      margin: 1.5rem 0 4rem;
       display: flex;
       flex-direction: column;
-      gap: 2.2rem;
+      gap: 1.8rem;
     }
 
     .kpi-summary-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.1rem;
     }
 
     .kpi-metric-card {
-      border: 1px solid var(--line);
-      background: var(--paper-deep);
-      border-radius: 4px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       padding: 1.6rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.2s ease;
+    }
+
+    .kpi-metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
     }
 
     .kpi-metric-num {
-      font-family: var(--font-serif);
-      font-size: 2.5rem;
-      font-weight: 500;
-      line-height: 1;
-      color: var(--ink);
+      font-size: 2.7rem;
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--text-heading);
       letter-spacing: -0.04em;
     }
 
     .kpi-metric-title {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--brand-primary);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
 
     .kpi-metric-context {
-      font-size: 0.82rem;
-      color: var(--faint);
+      font-size: 0.8rem;
+      color: var(--text-muted);
       line-height: 1.4;
       margin-top: 0.2rem;
     }
 
-    /* Timeline Chart Card */
     .timeline-chart-card {
-      border: 1px solid var(--line);
-      background: var(--paper-deep);
-      border-radius: 4px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       padding: 1.8rem;
+      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
@@ -1008,23 +1264,22 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 0.8rem;
     }
 
     .timeline-chart-header h4 {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--ink);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-heading);
     }
 
     .timeline-svg-wrap {
       width: 100%;
       overflow-x: auto;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 4px;
+      background: #F8FAFD;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
       padding: 1rem 0.5rem;
     }
 
@@ -1032,14 +1287,13 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      color: var(--muted);
+      font-size: 0.78rem;
+      color: var(--text-muted);
       padding-top: 0.4rem;
     }
 
     .timeline-stats-footer strong {
-      color: var(--ink);
+      color: var(--text-heading);
     }
 
     .kpi-deep-grid {
@@ -1049,21 +1303,21 @@
     }
 
     .kpi-detail-card {
-      border: 1px solid var(--line);
-      background: var(--paper-deep);
-      border-radius: 4px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
       padding: 1.8rem;
+      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
     }
 
     .kpi-detail-title {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-weight: 500;
-      color: var(--ink);
-      border-bottom: 1px solid var(--line);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 0.6rem;
     }
 
@@ -1076,31 +1330,32 @@
     .bar-stat-labels {
       display: flex;
       justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
     }
 
     .bar-stat-track {
-      height: 8px;
-      background: var(--line);
-      border-radius: 4px;
+      height: 9px;
+      background: #EEF2F6;
+      border-radius: var(--radius-pill);
       overflow: hidden;
     }
 
     .bar-stat-fill {
       height: 100%;
-      background: var(--ink);
-      border-radius: 4px;
+      background: var(--brand-primary);
+      border-radius: var(--radius-pill);
       transition: width 0.3s ease;
     }
 
-    /* Modal / Drawer */
+    /* Modais / Painéis Deslizantes */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(36, 36, 32, 0.5);
-      backdrop-filter: blur(4px);
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 100;
       display: none;
       align-items: center;
@@ -1115,15 +1370,15 @@
       width: 100%;
       max-width: 600px;
       height: 100vh;
-      background: var(--paper);
-      border-left: 1px solid var(--line-dark);
-      padding: 2.8rem 2.4rem;
+      background: #FFFFFF;
+      border-left: 1px solid var(--border-subtle);
+      padding: 2.5rem 2.2rem;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
       position: relative;
-      box-shadow: -10px 0 35px rgba(0, 0, 0, 0.08);
-      animation: slideInSheet 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -15px 0 45px rgba(15, 23, 42, 0.18);
+      animation: slideInSheet 0.24s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes slideInSheet {
@@ -1133,56 +1388,56 @@
 
     .modal-close-btn {
       position: absolute;
-      top: 1.8rem;
-      right: 1.8rem;
-      background: transparent;
-      border: 1px solid var(--line);
-      width: 34px;
-      height: 34px;
-      border-radius: 3px;
+      top: 1.6rem;
+      right: 1.6rem;
+      background: #F1F5F9;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-pill);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       font-size: 1rem;
-      color: var(--muted);
+      color: var(--text-muted);
       transition: all 0.15s;
     }
 
     .modal-close-btn:hover {
-      color: var(--ink);
-      border-color: var(--ink);
+      background: #E2E8F0;
+      color: var(--text-heading);
     }
 
     .modal-header-block {
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.8rem;
-      margin-bottom: 1.8rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1.6rem;
+      margin-bottom: 1.6rem;
     }
 
     .modal-title {
-      font-family: var(--font-serif);
-      font-size: 2.1rem;
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.6rem;
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.4rem;
+      color: var(--text-heading);
     }
 
     .modal-company {
       font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--ink-soft);
+      font-weight: 700;
+      color: var(--brand-primary);
     }
 
     .modal-desc-box {
-      background: var(--paper-deep);
-      border: 1px solid var(--line);
-      border-radius: 3px;
+      background: #F8FAFD;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
       padding: 1.2rem;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       line-height: 1.6;
-      color: var(--ink-soft);
+      color: var(--text-body);
       white-space: pre-line;
       max-height: 300px;
       overflow-y: auto;
@@ -1194,17 +1449,18 @@
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
-      background: var(--paper-card);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 0.75rem 0.95rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      transition: all 0.15s ease;
       width: 100%;
     }
+
     .chip-mismatch-btn:hover {
-      background: #fffbeb;
-      border-color: #fcd34d;
+      background: var(--accent-amber-subtle);
+      border-color: #FCD34D;
       transform: translateY(-1px);
     }
 
@@ -1213,21 +1469,20 @@
       bottom: 2rem;
       left: 50%;
       transform: translateX(-50%) translateY(30px);
-      background: var(--ink);
-      color: var(--paper);
-      padding: 0.6rem 1.2rem;
-      border-radius: 3px;
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      letter-spacing: 0.03em;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
       z-index: 200;
       opacity: 0;
       pointer-events: none;
       transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.65rem;
     }
 
     .toast-hud.show {
@@ -1235,16 +1490,15 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Mobile */
+    /* Mobile / Tablet Responsiveness */
     @media (max-width: 900px) {
       body { flex-direction: column; }
       .site-sidebar {
         position: static;
         width: 100%;
         height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
         padding: 1.2rem 1.4rem;
+        box-shadow: none;
       }
       .sidebar-top {
         flex-direction: row;
@@ -1253,15 +1507,79 @@
         border-bottom: none;
         padding-bottom: 0;
       }
-      .sidebar-nav { padding: 1rem 0 0.5rem; }
+      .nav-section-title { display: none; }
       .sidebar-links { flex-direction: row; flex-wrap: wrap; gap: 0.4rem; }
-      .sidebar-link { padding: 0.45rem 0.65rem; font-size: 0.8rem; }
+      .sidebar-link { padding: 0.5rem 0.8rem; font-size: 0.82rem; }
       .sidebar-bottom { display: none; }
       .site-main { margin-left: 0; width: 100%; }
       .screen-title { font-size: 2.2rem; }
-      .job-row { grid-template-columns: 1fr; gap: 0.8rem; padding: 1.6rem 0.5rem; }
+      .job-row { grid-template-columns: 1fr; gap: 0.9rem; padding: 1.4rem 1.2rem; }
       .job-actions-column { flex-direction: row; align-items: center; justify-content: flex-start; }
       .params-grid-2, .kpi-deep-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =============================================================
+       CARGA COGNITIVA: ONDA 2 & ONDA 3
+       Tech Chips · Match Score · Turno Badge · Celebração de Meta
+       ============================================================= */
+    .job-tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+
+    .tech-chip {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.18rem 0.55rem;
+      border-radius: var(--radius-pill);
+      background: #ECFDF5; color: #059669; border: 1px solid rgba(5, 150, 105, 0.18);
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .tag-badge.match-score {
+      background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+      color: #065F46;
+      font-weight: 700;
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+
+    .goal-tracker-card.goal-achieved {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F0FDF4 100%);
+      border-color: #86EFAC;
+      box-shadow: 0 10px 25px -4px rgba(16, 185, 129, 0.25);
+    }
+
+    .goal-tracker-card.goal-achieved .goal-counter {
+      background: #DCFCE7;
+      color: #15803D;
+      border-color: #86EFAC;
+    }
+
+    .goal-tracker-card.goal-achieved .goal-meter-fill {
+      background: linear-gradient(90deg, #10B981, #059669);
+    }
+
+    .toast-undo-btn {
+      background: #FFFFFF;
+      color: #0F172A;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 0.25rem 0.75rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 0.6rem;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .toast-undo-btn:hover {
+      background: #E2E8F0;
     }
   </style>
 </head>
@@ -1270,65 +1588,118 @@
   <!-- =============================================================
        SITE SIDEBAR (5 Decoupled Screens)
        ============================================================= -->
-  <aside class="site-sidebar">
-    <div class="sidebar-top">
-      <div class="sidebar-identity" onclick="navigateToScreen('01')">
-        <span class="identity-mark">J</span>
-        <span class="identity-copy">
-          <strong>João Francisco</strong>
-          <small>estágio &bull; engenharia de software</small>
-        </span>
-      </div>
-
-      <div class="sidebar-status">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Radar Ativo &bull; UTC−3</span>
-      </div>
+    <aside class="site-sidebar">
+    <!-- 1. TOPO: MARCA DO SAAS (LOGO + "SONA") -->
+    <div class="brand-header" title="Sona">
+      <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" aria-label="Logo Sona">
+        <circle cx="50" cy="50" r="34" stroke="currentColor" stroke-width="11" />
+        <path d="M 50 16 C 34 16, 26 28, 34 40 C 42 52, 60 48, 66 60 C 74 72, 64 84, 50 84" 
+              stroke="currentColor" stroke-width="10" stroke-linecap="round" />
+      </svg>
+      <span class="brand-name">Sona</span>
     </div>
 
-    <nav class="sidebar-nav" aria-label="Navegação Desacoplada">
+    <div class="sidebar-divider"></div>
+
+    <!-- 2. WORKSPACE / PERFIL ATIVO (Estilo Abacate) -->
+    <div class="workspace-card" title="Perfil ativo de busca" onclick="navigateToScreen('04')">
+      <div class="workspace-avatar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <div class="workspace-info">
+        <span class="workspace-name">João Francisco</span>
+        <span class="workspace-handle">/engenharia-software</span>
+      </div>
+      <svg class="workspace-switch-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- 3. ABAS DA APLICAÇÃO (HOVER TÁTIL & CONTADORES) -->
+    <nav class="sidebar-nav" aria-label="Navegação do Sona">
+      <div class="nav-section-title">OPERAÇÃO</div>
       <ul class="sidebar-links">
         <li>
           <div class="sidebar-link active" id="nav-btn-01" onclick="navigateToScreen('01')">
-            <span class="nav-number">01</span>
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
             <span class="nav-label">Meta do Dia</span>
             <span class="nav-badge" id="badge-nav-abertas">0</span>
           </div>
         </li>
         <li>
           <div class="sidebar-link" id="nav-btn-02" onclick="navigateToScreen('02')">
-            <span class="nav-number">02</span>
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
             <span class="nav-label">Candidaturas</span>
             <span class="nav-badge" id="badge-nav-candidaturas">0</span>
           </div>
         </li>
+      </ul>
+
+      <div class="nav-section-title">TELEMETRIA</div>
+      <ul class="sidebar-links">
         <li>
           <div class="sidebar-link" id="nav-btn-03" onclick="navigateToScreen('03')">
-            <span class="nav-number">03</span>
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
             <span class="nav-label">Histórico de Buscas</span>
-            <span class="nav-badge" id="badge-nav-runs">0</span>
-          </div>
-        </li>
-        <li>
-          <div class="sidebar-link" id="nav-btn-04" onclick="navigateToScreen('04')">
-            <span class="nav-number">04</span>
-            <span class="nav-label">Parâmetros de Busca</span>
-            <span class="nav-badge" style="background: var(--line-dark); color: #fff;">Config</span>
           </div>
         </li>
         <li>
           <div class="sidebar-link" id="nav-btn-05" onclick="navigateToScreen('05')">
-            <span class="nav-number">05</span>
-            <span class="nav-label">Indicadores &amp; KPIs</span>
-            <span class="nav-badge" style="background: var(--yellow); color: #000;">Métricas</span>
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            <span class="nav-label">Indicadores</span>
           </div>
         </li>
       </ul>
     </nav>
 
+    <!-- 4. BASE: CONFIGURAÇÕES E PERFIL COM LOGOUT (SEM DARK MODE) -->
     <div class="sidebar-bottom">
-      <div class="sidebar-availability" id="sidebar-avail-text">
-        Disponível: Tarde / Noite / Flexível &bull; Presencial BH ou Remoto
+      <ul class="sidebar-links" style="margin-bottom: 0.5rem;">
+        <li>
+          <div class="sidebar-link" id="nav-btn-04" onclick="navigateToScreen('04')">
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span class="nav-label">Configurações</span>
+          </div>
+        </li>
+      </ul>
+
+      <!-- CARD DO USUÁRIO LOGADO + LOGOUT CORAL -->
+      <div class="user-footer-card">
+        <div class="user-avatar-circle">JF</div>
+        <div class="user-details">
+          <span class="user-name">João Francisco</span>
+          <span class="user-email">@joaofrancisco</span>
+        </div>
+        <div class="user-actions">
+          <button class="icon-action-btn logout" onclick="handleLogout()" title="Sair da Conta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </aside>
@@ -1344,8 +1715,8 @@
     <section class="screen-view active" id="screen-view-01">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">01 / ROTINA DIÁRIA &amp; DESCOBERTA</div>
-          <h1 class="screen-title">Meta do Dia &amp; Oportunidades.</h1>
+          <div class="screen-kicker mono">SONA · OPERAÇÃO</div>
+          <h1 class="screen-title">Meta do Dia<span class="title-dot">.</span></h1>
           <p class="screen-desc">
             Três oportunidades selecionadas para você cumprir sua meta diária de hoje, além de todo o catálogo de vagas abertas para você escolher livremente.
           </p>
@@ -1368,22 +1739,6 @@
             </div>
           </div>
 
-          <!-- BANNER DE AÇÕES PENDENTES URGENTES (Testes / Entrevistas) -->
-          <div id="banner-acao-urgente" style="display: none; margin-top: 1.2rem; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px; padding: 1rem 1.25rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
-              <div style="display: flex; align-items: center; gap: 0.8rem;">
-                <span style="font-size: 1.5rem;">⚡</span>
-                <div>
-                  <div style="font-size: 0.95rem; font-weight: 700; color: #92400e;" id="banner-acao-titulo">Testes Técnicos / Entrevistas Pendentes</div>
-                  <div style="font-size: 0.82rem; color: #b45309;" id="banner-acao-desc">Você possui processos seletivos aguardando ação (testes, desafios ou agendamento).</div>
-                </div>
-              </div>
-              <button class="btn-action-ink" onclick="navigateToScreen('02'); switchSubTab02('pendentes');" style="background: #92400e; border-color: #78350f; font-size: 0.8rem; padding: 0.5rem 0.9rem;">
-                <span>Ver Testes / Entrevistas</span>
-                <span>→</span>
-              </button>
-            </div>
-          </div>
 
           <!-- BANNER DE ALERTA DE OBSERVABILIDADE DO CRAWLER -->
           <div id="banner-crawler-falha" style="display: none; margin-top: 1.2rem; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 6px; padding: 1rem 1.25rem;">
@@ -1396,7 +1751,7 @@
                 </div>
               </div>
               <button class="btn-action-ink" onclick="navigateToScreen('03');" style="background: #991b1b; border-color: #7f1d1d; font-size: 0.8rem; padding: 0.5rem 0.9rem;">
-                <span>Ver Telemetria &amp; Logs</span>
+                <span>Ver Telemetria</span>
                 <span>→</span>
               </button>
             </div>
@@ -1407,7 +1762,7 @@
       <div class="wrap">
         <!-- SUB-SEÇÃO 1: AS 3 VAGAS DA META DE HOJE -->
         <div class="sub-section-header">
-          <h3>Foco de Hoje (3 Vagas Prioritárias)</h3>
+          <h3>Foco de Hoje (3 Vagas Prioritárias)<span class="title-dot">.</span></h3>
           <span class="mono" style="font-size: 0.72rem;">Meta diária recomendada</span>
         </div>
         <div class="jobs-table" id="table-focus-jobs">
@@ -1416,7 +1771,7 @@
 
         <!-- SUB-SEÇÃO 2: TODAS AS OPORTUNIDADES ABERTAS -->
         <div class="sub-section-header">
-          <h3>Todas as Vagas Abertas</h3>
+          <h3>Todas as Vagas Abertas<span class="title-dot">.</span></h3>
           <span class="mono" id="label-all-abertas-count">Carregando catálogo...</span>
         </div>
 
@@ -1473,8 +1828,8 @@
     <section class="screen-view" id="screen-view-02">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">02 / PIPELINE DE CANDIDATURAS</div>
-          <h1 class="screen-title">Minhas Candidaturas.</h1>
+          <div class="screen-kicker mono">SONA · CANDIDATURAS</div>
+          <h1 class="screen-title">Minhas Candidaturas<span class="title-dot">.</span></h1>
           <p class="screen-desc">
             Acompanhe as inscrições que estão em andamento, confirme suas aplicações concluídas e consulte suas vagas salvas.
           </p>
@@ -1484,21 +1839,17 @@
       <div class="wrap">
         <!-- Sub-abas da Tela 02 -->
         <div class="screen-tabs-bar">
-          <button class="sub-tab-btn" id="btn-subtab-pendentes" onclick="switchSubTab02('pendentes')">
-            <span style="color: #b45309; font-weight: 600;">⚡ Ações Pendentes (Testes / Entrevistas)</span>
-            <span class="tab-count" id="count-subtab-pendentes" style="color: #b45309; font-weight: 700;">(0)</span>
+          <button class="sub-tab-btn active" id="btn-subtab-salvas" onclick="switchSubTab02('salvas')">
+            <span>Vagas Salvas ★</span>
+            <span class="tab-count" id="count-subtab-salvas">(0)</span>
           </button>
-          <button class="sub-tab-btn active" id="btn-subtab-andamento" onclick="switchSubTab02('andamento')">
+          <button class="sub-tab-btn" id="btn-subtab-andamento" onclick="switchSubTab02('andamento')">
             <span>Em Andamento</span>
             <span class="tab-count" id="count-subtab-andamento">(0)</span>
           </button>
           <button class="sub-tab-btn" id="btn-subtab-aplicadas" onclick="switchSubTab02('aplicadas')">
-            <span>Aplicadas / Concluídas</span>
+            <span>Inscrições Concluídas ✓</span>
             <span class="tab-count" id="count-subtab-aplicadas">(0)</span>
-          </button>
-          <button class="sub-tab-btn" id="btn-subtab-salvas" onclick="switchSubTab02('salvas')">
-            <span>Vagas Salvas ★</span>
-            <span class="tab-count" id="count-subtab-salvas">(0)</span>
           </button>
         </div>
 
@@ -1515,8 +1866,8 @@
     <section class="screen-view" id="screen-view-03">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">03 / TELEMETRIA DO CRAWLER</div>
-          <h1 class="screen-title">Histórico de Varreduras.</h1>
+          <div class="screen-kicker mono">SONA · TELEMETRIA</div>
+          <h1 class="screen-title">Histórico de Varreduras<span class="title-dot">.</span></h1>
           <p class="screen-desc">
             Registro imutável das execuções do bot, tempo de resposta e novas oportunidades catalogadas no radar.
           </p>
@@ -1539,8 +1890,8 @@
     <section class="screen-view" id="screen-view-04">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">04 / CONTROLE DETERMINÍSTICO</div>
-          <h1 class="screen-title">Parâmetros do Crawler.</h1>
+          <div class="screen-kicker mono">SONA · CONFIGURAÇÕES</div>
+          <h1 class="screen-title">Parâmetros do Crawler<span class="title-dot">.</span></h1>
           <p class="screen-desc">
             Ajuste as regras determinísticas de busca. Quando seu semestre mudar, seu turno da faculdade alterar ou se você mudar de estado/cidade, configure abaixo e o robô recalibrará as buscas imediatamente.
           </p>
@@ -1726,8 +2077,8 @@
     <section class="screen-view" id="screen-view-05">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">05 / TELEMETRIA &amp; ANALYTICS</div>
-          <h1 class="screen-title">Indicadores &amp; Performance.</h1>
+          <div class="screen-kicker mono">SONA · INDICADORES</div>
+          <h1 class="screen-title">Indicadores<span class="title-dot">.</span></h1>
           <p class="screen-desc">
             Métricas 100% auditadas e calculadas a partir das suas ações reais, sem valores fictícios ou estimativas artificiais.
           </p>
@@ -1875,70 +2226,52 @@
 
           </div>
 
-          <!-- Distribuição por Modelo de Trabalho -->
-          <div class="kpi-detail-card" style="margin-top: -0.7rem;">
-            <h4 class="kpi-detail-title">Distribuição por Modelo de Trabalho</h4>
+          <!-- Deep Analytics: Modelo de Trabalho & Plataformas -->
+          <div class="kpi-deep-grid">
 
-            <div class="bar-stat-row">
-              <div class="bar-stat-labels">
-                <span>100% Remoto</span>
-                <span id="kpi-dist-remoto-pct">0%</span>
+            <!-- DISTRIBUIÇÃO POR MODELO DE TRABALHO -->
+            <div class="kpi-detail-card">
+              <h4 class="kpi-detail-title">Distribuição por Modelo de Trabalho</h4>
+
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span>100% Remoto</span>
+                  <span id="kpi-dist-remoto-pct">0%</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-dist-remoto-bar" style="width: 0%; background: var(--green);"></div>
+                </div>
               </div>
-              <div class="bar-stat-track">
-                <div class="bar-stat-fill" id="kpi-dist-remoto-bar" style="width: 0%; background: var(--green);"></div>
+
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span>Presencial</span>
+                  <span id="kpi-dist-presencial-pct">0%</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-dist-presencial-bar" style="width: 0%; background: #d97706;"></div>
+                </div>
+              </div>
+
+              <div class="bar-stat-row">
+                <div class="bar-stat-labels">
+                  <span>Híbrido</span>
+                  <span id="kpi-dist-hibrido-pct">0%</span>
+                </div>
+                <div class="bar-stat-track">
+                  <div class="bar-stat-fill" id="kpi-dist-hibrido-bar" style="width: 0%; background: #6366f1;"></div>
+                </div>
               </div>
             </div>
 
-            <div class="bar-stat-row">
-              <div class="bar-stat-labels">
-                <span>Presencial</span>
-                <span id="kpi-dist-presencial-pct">0%</span>
-              </div>
-              <div class="bar-stat-track">
-                <div class="bar-stat-fill" id="kpi-dist-presencial-bar" style="width: 0%; background: #d97706;"></div>
+            <!-- DISTRIBUIÇÃO POR PLATAFORMA -->
+            <div class="kpi-detail-card">
+              <h4 class="kpi-detail-title">Distribuição por Plataforma</h4>
+              <div id="container-plataformas-dist" style="display: flex; flex-direction: column; gap: 0.9rem;">
+                <!-- Injected via JS -->
               </div>
             </div>
 
-            <div class="bar-stat-row">
-              <div class="bar-stat-labels">
-                <span>Híbrido</span>
-                <span id="kpi-dist-hibrido-pct">0%</span>
-              </div>
-              <div class="bar-stat-track">
-                <div class="bar-stat-fill" id="kpi-dist-hibrido-bar" style="width: 0%; background: #6366f1;"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dinâmica de Encerramento das Vagas (SLA de Mercado) -->
-          <div class="kpi-detail-card" style="margin-top: 1.2rem;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.5rem;">
-              <div>
-                <h4 class="kpi-detail-title" style="margin-bottom: 0.2rem;">Dinâmica de Encerramento das Vagas (Tempo Médio de Vida)</h4>
-                <p style="font-size: 0.82rem; color: var(--muted);">Tempo médio decorrido entre a publicação no mercado e o encerramento das inscrições.</p>
-              </div>
-              <span class="tag-badge" id="badge-total-encerradas" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; font-size: 0.72rem;">Base: 95 vagas encerradas</span>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
-              <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 0.9rem;">
-                <div class="mono" style="font-size: 0.68rem; color: #b91c1c;">⚡ LINKEDIN (ALTA ROTATIVIDADE)</div>
-                <div style="font-size: 1.6rem; font-weight: 700; color: var(--ink); margin: 0.2rem 0;" id="kpi-vida-linkedin">~2.7 dias</div>
-                <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Vagas 100% remotas ou de TI no LinkedIn atingem o teto de 25-50 candidaturas e fecham em menos de 72 horas.</p>
-              </div>
-
-              <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 0.9rem;">
-                <div class="mono" style="font-size: 0.68rem; color: var(--green);">🏢 GUPY &amp; SITES CORPORATIVOS</div>
-                <div style="font-size: 1.6rem; font-weight: 700; color: var(--ink); margin: 0.2rem 0;" id="kpi-vida-outros">~11.4 dias</div>
-                <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Programas de estágio corporativos e bancos de talentos permanecem abertos por mais de 1 a 2 semanas.</p>
-              </div>
-
-              <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 0.9rem;">
-                <div class="mono" style="font-size: 0.68rem; color: var(--ink-soft);">⏱️ RECOMENDAÇÃO DA IA</div>
-                <div style="font-size: 1.6rem; font-weight: 700; color: var(--green); margin: 0.2rem 0;">Até 48 horas</div>
-                <p style="font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Para maximizar a conversão, aplique no mesmo dia ou no máximo em 48h assim que o bot catalogar a vaga.</p>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -1978,9 +2311,7 @@
           <button class="btn-action-ink" id="m-btn-inscrever" onclick="iniciarInscricaoModal()" style="flex: 1; justify-content: center;">
             <span>Abrir Inscrição Oficial ↗</span>
           </button>
-          <button class="btn-action-ink btn-confirm-success" id="m-btn-concluir-etapa" onclick="concluirEtapaModal()" style="display: none; justify-content: center;">
-            <span>Concluir Etapa ✓</span>
-          </button>
+          
           <button class="job-icon-btn" id="m-btn-star" onclick="toggleStarModal()" style="width: 44px; height: 44px;" title="Salvar">
             ★
           </button>
@@ -2190,7 +2521,7 @@
             } else if (isEtapaConcluida) {
               currentStatus = userState.status || 'aplicada';
             } else if (job.status === 'acao_pendente' || userState.status === 'acao_pendente') {
-              currentStatus = 'acao_pendente';
+              currentStatus = 'aplicada';
             } else {
               currentStatus = userState.status || job.status || 'para_aplicar';
             }
@@ -2254,7 +2585,7 @@
 
     let allJobs = getConsolidatedJobs();
     let currentScreen = '01'; // '01', '02', '03', '04', '05'
-    let currentSubTab02 = 'andamento'; // 'andamento', 'aplicadas', 'salvas'
+    let currentSubTab02 = 'salvas'; // 'andamento', 'aplicadas', 'salvas'
     let search01Query = '';
     let filter01Turno = 'all';
     let filter01Loc = 'all';
@@ -2265,14 +2596,29 @@
 
     // Toast HUD
     let toastTimer = null;
-    function showToast(msg) {
+    function showToast(msg, undoCallback = null) {
       const hud = document.getElementById('toast-hud');
-      document.getElementById('toast-msg').innerText = msg;
+      const msgEl = document.getElementById('toast-msg');
+      if (!hud || !msgEl) return;
+
+      if (undoCallback) {
+        msgEl.innerHTML = `<span>${msg}</span><button id="toast-undo-action" class="toast-undo-btn">Desfazer ↺</button>`;
+        const undoBtn = document.getElementById('toast-undo-action');
+        if (undoBtn) {
+          undoBtn.onclick = () => {
+            undoCallback();
+            hud.classList.remove('show');
+          };
+        }
+      } else {
+        msgEl.innerText = msg;
+      }
+
       hud.classList.add('show');
       if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
         hud.classList.remove('show');
-      }, 2800);
+      }, undoCallback ? 4800 : 2800);
     }
 
     // =============================================================
@@ -2372,6 +2718,13 @@
     // =============================================================
     // DECOUPLED SCREEN NAVIGATION
     // =============================================================
+    function handleLogout() {
+      if (confirm('Deseja realmente sair da sessão do Sona?')) {
+        localStorage.removeItem('sb_auth_token');
+        alert('Sessão encerrada com sucesso.');
+      }
+    }
+
     function navigateToScreen(screenId) {
       currentScreen = screenId;
 
@@ -2389,6 +2742,124 @@
       if (screenId === '03') renderScreen03();
       if (screenId === '05') renderScreen05();
       updateGlobalBadges();
+    }
+
+    
+    // =============================================================
+    // CARGA COGNITIVA: AUXILIARES (ONDA 2 & ONDA 3)
+    // =============================================================
+    
+    function getPlatformBadge(link) {
+      if (!link) return '';
+      const url = link.toLowerCase();
+      
+      if (url.includes('linkedin.com')) {
+        return `<span class="tag-badge platform" style="background: #E8F0FE; color: #0A66C2; border: 1px solid rgba(10, 102, 194, 0.2);" title="Vaga oficial hospedada no LinkedIn">💼 LinkedIn</span>`;
+      }
+      if (url.includes('gupy.io')) {
+        return `<span class="tag-badge platform" style="background: #F3E8FF; color: #7E22CE; border: 1px solid rgba(126, 34, 206, 0.2);" title="Processo seletivo hospedado na Gupy">🏢 Gupy</span>`;
+      }
+      if (url.includes('ciadetalentos') || url.includes('vagas.ciadetalentos')) {
+        return `<span class="tag-badge platform" style="background: #FFF7ED; color: #C2410C; border: 1px solid rgba(194, 65, 12, 0.2);" title="Programa de estágio na Cia de Talentos">🎯 Cia de Talentos</span>`;
+      }
+      if (url.includes('vagas.com.br')) {
+        return `<span class="tag-badge platform" style="background: #ECFEFF; color: #0E7490; border: 1px solid rgba(14, 116, 144, 0.2);" title="Vaga hospedada no Vagas.com">📄 Vagas.com</span>`;
+      }
+      if (url.includes('solides')) {
+        return `<span class="tag-badge platform" style="background: #FDF2F8; color: #BE185D; border: 1px solid rgba(190, 24, 93, 0.2);" title="Vaga hospedada no Portal Sólides">🚀 Sólides</span>`;
+      }
+      if (url.includes('glassdoor')) {
+        return `<span class="tag-badge platform" style="background: #F0FDF4; color: #15803D; border: 1px solid rgba(21, 128, 61, 0.2);" title="Vaga hospedada no Glassdoor">🚪 Glassdoor</span>`;
+      }
+      if (url.includes('indeed')) {
+        return `<span class="tag-badge platform" style="background: #EFF6FF; color: #1D4ED8; border: 1px solid rgba(29, 78, 216, 0.2);" title="Vaga hospedada no Indeed">🔍 Indeed</span>`;
+      }
+      return `<span class="tag-badge platform" style="background: #F8FAFD; color: #475569; border: 1px solid #E2E8F0;" title="Link oficial de candidatura">🌐 Link Oficial</span>`;
+    }
+
+    function getPrazoBadge(prazo) {
+      if (!prazo) return '';
+      const p = prazo.trim();
+      // Elimina o ruído genérico "Inscrições Abertas" (já que todas as vagas abertas estão abertas)
+      if (/^inscri[çc][õo]es\s+abertas$/i.test(p)) return '';
+
+      // Se tiver data explícita (ex: "Prazo: 28/11" ou "Até 30/11/2026")
+      if (/\d{1,2}\/\d{1,2}/.test(p) || /\b(at[eé]|prazo|encerra)\b/i.test(p)) {
+        return `<span class="tag-badge prazo-real" style="background: #FFFBEB; color: #B45309; border: 1px solid #FCD34D; font-weight: 700;" title="Data limite informada pelo processo seletivo">⏳ ${p}</span>`;
+      }
+      return '';
+    }
+
+    function extractTechChips(job) {
+      const text = `${job.cargo || ''} ${job.requisitos || ''}`.toLowerCase();
+      const techList = [
+        { name: 'React', regex: /\b(react|react\.js|reactjs)\b/i },
+        { name: 'Node.js', regex: /\b(node|node\.js|nodejs)\b/i },
+        { name: 'TypeScript', regex: /\b(typescript|ts)\b/i },
+        { name: 'JavaScript', regex: /\b(javascript|js|es6)\b/i },
+        { name: 'Python', regex: /\b(python|django|fastapi|flask)\b/i },
+        { name: 'SQL', regex: /\b(sql|postgres|postgresql|mysql|sql server)\b/i },
+        { name: 'Java', regex: /\b(java|spring|spring boot)\b/i },
+        { name: 'C# / .NET', regex: /\b(c#|\.net|dotnet)\b/i },
+        { name: 'AWS', regex: /\b(aws|amazon web services|cloud)\b/i },
+        { name: 'Docker', regex: /\b(docker|containers|kubernetes)\b/i },
+        { name: 'Git', regex: /\b(git|github|gitlab)\b/i },
+        { name: 'Vue.js', regex: /\b(vue|vue\.js|vuejs)\b/i },
+        { name: 'Next.js', regex: /\b(next|next\.js|nextjs)\b/i },
+        { name: 'IA / Dados', regex: /\b(ia|ai|machine learning|dados|data|pandas)\b/i },
+        { name: 'REST API', regex: /\b(rest|api|apis|restful)\b/i }
+      ];
+
+      const found = [];
+      for (const item of techList) {
+        if (item.regex.test(text)) {
+          found.push(item.name);
+          if (found.length >= 4) break;
+        }
+      }
+      return found;
+    }
+
+    function calculateMatchScore(job) {
+      let score = 80;
+      const breakdown = ['Base: 80pts'];
+      const text = `${job.cargo || ''} ${job.requisitos || ''} ${job.modalidade || ''}`.toLowerCase();
+      
+      if (text.includes('engenharia de software') || text.includes('software')) {
+        score += 6;
+        breakdown.push('+6pts Software');
+      }
+      if (text.includes('desenvolvimento') || text.includes('developer')) {
+        score += 4;
+        breakdown.push('+4pts Dev');
+      }
+      if (text.includes('remoto')) {
+        score += 4;
+        breakdown.push('+4pts Remoto');
+      }
+      if (text.includes('react') || text.includes('typescript') || text.includes('python')) {
+        score += 4;
+        breakdown.push('+4pts Stack Chave');
+      }
+      
+      const finalScore = Math.min(98, score);
+      const tooltip = `Match Score ${finalScore}% (${breakdown.join(', ')})`;
+      return { score: finalScore, tooltip };
+    }
+
+    function getTurnoMatchBadge(job) {
+      const faculdadeSelect = document.getElementById('cfg-turno-faculdade');
+      const faculdadeTurno = (faculdadeSelect ? faculdadeSelect.value : 'Manhã').toLowerCase();
+      const text = `${job.turno || ''} ${job.requisitos || ''}`.toLowerCase();
+      
+      if (faculdadeTurno === 'manhã' || faculdadeTurno === 'manha') {
+        const isManhaRigido = (text.includes('manhã') || text.includes('manha') || text.includes('matutino') || text.includes('08:00') || text.includes('8h às 15h')) && !text.includes('flex');
+        if (isManhaRigido) {
+          return `<span class="tag-badge" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FCA5A5;" title="Turno matutino pode colidir com horário da faculdade">⚠️ Possível Conflito (Manhã)</span>`;
+        }
+        return `<span class="tag-badge" style="background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0;" title="Horário perfeitamente compatível com faculdade pela manhã">✓ Turno Compatível</span>`;
+      }
+      return `<span class="tag-badge turno">⏱️ ${job.turno || 'Tarde / Flexível'}</span>`;
     }
 
     // =============================================================
@@ -2471,26 +2942,19 @@
 
       if (fill) fill.style.width = `${pct}%`;
       if (text) text.innerText = `${aplicadasHoje} de 3`;
+      const cardTracker = document.querySelector('.goal-tracker-card');
       if (statusLabel) {
-        statusLabel.innerText = aplicadasHoje >= 3 
-          ? `Meta diária batida com sucesso! (${aplicadasHoje} candidaturas confirmadas hoje)` 
-          : `${aplicadasHoje} de 3 candidaturas confirmadas hoje`;
-      }
-
-      // Controle do Banner de Ações Urgentes (Testes / Entrevistas)
-      const pendentesGeral = allJobs.filter(j => j.status === 'acao_pendente');
-      const bannerUrgente = document.getElementById('banner-acao-urgente');
-      if (bannerUrgente) {
-        if (pendentesGeral.length > 0) {
-          bannerUrgente.style.display = 'block';
-          const bannerDesc = document.getElementById('banner-acao-desc');
-          if (bannerDesc) {
-            bannerDesc.innerText = `Você possui ${pendentesGeral.length} processo(s) com teste técnico ou entrevista aguardando sua resposta.`;
-          }
+        if (aplicadasHoje >= 3) {
+          statusLabel.innerText = `🎉 Meta diária batida com sucesso! (${aplicadasHoje} candidaturas confirmadas hoje)`;
+          if (cardTracker) cardTracker.classList.add('goal-achieved');
         } else {
-          bannerUrgente.style.display = 'none';
+          const faltam = 3 - aplicadasHoje;
+          statusLabel.innerText = `${aplicadasHoje} de 3 concluídas hoje (faltam apenas ${faltam} para o dever cumprido)`;
+          if (cardTracker) cardTracker.classList.remove('goal-achieved');
         }
       }
+
+      
 
       // Controle do Banner de Observabilidade do Crawler (Falha / Anomalia)
       const bannerCrawler = document.getElementById('banner-crawler-falha');
@@ -2554,7 +3018,7 @@
     // =============================================================
     function switchSubTab02(tabName) {
       currentSubTab02 = tabName;
-      ['pendentes', 'andamento', 'aplicadas', 'salvas'].forEach(t => {
+      ['salvas', 'andamento', 'aplicadas'].forEach(t => {
         const btn = document.getElementById(`btn-subtab-${t}`);
         if (btn) btn.classList.toggle('active', t === tabName);
       });
@@ -2564,51 +3028,35 @@
     function renderScreen02() {
       const container = document.getElementById('table-candidaturas');
 
-      const pendentesJobs = allJobs.filter(j => j.status === 'acao_pendente');
+      const salvasJobs = allJobs.filter(j => j.starred && j.status !== 'encerrada' && j.status !== 'descartada');
       const andamentoJobs = allJobs.filter(j => j.status === 'em_andamento');
       const aplicadasJobs = allJobs.filter(j => j.status === 'aplicada');
-      const salvasJobs = allJobs.filter(j => j.starred && j.status !== 'encerrada' && j.status !== 'descartada');
 
-      const countPendentes = document.getElementById('count-subtab-pendentes');
+      const countSalvas = document.getElementById('count-subtab-salvas');
       const countAndamento = document.getElementById('count-subtab-andamento');
       const countAplicadas = document.getElementById('count-subtab-aplicadas');
-      const countSalvas = document.getElementById('count-subtab-salvas');
 
-      if (countPendentes) countPendentes.innerText = `(${pendentesJobs.length})`;
+      if (countSalvas) countSalvas.innerText = `(${salvasJobs.length})`;
       if (countAndamento) countAndamento.innerText = `(${andamentoJobs.length})`;
       if (countAplicadas) countAplicadas.innerText = `(${aplicadasJobs.length})`;
-      if (countSalvas) countSalvas.innerText = `(${salvasJobs.length})`;
-
-      // Se houver ações pendentes e a aba atual for 'andamento' vazia, focar em 'pendentes'
-      if (currentSubTab02 === 'andamento' && andamentoJobs.length === 0 && pendentesJobs.length > 0) {
-        currentSubTab02 = 'pendentes';
-        ['pendentes', 'andamento', 'aplicadas', 'salvas'].forEach(t => {
-          const btn = document.getElementById(`btn-subtab-${t}`);
-          if (btn) btn.classList.toggle('active', t === 'pendentes');
-        });
-      }
 
       let targetList = [];
-      if (currentSubTab02 === 'pendentes') targetList = pendentesJobs;
+      if (currentSubTab02 === 'salvas') targetList = salvasJobs;
       if (currentSubTab02 === 'andamento') targetList = andamentoJobs;
       if (currentSubTab02 === 'aplicadas') targetList = aplicadasJobs;
-      if (currentSubTab02 === 'salvas') targetList = salvasJobs;
 
       if (targetList.length === 0) {
-        let msgTitle = "Nenhuma candidatura nesta seção";
+        let msgTitle = "Nenhuma vaga nesta seção";
         let msgDesc = "Clique em 'Inscrição ↗' em qualquer vaga aberta da Tela 01 para iniciar.";
-        if (currentSubTab02 === 'pendentes') {
-          msgTitle = "Nenhum teste ou entrevista pendente!";
-          msgDesc = "O robô monitora sua caixa de entrada a cada 1 hora. Quando uma empresa convocar para testes ou agendamento, ela aparecerá aqui com prazo e link direto.";
-        } else if (currentSubTab02 === 'andamento') {
-          msgTitle = "Nenhuma inscrição em andamento no momento";
-          msgDesc = "Ao clicar em 'Inscrição ↗' na Tela 01, a vaga vem para cá para você preenchê-la e depois confirmar.";
-        } else if (currentSubTab02 === 'aplicadas') {
-          msgTitle = "Nenhuma candidatura finalizada ainda";
-          msgDesc = "Confirme as vagas que estão 'Em Andamento' após enviar seu formulário oficial.";
-        } else if (currentSubTab02 === 'salvas') {
+        if (currentSubTab02 === 'salvas') {
           msgTitle = "Nenhuma vaga favoritada";
-          msgDesc = "Clique no ícone de estrela (★) para salvar oportunidades interessantes.";
+          msgDesc = "Clique no ícone de estrela (★) para salvar oportunidades interessantes e aplicar quando quiser.";
+        } else if (currentSubTab02 === 'andamento') {
+          msgTitle = "Nenhuma inscrição em andamento";
+          msgDesc = "Ao clicar em 'Inscrição ↗' na Tela 01, a vaga vem para cá para você confirmar o envio.";
+        } else if (currentSubTab02 === 'aplicadas') {
+          msgTitle = "Nenhuma candidatura registrada ainda";
+          msgDesc = "Após enviar sua inscrição oficial, confirme-a para manter seu histórico organizado.";
         }
 
         container.innerHTML = `
@@ -2847,27 +3295,7 @@
           </div>
         `;
       } else if (contextScreen === 'screen02') {
-        if (currentSubTab02 === 'pendentes') {
-          const det = job.detalhesAcao || {};
-          const tipoStr = det.tipo || 'Ação Necessária';
-          const prazoStr = det.prazo ? `Prazo: ${det.prazo}` : 'Prazo a definir';
-          const linkStr = det.link && det.link !== '#' ? det.link : (job.link || '#');
-          const isEntrevista = tipoStr.toLowerCase().includes('entrevista');
-
-          actionButtons = `
-            <div style="display: flex; flex-direction: column; gap: 0.35rem; align-items: flex-end;">
-              <div style="display: flex; gap: 0.4rem;">
-                <button class="btn-action-ink" onclick="event.stopPropagation(); window.open('${linkStr}', '_blank')" style="background: #92400e; border-color: #78350f;">
-                  <span>${isEntrevista ? 'Agendar Entrevista ↗' : 'Fazer Teste ↗'}</span>
-                </button>
-                <button class="btn-action-ink btn-confirm-success" onclick="event.stopPropagation(); concluirAcaoPendente('${job.canonicalKey}')" title="Marcar etapa como concluída">
-                  <span>Concluído ✓</span>
-                </button>
-              </div>
-              <span class="mono" style="font-size: 0.65rem; color: #b45309; font-weight: 600;">⚡ ${prazoStr}</span>
-            </div>
-          `;
-        } else if (currentSubTab02 === 'andamento') {
+        if (currentSubTab02 === 'andamento') {
           let tempoDecorridoStr = "Iniciada recentemente";
           if (job.inicioCandidatura) {
             const min = Math.max(1, Math.round((Date.now() - job.inicioCandidatura) / 60000));
@@ -2931,16 +3359,23 @@
 
       return `
         <article class="job-row" onclick="openJobModal('${jobEncoded}')">
-          <span class="job-number mono">${indexStr}</span>
+          <div class="company-avatar-squircle">
+            ${(job.empresa || 'V').trim().substring(0, 2).toUpperCase()}
+          </div>
 
           <div class="job-content">
             <div class="job-top-meta">
               <span class="company-label">${job.empresa || 'Empresa'}</span>
               <span class="job-date">&bull; ${job.dataColeta ? job.dataColeta.split(',')[0] : 'Hoje'}</span>
               <span class="tag-badge ${tagClass}">📍 ${tagLabel}</span>
-              <span class="tag-badge turno">⏱️ ${job.turno || 'Tarde / Flexível'}</span>
-              <span class="tag-badge inscricao">📄 ${job.prazo || 'Inscrições Abertas'}</span>
-              ${job.status === 'acao_pendente' ? `<span class="tag-badge" style="background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; font-weight: 600;">⚡ ${job.detalhesAcao ? job.detalhesAcao.tipo : 'Ação Pendente'}</span>` : ''}
+              ${getTurnoMatchBadge(job)}
+              ${(() => {
+                const matchData = calculateMatchScore(job);
+                return `<span class="tag-badge match-score" title="${matchData.tooltip}">⚡ ${matchData.score}% Match</span>`;
+              })()}
+              ${getPlatformBadge(job.link)}
+              ${getPrazoBadge(job.prazo)}
+              
               ${job.status === 'em_andamento' ? '<span class="tag-badge andamento">⏳ Em Andamento</span>' : ''}
               ${job.status === 'aplicada' ? (job.etapaConcluida ? '<span class="tag-badge applied">✓ Etapa Concluída</span>' : (job.candidaturaExterna ? '<span class="tag-badge applied">✓ Aplicada por fora</span>' : '<span class="tag-badge applied">✓ Aplicada</span>')) : ''}
               ${job.status === 'encerrada' ? `<span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">❌ Encerrada: ${job.motivoEncerramento || 'Inscrições encerradas'}</span>` : ''}
@@ -2951,6 +3386,9 @@
               <h3>${job.cargo}</h3>
             </div>
 
+            <div class="job-tech-stack">
+              ${extractTechChips(job).map(t => `<span class="tech-chip">${t}</span>`).join('')}
+            </div>
             <p class="job-snippet">${job.requisitos || 'Sem descrição fornecida.'}</p>
           </div>
 
@@ -3563,6 +4001,9 @@
       const dHibridoBar = document.getElementById('kpi-dist-hibrido-bar');
       if (dHibridoPct) dHibridoPct.innerText = `${pHibrido}% (${hibridoCount})`;
       if (dHibridoBar) dHibridoBar.style.width = `${pHibrido}%`;
+
+      // 8. DISTRIBUIÇÃO POR PLATAFORMA
+      renderDistribuicaoPlataformas();
     }
 
     // =============================================================
@@ -3730,26 +4171,92 @@
       }).join('');
     }
 
+    function classificarPlataformaVaga(job) {
+      const url = (job.link || '').toLowerCase();
+      if (url.includes("linkedin.com")) return "LinkedIn";
+      if (url.includes("gupy.io")) return "Gupy";
+      if (url.includes("greenhouse.io")) return "Greenhouse (ATS)";
+      if (url.includes("myworkdayjobs.com") || url.includes("workday")) return "Workday (ATS)";
+      if (url.includes("inhire.app")) return "InHire (ATS)";
+      if (url.includes("solides")) return "Sólides (ATS)";
+      if (url.includes("ciadetalentos") || url.includes("vagas.ciadetalentos")) return "Cia de Talentos";
+      if (url.includes("vagas.com.br") || url.includes("vagas.com")) return "Vagas.com";
+      if (url.includes("catho.com.br")) return "Catho";
+      if (url.includes("nube.com.br") || url.includes("ciee.org.br") || url.includes("agiel.com.br")) return "Agentes (Nube/CIEE)";
+      if (url.includes("glassdoor")) return "Glassdoor";
+      if (url.includes("indeed")) return "Indeed";
+      if (url.includes("vertexaisearch") || url.includes("google.com")) return "Google Jobs";
+      return "Sites Próprios das Empresas";
+    }
+
+    function renderDistribuicaoPlataformas() {
+      const container = document.getElementById('container-plataformas-dist');
+      if (!container) return;
+
+      const validJobs = allJobs.filter(j => j.status !== 'encerrada' && j.status !== 'descartada');
+      const total = Math.max(validJobs.length, 1);
+
+      if (validJobs.length === 0) {
+        container.innerHTML = '<div style="color: var(--muted); font-size: 0.85rem;">Nenhuma vaga ativa no momento.</div>';
+        return;
+      }
+
+      const meta = {
+        "Google Jobs": { label: "🔎 Google Jobs", color: "#475569" },
+        "LinkedIn": { label: "💼 LinkedIn", color: "#0A66C2" },
+        "Gupy": { label: "🏢 Gupy", color: "#7E22CE" },
+        "Greenhouse (ATS)": { label: "🌱 Greenhouse (ATS)", color: "#047857" },
+        "InHire (ATS)": { label: "⚡ InHire (ATS)", color: "#4F46E5" },
+        "Workday (ATS)": { label: "⚙️ Workday (ATS)", color: "#1D4ED8" },
+        "Sólides (ATS)": { label: "🚀 Sólides (ATS)", color: "#BE185D" },
+        "Catho": { label: "📋 Catho", color: "#E11D48" },
+        "Agentes (Nube/CIEE)": { label: "🎓 Agentes (Nube/CIEE)", color: "#0D9488" },
+        "Cia de Talentos": { label: "🎯 Cia de Talentos", color: "#C2410C" },
+        "Vagas.com": { label: "📄 Vagas.com", color: "#0E7490" },
+        "Glassdoor": { label: "🚪 Glassdoor", color: "#15803D" },
+        "Indeed": { label: "🔍 Indeed", color: "#1D4ED8" },
+        "Sites Próprios das Empresas": { label: "🏢 Sites Próprios das Empresas", color: "#334155" }
+      };
+
+      const counts = {};
+      validJobs.forEach(job => {
+        const plat = classificarPlataformaVaga(job);
+        counts[plat] = (counts[plat] || 0) + 1;
+      });
+
+      const sortedPlats = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+
+      container.innerHTML = sortedPlats.map(plat => {
+        const count = counts[plat];
+        const pct = Math.round((count / total) * 100);
+        const info = meta[plat] || { label: `🌐 ${plat}`, color: "#475569" };
+        return `
+          <div class="bar-stat-row">
+            <div class="bar-stat-labels">
+              <span>${info.label}</span>
+              <span><strong>${pct}%</strong> (${count})</span>
+            </div>
+            <div class="bar-stat-track">
+              <div class="bar-stat-fill" style="width: ${pct}%; background: ${info.color};"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
     // =============================================================
     // GLOBAL BADGES
     // =============================================================
     function updateGlobalBadges() {
       const openCount = allJobs.filter(j => j.status === 'para_aplicar').length;
-      const pendentesCount = allJobs.filter(j => j.status === 'acao_pendente').length;
-      const candCount = allJobs.filter(j => j.status === 'em_andamento' || j.status === 'aplicada' || j.status === 'acao_pendente').length;
+      const candCount = allJobs.filter(j => j.status === 'em_andamento' || j.status === 'aplicada').length;
 
       const bAbertas = document.getElementById('badge-nav-abertas');
       const bCand = document.getElementById('badge-nav-candidaturas');
-      const bRuns = document.getElementById('badge-nav-runs');
 
       if (bAbertas) bAbertas.innerText = openCount;
-      if (bCand) {
-        if (pendentesCount > 0) {
-          bCand.innerHTML = `${candCount} <span style="color:#b45309; font-weight:bold;">⚡${pendentesCount}</span>`;
-        } else {
-          bCand.innerText = candCount;
-        }
-      }
+      if (bCand) bCand.innerText = candCount;
+      const bRuns = null;
       if (bRuns) {
         const health = getCrawlerHealth();
         if (health.status === 'error') {
@@ -3780,7 +4287,19 @@
       locBadge.innerText = `📍 ${job.localizacao || (isRemoto ? '100% Remoto' : 'Presencial / BH')}`;
 
       document.getElementById('m-badge-turno').innerText = `⏱️ ${job.turno || 'Tarde / Flexível'}`;
-      document.getElementById('m-badge-prazo').innerText = `📄 ${job.prazo || 'Inscrições Abertas'}`;
+      const badgePrazoModal = document.getElementById('m-badge-prazo');
+      if (badgePrazoModal) {
+        const p = (job.prazo || '').trim();
+        if (p && !/^inscri[çc][õo]es\s+abertas$/i.test(p)) {
+          badgePrazoModal.style.display = 'inline-flex';
+          badgePrazoModal.innerText = `⏳ ${p}`;
+          badgePrazoModal.style.background = '#FFFBEB';
+          badgePrazoModal.style.color = '#B45309';
+          badgePrazoModal.style.borderColor = '#FCD34D';
+        } else {
+          badgePrazoModal.style.display = 'none';
+        }
+      }
 
       const starBtn = document.getElementById('m-btn-star');
       starBtn.innerText = job.starred ? '★' : '☆';
@@ -3947,7 +4466,11 @@
         }).catch(() => {});
       } catch (e) {}
 
-      showToast('Vaga marcada como Mismatch e removida do radar!');
+      const motivoCurto = motivo.split('/')[0].trim();
+      showToast(`🧠 Robô calibrado! Vagas de "${motivoCurto}" foram excluídas do radar.`, () => {
+        moverDeVoltaParaAbertas(canonicalKey);
+        showToast('↺ Ação desfeita: Vaga restaurada para abertas!');
+      });
       updateGlobalBadges();
       renderScreen01();
       renderScreen02();

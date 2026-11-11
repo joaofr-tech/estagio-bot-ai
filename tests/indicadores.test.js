@@ -89,6 +89,34 @@ function runIndicadoresTests() {
   assert.strictEqual(days.length, 15, 'Timeline deve conter exatamente 15 dias');
   assert.strictEqual(days[14], today.toLocaleDateString('pt-BR'), 'Último dia da timeline deve ser hoje');
   console.log('  ✓ Timeline Quinzenal: gera 15 dias contínuos terminando na data presente');
+
+  // 8. Classificador de Plataformas & ATSs
+  function classificarPlataformaVaga(job) {
+    const url = (job.link || '').toLowerCase();
+    if (url.includes('linkedin.com')) return 'LinkedIn';
+    if (url.includes('gupy.io')) return 'Gupy';
+    if (url.includes('greenhouse.io')) return 'Greenhouse (ATS)';
+    if (url.includes('myworkdayjobs.com') || url.includes('workday')) return 'Workday (ATS)';
+    if (url.includes('inhire.app')) return 'InHire (ATS)';
+    if (url.includes('solides')) return 'Sólides (ATS)';
+    if (url.includes('ciadetalentos') || url.includes('vagas.ciadetalentos')) return 'Cia de Talentos';
+    if (url.includes('vagas.com.br') || url.includes('vagas.com')) return 'Vagas.com';
+    if (url.includes('catho.com.br')) return 'Catho';
+    if (url.includes('nube.com.br') || url.includes('ciee.org.br') || url.includes('agiel.com.br')) return 'Agentes (Nube/CIEE)';
+    if (url.includes('glassdoor')) return 'Glassdoor';
+    if (url.includes('indeed')) return 'Indeed';
+    if (url.includes('vertexaisearch') || url.includes('google.com')) return 'Google Jobs';
+    return 'Sites Próprios das Empresas';
+  }
+
+  assert.strictEqual(classificarPlataformaVaga({ link: 'https://www.linkedin.com/jobs/view/123' }), 'LinkedIn');
+  assert.strictEqual(classificarPlataformaVaga({ link: 'https://empresa.gupy.io/job/456' }), 'Gupy');
+  assert.strictEqual(classificarPlataformaVaga({ link: 'https://job-boards.greenhouse.io/empresa/vaga' }), 'Greenhouse (ATS)');
+  assert.strictEqual(classificarPlataformaVaga({ link: 'https://ciena.wd5.myworkdayjobs.com/careers' }), 'Workday (ATS)');
+  assert.strictEqual(classificarPlataformaVaga({ link: 'https://radix.inhire.app/vagas/123' }), 'InHire (ATS)');
+  assert.strictEqual(classificarPlataformaVaga({ link: 'https://vertexaisearch.cloud.google.com/redirect' }), 'Google Jobs');
+  assert.strictEqual(classificarPlataformaVaga({ link: 'https://careers.wexinc.com/job/1' }), 'Sites Próprios das Empresas');
+  console.log('  ✓ Classificação por Plataforma & ATS: categoriza URLs e ATSs determinísticamente');
 }
 
 module.exports = { runIndicadoresTests };
