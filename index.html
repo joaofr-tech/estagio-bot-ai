@@ -812,6 +812,127 @@
       border: none;
     }
 
+    /* Grid 3 Colunas para o Foco de Hoje */
+    .focus-jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.05rem;
+      margin-bottom: 3.5rem;
+      align-items: stretch;
+    }
+
+    .focus-jobs-grid .empty-state-box {
+      grid-column: 1 / -1;
+    }
+
+    .focus-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      color: inherit;
+      position: relative;
+      min-width: 0;
+    }
+
+    .focus-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(5, 150, 105, 0.35);
+    }
+
+    .focus-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+    }
+
+    .focus-card-company {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+
+    .focus-card-company .company-avatar-squircle {
+      width: 40px;
+      height: 40px;
+      font-size: 0.9rem;
+    }
+
+    .focus-card-company-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .focus-card-company-meta .company-label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .focus-card-title {
+      font-size: 1.04rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 2.7em;
+    }
+
+    .focus-card-snippet {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .focus-card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .focus-card-footer {
+      margin-top: auto;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(226, 232, 240, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .focus-card-footer .btn-action-ink {
+      flex: 1;
+      justify-content: center;
+    }
+
+    @media (max-width: 1080px) {
+      .focus-jobs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .focus-jobs-grid { grid-template-columns: 1fr; }
+    }
+
     .job-row {
       background: #FFFFFF;
       border: 1px solid rgba(226, 232, 240, 0.9);
@@ -1765,7 +1886,7 @@
           <h3>Foco de Hoje (3 Vagas Prioritárias)<span class="title-dot">.</span></h3>
           <span class="mono" style="font-size: 0.72rem;">Meta diária recomendada</span>
         </div>
-        <div class="jobs-table" id="table-focus-jobs">
+        <div class="focus-jobs-grid" id="table-focus-jobs">
           <!-- Rendered via JS -->
         </div>
 
@@ -2881,7 +3002,7 @@
           </div>
         `;
       } else {
-        containerFocus.innerHTML = focusJobs.map((job, idx) => renderJobRowHTML(job, idx + 1, 'screen01')).join('');
+        containerFocus.innerHTML = focusJobs.map((job) => renderFocusCardHTML(job)).join('');
       }
 
       // Todas as Vagas Abertas (com filtros)
@@ -3264,6 +3385,66 @@
     // =============================================================
     // ROW HTML GENERATOR (Clean Gabriel Greco Project-Row)
     // =============================================================
+    function renderFocusCardHTML(job) {
+      const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+      const isPresencial = (job.modalidade || '').toLowerCase().includes('presencial');
+      const tagClass = isRemoto ? 'remote' : (isPresencial ? 'presencial' : 'hybrid');
+      const tagLabel = isRemoto ? '100% Remoto' : (job.localizacao || job.modalidade || 'BH / Presencial');
+      const isStarred = !!job.starred;
+      const jobEncoded = encodeURIComponent(JSON.stringify(job));
+      const matchData = calculateMatchScore(job);
+      const chips = extractTechChips(job);
+
+      return `
+        <article class="focus-card" onclick="openJobModal('${jobEncoded}')">
+          <div class="focus-card-header">
+            <div class="focus-card-company">
+              <div class="company-avatar-squircle">
+                ${(job.empresa || 'V').trim().substring(0, 2).toUpperCase()}
+              </div>
+              <div class="focus-card-company-meta">
+                <span class="company-label" title="${job.empresa || 'Empresa'}">${job.empresa || 'Empresa'}</span>
+                <span class="job-date">${job.dataColeta ? job.dataColeta.split(',')[0] : 'Hoje'}</span>
+              </div>
+            </div>
+            <span class="tag-badge match-score" title="${matchData.tooltip}">⚡ ${matchData.score}% Match</span>
+          </div>
+
+          <div>
+            <h3 class="focus-card-title">${job.cargo}</h3>
+            ${chips.length > 0 ? `<div class="job-tech-stack">${chips.map(t => `<span class="tech-chip">${t}</span>`).join('')}</div>` : ''}
+          </div>
+
+          <p class="focus-card-snippet" title="${(job.requisitos || '').replace(/"/g, '&quot;')}">${job.requisitos || 'Sem descrição fornecida.'}</p>
+
+          <div class="focus-card-pills">
+            <span class="tag-badge ${tagClass}">📍 ${tagLabel}</span>
+            ${getTurnoMatchBadge(job)}
+            ${getPlatformBadge(job.link)}
+            ${getPrazoBadge(job.prazo)}
+          </div>
+
+          <div class="focus-card-footer" onclick="event.stopPropagation()">
+            <button class="btn-action-ink" onclick="iniciarInscricao('${job.canonicalKey}', '${job.link || ''}')">
+              <span>Inscrição</span>
+              <span>↗</span>
+            </button>
+            <div style="display: flex; gap: 0.35rem; align-items: center;">
+              <button class="job-icon-btn ${isStarred ? 'is-starred' : ''}" title="${isStarred ? 'Remover dos favoritos' : 'Favoritar'}" onclick="toggleStar('${job.canonicalKey}')">
+                ${isStarred ? '★' : '☆'}
+              </button>
+              <button class="job-icon-btn" title="Já me candidatei por fora (concluída)" onclick="event.stopPropagation(); marcarJaCandidatado('${job.canonicalKey}')" style="color: #16a34a; font-weight: bold;">
+                ✓
+              </button>
+              <button class="job-icon-btn" title="Descartar vaga (Mismatch com meu perfil)" onclick="event.stopPropagation(); abrirModalMismatchKey('${job.canonicalKey}')" style="color: #b45309;">
+                ⊘
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
     function renderJobRowHTML(job, indexNum, contextScreen) {
       const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
       const isPresencial = (job.modalidade || '').toLowerCase().includes('presencial');
