@@ -16,6 +16,12 @@ novas_vagas.json
 *.bak
 temp_*.html
 scratch/
+next_f_extracted.txt
+
+# Scripts de inspecao e debug exploratorio
+inspect_*.js
+scan_*.js
+parse_*.js
 
 # Prototipos e Previews de UI/Design (Padronizacao)
 preview-*.html
