@@ -1,29 +1,127 @@
 window.BANCO_VAGAS = [
   {
-    "id": "vaga-1794345944781-8yfmk",
-    "empresa": "Drogaria Araujo S/A",
-    "cargo": "Estágio de Governança de Arquitetura em TI",
-    "modalidade": "Presencial",
-    "localizacao": "Belo Horizonte/MG (Centro)",
+    "id": "vaga-1795013427646-pjyyz",
+    "empresa": "MCA Auditoria e Gerenciamento Ltda",
+    "cargo": "Estágio em Automação de Processos e BI (Power Platform / Dashboards)",
+    "modalidade": "Hibrido",
+    "localizacao": "Belo Horizonte e Região/MG",
     "turno": "Tarde (13h-19h)",
-    "prazo": "Inscrições Abertas",
-    "requisitos": "Estar cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas correlatas (a partir do 3º período); interesse em integração corporativa de sistemas, microsserviços, barramento corporativo, ETL e APIs; noções básicas de lógica de programação e banco de dados (SQL); diferenciais: noções de APIs REST, JSON, XML, Git, Python ou Java; disposição para aprender plataformas corporativas como MuleSoft e IBM DataStage.",
-    "link": "https://www.linkedin.com/jobs/view/4488009186",
-    "dataColeta": "10/11/2026, 18:25:44",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Graduação em andamento em Engenharia de Software, TI ou áreas correlatas. Conhecimento em lógica de programação, interesse em automação de processos low-code/no-code, desenvolvimento de soluções em Microsoft Power Platform (Power Apps e Power Automate), criação de dashboards em Power BI; diferenciais em APIs, JavaScript e banco de dados.",
+    "link": "https://www.linkedin.com/jobs/view/4450258265",
+    "dataColeta": "18/11/2026, 11:50:27",
     "notificada": true,
     "status": "para_aplicar"
   },
   {
-    "id": "vaga-1794336768522-46hb0",
+    "id": "vaga-1795013427644-ogytl",
+    "empresa": "Pottencial Seguradora",
+    "cargo": "Estágio em Automação e Dados (RPA, Python e Power BI)",
+    "modalidade": "Hibrido",
+    "localizacao": "Belo Horizonte/MG (Híbrido - 3 dias presenciais)",
+    "turno": "Tarde (13h-19h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Engenharia da Computação ou afins. Apoio no desenvolvimento e criação de jornadas e rotinas automatizadas via RPA, scripts em Python para manipulação de dados, consultas SQL, relatórios inteligentes em Power BI e documentação de soluções.",
+    "link": "https://www.linkedin.com/jobs/view/4489678453",
+    "dataColeta": "18/11/2026, 11:50:27",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794778091817-a0b60",
+    "empresa": "Apollo Solutions",
+    "cargo": "Estágio em Desenvolvimento de Software",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Estar cursando graduação em Engenharia de Software, Ciência da Computação ou áreas afins (previsão de formatura a partir de 2028). Experiência prática/acadêmica com programação em Python, controle de versão com Git, fundamentos de lógica de programação e algoritmos. Conhecimento em manipulação de dados e bibliotecas como OpenCV, NumPy, Pandas e Matplotlib. Interesse em Visão Computacional, Inteligência Artificial e Machine Learning. Disponibilidade para 30h semanais.",
+    "link": "https://app.sesametime.com/jobs/apollosolutionsdev/c3006e0f-ba14-4ed8-8dd2-4ad5b7a50866/overview",
+    "dataColeta": "15/11/2026, 18:28:11",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794756777571-a61pm",
+    "empresa": "Brandt - Legacy by Strategy",
+    "cargo": "Estágio em Desenvolvimento – Hub Geointeligência",
+    "modalidade": "Presencial",
+    "localizacao": "Nova Lima/MG",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscrições Abertas",
+    "requisitos": "Estar cursando graduação em Engenharia de Software, Ciência da Computação, Análise e Desenvolvimento de Sistemas ou áreas afins a partir do 3º período (disponibilidade mínima de 1 ano). Desenvolvimento e manutenção de scripts de automação (Python, PowerShell), apoio ao desenvolvimento de ferramentas e soluções internas, documentação técnica, lógica de programação e automação de processos.",
+    "link": "https://www.linkedin.com/jobs/view/4491038023",
+    "dataColeta": "15/11/2026, 12:32:57",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794724165760-lyh5z",
+    "empresa": "Brex",
+    "cargo": "Software Engineer, Internship - 2027",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Graduação com conclusão prevista para 2027 em Engenharia de Software, Ciência da Computação ou afins. Conhecimentos sólidos em algoritmos e fundamentos de computação, desenvolvimento backend com linguagens como Java, Kotlin ou Python, bancos de dados SQL/NoSQL e inglês avançado.",
+    "link": "https://www.brex.com/careers/8935242002?gh_jid=8935242002",
+    "dataColeta": "15/11/2026, 03:29:25",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794357084203-1tcf7",
+    "empresa": "Drogaria Araujo S/A",
+    "cargo": "Estágio de Governança de Arquitetura em TI (Integração Corporativa)",
+    "modalidade": "Presencial",
+    "localizacao": "Belo Horizonte/MG (Centro)",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Cursando a partir do 3º período em Ciência da Computação, Engenharia de Software, Sistemas de Informação ou áreas correlatas; noções de lógica de programação, banco de dados (SQL) e APIs (REST, JSON, XML); interesse em integração de sistemas, pipelines ETL e tecnologias como IBM DataStage e MuleSoft; diferenciais em Python, Java, Git e Postman. Bolsa de R$ 1.800,00 + VT + Seguro de vida.",
+    "link": "https://www.catho.com.br/vagas/estagio-de-governanca-de-arquitetura-em-ti/39105281/",
+    "dataColeta": "10/11/2026, 21:31:24",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794347068093-3q1qd",
+    "empresa": "AllierBrasil & look2agro",
+    "cargo": "Estágio em Automação e Dados com Python",
+    "modalidade": "Remoto",
+    "localizacao": "Remoto - Brasil",
+    "turno": "Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Conhecimentos em Python, automação de processos/scripts, organização e coleta de dados, web scraping e Excel. Foco em automação e tratamento de dados.",
+    "link": "https://www.icex.ufmg.br/icex_novo/estagio-na-allierbrasil-look2agro/",
+    "dataColeta": "10/11/2026, 18:44:27",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794342595691-8aaja",
+    "empresa": "Belgo Arames",
+    "cargo": "Estagiário - Dados e Inteligência Artificial",
+    "modalidade": "Presencial",
+    "localizacao": "Contagem/MG (Planta Industrial - Região Metropolitana de BH)",
+    "turno": "Tarde (12h-18h / 13h-19h) ou Flexivel (6h)",
+    "prazo": "Inscricoes Abertas",
+    "requisitos": "Ensino Superior em andamento em Engenharia de Software, Ciência da Computação, Ciência de Dados ou áreas correlatas. Conhecimentos básicos em Python e manipulação de dados (Pandas), consultas SQL, auxílio no desenvolvimento de pipelines ETL/ELT e integrações via API. Noções básicas de computação em nuvem Azure (Blob Storage, Databricks, Logic Apps). Inglês básico/intermediário.",
+    "link": "https://www.vagas.com.br/vagas/v2818575/estagiario-dados-e-inteligencia-artificial",
+    "dataColeta": "10/11/2026, 17:29:55",
+    "notificada": true,
+    "status": "para_aplicar"
+  },
+  {
+    "id": "vaga-1794338977780-qbvt3",
     "empresa": "Minas Tênis Clube",
     "cargo": "Estágio de Informática (Desenvolvimento de sistemas)",
     "modalidade": "Presencial",
-    "localizacao": "Belo Horizonte/MG (Bairro Lourdes)",
+    "localizacao": "Belo Horizonte/MG (Lourdes - Minas I)",
     "turno": "Flexivel (6h)",
-    "prazo": "Inscricoes Abertas",
-    "requisitos": "Cursando ensino superior em áreas de Tecnologia da Informação ou correlatas (a partir do 2º período); conhecimento em lógica de programação e familiaridade com linguagens como C# e JavaScript; conhecimentos básicos em banco de dados e SQL; noções de desenvolvimento de APIs REST; atuação no apoio ao desenvolvimento e manutenção de sistemas internos e aplicações web, construção e evolução de APIs e testes funcionais; carga horária de 6h diárias com horário a definir conforme a disponibilidade do estudante (Bolsa de R$ 1.621,00/mês + alimentação na empresa + VT + seguro).",
-    "link": "https://www.linkedin.com/jobs/view/4487817213",
-    "dataColeta": "10/11/2026, 15:52:48",
+    "prazo": "Inscrições Abertas (até 30/11/2026)",
+    "requisitos": "Estar cursando graduação em Engenharia de Software, Ciência da Computação, Sistemas de Informação ou áreas de TI a partir do 2º período; conhecimentos em lógica de programação; familiaridade com C# ou JavaScript; noções de bancos de dados relacionais e SQL; noções de desenvolvimento de APIs REST; atuação no desenvolvimento e sustentação de sistemas internos e aplicações web, além de testes funcionais. Carga horária de 6h diárias (30h semanais) com horário a definir de acordo com a disponibilidade do estudante.",
+    "link": "https://minastcestagio.gupy.io/jobs/12833328",
+    "dataColeta": "10/11/2026, 16:29:37",
     "notificada": true,
     "status": "para_aplicar"
   },
@@ -39,7 +137,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4487417691",
     "dataColeta": "10/11/2026, 10:32:09",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "18/11/2026, 11:50:41",
+    "motivoEncerramento": "LinkedIn: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1794317529372-yr9at",
@@ -81,7 +181,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4475229965",
     "dataColeta": "10/11/2026, 09:34:12",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "18/11/2026, 11:50:41",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1794314052720-tgjqq",
@@ -151,7 +253,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4467115781",
     "dataColeta": "10/11/2026, 06:30:27",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "14/11/2026, 22:29:10",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1794303027821-7iegy",
@@ -221,7 +325,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4477445748",
     "dataColeta": "10/11/2026, 03:33:44",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "14/11/2026, 22:29:10",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1794288377749-n1ike",
@@ -249,7 +355,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4487928973",
     "dataColeta": "10/11/2026, 02:26:17",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "14/11/2026, 22:29:10",
+    "motivoEncerramento": "LinkedIn: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1794284864769-7nijm",
@@ -263,7 +371,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.vagas.com.br/vagas/v2841752/estagiario-a-de-dados-e-banco-de-dados",
     "dataColeta": "10/11/2026, 01:27:44",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "14/11/2026, 22:29:10",
+    "motivoEncerramento": "Link inexistente (Domínio não existe / DNS falhou)"
   },
   {
     "id": "vaga-1794284864768-u38a3",
@@ -277,7 +387,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4487342030",
     "dataColeta": "10/11/2026, 01:27:44",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "18/11/2026, 11:50:41",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1794281103407-nbgzq",
@@ -319,7 +431,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4479849273",
     "dataColeta": "09/11/2026, 23:29:20",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "15/11/2026, 02:25:38",
+    "motivoEncerramento": "LinkedIn: Botão de candidatura ausente (inscrições encerradas)"
   },
   {
     "id": "vaga-1794270240087-jfk3n",
@@ -347,7 +461,9 @@ window.BANCO_VAGAS = [
     "link": "https://www.linkedin.com/jobs/view/4487407740",
     "dataColeta": "09/11/2026, 21:23:59",
     "notificada": true,
-    "status": "para_aplicar"
+    "status": "encerrada",
+    "dataEncerramento": "14/11/2026, 22:29:10",
+    "motivoEncerramento": "LinkedIn: Não aceita mais candidaturas"
   },
   {
     "id": "vaga-1794259683756-ux4pq",
