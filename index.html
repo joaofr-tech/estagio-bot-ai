@@ -1752,7 +1752,6 @@
               <polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
             <span class="nav-label">Meta do Dia</span>
-            <span class="nav-badge" id="badge-nav-abertas">0</span>
           </div>
         </li>
         <li>
@@ -1762,7 +1761,6 @@
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
             </svg>
             <span class="nav-label">Candidaturas</span>
-            <span class="nav-badge" id="badge-nav-candidaturas">0</span>
           </div>
         </li>
       </ul>
@@ -1916,16 +1914,6 @@
           </div>
 
           <div class="filters-cluster">
-            <div class="filter-subgroup">
-              <span class="filter-subgroup-label">Turno:</span>
-              <div class="toggle-strip">
-                <button class="toggle-btn active" id="f-turno-all" onclick="setFilterTurno('all')">Todos</button>
-                <button class="toggle-btn" id="f-turno-tarde" onclick="setFilterTurno('tarde')">Tarde</button>
-                <button class="toggle-btn" id="f-turno-noite" onclick="setFilterTurno('noite')">Noite</button>
-                <button class="toggle-btn" id="f-turno-flex" onclick="setFilterTurno('flexivel')">Flexível</button>
-              </div>
-            </div>
-
             <div class="filter-subgroup">
               <span class="filter-subgroup-label">Localização:</span>
               <div class="toggle-strip">
@@ -2708,7 +2696,6 @@
     let currentScreen = '01'; // '01', '02', '03', '04', '05'
     let currentSubTab02 = 'salvas'; // 'andamento', 'aplicadas', 'salvas'
     let search01Query = '';
-    let filter01Turno = 'all';
     let filter01Loc = 'all';
     let activeModalJob = null;
 
@@ -3008,16 +2995,6 @@
       // Todas as Vagas Abertas (com filtros)
       let filteredAll = openJobs.slice();
 
-      if (filter01Turno !== 'all') {
-        filteredAll = filteredAll.filter(j => {
-          const t = `${j.turno || ''} ${j.requisitos || ''}`.toLowerCase();
-          if (filter01Turno === 'tarde') return t.includes('tarde') || t.includes('13h') || t.includes('12h') || t.includes('flex');
-          if (filter01Turno === 'noite') return t.includes('noite') || t.includes('noturno') || t.includes('flex');
-          if (filter01Turno === 'flexivel') return t.includes('flex') || t.includes('6h') || t.includes('30h');
-          return true;
-        });
-      }
-
       if (filter01Loc === 'remoto') {
         filteredAll = filteredAll.filter(j => (j.modalidade || '').toLowerCase().includes('remoto') || (j.localizacao || '').toLowerCase().includes('remoto'));
       } else if (filter01Loc === 'bh') {
@@ -3044,7 +3021,7 @@
         containerAll.innerHTML = `
           <div class="empty-state-box">
             <div class="empty-state-title">Nenhuma vaga encontrada com os filtros atuais</div>
-            <div class="empty-state-desc">Experimente alternar os filtros de turno ou limpar a busca.</div>
+            <div class="empty-state-desc">Experimente alternar o filtro de localização ou limpar a busca.</div>
           </div>
         `;
       } else {
@@ -3114,15 +3091,6 @@
         input.focus();
         renderScreen01();
       }
-    }
-
-    function setFilterTurno(turno) {
-      filter01Turno = turno;
-      ['all', 'tarde', 'noite', 'flex'].forEach(t => {
-        const el = document.getElementById(`f-turno-${t}`);
-        if (el) el.classList.toggle('active', t === (turno === 'flexivel' ? 'flex' : turno));
-      });
-      renderScreen01();
     }
 
     function setFilterLoc(loc) {
@@ -4466,27 +4434,7 @@
     // =============================================================
     // GLOBAL BADGES
     // =============================================================
-    function updateGlobalBadges() {
-      const openCount = allJobs.filter(j => j.status === 'para_aplicar').length;
-      const candCount = allJobs.filter(j => j.status === 'em_andamento' || j.status === 'aplicada').length;
-
-      const bAbertas = document.getElementById('badge-nav-abertas');
-      const bCand = document.getElementById('badge-nav-candidaturas');
-
-      if (bAbertas) bAbertas.innerText = openCount;
-      if (bCand) bCand.innerText = candCount;
-      const bRuns = null;
-      if (bRuns) {
-        const health = getCrawlerHealth();
-        if (health.status === 'error') {
-          bRuns.innerHTML = `${executionData.length} <span style="color:#ef4444; font-weight:bold;">⚠️</span>`;
-        } else if (health.status === 'warning') {
-          bRuns.innerHTML = `${executionData.length} <span style="color:#b45309; font-weight:bold;">⚡</span>`;
-        } else {
-          bRuns.innerText = executionData.length;
-        }
-      }
-    }
+    function updateGlobalBadges() {}
 
     // =============================================================
     // MODAL HANDLERS
