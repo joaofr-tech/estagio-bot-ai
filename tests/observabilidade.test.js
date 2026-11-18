@@ -1,4 +1,9 @@
 const assert = require('assert');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const { detectarZeroYieldFontes } = require('../registrar_log');
+const { rotacionarLogSeNecessario } = require('../src/logger');
 
 function runObservabilidadeTests() {
   console.log('\n[Suíte 5: Observabilidade & Detecção de Falhas do Crawler]');
@@ -75,6 +80,44 @@ function runObservabilidadeTests() {
   assert.ok(regexErro.test('Fatal: unauthorized token'), 'Deve capturar erro de autorização/token');
   assert.ok(!regexErro.test('Nenhuma vaga nova nesta rodada.'), 'Não deve falsamente acusar erro em rodadas sem vagas');
   console.log('  ✓ Regex de anomalias: identifica assinaturas fatais sem falsos positivos');
+
+  // Teste 6: Detector de Zero-Yield por fonte (3 rodadas seguidas sem retorno)
+  const historicoComZeroYield = [
+    { fontes: { linkedin: { status: 'ok', brutas: 12 }, catho: { status: 'ok', brutas: 0 } } },
+    { fontes: { linkedin: { status: 'ok', brutas: 8 }, catho: { status: 'error', brutas: 0 } } },
+    { fontes: { linkedin: { status: 'ok', brutas: 15 }, catho: { status: 'ok', brutas: 0 } } }
+  ];
+  const avisos = detectarZeroYieldFontes(historicoComZeroYield, 3);
+  assert.strictEqual(avisos.length, 1, 'Deve alertar exatamente 1 fonte com zero-yield');
+  assert.ok(avisos[0].includes('catho'), 'Aviso deve mencionar a fonte catho');
+
+  const historicoSaudavel = [
+    { fontes: { linkedin: { status: 'ok', brutas: 12 }, catho: { status: 'ok', brutas: 3 } } },
+    { fontes: { linkedin: { status: 'ok', brutas: 8 }, catho: { status: 'ok', brutas: 0 } } },
+    { fontes: { linkedin: { status: 'ok', brutas: 15 }, catho: { status: 'ok', brutas: 0 } } }
+  ];
+  assert.strictEqual(detectarZeroYieldFontes(historicoSaudavel, 3).length, 0, 'Não deve emitir aviso se houve retorno em uma das 3 rodadas');
+  console.log('  ✓ Detector de Zero-Yield: identifica fonte estagnada há 3 rodadas sem falsos positivos');
+
+  // Teste 7: Rotação automática de logs quando ultrapassa maxBytes
+  const tmpLogDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sona-log-'));
+  const tmpLog = path.join(tmpLogDir, 'log_execucoes.txt');
+  const tmpOld = path.join(tmpLogDir, 'log_execucoes.old.txt');
+  try {
+    const linhas = Array.from({ length: 20 }, (_, i) => `[Linha ${i + 1}] Registro de execução do pipeline ETL`).join('\n');
+    fs.writeFileSync(tmpLog, linhas, 'utf8');
+    const resRot = rotacionarLogSeNecessario(tmpLog, 200);
+    assert.strictEqual(resRot.rotated, true, 'Deve rotacionar quando tamanho ultrapassa maxBytes');
+    assert.ok(fs.existsSync(tmpOld), 'Deve arquivar metade anterior em .old.txt');
+    const conteudoRestante = fs.readFileSync(tmpLog, 'utf8');
+    assert.ok(conteudoRestante.includes('[Linha 20]'), 'Metade mais recente deve permanecer no log ativo');
+    assert.ok(!conteudoRestante.includes('[Linha 1]'), 'Primeira linha antiga deve ter ido para o arquivo .old.txt');
+    console.log('  ✓ Rotação de Logs: arquiva metade antiga em .old.txt mantendo registros recentes');
+  } finally {
+    if (fs.existsSync(tmpLog)) fs.unlinkSync(tmpLog);
+    if (fs.existsSync(tmpOld)) fs.unlinkSync(tmpOld);
+    if (fs.existsSync(tmpLogDir)) fs.rmdirSync(tmpLogDir);
+  }
 }
 
 module.exports = { runObservabilidadeTests };

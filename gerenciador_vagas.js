@@ -1,8 +1,10 @@
 const fs = require('fs');
-const path = require('path');
-
-const BANCO_PATH = path.join(__dirname, 'banco_vagas.json');
-const BANCO_JS_PATH = path.join(__dirname, 'banco_vagas.js');
+const {
+  carregarBanco,
+  salvarBanco,
+  sincronizarVagasSupabase,
+  validarSchemaVaga
+} = require('./src/repository');
 
 /**
  * Normaliza strings removendo acentos, pontuações especiais, stop-words
@@ -26,20 +28,6 @@ function gerarChaveCanonica(vaga) {
   const emp = normalizarTexto(vaga.empresa);
   const car = normalizarTexto(vaga.cargo);
   return `${emp}::${car}`;
-}
-
-function carregarBanco() {
-  if (!fs.existsSync(BANCO_PATH)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(BANCO_PATH, 'utf8'));
-  } catch (e) {
-    return [];
-  }
-}
-
-function salvarBanco(banco) {
-  fs.writeFileSync(BANCO_PATH, JSON.stringify(banco, null, 2), 'utf8');
-  fs.writeFileSync(BANCO_JS_PATH, `window.BANCO_VAGAS = ${JSON.stringify(banco, null, 2)};\n`, 'utf8');
 }
 
 /**
@@ -73,12 +61,21 @@ function limparDuplicatas() {
   return limpo;
 }
 
-async function salvarNovasVagas(jsonPath) {
-  if (!fs.existsSync(jsonPath)) return [];
+async function salvarNovasVagas(jsonPathOrArray) {
   let candidatas = [];
-  try {
-    candidatas = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-  } catch (e) {
+  if (Array.isArray(jsonPathOrArray)) {
+    candidatas = jsonPathOrArray;
+  } else {
+    if (!jsonPathOrArray || !fs.existsSync(jsonPathOrArray)) return [];
+    try {
+      candidatas = JSON.parse(fs.readFileSync(jsonPathOrArray, 'utf8'));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  if (!Array.isArray(candidatas) || candidatas.length === 0) {
+    console.log("[Banco de Vagas] Nenhuma vaga inédita encontrada nesta rodada (lote vazio).");
     return [];
   }
 
@@ -98,11 +95,16 @@ async function salvarNovasVagas(jsonPath) {
   const novasAdicionadas = [];
   const agora = new Date().toLocaleString('pt-BR');
 
-  for (const vaga of candidatas) {
-    if (!vaga.empresa && !vaga.cargo) continue;
+  for (const rawVaga of candidatas) {
+    const validacao = validarSchemaVaga(rawVaga);
+    if (!validacao.valida) {
+      console.warn(`[Schema Inválido] Vaga ignorada: ${validacao.erros.join('; ')}`);
+      continue;
+    }
 
+    const vaga = validacao.vagaSanitizada;
     const chave = gerarChaveCanonica(vaga);
-    const linkNormalizado = vaga.link ? vaga.link.trim().toLowerCase() : '';
+    const linkNormalizado = vaga.link ? vaga.link.toLowerCase() : '';
 
     // Verifica tanto por chave canônica (Empresa+Cargo) quanto por link direto
     const jaExiste = chavesExistentes.has(chave) || (linkNormalizado && linksExistentes.has(linkNormalizado));
@@ -129,7 +131,7 @@ async function salvarNovasVagas(jsonPath) {
         turno: vaga.turno || "Tarde / Flexível",
         prazo: vaga.prazo || "Inscrições Abertas",
         requisitos: vaga.requisitos || "Sem requisitos descritos",
-        link: vaga.link ? vaga.link.trim() : "",
+        link: vaga.link || "",
         dataColeta: agora,
         notificada: false,
         status: 'para_aplicar' // para_aplicar, aplicada, favorita, encerrada, descartada
@@ -145,12 +147,7 @@ async function salvarNovasVagas(jsonPath) {
 
   if (novasAdicionadas.length > 0) {
     console.log(`[Banco de Vagas] ${novasAdicionadas.length} nova(s) vaga(s) inédita(s) salva(s)!`);
-    try {
-      const { upsertVagasSupabase } = require('./supabase_client');
-      await upsertVagasSupabase(novasAdicionadas);
-    } catch (e) {
-      console.warn('[Supabase] Falha ao sincronizar novas vagas:', e.message);
-    }
+    await sincronizarVagasSupabase(novasAdicionadas);
   } else {
     console.log("[Banco de Vagas] Nenhuma vaga inédita encontrada nesta rodada (todas já catalogadas).");
   }
@@ -166,12 +163,17 @@ function obterPendentes() {
 function marcarComoNotificadas(ids) {
   const banco = carregarBanco();
   const idSet = new Set(ids);
+  const atualizadas = [];
   for (const vaga of banco) {
     if (idSet.has(vaga.id)) {
       vaga.notificada = true;
+      atualizadas.push(vaga);
     }
   }
-  salvarBanco(banco);
+  if (atualizadas.length > 0) {
+    salvarBanco(banco);
+    sincronizarVagasSupabase(atualizadas).catch(() => {});
+  }
 }
 
 function atualizarStatusVaga(id, novoStatus) {
@@ -183,6 +185,7 @@ function atualizarStatusVaga(id, novoStatus) {
       vaga.dataAplicacao = new Date().toLocaleString('pt-BR');
     }
     salvarBanco(banco);
+    sincronizarVagasSupabase([vaga]).catch(() => {});
     return true;
   }
   return false;
@@ -190,7 +193,7 @@ function atualizarStatusVaga(id, novoStatus) {
 
 function concluirEtapaVaga(canonicalKey) {
   const banco = carregarBanco();
-  let encontrada = false;
+  let vagaAtualizada = null;
 
   for (const vaga of banco) {
     const chave = gerarChaveCanonica(vaga);
@@ -198,17 +201,18 @@ function concluirEtapaVaga(canonicalKey) {
       vaga.status = 'aplicada';
       vaga.etapaConcluida = true;
       vaga.dataConclusaoEtapa = new Date().toLocaleString('pt-BR');
-      encontrada = true;
+      vagaAtualizada = vaga;
       break;
     }
   }
 
-  if (encontrada) {
+  if (vagaAtualizada) {
     salvarBanco(banco);
+    sincronizarVagasSupabase([vagaAtualizada]).catch(() => {});
     console.log(`[Etapa Concluída] Vaga ${canonicalKey} atualizada no banco.`);
   }
 
-  return encontrada;
+  return !!vagaAtualizada;
 }
 
 if (require.main === module) {

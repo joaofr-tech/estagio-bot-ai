@@ -1,8 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const {
+  carregarBanco,
+  salvarBanco,
+  writeFileAtomically,
+  sincronizarVagasSupabase
+} = require('./src/repository');
 
-const BANCO_PATH = path.join(__dirname, 'banco_vagas.json');
-const BANCO_JS_PATH = path.join(__dirname, 'banco_vagas.js');
 const REGRAS_JSON_PATH = path.join(__dirname, 'regras_mismatch.json');
 const REGRAS_JS_PATH = path.join(__dirname, 'regras_mismatch.js');
 
@@ -22,20 +26,6 @@ const MAPA_TERMOS_NEGATIVOS = {
   ],
   'Presencial rígido / Localização inviável': []
 };
-
-function carregarBanco() {
-  if (!fs.existsSync(BANCO_PATH)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(BANCO_PATH, 'utf8'));
-  } catch (e) {
-    return [];
-  }
-}
-
-function salvarBanco(banco) {
-  fs.writeFileSync(BANCO_PATH, JSON.stringify(banco, null, 2), 'utf8');
-  fs.writeFileSync(BANCO_JS_PATH, `window.BANCO_VAGAS = ${JSON.stringify(banco, null, 2)};\n`, 'utf8');
-}
 
 function carregarRegrasMismatch() {
   if (!fs.existsSync(REGRAS_JSON_PATH)) {
@@ -65,8 +55,9 @@ function carregarRegrasMismatch() {
 }
 
 function salvarRegrasMismatch(regras) {
-  fs.writeFileSync(REGRAS_JSON_PATH, JSON.stringify(regras, null, 2), 'utf8');
-  fs.writeFileSync(REGRAS_JS_PATH, `window.REGRAS_MISMATCH = ${JSON.stringify(regras, null, 2)};\n`, 'utf8');
+  const jsonStr = JSON.stringify(regras, null, 2);
+  writeFileAtomically(REGRAS_JSON_PATH, jsonStr);
+  writeFileAtomically(REGRAS_JS_PATH, `window.REGRAS_MISMATCH = ${jsonStr};\n`);
 }
 
 /**
@@ -107,6 +98,7 @@ function descartarVaga(canonicalKeyOrId, motivo, detalhe = '') {
     vaga.detalheMismatch = detalhe;
     vaga.dataMismatch = dataHoje;
     salvarBanco(banco);
+    sincronizarVagasSupabase([vaga]).catch(() => {});
     console.log(`[Mismatch] Vaga '${vaga.cargo}' da empresa '${vaga.empresa}' marcada como DESCARTADA.`);
   } else {
     console.log(`[Mismatch] Vaga com chave/id '${canonicalKeyOrId}' atualizada no catálogo.`);

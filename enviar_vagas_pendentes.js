@@ -61,4 +61,10 @@ async function verificarEEnviar() {
   }
 }
 
-verificarEEnviar();
+if (require.main === module) {
+  verificarEEnviar();
+}
+
+module.exports = {
+  verificarEEnviar
+};

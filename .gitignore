@@ -9,13 +9,17 @@ email_config.json
 
 # Logs e arquivos temporarios de execucao
 *.log
+*.old.txt
 log_execucoes.txt
 novas_vagas.json
 *.backup.json
 *.tmp
 *.bak
+.pipeline.lock
+.last_alert.json
 temp_*.html
 scratch/
+scripts/scratch/
 next_f_extracted.txt
 
 # Scripts de inspecao e debug exploratorio
@@ -24,6 +28,7 @@ scan_*.js
 parse_*.js
 
 # Prototipos e Previews de UI/Design (Padronizacao)
+guia_visual_sona.html
 preview-*.html
 preview_*.html
 prototipo-*.html
@@ -38,6 +43,11 @@ public/vitrine_*.html
 # IDEs e Editores
 .vscode/
 .idea/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
 
 # Sistema operacional
 .DS_Store

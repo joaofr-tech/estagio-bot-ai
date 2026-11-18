@@ -1,19 +1,15 @@
-﻿Set-Location $PSScriptRoot
+﻿param(
+    [switch]$ComAgente
+)
 
-# Auto-update: baixa automaticamente as ultimas melhorias do repositorio antes de iniciar
-try {
-    $pullResult = git -C $PSScriptRoot pull --rebase origin main 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        git -C $PSScriptRoot rebase --abort 2>&1 | Out-Null
-    }
-} catch {}
+Set-Location $PSScriptRoot
 
 $start = Get-Date
 $timestamp = $start.ToString("dd/MM/yyyy HH:mm:ss")
 $logPath = Join-Path $PSScriptRoot "log_execucoes.txt"
 
 Add-Content -Path $logPath -Value "========================================================"
-Add-Content -Path $logPath -Value "[$timestamp] Iniciando varredura horaria de vagas..."
+Add-Content -Path $logPath -Value "[$timestamp] Iniciando varredura horaria de vagas (Python ETL)..."
 
 $vagasJson = Join-Path $PSScriptRoot "novas_vagas.json"
 if (Test-Path $vagasJson) {
@@ -107,45 +103,31 @@ Siga estritamente este fluxo de curadoria para garantir vagas REAIS, ATIVAS e SE
    - Se nao encontrar vagas novas e ativas com esses requisitos nesta rodada, apenas responda 'Nenhuma vaga nova nesta rodada.' e finalize silenciosamente sem criar o arquivo.
 "@
 
-Add-Content -Path $logPath -Value "[$timestamp] Executando agente com modelo: $modelo (effort: $effort)..."
-$result = $prompt | agy --model $modelo --effort $effort --dangerously-skip-permissions 2>&1
-$exitCode = $LASTEXITCODE
-Add-Content -Path $logPath -Value $result
+# 1. Orquestrador oficial do Pipeline ETL em Python (sempre executa primeiro e rapido)
+$env:PYTHONUTF8 = "1"
+Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Executando pipeline ETL em Python (python -m etl.pipeline)..."
+python -m etl.pipeline >> $logPath 2>&1
 
-$end = Get-Date
-$duration = [math]::Round(($end - $start).TotalSeconds)
-Add-Content -Path $logPath -Value "[$($end.ToString('dd/MM/yyyy HH:mm:ss'))] Varredura concluida em $duration s."
-
-# Detecção de Anomalias e Falhas de Observabilidade
-$resultadoStr = if ($result) { ($result -join "`n") } else { "" }
-$temErroExplicito = ($exitCode -ne 0) -or ($resultadoStr -match "(?i)(error:|exception:|unexpected argument|unauthorized|fatal:|failed to start|crash)")
-$execucaoAnomalaRapida = ($duration -lt 15) -and -not (Test-Path $vagasJson) -and ($temErroExplicito -or [string]::IsNullOrWhiteSpace($resultadoStr))
-
-if ($temErroExplicito -or $execucaoAnomalaRapida) {
-    $msgErro = if ($resultadoStr -match "(?i)(error:.*|unexpected argument.*)") { $matches[0] } elseif ($exitCode -ne 0) { "Processo encerrou com código de erro $exitCode." } else { "Execução anômala ultrarrápida ($duration s) sem retorno." }
-    Add-Content -Path $logPath -Value "[$($end.ToString('dd/MM/yyyy HH:mm:ss'))] ❌ ALERTA DE OBSERVABILIDADE: $msgErro"
-    node registrar_log.js "ERRO_CRAWLER" $duration "Falha no crawler: $msgErro"
-} elseif (Test-Path $vagasJson) {
-    node gerenciador_vagas.js salvar novas_vagas.json
-    node registrar_log.js "VAGAS_SALVAS" $duration "Novas oportunidades catalogadas!" novas_vagas.json
-    node enviar_vagas_pendentes.js >> $logPath 2>&1
-} else {
-    node registrar_log.js "SEM_VAGAS" $duration "Varredura realizada. Nenhuma vaga nova nesta rodada."
-}
-
-# Auditoria automatica de encerramento em vagas abertas (LinkedIn, Gupy, portais)
-Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Auditando status de encerramento das vagas em aberto..."
-node verificar_vagas_encerradas.js 30 >> $logPath 2>&1
-
-# Verificacao de e-mails para acoes pendentes (Testes / Entrevistas)
+# 2. Verificacao de e-mails para acoes pendentes (Testes / Entrevistas)
 Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Verificando e-mails para acoes pendentes (testes/entrevistas)..."
 node verificar_emails.js >> $logPath 2>&1
 
-# Sincronizacao local e nuvem
-try {
-    Copy-Item -Path (Join-Path $PSScriptRoot "dashboard.html") -Destination (Join-Path $PSScriptRoot "index.html") -Force
-    Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Ciclo concluido. Dados sincronizados com o Supabase."
-} catch {
-    Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Aviso na atualizacao local: $_"
+# 3. Passagem complementar opcional via agente (somente quando executado com -ComAgente)
+if ($ComAgente -and (Get-Command agy -ErrorAction SilentlyContinue)) {
+    Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Executando busca complementar do agente (-ComAgente) com modelo: $modelo..."
+    try {
+        $result = $prompt | agy --model $modelo --effort $effort --dangerously-skip-permissions 2>&1
+        $exitCode = $LASTEXITCODE
+        Add-Content -Path $logPath -Value $result
+        if ($exitCode -eq 0 -and (Test-Path $vagasJson)) {
+            python -m etl.pipeline >> $logPath 2>&1
+        }
+    } catch {
+        Add-Content -Path $logPath -Value "[$((Get-Date).ToString('dd/MM/yyyy HH:mm:ss'))] Aviso: Falha no agente complementar ($_)."
+    }
 }
+
+$end = Get-Date
+$duration = [math]::Round(($end - $start).TotalSeconds)
+Add-Content -Path $logPath -Value "[$($end.ToString('dd/MM/yyyy HH:mm:ss'))] Ciclo ETL completo concluido em $duration s."
 

@@ -1,27 +1,13 @@
-const fs = require('fs');
-const path = require('path');
 const https = require('https');
 const http = require('http');
 const { URL } = require('url');
-
-const BANCO_PATH = path.join(__dirname, 'banco_vagas.json');
-const BANCO_JS_PATH = path.join(__dirname, 'banco_vagas.js');
+const {
+  carregarBanco,
+  salvarBanco,
+  sincronizarVagasSupabase
+} = require('./src/repository');
 
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
-
-function carregarBanco() {
-  if (!fs.existsSync(BANCO_PATH)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(BANCO_PATH, 'utf8'));
-  } catch (e) {
-    return [];
-  }
-}
-
-function salvarBanco(banco) {
-  fs.writeFileSync(BANCO_PATH, JSON.stringify(banco, null, 2), 'utf8');
-  fs.writeFileSync(BANCO_JS_PATH, `window.BANCO_VAGAS = ${JSON.stringify(banco, null, 2)};\n`, 'utf8');
-}
 
 /**
  * Faz uma requisição HTTP/HTTPS com suporte a redirecionamentos automáticos.
@@ -280,17 +266,21 @@ async function auditarVagasAtivas(options = {}) {
   const { limite = 9999, reavaliarTodas = false } = options;
   const banco = carregarBanco();
 
-  // Se reavaliarTodas for true, retesta tudo; senão, apenas vagas abertas
-  const candidatos = reavaliarTodas 
-    ? banco 
-    : banco.filter(v => (!v.status || v.status === 'para_aplicar'));
+  // Se reavaliarTodas for true, retesta tudo; senão, ordena vagas abertas em fila circular (menos recentes primeiro)
+  const candidatos = reavaliarTodas
+    ? banco
+    : banco
+        .filter(v => (!v.status || v.status === 'para_aplicar'))
+        .sort((a, b) => (a.ultimaAuditoriaMs || 0) - (b.ultimaAuditoriaMs || 0));
 
   const lote = candidatos.slice(0, limite);
-  console.log(`[Auditoria Geral] Iniciando verificação de ${lote.length} vaga(s) no banco de dados...`);
+  console.log(`[Auditoria Geral] Iniciando verificação de ${lote.length} vaga(s) no banco de dados (fila circular)...`);
 
   let encerradasCount = 0;
   let ativasCount = 0;
   let indeterminadasCount = 0;
+  let houveAtualizacaoAuditoria = false;
+  const vagasEncerradasNaRodada = [];
   const dataHoje = new Date().toLocaleString('pt-BR');
 
   // Concorrência de 6 conexões assíncronas simultâneas
@@ -309,12 +299,17 @@ async function auditarVagasAtivas(options = {}) {
         vaga.status = 'encerrada';
         vaga.dataEncerramento = dataHoje;
         vaga.motivoEncerramento = res.motivo;
+        vaga.ultimaAuditoriaMs = Date.now();
+        houveAtualizacaoAuditoria = true;
+        vagasEncerradasNaRodada.push(vaga);
         console.log(`  ❌ [ENCERRADA] ${vaga.empresa} - ${vaga.cargo}`);
         console.log(`     Motivo: ${res.motivo}`);
       } else if (res.indeterminado) {
         indeterminadasCount++;
       } else {
         ativasCount++;
+        vaga.ultimaAuditoriaMs = Date.now();
+        houveAtualizacaoAuditoria = true;
       }
 
       await new Promise(r => setTimeout(r, 120));
@@ -327,8 +322,12 @@ async function auditarVagasAtivas(options = {}) {
   }
   await Promise.all(workers);
 
-  if (encerradasCount > 0) {
+  if (lote.length > 0 && (houveAtualizacaoAuditoria || encerradasCount > 0)) {
     salvarBanco(banco);
+  }
+
+  if (encerradasCount > 0) {
+    await sincronizarVagasSupabase(vagasEncerradasNaRodada);
     console.log(`\n[Auditoria Geral] Concluída! ${encerradasCount} nova(s) vaga(s) encerrada(s) ou inexistente(s) marcadas como 'encerrada'.`);
   } else {
     console.log(`\n[Auditoria Geral] Concluída! Nenhuma nova vaga encerrada detectada.`);
@@ -338,7 +337,14 @@ async function auditarVagasAtivas(options = {}) {
   const totalAbertas = banco.filter(v => v.status === 'para_aplicar' || !v.status).length;
   console.log(`[Status do Banco] Vagas Abertas: ${totalAbertas} | Total de Vagas Encerradas: ${totalEncerradas}`);
 
-  return { encerradasCount, ativasCount, indeterminadasCount, totalEncerradas, totalAbertas };
+  return {
+    verificadas: lote.length,
+    encerradasCount,
+    ativasCount,
+    indeterminadasCount,
+    totalEncerradas,
+    totalAbertas
+  };
 }
 
 /**

@@ -4,8 +4,11 @@
   "description": "Sona — Autonomous Job Hunter & Application Tracker for Tech Internships",
   "scripts": {
     "build": "node scripts/build_dashboard.js",
+    "etl": "python -m etl.pipeline",
+    "etl:node": "node src/pipeline.js",
     "start": "node servidor.js",
-    "test": "node tests/run_all_tests.js"
+    "test": "node tests/run_all_tests.js",
+    "test:py": "pytest tests_py/"
   },
   "keywords": [],
   "author": "",

@@ -3505,6 +3505,14 @@
           tempoMedioStr = m > 0 ? `${m}m ${s}s` : `${s}s`;
         }
 
+        const crawlerHealthMeta = window.CRAWLER_HEALTH || {};
+        const avisosFontes = Array.isArray(crawlerHealthMeta.avisosFontes) ? crawlerHealthMeta.avisosFontes : [];
+        const avisosHtml = avisosFontes.length > 0
+          ? `<div style="margin-top: 0.75rem; padding: 0.7rem 1rem; border-radius: 8px; background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; font-size: 0.78rem;">
+              <strong>⚠️ Alerta de Fontes (Zero-Yield):</strong> ${avisosFontes.map(a => String(a).replace(/</g, '&lt;')).join(' &bull; ')}
+             </div>`
+          : '';
+
         healthContainer.innerHTML = `
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 0.5rem;">
             <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 1.2rem;">
@@ -3540,6 +3548,7 @@
               <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem;">Frequência: A cada 1 hora</p>
             </div>
           </div>
+          ${avisosHtml}
         `;
       }
 
@@ -3568,6 +3577,34 @@
         const borderStyle = isErro ? 'border-left: 3px solid #ef4444; background: #fff5f5;' : '';
         const numStr = (idx + 1).toString().padStart(2, '0');
 
+        const pills = [];
+        if (run.fontes && typeof run.fontes === 'object') {
+          Object.entries(run.fontes).forEach(([nome, f]) => {
+            if (!f) return;
+            const labelNome = nome.charAt(0).toUpperCase() + nome.slice(1);
+            const latStr = typeof f.latenciaMs === 'number' ? ` (${(f.latenciaMs / 1000).toFixed(1)}s)` : '';
+            if (f.status === 'error') {
+              const safeErro = String(f.erro || 'Erro').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+              pills.push(`<span title="${safeErro}" style="display:inline-block; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.68rem; background:#fee2e2; color:#991b1b; border:1px solid #fca5a5;">${labelNome}: erro</span>`);
+            } else {
+              const okBg = (f.brutas || 0) > 0 ? '#ecfdf5' : '#f3f4f6';
+              const okColor = (f.brutas || 0) > 0 ? '#065f46' : '#4b5563';
+              const okBorder = (f.brutas || 0) > 0 ? '#a7f3d0' : '#d1d5db';
+              pills.push(`<span style="display:inline-block; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.68rem; background:${okBg}; color:${okColor}; border:1px solid ${okBorder};">${labelNome}: ${f.brutas || 0}${latStr}</span>`);
+            }
+          });
+        }
+        if (run.funil && typeof run.funil === 'object') {
+          const mismatchTxt = run.funil.filtradasMismatch ? ` &bull; ${run.funil.filtradasMismatch} mismatch` : '';
+          pills.push(`<span style="display:inline-block; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.68rem; background:#eff6ff; color:#1e40af; border:1px solid #bfdbfe;">Funil: ${run.funil.extraidas || 0} extraídas &rarr; ${run.funil.jaConhecidas || 0} conhecidas${mismatchTxt} &rarr; ${run.funil.ineditas || 0} inéditas</span>`);
+        }
+        if (run.auditoria && typeof run.auditoria === 'object') {
+          pills.push(`<span style="display:inline-block; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.68rem; background:#f5f3ff; color:#5b21b6; border:1px solid #ddd6fe;">Auditoria: ${run.auditoria.verificadas || 0} verificadas (${run.auditoria.encerradasCount || 0} encerradas)</span>`);
+        }
+        const pillsHtml = pills.length > 0
+          ? `<div class="mono" style="display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:0.45rem;">${pills.join('')}</div>`
+          : '';
+
         return `
           <div class="job-row" style="cursor: default; padding: 1.4rem 1rem; ${borderStyle}">
             <span class="mono" style="color: ${isErro ? '#b91c1c' : 'var(--faint)'};">${numStr}</span>
@@ -3578,6 +3615,7 @@
               <div class="mono" style="font-size: 0.7rem; color: var(--faint); margin-top: 0.2rem;">
                 ${run.timestamp} &bull; Duração: ${run.duracaoSegundos !== undefined ? run.duracaoSegundos : 30}s &bull; Status: ${run.status || 'OK'}
               </div>
+              ${pillsHtml}
             </div>
             <div>
               ${badge}
