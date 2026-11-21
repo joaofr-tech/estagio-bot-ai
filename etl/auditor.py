@@ -120,6 +120,8 @@ def validar_vaga_ativa(vaga: dict[str, Any]) -> dict[str, Any]:
     link = (vaga.get("link") or "").strip()
     if not link or link == "#":
         return {"encerrada": True, "motivo": "Vaga sem link válido"}
+    if "vertexaisearch.cloud.google.com" in link.lower() or "grounding-api-redirect" in link.lower():
+        return {"encerrada": True, "motivo": "Link temporário de grounding expirado"}
     try:
         if "linkedin.com/jobs/view/" in link:
             return _verificar_linkedin(link)
