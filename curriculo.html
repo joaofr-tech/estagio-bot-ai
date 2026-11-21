@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0C0C0E">
+  <title>Sona — Gerador de Currículo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css?v=1">
+  <link rel="stylesheet" href="curriculo.css?v=11">
+</head>
+<body>
+
+  <!-- =============================================================
+       SIDEBAR STANDALONE (OCULTA QUANDO EMBUTIDO NO DASHBOARD)
+       ============================================================= -->
+  <aside class="studio-sidebar">
+    <a class="brand-header" href="dashboard.html" title="Voltar ao Sona">
+      <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" aria-label="Logo Sona">
+        <circle cx="50" cy="50" r="34" stroke="currentColor" stroke-width="10" />
+        <path d="M 50 16 C 34 16, 26 28, 34 40 C 42 52, 60 48, 66 60 C 74 72, 64 84, 50 84"
+              stroke="currentColor" stroke-width="9" stroke-linecap="round" />
+      </svg>
+      <span class="brand-name">Sona</span>
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="auth-card" id="auth-card">
+      <div class="auth-status-row">
+        <span class="auth-dot local" id="auth-dot"></span>
+        <div style="min-width:0;">
+          <div class="auth-name" id="auth-user-name">Armazenamento local</div>
+          <div class="auth-mode" id="auth-mode-label">Salvo no navegador</div>
+        </div>
+      </div>
+      <button class="btn-secondary" id="btn-github-login" onclick="loginWithGitHub()" style="width:100%; font-size:0.76rem; padding:0.42rem 0.65rem;">
+        Conectar com GitHub
+      </button>
+      <button class="btn-secondary" id="btn-logout" style="display:none; width:100%; font-size:0.76rem; padding:0.42rem 0.65rem;" onclick="logoutSupabase()">
+        Sair da conta
+      </button>
+    </div>
+
+    <div class="nav-section-title">CURRÍCULO</div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-btn active" id="nav-studio" onclick="switchView('studio')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Gerador de Currículo</span>
+      </button>
+      <button class="sidebar-btn" id="nav-onboarding" onclick="switchView('onboarding')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        <span>Configurar Fontes</span>
+        <span class="sidebar-pill-badge" id="badge-onboarding-status">0/4</span>
+      </button>
+      <button class="sidebar-btn" id="nav-profile" onclick="switchView('profile')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Banco de Fatos</span>
+        <span class="sidebar-pill-badge" id="badge-projects-count">0</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="sidebar-btn" href="dashboard.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>Voltar para Vagas</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- =============================================================
+       MAIN WORKSPACE
+       ============================================================= -->
+  <main class="studio-main">
+
+    <!-- ===========================================================
+         VIEW 1: ESTÚDIO DE CURRÍCULO (TELA ÚNICA — 2 AÇÕES + MENU)
+         =========================================================== -->
+    <section class="view-section active" id="view-studio">
+      <!-- Barra única minimalista -->
+      <div class="studio-context-bar" id="active-job-banner">
+        <div class="studio-job-info">
+          <div class="job-banner-company" id="job-company">Gerador de Currículo</div>
+          <div class="job-banner-title" id="job-title">Selecione uma vaga em andamento para gerar</div>
+          <div class="job-banner-meta" id="job-meta"></div>
+        </div>
+
+        <div style="display:flex; gap:0.55rem; align-items:center;">
+          <button class="btn-secondary" id="btn-generate-ats" onclick="generateATSResume()">Gerar Currículo</button>
+          <button class="btn-primary" onclick="exportATSPdf()">Exportar PDF</button>
+
+          <div class="studio-more-wrap">
+            <button class="sona-icon-btn" id="btn-studio-more" aria-label="Mais Opções" data-tooltip="Mais Opções" onclick="toggleStudioMoreMenu(event)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+            </button>
+            <div class="studio-more-menu" id="studio-more-menu">
+              <button type="button" class="studio-menu-item" id="btn-open-analysis" onclick="closeStudioMoreMenu(); toggleStudioDrawer('drawer-analysis')">Análise de Aderência</button>
+              <button type="button" class="studio-menu-item" onclick="closeStudioMoreMenu(); toggleStudioDrawer('drawer-history')">Histórico de Versões</button>
+              <button type="button" class="studio-menu-item" id="btn-toggle-edit" onclick="closeStudioMoreMenu(); toggleSheetEditMode()">Preview Limpo</button>
+              <button type="button" class="studio-menu-item" onclick="closeStudioMoreMenu(); copyResumePlainText()">Copiar Texto</button>
+              <button type="button" class="studio-menu-item" id="btn-undo-edit" onclick="closeStudioMoreMenu(); undoResumeEdit()" style="display:none;">Desfazer Última Edição</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAVETA SOB DEMANDA: ANÁLISE DE ADERÊNCIA -->
+      <div class="studio-drawer" id="drawer-analysis" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Análise de Aderência</div>
+          <button class="btn-secondary" onclick="toggleStudioDrawer('drawer-analysis')">Fechar</button>
+        </div>
+        <p class="field-hint" id="fit-summary-text" style="margin-bottom:1rem;">Gere um currículo para ver matches diretos e requisitos ausentes.</p>
+
+        <div id="transparency-content" style="display:none;">
+          <div class="grid-2" style="margin-bottom:1rem;">
+            <div class="transparency-group">
+              <div class="transparency-heading match">Matches Diretos (<span id="count-direct">0</span>)</div>
+              <div class="chip-list" id="list-direct-matches"></div>
+            </div>
+            <div class="transparency-group">
+              <div class="transparency-heading gap">Requisitos Ausentes (<span id="count-gaps">0</span>)</div>
+              <div class="chip-list" id="list-excluded-gaps"></div>
+            </div>
+          </div>
+
+          <div class="transparency-group">
+            <div class="transparency-heading term">Equivalências Aplicadas (<span id="count-term">0</span>)</div>
+            <div id="list-term-matches"></div>
+          </div>
+
+          <div class="audit-box" id="audit-summary-box"></div>
+        </div>
+      </div>
+
+      <!-- GAVETA SOB DEMANDA: HISTÓRICO SALVO -->
+      <div class="studio-drawer" id="drawer-history" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Versões Salvas</div>
+          <button class="btn-secondary" onclick="toggleStudioDrawer('drawer-history')">Fechar</button>
+        </div>
+        <div id="resume-history-list">
+          <p class="field-hint">Nenhum currículo gerado ainda.</p>
+        </div>
+      </div>
+
+      <!-- FOLHA ATS PROTAGONISTA (modelo-cv.docx) -->
+      <div class="ats-sheet-wrapper">
+        <article id="ats-resume-sheet" class="edit-mode-on" aria-label="Folha do Currículo ATS">
+          <div class="ats-header">
+            <div class="ats-name" contenteditable="true" id="sheet-name">Seu Nome Completo</div>
+            <div class="ats-target-role" contenteditable="true" id="sheet-role">Cargo Alvo</div>
+            <div class="ats-contact-line" contenteditable="true" id="sheet-location">Cidade, UF, Brasil</div>
+            <div class="ats-contact-line" contenteditable="true" id="sheet-phone-email">+55 (00) 00000-0000 | email@exemplo.com</div>
+            <div class="ats-contact-line" contenteditable="true" id="sheet-links">LinkedIn: linkedin.com/in/voce | GitHub: github.com/voce</div>
+          </div>
+
+          <div class="ats-section" id="sheet-sec-summary">
+            <div class="ats-section-head">
+              <div class="ats-section-title" id="lbl-summary">RESUMO</div>
+            </div>
+            <p contenteditable="true" id="sheet-summary">
+              Configure suas fontes em "Configurar fontes" e clique em "Gerar currículo" para montar a versão otimizada para a vaga.
+            </p>
+          </div>
+
+          <div class="ats-section" id="sheet-sec-experiences" style="display:none;">
+            <div class="ats-section-head">
+              <div class="ats-section-title" id="lbl-experiences">EXPERIÊNCIA PROFISSIONAL</div>
+              <button type="button" class="sheet-edit-ctrl" onclick="sheetAddExperience()">+ Experiência</button>
+            </div>
+            <div id="sheet-experiences-list"></div>
+          </div>
+
+          <div class="ats-section" id="sheet-sec-projects">
+            <div class="ats-section-head">
+              <div class="ats-section-title" id="lbl-projects">PROJETOS</div>
+              <div style="display:flex; gap:4px;">
+                <button type="button" class="sheet-edit-ctrl" onclick="toggleAddProjectFromBank()">+ Do banco</button>
+                <button type="button" class="sheet-edit-ctrl" onclick="sheetAddBlankProject()">+ Novo</button>
+              </div>
+            </div>
+            <div id="sheet-project-bank-picker" class="ats-swap-box" style="display:none;"></div>
+            <div id="sheet-projects-list"></div>
+          </div>
+
+          <div class="ats-section" id="sheet-sec-education">
+            <div class="ats-section-head">
+              <div class="ats-section-title" id="lbl-education">FORMAÇÃO</div>
+              <button type="button" class="sheet-edit-ctrl" onclick="sheetAddEducation()">+ Formação</button>
+            </div>
+            <div id="sheet-education-list"></div>
+          </div>
+
+          <div class="ats-section" id="sheet-sec-skills">
+            <div class="ats-section-head">
+              <div class="ats-section-title" id="lbl-skills">HABILIDADES</div>
+              <button type="button" class="sheet-edit-ctrl" onclick="sheetAddSkillCategory()">+ Categoria</button>
+            </div>
+            <div id="sheet-skills-list"></div>
+          </div>
+
+          <div class="ats-section" id="sheet-sec-certifications" style="display:none;">
+            <div class="ats-section-head">
+              <div class="ats-section-title" id="lbl-certifications">CERTIFICAÇÕES</div>
+              <button type="button" class="sheet-edit-ctrl" onclick="sheetAddCertification()">+ Certificação</button>
+            </div>
+            <ul class="ats-bullets" id="sheet-certifications-list"></ul>
+          </div>
+
+          <div class="ats-section" id="sheet-sec-languages" style="display:none;">
+            <div class="ats-section-head">
+              <div class="ats-section-title" id="lbl-languages">IDIOMAS</div>
+            </div>
+            <p contenteditable="true" id="sheet-languages-line"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         VIEW 2: CONFIGURAR FONTES (4 PASSOS LIMPOS, ZERO EMOJI)
+         =========================================================== -->
+    <section class="view-section" id="view-onboarding">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Configurar Fontes</h1>
+          <p class="page-subtitle">Conecte sua chave de IA, GitHub, LinkedIn e currículo base para alimentar o banco de fatos.</p>
+        </div>
+        <button class="btn-primary" onclick="switchView('studio')">Abrir Gerador</button>
+      </div>
+
+      <div class="stepper">
+        <div class="step-pill active" id="pill-step-1" onclick="goToStep(1)">
+          <span class="step-num">1</span>
+          <div>
+            <div class="step-label">Chave de IA</div>
+            <div class="step-sub">Gemini, OpenAI ou Groq</div>
+          </div>
+        </div>
+        <div class="step-pill" id="pill-step-2" onclick="goToStep(2)">
+          <span class="step-num">2</span>
+          <div>
+            <div class="step-label">GitHub</div>
+            <div class="step-sub">Repositórios e README</div>
+          </div>
+        </div>
+        <div class="step-pill" id="pill-step-3" onclick="goToStep(3)">
+          <span class="step-num">3</span>
+          <div>
+            <div class="step-label">LinkedIn</div>
+            <div class="step-sub">Arquivo ZIP ou PDF</div>
+          </div>
+        </div>
+        <div class="step-pill" id="pill-step-4" onclick="goToStep(4)">
+          <span class="step-num">4</span>
+          <div>
+            <div class="step-label">Currículo Base</div>
+            <div class="step-sub">Mesclar PDF atual</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 1: IA -->
+      <div class="card step-panel active" id="step-panel-1">
+        <div class="card-title">Chave de IA (BYOK)</div>
+        <p class="card-desc">A chave fica salva apenas no navegador. Para uso gratuito, gere uma chave no Google AI Studio.</p>
+
+        <ol class="guide-list">
+          <li>Acesse <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> e clique em Create API key.</li>
+          <li>Cole a chave abaixo e clique em Testar e salvar.</li>
+        </ol>
+
+        <div class="grid-2">
+          <div class="field-group">
+            <label class="field-label" for="byok-provider">Provedor</label>
+            <select class="select" id="byok-provider" onchange="onProviderChange()">
+              <option value="gemini">Google Gemini (Free Tier)</option>
+              <option value="openai">OpenAI</option>
+              <option value="groq">Groq</option>
+              <option value="openrouter">OpenRouter</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="byok-model-select" style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Modelo</span>
+              <button type="button" id="btn-refresh-models" onclick="refreshGeminiFreeModels()" style="background:none; border:none; color:var(--text-secondary); font-size:0.74rem; cursor:pointer; text-decoration:underline;">Atualizar lista da chave</button>
+            </label>
+            <select class="select" id="byok-model-select">
+              <option value="gemini-3.8-flash">Gemini 3.8 Flash (Padrão · Gratuito)</option>
+              <option value="gemini-3.6-flash">Gemini 3.6 Flash (Gratuito)</option>
+              <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite (Gratuito)</option>
+              <option value="gemini-3.1-flash-lite">Gemini 3.1 Flash-Lite (Gratuito)</option>
+              <option value="gemma-3-27b-it">Gemma 3 27B (Gratuito)</option>
+            </select>
+            <input class="input" id="byok-model" autocomplete="off" placeholder="Deixe vazio para o padrão" style="display:none;">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="byok-key">API Key</label>
+          <input class="input" type="password" id="byok-key" placeholder="Cole sua chave de API">
+        </div>
+
+        <div style="display:flex; gap:0.7rem; align-items:center; flex-wrap:wrap;">
+          <button class="btn-primary" id="btn-test-key" onclick="saveAndTestKey()">Testar e Salvar</button>
+          <button class="btn-secondary" onclick="goToStep(2)">Avançar para GitHub</button>
+          <span class="field-hint" id="byok-status-msg"></span>
+        </div>
+      </div>
+
+      <!-- PASSO 2: GITHUB -->
+      <div class="card step-panel" id="step-panel-2">
+        <div class="card-title">Importar Projetos do GitHub</div>
+        <p class="card-desc">Informe seu username público para listar todos os repositórios, filtrar templates automaticamente e escolher quais entram no currículo.</p>
+
+        <div style="display:flex; gap:0.75rem; align-items:flex-end; flex-wrap:wrap; margin-bottom:0.75rem;">
+          <div class="field-group" style="flex:1; min-width:220px; margin-bottom:0;">
+            <label class="field-label" for="gh-username">Username do GitHub</label>
+            <input class="input" id="gh-username" placeholder="Ex: joaofrancisco" onkeydown="if(event.key==='Enter') loadGitHubRepoList()">
+          </div>
+          <button class="btn-primary" id="btn-list-gh" onclick="loadGitHubRepoList()">Carregar Repositórios</button>
+          <button class="btn-secondary" id="btn-step2-oauth" onclick="loginWithGitHub()">Conectar OAuth</button>
+          <button class="btn-secondary" onclick="goToStep(3)">Avançar para LinkedIn</button>
+        </div>
+        <div class="field-hint" id="gh-status-msg"></div>
+
+        <div class="repo-picker-box" id="gh-repo-picker" style="display:none;">
+          <div class="repo-picker-toolbar">
+            <input class="input" id="gh-repo-search" placeholder="Filtrar por nome ou linguagem..." oninput="renderGitHubRepoPicker()" style="max-width:260px; padding:0.45rem 0.75rem; font-size:0.82rem;">
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+              <button type="button" class="btn-secondary" onclick="applyRepoSelectionPreset('recommended')">Recomendados</button>
+              <button type="button" class="btn-secondary" onclick="applyRepoSelectionPreset('all')">Selecionar Todos</button>
+              <button type="button" class="btn-secondary" onclick="applyRepoSelectionPreset('none')">Limpar</button>
+            </div>
+          </div>
+
+          <div class="repo-card-grid" id="gh-repo-grid"></div>
+
+          <div style="margin-top:1rem; display:flex; align-items:center; justify-content:space-between; gap:0.75rem; flex-wrap:wrap;">
+            <span class="field-hint" id="gh-selection-count">0 repositórios selecionados</span>
+            <button class="btn-primary" id="btn-sync-gh" onclick="importSelectedGitHubRepos()">Importar Selecionados</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 3: LINKEDIN -->
+      <div class="card step-panel" id="step-panel-3">
+        <div class="card-title">Importar LinkedIn</div>
+        <p class="card-desc">Envie o arquivo ZIP oficial (recebido por e-mail em Privacidade de dados) ou o PDF rápido salvo direto do seu perfil.</p>
+
+        <div class="grid-2" style="margin-bottom:1rem;">
+          <div>
+            <ol class="guide-list" style="margin-top:0;">
+              <li>LinkedIn → Configurações → Privacidade de dados → Obter cópia dos seus dados.</li>
+              <li>Baixe o arquivo .zip enviado por e-mail e selecione abaixo.</li>
+            </ol>
+            <label class="dropzone" for="input-linkedin-zip">
+              <strong>Enviar Arquivo .zip do LinkedIn</strong>
+              <span class="field-hint" style="margin-top:0.25rem; display:block;">Leitura local e determinística dos CSVs</span>
+              <input type="file" id="input-linkedin-zip" accept=".zip" style="display:none;" onchange="handleLinkedInZipUpload(event)">
+            </label>
+          </div>
+
+          <div>
+            <ol class="guide-list" style="margin-top:0;">
+              <li>Abra seu perfil no LinkedIn e clique em Mais (ou Recursos).</li>
+              <li>Clique em Salvar como PDF e selecione abaixo.</li>
+            </ol>
+            <label class="dropzone" for="input-linkedin-pdf">
+              <strong>Enviar PDF do LinkedIn</strong>
+              <span class="field-hint" style="margin-top:0.25rem; display:block;">Extração estruturada usando sua chave de IA</span>
+              <input type="file" id="input-linkedin-pdf" accept=".pdf" style="display:none;" onchange="handlePdfUpload(event, 'linkedin_pdf')">
+            </label>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:0.75rem; align-items:center;">
+          <button class="btn-secondary" onclick="goToStep(4)">Avançar para Currículo Base</button>
+          <span class="field-hint" id="li-status-msg"></span>
+        </div>
+      </div>
+
+      <!-- PASSO 4: CURRÍCULO BASE -->
+      <div class="card step-panel" id="step-panel-4">
+        <div class="card-title">Currículo Base</div>
+        <p class="card-desc">Opcional: envie seu currículo atual em PDF para mesclar experiências, formação e certificados sem duplicar dados.</p>
+
+        <label class="dropzone" for="input-base-pdf">
+          <strong>Enviar Currículo Base (.pdf)</strong>
+          <span class="field-hint" style="margin-top:0.25rem; display:block;">Os fatos extraídos são mesclados ao banco sem apagar projetos do GitHub</span>
+          <input type="file" id="input-base-pdf" accept=".pdf" style="display:none;" onchange="handlePdfUpload(event, 'base_resume_pdf')">
+        </label>
+
+        <div style="margin-top:1.15rem; display:flex; gap:0.7rem; align-items:center; flex-wrap:wrap;">
+          <button class="btn-primary" onclick="switchView('profile')">Revisar Banco de Fatos</button>
+          <button class="btn-secondary" onclick="switchView('studio')">Abrir Gerador</button>
+          <span class="field-hint" id="base-status-msg"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         VIEW 3: BANCO DE FATOS (MASTER PROFILE)
+         =========================================================== -->
+    <section class="view-section" id="view-profile">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Banco de Fatos</h1>
+          <p class="page-subtitle">Fonte única usada na geração dos currículos.</p>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <button class="btn-secondary" onclick="loadSampleProfile()">Carregar Exemplo</button>
+          <button class="btn-primary" onclick="saveMasterProfileForm()">Salvar Alterações</button>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:1.25rem;">
+        <div class="card">
+          <div class="card-title" style="margin-bottom:1rem;">Dados de Contato</div>
+          <div class="field-group"><label class="field-label">Nome Completo</label><input class="input" id="mp-name"></div>
+          <div class="grid-2">
+            <div class="field-group"><label class="field-label">E-mail</label><input class="input" id="mp-email"></div>
+            <div class="field-group"><label class="field-label">Telefone</label><input class="input" id="mp-phone"></div>
+          </div>
+          <div class="field-group"><label class="field-label">Localização</label><input class="input" id="mp-location" placeholder="Belo Horizonte, MG, Brasil"></div>
+          <div class="grid-2">
+            <div class="field-group" style="margin-bottom:0;"><label class="field-label">LinkedIn</label><input class="input" id="mp-linkedin" placeholder="linkedin.com/in/..."></div>
+            <div class="field-group" style="margin-bottom:0;"><label class="field-label">GitHub</label><input class="input" id="mp-github" placeholder="github.com/..."></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Habilidades Verificadas</div>
+          <p class="card-desc">Separe por vírgula. Somente habilidades presentes aqui ou nos projetos podem entrar no currículo.</p>
+          <textarea class="textarea" id="mp-skills" style="min-height:175px;" placeholder="Python, JavaScript, SQL, PostgreSQL, Supabase, Git..."></textarea>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Formação</div>
+          <button class="btn-secondary" onclick="addEducationItem()">Adicionar Formação</button>
+        </div>
+        <div id="mp-education-list"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Projetos</div>
+          <button class="btn-secondary" onclick="addManualProject()">Adicionar Projeto</button>
+        </div>
+        <div id="mp-projects-list"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Experiências</div>
+          <button class="btn-secondary" onclick="addManualExperience()">Adicionar Experiência</button>
+        </div>
+        <div id="mp-experiences-list"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Certificações</div>
+          <button class="btn-secondary" onclick="addManualCertification()">Adicionar Certificação</button>
+        </div>
+        <div id="mp-certifications-list"></div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Idiomas</div>
+          <button class="btn-secondary" onclick="addManualLanguage()">Adicionar Idioma</button>
+        </div>
+        <div id="mp-languages-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="studio-toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="supabase_config.js"></script>
+  <script src="curriculo.js?v=12"></script>
+</body>
+</html>

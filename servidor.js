@@ -31,10 +31,11 @@ function getLocalIPs() {
   return ips;
 }
 
-const server = http.createServer((req, res) => {
-  // CORS habilitado para leitura facilitada
+const server = http.createServer(async (req, res) => {
+  // CORS habilitado para leitura e endpoints /api locais
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-LLM-Provider, X-LLM-Key, X-LLM-Model, X-GitHub-Token');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
@@ -43,6 +44,57 @@ const server = http.createServer((req, res) => {
   }
 
   let reqPath = decodeURI(req.url.split('?')[0]);
+
+  // Roteamento local para Vercel Serverless Functions (/api/*)
+  if (reqPath.startsWith('/api/')) {
+    const endpoint = reqPath.replace(/^\/api\//, '').replace(/[^a-zA-Z0-9_-]/g, '');
+    const handlerPath = path.join(DIR, 'api', `${endpoint}.js`);
+    if (!fs.existsSync(handlerPath)) {
+      res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: `Endpoint /api/${endpoint} não encontrado.` }));
+      return;
+    }
+
+    // Parse JSON body
+    let rawBody = '';
+    for await (const chunk of req) {
+      rawBody += chunk;
+    }
+    try {
+      req.body = rawBody ? JSON.parse(rawBody) : {};
+    } catch {
+      req.body = {};
+    }
+
+    // Helpers compatíveis com Vercel (res.status().json())
+    res.status = (code) => {
+      res.statusCode = code;
+      return res;
+    };
+    res.json = (payload) => {
+      if (!res.headersSent) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      }
+      res.end(JSON.stringify(payload));
+      return res;
+    };
+
+    try {
+      // Limpa cache de /api/* e /api/_lib/* em modo dev local
+      Object.keys(require.cache).forEach((k) => {
+        if (k.includes(`${path.sep}api${path.sep}`)) delete require.cache[k];
+      });
+      const handler = require(handlerPath);
+      await handler(req, res);
+    } catch (err) {
+      console.error(`[API /api/${endpoint}] Erro:`, err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: err.message || 'Erro interno no servidor local.' });
+      }
+    }
+    return;
+  }
+
   if (reqPath === '/' || reqPath === '') {
     reqPath = '/dashboard.html';
   }
@@ -66,10 +118,10 @@ const server = http.createServer((req, res) => {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    // Headers para evitar cache agressivo no banco_vagas e garantir dados frescos
+    // Headers para evitar cache agressivo no desenvolvimento local
     res.writeHead(200, {
       'Content-Type': contentType,
-      'Cache-Control': ext === '.json' || ext === '.js' ? 'no-cache' : 'max-age=3600'
+      'Cache-Control': ['.json', '.js', '.css', '.html'].includes(ext) ? 'no-cache' : 'max-age=3600'
     });
 
     const stream = fs.createReadStream(filePath);
