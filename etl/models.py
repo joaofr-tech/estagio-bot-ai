@@ -62,6 +62,8 @@ class VagaRecord(BaseModel):
         if v:
             if v == "#" or not re.match(r"^https?://.+", v, flags=re.IGNORECASE):
                 raise ValueError(f'Link inválido (deve iniciar com http:// ou https://): "{v}"')
+            if re.search(r"vertexaisearch\.cloud\.google\.com|grounding-api-redirect", v, flags=re.IGNORECASE):
+                raise ValueError(f'Link temporário de grounding redirect rejeitado (expira em 404): "{v}"')
         return v
 
     @model_validator(mode="after")

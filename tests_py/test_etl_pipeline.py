@@ -107,3 +107,14 @@ def test_rotacionar_log_se_necessario(tmp_path):
     ativo = log_file.read_text(encoding="utf-8")
     assert "[Linha 20]" in ativo
     assert "[Linha 1]" not in ativo
+
+
+def test_rejeitar_links_temporarios_grounding_redirect():
+    from etl.auditor import validar_vaga_ativa
+
+    url_temp = "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGcRDQ-fake"
+    with pytest.raises(ValidationError):
+        VagaRecord(empresa="Teste", cargo="Estágio", link=url_temp)
+
+    audit = validar_vaga_ativa({"link": url_temp})
+    assert audit["encerrada"] is True
