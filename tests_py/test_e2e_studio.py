@@ -242,7 +242,7 @@ def _launch_browser(p):
     raise RuntimeError("Nenhum navegador Chromium/Chrome/Edge disponível para Playwright.")
 
 
-def test_e2e_sona_full_flow(local_server):
+def test_e2e_sona_full_flow(local_server, tmp_path):
     page_errors = []
 
     with sync_playwright() as p:
@@ -318,8 +318,8 @@ def test_e2e_sona_full_flow(local_server):
         btn_ats = page.locator("#table-candidaturas button:has-text('Gerar Currículo')").first
         btn_ats.wait_for(state="visible", timeout=5000)
 
-        # Salva screenshot da tela Meta do Dia (Obsidian Luxury)
-        scratch_dir = Path(r"C:\Users\João\.gemini\antigravity-cli\brain\56da99eb-ec7b-405a-9885-5f739f90e5db\scratch")
+        # Salva screenshot da tela Meta do Dia (Obsidian Luxury) em diretório temporário portável
+        scratch_dir = tmp_path / "screenshots"
         scratch_dir.mkdir(parents=True, exist_ok=True)
         page.screenshot(path=str(scratch_dir / "e2e_01_meta_do_dia.png"))
 

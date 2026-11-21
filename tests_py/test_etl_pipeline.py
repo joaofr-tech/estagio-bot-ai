@@ -118,3 +118,117 @@ def test_rejeitar_links_temporarios_grounding_redirect():
 
     audit = validar_vaga_ativa({"link": url_temp})
     assert audit["encerrada"] is True
+
+
+def test_require_cloud_falha_sem_credenciais(monkeypatch, tmp_path):
+    from etl import repository
+    from etl.models import PipelineRunTelemetry
+    from etl.repository import carregar_vagas_atuais, registrar_telemetria, upsert_vagas
+
+    monkeypatch.delenv("SUPABASE_URL", raising=False)
+    monkeypatch.delenv("SUPABASE_SERVICE_ROLE_KEY", raising=False)
+    monkeypatch.setattr(repository, "BANCO_PATH", tmp_path / "banco_vagas.json")
+    monkeypatch.setattr(repository, "BANCO_JS_PATH", tmp_path / "banco_vagas.js")
+
+    with pytest.raises(RuntimeError, match="Credenciais Supabase obrigatórias ausentes"):
+        carregar_vagas_atuais(require_cloud=True)
+
+    vaga = VagaRecord(empresa="Acme", cargo="Estágio Python", link="https://acme.gupy.io/jobs/99")
+    with pytest.raises(RuntimeError, match="Credenciais Supabase obrigatórias ausentes"):
+        upsert_vagas([vaga], banco_atual=[], require_cloud=True)
+
+    telemetria = PipelineRunTelemetry(timestamp="21/11/2026, 15:00:00", status="SEM_VAGAS", mensagem="Ok")
+    with pytest.raises(RuntimeError, match="Credenciais Supabase obrigatórias ausentes"):
+        registrar_telemetria(
+            telemetria,
+            historico_local_path=tmp_path / "historico.js",
+            require_cloud=True,
+        )
+
+
+def test_supabase_row_inclui_updated_at():
+    from etl.repository import _to_supabase_row
+
+    row = _to_supabase_row(
+        {
+            "id": "v1",
+            "empresa": "Acme",
+            "cargo": "Estágio Backend",
+            "link": "https://acme.gupy.io/jobs/1",
+            "status": "encerrada",
+        },
+        include_updated_at=True,
+    )
+    assert "updated_at" in row and "T" in row["updated_at"]
+    assert row["status"] == "encerrada"
+
+
+def test_extratores_ats_e_gupy_mockados(monkeypatch):
+    import json
+    from etl.extractors import ats, gupy
+    from etl.extractors.http_client import HttpResponse
+
+    assert ats.is_estagio_tech("Estágio em Engenharia de Software") is True
+    assert ats.is_estagio_tech("Estágio em Suporte Técnico") is False
+    assert ats.is_estagio_tech("Desenvolvedor Sênior Python") is False
+
+    gh_payload = json.dumps({
+        "jobs": [
+            {
+                "title": "Estágio em Engenharia de Dados",
+                "location": {"name": "Remoto - Brasil"},
+                "absolute_url": "https://boards.greenhouse.io/vtex/jobs/12345",
+            },
+            {
+                "title": "Estágio Jurídico",
+                "location": {"name": "Belo Horizonte"},
+                "absolute_url": "https://boards.greenhouse.io/vtex/jobs/99999",
+            },
+        ]
+    })
+
+    monkeypatch.setattr(ats, "GREENHOUSE_BOARDS", [{"slug": "vtex", "empresa": "VTEX"}])
+    monkeypatch.setattr(ats, "INHIRE_TENANTS", [])
+    monkeypatch.setattr(
+        ats,
+        "fetch_with_retry",
+        lambda *args, **kwargs: HttpResponse(ok=True, status_code=200, body=gh_payload, final_url="https://boards-api.greenhouse.io"),
+    )
+
+    ats_res = ats.extract({"aceitaRemoto": True})
+    assert ats_res["ok"] is True
+    assert len(ats_res["jobs"]) == 1
+    assert ats_res["jobs"][0]["empresa"] == "VTEX"
+
+    gupy_html = (
+        '<html><script id="__NEXT_DATA__" type="application/json">'
+        + json.dumps({
+            "props": {
+                "pageProps": {
+                    "data": [
+                        {
+                            "id": 777,
+                            "name": "Estágio em Desenvolvimento Backend",
+                            "type": "vacancy_type_internship",
+                            "careerPageName": "TechBH",
+                            "city": "Belo Horizonte",
+                            "state": "MG",
+                            "isRemoteWork": False,
+                            "workplaceType": "hybrid",
+                            "jobUrl": "https://techbh.gupy.io/jobs/777",
+                        }
+                    ]
+                }
+            }
+        })
+        + "</script></html>"
+    )
+    monkeypatch.setattr(
+        gupy,
+        "fetch_with_retry",
+        lambda *args, **kwargs: HttpResponse(ok=True, status_code=200, body=gupy_html, final_url="https://portal.gupy.io"),
+    )
+    gupy_res = gupy.extract({"cidades": ["Belo Horizonte"], "aceitaRemoto": True})
+    assert gupy_res["ok"] is True
+    assert len(gupy_res["jobs"]) == 1
+    assert gupy_res["jobs"][0]["link"] == "https://techbh.gupy.io/jobs/777"

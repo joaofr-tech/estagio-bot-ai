@@ -4,7 +4,8 @@ const path = require('path');
 const os = require('os');
 
 const PORT = process.env.PORT || 3000;
-const DIR = __dirname;
+const HOST = process.env.HOST || '127.0.0.1';
+const DIR = path.resolve(__dirname);
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -17,6 +18,33 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon',
   '.txt': 'text/plain; charset=utf-8'
 };
+
+const BLOCKED_FILENAMES = new Set([
+  'email_config.json',
+  'server.js',
+  'servidor.js',
+  'supabase_client.js',
+  'package.json',
+  'package-lock.json'
+]);
+
+const BLOCKED_DIRS = new Set(['api', 'etl', 'node_modules', 'scripts', 'src', 'tests', 'tests_py']);
+
+function isSensitiveOrUnsafePath(rootDir, candidatePath) {
+  const rel = path.relative(rootDir, candidatePath);
+  if (!rel || rel.startsWith('..') || path.isAbsolute(rel)) return true;
+
+  const segments = rel.split(path.sep).filter(Boolean);
+  if (segments.some((seg) => seg.startsWith('.'))) return true;
+  if (BLOCKED_DIRS.has(segments[0].toLowerCase())) return true;
+
+  const base = segments[segments.length - 1].toLowerCase();
+  if (BLOCKED_FILENAMES.has(base)) return true;
+  if (base.endsWith('.sql') || base.endsWith('.bak') || base.endsWith('.backup.json') || base.endsWith('.ps1')) {
+    return true;
+  }
+  return false;
+}
 
 function getLocalIPs() {
   const interfaces = os.networkInterfaces();
@@ -43,13 +71,20 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  let reqPath = decodeURI(req.url.split('?')[0]);
+  let reqPath;
+  try {
+    reqPath = decodeURIComponent(req.url.split('?')[0]);
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('400 Requisição inválida');
+    return;
+  }
 
   // Roteamento local para Vercel Serverless Functions (/api/*)
   if (reqPath.startsWith('/api/')) {
     const endpoint = reqPath.replace(/^\/api\//, '').replace(/[^a-zA-Z0-9_-]/g, '');
     const handlerPath = path.join(DIR, 'api', `${endpoint}.js`);
-    if (!fs.existsSync(handlerPath)) {
+    if (!endpoint || !fs.existsSync(handlerPath)) {
       res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: `Endpoint /api/${endpoint} não encontrado.` }));
       return;
@@ -99,10 +134,10 @@ const server = http.createServer(async (req, res) => {
     reqPath = '/dashboard.html';
   }
 
-  const filePath = path.normalize(path.join(DIR, reqPath));
+  const filePath = path.resolve(DIR, `.${reqPath}`);
 
-  // Proteção contra Directory Traversal
-  if (!filePath.startsWith(DIR)) {
+  // Proteção rigorosa contra Directory Traversal e exposição de dotfiles/arquivos sensíveis
+  if (isSensitiveOrUnsafePath(DIR, filePath)) {
     res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('403 Proibido');
     return;
@@ -129,20 +164,26 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log('\n======================================================');
-  console.log('📡 Servidor EstágioBot Iniciado!');
-  console.log('======================================================');
-  console.log(`💻 Localmente no notebook:   http://localhost:${PORT}`);
-  
-  const ips = getLocalIPs();
-  if (ips.length > 0) {
-    console.log(`🌐 No seu computador ou celular (mesmo Wi-Fi):`);
-    ips.forEach(ip => {
-      console.log(`   👉 http://${ip}:${PORT}`);
-    });
-  } else {
-    console.log(`🌐 Para acessar de outro PC, use o IP local do notebook na porta ${PORT}`);
-  }
-  console.log('======================================================\n');
-});
+if (require.main === module) {
+  server.listen(PORT, HOST, () => {
+    console.log('\n======================================================');
+    console.log('📡 Servidor Local Sona Iniciado!');
+    console.log('======================================================');
+    console.log(`💻 Acesso local: http://${HOST === '0.0.0.0' ? 'localhost' : HOST}:${PORT}`);
+
+    if (HOST === '0.0.0.0') {
+      const ips = getLocalIPs();
+      if (ips.length > 0) {
+        console.log('🌐 Na rede local (Wi-Fi):');
+        ips.forEach(ip => {
+          console.log(`   👉 http://${ip}:${PORT}`);
+        });
+      }
+    } else {
+      console.log('🔒 Vinculado apenas a localhost (use HOST=0.0.0.0 para expor na rede local).');
+    }
+    console.log('======================================================\n');
+  });
+}
+
+module.exports = { server, isSensitiveOrUnsafePath };

@@ -14,7 +14,9 @@ verificar_vagas_encerradas.js
 registrar_log.js
 supabase_client.js
 EmailTemplate.jsx
+etl/
 tests/
+tests_py/
 scratch/
 legacy/
 banco_vagas.backup.json
@@ -27,5 +29,11 @@ skills/
 preview-*.html
 prototipo-*.html
 vitrine_*.html
+dashboard-redesign.html
 schema_supabase.sql
+schema_curriculo_supabase.sql
 arquitetura_estagiobot.*
+requirements.txt
+pyproject.toml
+DESIGN.md
+CHANGELOG.md

@@ -89,6 +89,7 @@ def _sincronizar_dashboard_index() -> None:
 def executar_pipeline(
     skip_network: bool | None = None,
     dry_run: bool | None = None,
+    require_cloud: bool | None = None,
     lock_path: Path = LOCK_PATH,
 ) -> dict[str, Any]:
     """Orquestrador principal do pipeline ETL em Python."""
@@ -96,6 +97,8 @@ def executar_pipeline(
         skip_network = "--skip-network" in sys.argv
     if dry_run is None:
         dry_run = "--dry-run" in sys.argv
+    if require_cloud is None:
+        require_cloud = "--require-cloud" in sys.argv
 
     adquirido, motivo = _adquirir_lock(lock_path)
     if not adquirido:
@@ -104,11 +107,17 @@ def executar_pipeline(
 
     t0 = time.monotonic()
     try:
-        print(f"[Pipeline Python ETL] Iniciando (skip_network={skip_network}, dry_run={dry_run})...")
+        print(
+            f"[Pipeline Python ETL] Iniciando "
+            f"(skip_network={skip_network}, dry_run={dry_run}, require_cloud={require_cloud})..."
+        )
         config = _carregar_config_busca()
 
         # 1. Fonte Única da Verdade (Supabase PostgreSQL, com fallback local offline)
-        vagas_existentes, origem_banco = carregar_vagas_atuais(skip_network=skip_network)
+        vagas_existentes, origem_banco = carregar_vagas_atuais(
+            skip_network=skip_network,
+            require_cloud=require_cloud,
+        )
         print(f"[Pipeline Python ETL] Base carregada de '{origem_banco}' ({len(vagas_existentes)} vagas).")
 
         # 2. Extract (LinkedIn, Gupy, Catho, Greenhouse/InHire em paralelo)
@@ -125,7 +134,12 @@ def executar_pipeline(
 
         # 5. Load (UPSERT no PostgreSQL Supabase + cache local)
         if not dry_run and ineditas:
-            upsert_vagas(ineditas, banco_atual=vagas_existentes, skip_network=skip_network)
+            upsert_vagas(
+                ineditas,
+                banco_atual=vagas_existentes,
+                skip_network=skip_network,
+                require_cloud=require_cloud,
+            )
             vagas_existentes = [v.to_local_dict() for v in ineditas] + vagas_existentes
 
         if not dry_run and vagas_staged and NOVAS_VAGAS_PATH.exists():
@@ -137,7 +151,12 @@ def executar_pipeline(
         # 6. Audit (Fila circular no Supabase)
         auditoria = AuditMetrics(verificadas=0, encerradasCount=0)
         if not skip_network and not dry_run:
-            auditoria = auditar_vagas_ativas(vagas_existentes, limite=60, skip_network=skip_network)
+            auditoria = auditar_vagas_ativas(
+                vagas_existentes,
+                limite=60,
+                skip_network=skip_network,
+                require_cloud=require_cloud,
+            )
 
         # 7. Notify (Digest SMTP se configurado)
         if not skip_network and not dry_run:
@@ -170,7 +189,11 @@ def executar_pipeline(
                 funil=funil,
                 auditoria=auditoria,
             )
-            health_data = registrar_telemetria(telemetria, skip_network=skip_network)
+            health_data = registrar_telemetria(
+                telemetria,
+                skip_network=skip_network,
+                require_cloud=require_cloud,
+            )
             _sincronizar_dashboard_index()
             rotacionar_log_se_necessario(LOG_PATH)
             verificar_e_disparar_alerta_saude(health_data, skip_network=skip_network)

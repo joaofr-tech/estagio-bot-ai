@@ -109,8 +109,23 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Servir arquivos estáticos (dashboard.html como raiz)
-  let filePath = path.join(PROJECT_DIR, pathname === '/' ? 'dashboard.html' : pathname);
+  // Servir arquivos estáticos (dashboard.html como raiz) com proteção contra traversal e dotfiles
+  const requested = pathname === '/' ? '/dashboard.html' : pathname;
+  let filePath = path.resolve(PROJECT_DIR, `.${requested}`);
+  const rel = path.relative(PROJECT_DIR, filePath);
+  const segs = rel.split(path.sep).filter(Boolean);
+  const blocked =
+    !rel ||
+    rel.startsWith('..') ||
+    path.isAbsolute(rel) ||
+    segs.some(s => s.startsWith('.')) ||
+    ['email_config.json', 'server.js', 'servidor.js', 'supabase_client.js'].includes(path.basename(filePath).toLowerCase()) ||
+    filePath.toLowerCase().endsWith('.sql');
+
+  if (blocked) {
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('403 Proibido');
+  }
 
   if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
     filePath = path.join(PROJECT_DIR, 'dashboard.html');
@@ -129,8 +144,10 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`[Dashboard Bridge] Servidor ativo em http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  server.listen(PORT, '127.0.0.1', () => {
+    console.log(`[Dashboard Bridge] Servidor ativo em http://127.0.0.1:${PORT}`);
+  });
+}
 
 module.exports = server;

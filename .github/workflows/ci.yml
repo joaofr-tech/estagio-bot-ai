@@ -1,0 +1,45 @@
+name: CI — Tests & Build Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Instalar dependências Node
+        run: npm ci
+
+      - name: Instalar dependências Python
+        run: pip install -r requirements.txt
+
+      - name: Executar testes Node.js (Dashboard, Motor ATS, API & Segurança)
+        run: npm test
+
+      - name: Executar testes Python ETL (pytest)
+        run: pytest tests_py/test_etl_pipeline.py -v
+
+      - name: Validar build estático e sincronia com /public
+        run: |
+          npm run build
+          git diff --exit-code public/

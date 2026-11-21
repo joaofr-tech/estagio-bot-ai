@@ -3572,7 +3572,7 @@
 
           allJobs = getConsolidatedJobs();
           if (currentScreen === '01') { renderScreen01(); renderScreen02(); }
-          else if (currentScreen === '02') renderScreen01();
+          else if (currentScreen === '02') renderScreen02();
           else if (currentScreen === '03') renderScreen03();
           else if (currentScreen === '05') renderScreen05();
           updateGlobalBadges();
@@ -4134,14 +4134,16 @@
         job.ultimaDataRecebimentoConcluida = current.ultimaDataRecebimentoConcluida;
       }
 
-      // Sincronizar com o backend local se estiver ativo
-      try {
-        fetch('http://localhost:3141/api/concluir-etapa', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ canonicalKey })
-        }).catch(() => {});
-      } catch (e) {}
+      // Sincronizar com o backend local se estiver em ambiente de desenvolvimento
+      if (['localhost', '127.0.0.1', ''].includes(window.location.hostname)) {
+        try {
+          fetch('http://localhost:3141/api/concluir-etapa', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ canonicalKey })
+          }).catch(() => {});
+        } catch (e) {}
+      }
 
       showToast('Etapa concluída com sucesso! Vaga arquivada em "Aplicadas / Concluídas".');
       updateGlobalBadges();
@@ -5598,14 +5600,16 @@
         job.dataMismatch = current.dataMismatch;
       }
 
-      // Tentar sincronizar via API local em segundo plano (se o server estiver rodando)
-      try {
-        fetch('http://localhost:3141/api/mismatch', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ canonicalKey, motivo, detalhe })
-        }).catch(() => {});
-      } catch (e) {}
+      // Tentar sincronizar via API local em segundo plano apenas em ambiente local
+      if (['localhost', '127.0.0.1', ''].includes(window.location.hostname)) {
+        try {
+          fetch('http://localhost:3141/api/mismatch', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ canonicalKey, motivo, detalhe })
+          }).catch(() => {});
+        } catch (e) {}
+      }
 
       const motivoCurto = motivo.split('/')[0].trim();
       showToast(`🧠 Robô calibrado! Vagas de "${motivoCurto}" foram excluídas do radar.`, () => {

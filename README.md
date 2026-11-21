@@ -1,140 +1,146 @@
 <div align="center">
 
-# 🎯 Sona
-### Pipeline ETL de Engenharia de Dados & Rastreador de Candidaturas para Estágios em TI
+# Sona
+### Pipeline ETL de Vagas, Rastreador de Candidaturas & Estúdio de Currículo ATS Anti-Alucinação
 
 [![Licença MIT](https://img.shields.io/badge/licença-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Python](https://img.shields.io/badge/python->=3.12-3776ab.svg?style=flat-square)](https://www.python.org)
+[![Node.js](https://img.shields.io/badge/node->=20-339933.svg?style=flat-square)](https://nodejs.org)
 [![Pydantic](https://img.shields.io/badge/validação-Pydantic%20v2-e92063.svg?style=flat-square)](https://docs.pydantic.dev)
 [![Supabase](https://img.shields.io/badge/banco-Supabase%20PostgreSQL-3ecf8e.svg?style=flat-square)](https://supabase.com)
-[![GitHub Actions](https://img.shields.io/badge/orquestração-GitHub%20Actions-2088ff.svg?style=flat-square)](.github/workflows/etl_pipeline.yml)
-[![Interface](https://img.shields.io/badge/interface-Painel%20Paper%20%26%20Ink-amber.svg?style=flat-square)](#)
-[![Testes](https://img.shields.io/badge/testes-pytest%20%2B%20node%20aprovados-brightgreen.svg?style=flat-square)](#)
+[![Vercel](https://img.shields.io/badge/deploy-Vercel%20Serverless-000000.svg?style=flat-square)](vercel.json)
+[![Interface](https://img.shields.io/badge/interface-Obsidian%20Dark-18181b.svg?style=flat-square)](DESIGN.md)
 
-<!-- Resumo direto: 1 frase de impacto -->
-**Pipeline ETL focado em nuvem em Python com validação Pydantic v2, carga idempotente no Supabase (PostgreSQL), auditoria em fila circular e observabilidade por fonte.**
+**Plataforma completa para busca de estágios em TI: pipeline ETL concorrente em Python com Supabase como Fonte Única da Verdade, painel analítico Obsidian Dark e Sona Resume Studio (gerador de currículos ATS em 3 camadas anti-alucinação com BYOK).**
 
-[Arquitetura ETL](#-arquitetura-do-pipeline-etl) · [Início Rápido](#-início-rápido) · [Configurar Parâmetros](#-filtros-determinísticos) · [Suíte de Testes](#-suíte-de-testes)
+[Arquitetura](#-arquitetura) · [Sona Resume Studio](#-sona-resume-studio-ats-anti-alucinação) · [Início Rápido](#-início-rápido) · [Deploy na Vercel](#-deploy-na-vercel--supabase) · [Suíte de Testes](#-suíte-de-testes)
 
 <br/>
 
-<!-- HERO VISUAL: Imagem em assets/dashboard_preview.png -->
-<img src="assets/dashboard_preview.png" alt="Prévia do Painel Sona" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.12);" />
+<img src="assets/dashboard_preview.png" alt="Prévia do Painel Sona" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.22);" />
 
 </div>
 
 ---
 
-### 💡 Por que o Sona?
+### Por que o Sona?
 
-Buscar estágio manualmente em dezenas de sites consome horas e gera candidaturas desorganizadas. O Sona automatiza o ciclo completo com práticas de Engenharia de Dados:
-
-- **Ingestão Concorrente Multi-Fonte:** Extratores paralelos em Python (`httpx` + `ThreadPoolExecutor`) coletam vagas em **LinkedIn, Gupy, Catho, Greenhouse e InHire** com retentativas e espera exponencial.
-- **Qualidade de Dados & Deduplicação Determinística:** Contratos estritos em **Pydantic v2** validam URLs e campos obrigatórios, enquanto a normalização canônica (`empresa::cargo` + link) e as regras de incompatibilidade (*mismatch*) filtram ruídos antes da carga.
-- **Nuvem como Fonte Única da Verdade + Auditoria Circular:** O **PostgreSQL no Supabase** centraliza os dados via gravação idempotente (`UPSERT`), com auditoria de vagas encerradas em fila circular (rodízio contínuo por `updated_at`) e cópia local atômica para o painel.
-- **Observabilidade Real:** Telemetria estruturada por fonte, funil e auditoria, com detector de fontes estagnadas (3 rodadas sem retorno), rotação automática de logs e alertas críticos via Webhook/e-mail.
+- **Ingestão Concorrente Multi-Fonte:** Extratores paralelos em Python (`httpx` + `ThreadPoolExecutor`) coletam vagas em **LinkedIn, Gupy, Catho, Greenhouse e InHire** com retentativas e backoff exponencial.
+- **Qualidade de Dados & Deduplicação Determinística:** Contratos estritos em **Pydantic v2** validam URLs (incluindo bloqueio de links temporários `grounding-api-redirect`), enquanto a normalização canônica (`empresa::cargo` + link) e as regras de *mismatch* filtram ruídos antes da carga.
+- **Nuvem como Fonte Única da Verdade + Auditoria Circular:** O **PostgreSQL no Supabase** centraliza vagas via `UPSERT` idempotente, com auditoria circular de vagas encerradas (60 vagas/hora por `updated_at`) e modo `--require-cloud` (fail-fast) no GitHub Actions.
+- **Sona Resume Studio (ATS Anti-Alucinação):** Gera currículos sob medida por vaga usando sua própria chave de IA (**BYOK**: Gemini, OpenAI, Groq ou OpenRouter) a partir de um **Banco de Fatos** verificado (GitHub Sync, LinkedIn `.zip`/PDF e Currículo Base).
+- **Design System Obsidian Dark:** Interface unificada em [DESIGN.md](DESIGN.md) e [design-system.css](design-system.css) com Meta do Dia, Catálogo de Vagas, Insights analíticos e Estúdio de Currículo embutido.
 
 ---
 
-### 🏗️ Arquitetura do Pipeline ETL
+### Arquitetura
 
 ```mermaid
 flowchart LR
-    E["1. Extração (Python) - LinkedIn, Gupy, Catho, Greenhouse e InHire"] --> T["2. Transformação - Pydantic v2, Deduplicação e Filtros"]
-    T --> L["3. Carga (Fonte Única) - Supabase PostgreSQL (UPSERT) + Cache Atômico"]
-    L --> A["4. Auditoria (Fila Circular) - 60 vagas/hora com Sync"]
-    A --> O["5. Observabilidade e Alertas - Telemetria, E-mail e Webhook"]
+    E["1. Extração (Python) - LinkedIn, Gupy, Catho, Greenhouse e InHire"] --> T["2. Transformação - Pydantic v2, Deduplicação e Mismatch"]
+    T --> L["3. Carga (Fonte Única) - Supabase PostgreSQL (UPSERT)"]
+    L --> A["4. Auditoria Circular - 60 vagas/h com updated_at"]
+    L --> UI["5. Painel Web + Resume Studio (Vercel + /api/* Serverless)"]
 ```
 
 ```text
-├── etl/
-│   ├── models.py               # Contratos Pydantic v2 (VagaRecord, PipelineRunTelemetry)
-│   ├── repository.py           # Supabase PostgreSQL (Fonte Única) + escrita atômica local
-│   ├── transform.py            # Normalização canônica, deduplicação e filtro de incompatibilidade
-│   ├── auditor.py              # Auditoria em fila circular (rodízio contínuo)
-│   ├── notifier.py             # Resumo por e-mail, rotação de logs e alertas críticos
-│   ├── pipeline.py             # Orquestrador principal (`python -m etl.pipeline`)
+├── etl/                        # Pipeline ETL Python (Pydantic v2, Supabase, Auditoria, Notificador)
 │   └── extractors/             # Conectores paralelos (LinkedIn, Gupy, Catho, Greenhouse/InHire)
-├── tests_py/                   # Suíte de testes unitários em pytest
-├── .github/workflows/          # Agendamento horário automatizado na nuvem (GitHub Actions)
-└── dashboard.html              # Painel visual (Paper & Ink) conectado ao Supabase
+├── api/                        # Vercel Serverless Functions do Sona Resume Studio
+│   ├── generate-resume.js      # POST /api/generate-resume (Pipeline ATS em 3 camadas)
+│   ├── github-sync.js          # POST /api/github-sync (Seletor inteligente + leitura de READMEs)
+│   ├── parse-resume-pdf.js     # POST /api/parse-resume-pdf (Extração factual de PDF)
+│   └── _lib/                   # Motor anti-alucinação (resume_engine.js), BYOK (llm.js), parser LinkedIn
+├── dashboard.html / index.html # Painel principal (Obsidian Dark) sincronizado com Supabase
+├── curriculo.html / .js / .css # Sona Resume Studio (Editor WYSIWYG, Onboarding, Banco de Fatos)
+├── design-system.css           # Tokens e componentes do Design System (DESIGN.md)
+├── schema_supabase.sql         # Schema + RLS de `vagas` e `historico_execucoes`
+├── schema_curriculo_supabase.sql # Schema + RLS de `master_profiles` e `curriculos_gerados`
+├── tests/                      # Testes Node.js (Dashboard, Motor ATS, APIs e Segurança Local)
+├── tests_py/                   # Testes Python (ETL unitários + E2E Playwright)
+└── .github/workflows/          # CI em PRs (ci.yml) + ETL horário fail-fast (etl_pipeline.yml)
 ```
 
 ---
 
-### 🚀 Início Rápido
+### Sona Resume Studio (ATS Anti-Alucinação)
 
-#### 1. Instalar Dependências Python & Configurar `.env`
+O módulo de currículos em [curriculo.html](curriculo.html) segue um pipeline em **3 camadas** ([api/_lib/resume_engine.js](api/_lib/resume_engine.js)):
+1. **Camada 1 — Matriz de Aderência & Seleção Determinística:** Analisa a vaga (detectando PT-BR ou EN), seleciona deterministicamente os Top 2–3 projetos reais mais relevantes e separa *direct matches*, equivalências honestas e *excluded gaps*.
+2. **Camada 2 — Geração Isolada por Entidade:** Cada projeto e experiência é reescrito em chamada isolada contendo apenas seus próprios fatos verificados (impossibilitando contaminação cruzada), enquanto formação acadêmica e dados básicos são copiados de forma 100% determinística.
+3. **Camada 3 — Guardrails em Código + Auditor Semântico (Critic):** Filtra tecnologias contra a *whitelist* verificada, bloqueia termos de *excluded gaps* e audita cada bullet contra sua evidência original.
+
+---
+
+### Início Rápido
+
+#### 1. Instalar Dependências & Configurar `.env`
 ```bash
+npm install
 pip install -r requirements.txt
 ```
-Configure no `.env` (ou nos segredos do **GitHub Actions**): `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, e opcionalmente `EMAIL_ADDRESS`, `EMAIL_PASSWORD` e `ALERT_WEBHOOK_URL`.
+Copie [.env.example](.env.example) para `.env` e preencha:
+- **Obrigatórios para nuvem:** `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
+- **Opcionais:** `EMAIL_ADDRESS`, `EMAIL_PASSWORD`, `ALERT_WEBHOOK_URL`
 
-#### 2. Executar Pipeline ETL Manualmente
+#### 2. Provisionar o Banco no Supabase
+No **SQL Editor** do Supabase, execute os dois scripts idempotentes:
+1. [schema_supabase.sql](schema_supabase.sql) — tabelas `vagas` (com `updated_at`) e `historico_execucoes`, com leitura pública e escrita restrita à `service_role`.
+2. [schema_curriculo_supabase.sql](schema_curriculo_supabase.sql) — tabelas `master_profiles` e `curriculos_gerados` com RLS estrita por `auth.uid()`.
+
+#### 3. Executar Pipeline ETL Manualmente
 ```bash
+# Execução local (usa Supabase se configurado ou fallback local)
 python -m etl.pipeline
-# ou via script do npm:
-npm run etl
-```
-> Para testar o fluxo sem chamadas de rede nem escrita no banco: `python -m etl.pipeline --skip-network --dry-run`.
 
-#### 3. Agendamento Automático (Nuvem ou Local)
-* **Nuvem (GitHub Actions):** O fluxo [`.github/workflows/etl_pipeline.yml`](.github/workflows/etl_pipeline.yml) executa `pytest` + `python -m etl.pipeline` automaticamente a cada hora (`cron: '0 * * * *'`), gravando direto no Supabase.
-* **Local (Agendador de Tarefas do Windows):** Para agendar execução horária local via [executar_busca.ps1](executar_busca.ps1):
-  ```powershell
-  powershell -ExecutionPolicy Bypass -File .\agendar_tarefas.ps1
-  ```
+# Execução fail-fast exigindo conexão e persistência no Supabase (usado na CI)
+python -m etl.pipeline --require-cloud
 
-#### 4. Acessar o Painel
-Abra **`dashboard.html`** (ou `index.html`) diretamente no navegador ou via `npm start`. O painel sincroniza em tempo real com o Supabase e exibe o funil de candidaturas + aba **`03 / Histórico`** com métricas por fonte.
-
----
-
-### ⚙️ Filtros Determinísticos
-
-Ajuste os critérios pela aba **`04 / Parâmetros`** do painel ou direto no `config_busca.json`:
-
-```json
-{
-  "candidato": "João Francisco",
-  "periodo": "3º período de Engenharia de Software",
-  "turnoFaculdade": "Manhã",
-  "turnosDisponiveis": ["Tarde (12h-18h / 13h-19h)", "Noite", "Flexível (6h)"],
-  "estado": "MG",
-  "cidades": ["Belo Horizonte", "Contagem", "Betim", "Nova Lima", "Ibirité"],
-  "aceitaPresencial": true,
-  "aceitaHibrido": true,
-  "aceitaRemoto": true,
-  "areasInteresse": "Engenharia de Software, Desenvolvimento Web/Full Stack/Backend/Frontend, Engenharia/Ciência de Dados, IA e Automação"
-}
+# Teste sem rede e sem escrita no banco
+python -m etl.pipeline --skip-network --dry-run
 ```
 
----
+> **Nota sobre telemetria:** Na nuvem (`historico_execucoes` do Supabase), o ETL registra o resumo por execução (`timestamp`, `status`, `is_erro`, `duracao_segundos`, `mensagem`, `total_vagas`). O detalhamento granular por fonte (`fontes`, `funil`, `auditoria`) é gravado no cache local `historico_execucoes.js`.
 
-### 🧰 Stack Tecnológica
-
-| Camada | Tecnologia | Motivo da Decisão |
-| :--- | :--- | :--- |
-| **Pipeline ETL & Extração** | Python 3.12+ · `httpx` · `ThreadPoolExecutor` | Ingestão paralela com retentativas automáticas em APIs públicas e portais de vagas sem depender de navegador pesado. |
-| **Qualidade & Contratos** | Pydantic v2 | Validação estrita de estrutura na ingestão, higienização de URLs e tipagem de telemetria. |
-| **Armazenamento (Fonte Única)** | Supabase (PostgreSQL) + Cache Atômico | Fonte Única da Verdade na nuvem via `UPSERT` idempotente + espelho local atômico (`os.replace`). |
-| **Orquestração & Automação** | GitHub Actions (`cron`) + PowerShell | Execução horária na nuvem (mesmo com PC desligado) com suíte `pytest` obrigatória antes de rodar o ETL. |
-| **Observabilidade** | Telemetria Estruturada + Detector de Estagnação | Métricas por fonte/funil/auditoria, rotação de logs (512 KB) e alertas com intervalo mínimo de 6h via Webhook/e-mail. |
-| **Interface (Painel)** | JavaScript Puro + Tailwind CSS | Estética editorial *Paper & Ink*, leitura ao vivo do Supabase e sem etapa de compilação. |
+#### 4. Rodar o Painel + APIs Localmente
+```bash
+npm start
+```
+Acesse `http://127.0.0.1:3000`. O servidor local [servidor.js](servidor.js) escuta apenas em `127.0.0.1` por padrão (use `HOST=0.0.0.0 npm start` apenas se quiser expor na rede local), bloqueia dotfiles/arquivos sensíveis e roteia `/api/*` para as funções em `api/`.
 
 ---
 
-### 🧪 Suíte de Testes
+### Deploy na Vercel & GitHub Actions
+
+- **Vercel ([vercel.json](vercel.json)):**
+  - `buildCommand`: `npm run build` (copia os artefatos estáticos para `public/` via [scripts/build_dashboard.js](scripts/build_dashboard.js)).
+  - `outputDirectory`: `public`.
+  - Funções serverless: `/api/generate-resume` (`maxDuration: 60`), `/api/github-sync` (`30s`) e `/api/parse-resume-pdf` (`30s`).
+  - **Importante:** Não use GitHub Pages para produção — o Resume Studio requer o runtime serverless `/api/*` da Vercel.
+- **GitHub Actions:**
+  - [`.github/workflows/etl_pipeline.yml`](.github/workflows/etl_pipeline.yml): executa `pytest` + `python -m etl.pipeline --require-cloud` a cada hora. Exige os secrets `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (e opcionalmente `EMAIL_ADDRESS`, `EMAIL_PASSWORD`, `ALERT_WEBHOOK_URL`).
+  - [`.github/workflows/ci.yml`](.github/workflows/ci.yml): executa `npm test`, `pytest tests_py/test_etl_pipeline.py -v` e verifica a sincronia de `npm run build` (`public/`) em todo `push` e `pull_request` para `main`.
+
+---
+
+### Filtros Determinísticos
+
+Ajuste os critérios pela aba **`Parâmetros do Crawler`** do painel ou diretamente em [config_busca.json](config_busca.json).
+
+---
+
+### Suíte de Testes
 
 ```bash
-# Testes do pipeline ETL Python (Pydantic, Transformação, Estagnação de Fontes e Rotação de Logs)
-pytest tests_py/ -v
-# ou: npm run test:py
-
-# Testes do Painel, Fluxo de Candidaturas e Indicadores
+# Testes Node.js (Candidaturas, Indicadores, Parâmetros, ETL/Observabilidade, Motor ATS, APIs e Segurança Local)
 npm test
+
+# Testes unitários do Pipeline ETL Python (Pydantic, Transformação, Fail-Fast Cloud, Extratores e Logs)
+pytest tests_py/test_etl_pipeline.py -v
+
+# Teste E2E completo no navegador (requer Playwright instalado: pip install playwright)
+npm run test:e2e
 ```
-> Valida contratos de dados, deduplicação, filtros de incompatibilidade, detector de anomalias, indicadores de funil e rotação de logs.
 
 ---
 

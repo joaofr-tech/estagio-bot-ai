@@ -136,6 +136,7 @@ def auditar_vagas_ativas(
     vagas_atuais: list[dict[str, Any]],
     limite: int = 60,
     skip_network: bool = False,
+    require_cloud: bool = False,
 ) -> AuditMetrics:
     """
     Audita vagas abertas em fila circular (menos recentemente auditadas primeiro)
@@ -176,6 +177,10 @@ def auditar_vagas_ativas(
                 vagas_para_atualizar.append(vaga)
 
     if vagas_para_atualizar:
-        atualizar_status_vagas(vagas_para_atualizar, skip_network=skip_network)
+        atualizar_status_vagas(
+            vagas_para_atualizar,
+            skip_network=skip_network,
+            require_cloud=require_cloud,
+        )
 
     return AuditMetrics(verificadas=len(lote), encerradasCount=encerradas_count)

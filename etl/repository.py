@@ -85,10 +85,23 @@ def _iso_to_ms(iso_str: str | None) -> int:
         return 0
 
 
-def carregar_vagas_atuais(skip_network: bool = False) -> tuple[list[dict[str, Any]], str]:
+def _require_supabase_config() -> tuple[str, str]:
+    url, key = _get_supabase_config()
+    if not url or not key:
+        raise RuntimeError(
+            "Credenciais Supabase obrigatórias ausentes: configure SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY."
+        )
+    return url, key
+
+
+def carregar_vagas_atuais(
+    skip_network: bool = False,
+    require_cloud: bool = False,
+) -> tuple[list[dict[str, Any]], str]:
     """
     Carrega vagas com Supabase PostgreSQL como Fonte Única da Verdade.
-    Faz fallback seguro para o cache local banco_vagas.json se offline ou sem credenciais.
+    Faz fallback seguro para o cache local banco_vagas.json se offline ou sem credenciais,
+    exceto quando require_cloud=True (modo fail-fast para CI/nuvem).
     Retorna (lista_vagas, origem: 'supabase' | 'local').
     """
     local_list = carregar_banco_local()
@@ -98,7 +111,11 @@ def carregar_vagas_atuais(skip_network: bool = False) -> tuple[list[dict[str, An
         if isinstance(v, dict) and v.get("id")
     }
 
-    url, key = _get_supabase_config()
+    if require_cloud:
+        url, key = _require_supabase_config()
+    else:
+        url, key = _get_supabase_config()
+
     if not skip_network and url and key:
         try:
             endpoint = f"{url}/rest/v1/vagas?select=*&order=created_at.desc&limit=5000"
@@ -129,8 +146,19 @@ def carregar_vagas_atuais(skip_network: bool = False) -> tuple[list[dict[str, An
                             "ultimaAuditoriaMs": audit_ms,
                         })
                     return normalized, "supabase"
+            msg = f"[Supabase] Erro ao consultar vagas HTTP {resp.status_code}: {resp.text[:250]}"
+            if require_cloud:
+                raise RuntimeError(msg)
+            print(f"{msg}; usando cache local.")
+        except RuntimeError:
+            raise
         except Exception as exc:
+            if require_cloud:
+                raise RuntimeError(f"[Supabase] Falha obrigatória ao consultar vagas: {exc}") from exc
             print(f"[Supabase] Aviso ao consultar vagas ({exc}); usando cache local.")
+
+    if require_cloud:
+        raise RuntimeError("[Supabase] Não foi possível carregar vagas da nuvem com --require-cloud ativo.")
 
     return local_list, "local"
 
@@ -169,6 +197,7 @@ def upsert_vagas(
     novas_vagas: list[VagaRecord],
     banco_atual: list[dict[str, Any]] | None = None,
     skip_network: bool = False,
+    require_cloud: bool = False,
 ) -> bool:
     """
     Persiste novas vagas no PostgreSQL (Supabase) via UPSERT por `link`
@@ -176,6 +205,11 @@ def upsert_vagas(
     """
     if not novas_vagas:
         return True
+
+    if require_cloud:
+        url, key = _require_supabase_config()
+    else:
+        url, key = _get_supabase_config()
 
     # Atualizar cache local (mantendo mais recentes no topo)
     base_local = list(banco_atual) if banco_atual is not None else carregar_banco_local()
@@ -190,8 +224,9 @@ def upsert_vagas(
         banco_atualizado = novos_para_local + base_local
         salvar_banco_local(banco_atualizado)
 
-    url, key = _get_supabase_config()
     if skip_network or not url or not key:
+        if require_cloud:
+            raise RuntimeError("[Supabase] Persistência obrigatória ignorada (skip_network ou credenciais ausentes).")
         return False
 
     payload_com_link = _deduplicar_por_link([v.to_supabase_dict() for v in novas_vagas if v.link])
@@ -206,9 +241,16 @@ def upsert_vagas(
         if resp.status_code in (200, 201, 204):
             print(f"[Supabase] ☁️ {len(payload_com_link)} vaga(s) sincronizada(s) no PostgreSQL!")
             return True
-        print(f"[Supabase] Erro UPSERT HTTP {resp.status_code}: {resp.text[:250]}")
+        msg = f"[Supabase] Erro UPSERT HTTP {resp.status_code}: {resp.text[:250]}"
+        if require_cloud:
+            raise RuntimeError(msg)
+        print(msg)
         return False
+    except RuntimeError:
+        raise
     except Exception as exc:
+        if require_cloud:
+            raise RuntimeError(f"[Supabase] Falha de conexão ao salvar vagas: {exc}") from exc
         print(f"[Supabase] Falha de conexão ao salvar vagas: {exc}")
         return False
 
@@ -217,6 +259,7 @@ def atualizar_status_vagas(
     vagas_atualizadas: list[dict[str, Any]],
     banco_completo: list[dict[str, Any]] | None = None,
     skip_network: bool = False,
+    require_cloud: bool = False,
 ) -> bool:
     """
     Atualiza status / notificada / updated_at de vagas existentes no Supabase e no cache local.
@@ -239,7 +282,10 @@ def atualizar_status_vagas(
     if not vagas_atualizadas or skip_network:
         return False
 
-    url, key = _get_supabase_config()
+    if require_cloud:
+        url, key = _require_supabase_config()
+    else:
+        url, key = _get_supabase_config()
     if not url or not key:
         return False
 
@@ -254,9 +300,16 @@ def atualizar_status_vagas(
             resp = client.post(endpoint, headers=headers, json=com_link)
         if resp.status_code in (200, 201, 204):
             return True
-        print(f"[Supabase] Erro ao atualizar status HTTP {resp.status_code}: {resp.text[:250]}")
+        msg = f"[Supabase] Erro ao atualizar status HTTP {resp.status_code}: {resp.text[:250]}"
+        if require_cloud:
+            raise RuntimeError(msg)
+        print(msg)
         return False
+    except RuntimeError:
+        raise
     except Exception as exc:
+        if require_cloud:
+            raise RuntimeError(f"[Supabase] Falha ao atualizar status na nuvem: {exc}") from exc
         print(f"[Supabase] Falha ao atualizar status na nuvem: {exc}")
         return False
 
@@ -310,6 +363,7 @@ def registrar_telemetria(
     telemetria: PipelineRunTelemetry,
     historico_local_path: Path = HISTORICO_JS_PATH,
     skip_network: bool = False,
+    require_cloud: bool = False,
 ) -> dict[str, Any]:
     """Registra telemetria estruturada no Supabase (historico_execucoes) e no bridge JS local."""
     historico = ler_historico_execucoes(historico_local_path)
@@ -352,7 +406,11 @@ def registrar_telemetria(
     )
     write_file_atomically(historico_local_path, output_content)
 
-    url, key = _get_supabase_config()
+    if require_cloud:
+        url, key = _require_supabase_config()
+    else:
+        url, key = _get_supabase_config()
+
     if not skip_network and url and key:
         try:
             endpoint = f"{url}/rest/v1/historico_execucoes"
@@ -369,8 +427,15 @@ def registrar_telemetria(
             if resp.status_code in (200, 201, 204):
                 print("[Supabase] 📡 Telemetria registrada na nuvem!")
             else:
-                print(f"[Supabase] Aviso ao gravar telemetria HTTP {resp.status_code}: {resp.text[:200]}")
+                msg = f"[Supabase] Aviso ao gravar telemetria HTTP {resp.status_code}: {resp.text[:200]}"
+                if require_cloud:
+                    raise RuntimeError(msg)
+                print(msg)
+        except RuntimeError:
+            raise
         except Exception as exc:
+            if require_cloud:
+                raise RuntimeError(f"[Supabase] Telemetria obrigatória em nuvem não registrada: {exc}") from exc
             print(f"[Supabase] Telemetria em nuvem não registrada: {exc}")
 
     return health_data
