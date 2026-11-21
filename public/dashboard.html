@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#059669">
-  <title>Sona — Radar de Oportunidades &amp; Engenharia</title>
+  <meta name="theme-color" content="#0C0C0E">
+  <title>Sona — Vagas &amp; Gerador de Currículo</title>
+  <link rel="stylesheet" href="design-system.css?v=2">
   
   <!-- Favicon: Monolito S-O (Logo 4C) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23064E3B'/%3E%3Ccircle cx='32' cy='32' r='20' stroke='%2334D399' stroke-width='6' fill='none'/%3E%3Cpath d='M 32 12 C 22 12, 17 19, 22 26 C 27 33, 38 31, 42 38 C 47 46, 41 52, 32 52' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
@@ -487,6 +488,12 @@
       display: block;
     }
 
+    main.studio-fullbleed {
+      padding-bottom: 0 !important;
+      height: 100vh;
+      overflow: hidden;
+    }
+
     @keyframes fadeInView {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
@@ -810,6 +817,127 @@
       gap: 0.85rem;
       margin-bottom: 3.5rem;
       border: none;
+    }
+
+    /* Grid 3 Colunas para o Foco de Hoje */
+    .focus-jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.05rem;
+      margin-bottom: 3.5rem;
+      align-items: stretch;
+    }
+
+    .focus-jobs-grid .empty-state-box {
+      grid-column: 1 / -1;
+    }
+
+    .focus-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      color: inherit;
+      position: relative;
+      min-width: 0;
+    }
+
+    .focus-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(5, 150, 105, 0.35);
+    }
+
+    .focus-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+    }
+
+    .focus-card-company {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+
+    .focus-card-company .company-avatar-squircle {
+      width: 40px;
+      height: 40px;
+      font-size: 0.9rem;
+    }
+
+    .focus-card-company-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .focus-card-company-meta .company-label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .focus-card-title {
+      font-size: 1.04rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 2.7em;
+    }
+
+    .focus-card-snippet {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .focus-card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .focus-card-footer {
+      margin-top: auto;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(226, 232, 240, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .focus-card-footer .btn-action-ink {
+      flex: 1;
+      justify-content: center;
+    }
+
+    @media (max-width: 1080px) {
+      .focus-jobs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .focus-jobs-grid { grid-template-columns: 1fr; }
     }
 
     .job-row {
@@ -1581,6 +1709,718 @@
     .toast-undo-btn:hover {
       background: #E2E8F0;
     }
+
+    /* =============================================================
+       SONA 3.0 — OBSIDIAN LUXURY & LINEAR ARCHITECTURE OVERRIDE
+       (Ref: Linear Dark Sidebar, Tactile 3D Buttons, Insights Grid)
+       ============================================================= */
+    :root {
+      --brand-primary: #F4F4F6;
+      --brand-primary-hover: #FFFFFF;
+      --brand-primary-light: rgba(255, 255, 255, 0.06);
+      --canvas-bg: #111114;
+      --canvas-card: #17171B;
+      --canvas-card-subtle: #1C1C21;
+      --text-heading: #F4F4F6;
+      --text-body: #A1A1AA;
+      --text-muted: #71717A;
+      --text-faint: #52525B;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --paper: #111114;
+      --paper-deep: #17171B;
+      --paper-card: #17171B;
+      --ink: #F4F4F6;
+      --ink-soft: #A1A1AA;
+      --muted: #71717A;
+      --faint: #52525B;
+      --line: rgba(255, 255, 255, 0.07);
+      --line-dark: rgba(255, 255, 255, 0.14);
+      --green: #4ADE80;
+      --bg-card: #17171B;
+      --sidebar: 236px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: #111114 !important;
+      color: #A1A1AA !important;
+      font-family: var(--font-sans) !important;
+    }
+
+    /* Sidebar estilo Linear (#0C0C0E, sem gradiente verde) */
+    .site-sidebar {
+      width: 236px !important;
+      background: #0C0C0E !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+      padding: 1.1rem 0.7rem !important;
+      box-shadow: none !important;
+    }
+
+    .site-main {
+      margin-left: 236px !important;
+      width: calc(100% - 236px) !important;
+      background: #111114 !important;
+    }
+
+    .wrap {
+      max-width: 1120px !important;
+      padding: 0 2.5rem !important;
+    }
+
+    .brand-header {
+      padding: 0.3rem 0.55rem 0.5rem !important;
+      gap: 0.55rem !important;
+    }
+
+    .brand-logo-svg {
+      width: 22px !important;
+      height: 22px !important;
+      color: #F4F4F6 !important;
+    }
+
+    .brand-name {
+      font-size: 0.96rem !important;
+      font-weight: 600 !important;
+      color: #F4F4F6 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    .sidebar-divider {
+      background: rgba(255, 255, 255, 0.07) !important;
+      margin: 0.5rem 0.35rem !important;
+    }
+
+    .workspace-card {
+      background: #141418 !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 10px !important;
+      padding: 0.55rem 0.65rem !important;
+      box-shadow: none !important;
+    }
+
+    .workspace-card:hover {
+      background: #1B1B20 !important;
+    }
+
+    .workspace-avatar {
+      background: #222228 !important;
+      color: #E4E4E7 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .workspace-name {
+      color: #F4F4F6 !important;
+      font-size: 0.82rem !important;
+      font-weight: 500 !important;
+    }
+
+    .workspace-handle {
+      color: #71717A !important;
+      font-size: 0.71rem !important;
+    }
+
+    .nav-section-title {
+      color: #71717A !important;
+      font-size: 0.67rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.05em !important;
+      padding: 0.55rem 0.55rem 0.25rem !important;
+    }
+
+    .sidebar-link {
+      color: #A1A1AA !important;
+      border-radius: 8px !important;
+      padding: 0.48rem 0.6rem !important;
+      font-size: 0.83rem !important;
+      font-weight: 500 !important;
+      border: 1px solid transparent !important;
+      gap: 0.6rem !important;
+    }
+
+    .sidebar-icon {
+      width: 15px !important;
+      height: 15px !important;
+      stroke-width: 1.7 !important;
+      color: #71717A !important;
+    }
+
+    .sidebar-link:hover {
+      background: #17171B !important;
+      color: #F4F4F6 !important;
+    }
+
+    .sidebar-link.active {
+      background: #1E1E24 !important;
+      border-color: rgba(255, 255, 255, 0.07) !important;
+      color: #F4F4F6 !important;
+      box-shadow: none !important;
+    }
+
+    .sidebar-link.active .sidebar-icon {
+      color: #F4F4F6 !important;
+    }
+
+    .user-footer-card {
+      background: #141418 !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 10px !important;
+    }
+
+    .user-avatar-circle {
+      background: #232329 !important;
+      color: #F4F4F6 !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Cabeçalhos & Respiro */
+    .screen-header-block {
+      background: transparent !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+      padding: 2.2rem 0 1.65rem !important;
+      margin-bottom: 1.75rem !important;
+    }
+
+    .screen-kicker {
+      color: #71717A !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.06em !important;
+    }
+
+    .screen-title {
+      color: #F4F4F6 !important;
+      font-size: 1.65rem !important;
+      font-weight: 600 !important;
+      letter-spacing: -0.025em !important;
+    }
+
+    .title-dot {
+      display: none !important;
+    }
+
+    .screen-desc {
+      color: #71717A !important;
+      font-size: 0.87rem !important;
+      max-width: 640px !important;
+      margin-top: 0.35rem !important;
+    }
+
+    .sub-section-header {
+      margin: 1.85rem 0 1rem !important;
+      padding-bottom: 0.55rem !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+
+    .sub-section-header h3 {
+      color: #F4F4F6 !important;
+      font-size: 0.95rem !important;
+      font-weight: 600 !important;
+    }
+
+    /* Meta Diária limpa (sem caixa chamativa) */
+    .goal-tracker-card {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 12px !important;
+      padding: 1rem 1.25rem !important;
+      margin-top: 1.35rem !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+
+    .goal-title {
+      color: #F4F4F6 !important;
+      font-size: 0.88rem !important;
+      font-weight: 600 !important;
+    }
+
+    .goal-sub {
+      color: #71717A !important;
+      font-size: 0.8rem !important;
+    }
+
+    .goal-meter-bar {
+      background: #24242A !important;
+      height: 6px !important;
+    }
+
+    .goal-meter-fill {
+      background: #4ADE80 !important;
+    }
+
+    .goal-counter {
+      color: #F4F4F6 !important;
+      font-family: var(--font-mono) !important;
+      font-size: 0.84rem !important;
+    }
+
+    /* Cards de Foco (3 Vagas) — Limpos, Espaçosos, Sem Monograma TE */
+    .focus-jobs-grid {
+      gap: 1.15rem !important;
+    }
+
+    .focus-card {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 14px !important;
+      padding: 1.35rem 1.4rem !important;
+      gap: 0.9rem !important;
+      overflow: visible !important;
+      box-shadow: var(--shadow-card) !important;
+      transition: border-color 0.15s ease, background 0.15s ease !important;
+    }
+
+    .focus-card:hover {
+      background: #1B1B20 !important;
+      border-color: rgba(255, 255, 255, 0.15) !important;
+      transform: none !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+
+    .focus-card-title {
+      color: #F4F4F6 !important;
+      font-size: 0.98rem !important;
+      font-weight: 600 !important;
+      line-height: 1.35 !important;
+      letter-spacing: -0.015em !important;
+    }
+
+    .company-label {
+      color: #A1A1AA !important;
+      font-size: 0.8rem !important;
+      font-weight: 500 !important;
+    }
+
+    .job-date {
+      color: #71717A !important;
+      font-size: 0.74rem !important;
+    }
+
+    .focus-card-snippet,
+    .job-snippet {
+      color: #71717A !important;
+      font-size: 0.81rem !important;
+      line-height: 1.5 !important;
+    }
+
+    .tech-chip {
+      background: #202026 !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      color: #A1A1AA !important;
+      font-size: 0.71rem !important;
+      font-weight: 500 !important;
+      padding: 0.16rem 0.5rem !important;
+      border-radius: 6px !important;
+    }
+
+    .tag-badge {
+      background: #202026 !important;
+      color: #A1A1AA !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      font-size: 0.72rem !important;
+      font-weight: 500 !important;
+      padding: 0.18rem 0.55rem !important;
+      border-radius: 6px !important;
+    }
+
+    .tag-badge.applied {
+      background: rgba(74, 222, 128, 0.12) !important;
+      color: #4ADE80 !important;
+      border-color: rgba(74, 222, 128, 0.25) !important;
+    }
+
+    .tag-badge.andamento {
+      background: rgba(96, 165, 250, 0.12) !important;
+      color: #60A5FA !important;
+      border-color: rgba(96, 165, 250, 0.25) !important;
+    }
+
+    .focus-card-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+      padding-top: 0.9rem !important;
+      margin-top: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.6rem !important;
+    }
+
+    .focus-actions-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .focus-actions-row .btn-action-ink,
+    .focus-actions-row .btn-action-secondary {
+      flex: 1;
+    }
+
+    /* Linhas de Vaga (Lista limpa estilo Linear) */
+    .jobs-table {
+      gap: 0.65rem !important;
+    }
+
+    .job-row {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 12px !important;
+      padding: 1.15rem 1.35rem !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+      grid-template-columns: minmax(0, 1fr) auto !important;
+      gap: 1.5rem !important;
+      align-items: center !important;
+    }
+
+    .job-row:hover {
+      background: #1B1B20 !important;
+      border-color: rgba(255, 255, 255, 0.14) !important;
+      transform: none !important;
+    }
+
+    .job-title-line h3 {
+      color: #F4F4F6 !important;
+      font-size: 0.96rem !important;
+      font-weight: 600 !important;
+    }
+
+    .job-meta-inline {
+      font-size: 0.78rem;
+      color: #71717A;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.3rem;
+    }
+
+    .job-actions-column {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+      flex-wrap: wrap !important;
+      justify-content: flex-end !important;
+    }
+
+    /* Sub-abas de Candidaturas */
+    .screen-tabs-bar {
+      background: transparent !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+      padding: 0 0 0.75rem !important;
+      margin-bottom: 1.1rem !important;
+      gap: 0.5rem !important;
+    }
+
+    .sub-tab-btn {
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      color: #71717A !important;
+      border-radius: 8px !important;
+      padding: 0.45rem 0.85rem !important;
+      font-size: 0.82rem !important;
+      font-weight: 500 !important;
+    }
+
+    .sub-tab-btn:hover {
+      color: #F4F4F6 !important;
+      background: #17171B !important;
+    }
+
+    .sub-tab-btn.active {
+      background: #1E1E24 !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      color: #F4F4F6 !important;
+      box-shadow: none !important;
+    }
+
+    /* Barra de Busca & Filtros Unificada (Ref. Imagem 4) */
+    .controls-box,
+    .insights-toolbar {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin-bottom: 1.35rem !important;
+      box-shadow: none !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      flex-wrap: wrap !important;
+    }
+
+    .search-row {
+      flex: 1 !important;
+      min-width: 240px !important;
+    }
+
+    .search-input-box {
+      background: #141418 !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 9px !important;
+    }
+
+    .search-input {
+      background: transparent !important;
+      color: #F4F4F6 !important;
+      font-size: 0.84rem !important;
+    }
+
+    .toggle-strip {
+      background: #141418 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 9px !important;
+      padding: 3px !important;
+    }
+
+    .toggle-btn {
+      color: #71717A !important;
+      border-radius: 7px !important;
+      font-size: 0.78rem !important;
+      font-weight: 500 !important;
+      background: transparent !important;
+    }
+
+    .toggle-btn.active {
+      background: #24242B !important;
+      color: #F4F4F6 !important;
+      box-shadow: none !important;
+    }
+
+    /* INSIGHTS GRID (Ref. Imagem 4: cards proporcionais com ilustrações/gráficos) */
+    .insights-visual-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .insight-card {
+      background: #17171B;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 215px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .insight-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.55rem;
+    }
+
+    .insight-card-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #A1A1AA;
+    }
+
+    .insight-card-metrics {
+      display: flex;
+      align-items: baseline;
+      gap: 1.1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .insight-big-num {
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: #F4F4F6;
+      letter-spacing: -0.025em;
+      font-family: var(--font-mono);
+    }
+
+    .insight-sub-label {
+      font-size: 0.72rem;
+      color: #71717A;
+    }
+
+    .insight-svg-box {
+      width: 100%;
+      height: 88px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .kpi-metric-card,
+    .timeline-chart-card,
+    .kpi-detail-card,
+    .history-log-table,
+    .config-card,
+    .empty-state-box {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 14px !important;
+      color: #A1A1AA !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+
+    .kpi-metric-num,
+    .kpi-detail-title,
+    .timeline-chart-header h4,
+    .empty-state-title {
+      color: #F4F4F6 !important;
+    }
+
+    .bar-stat-track {
+      background: #24242A !important;
+    }
+
+    .timeline-svg-wrap {
+      background: #141418 !important;
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+      border-radius: 10px !important;
+    }
+
+    .timeline-stats-footer {
+      color: #71717A !important;
+      border-top-color: rgba(255, 255, 255, 0.06) !important;
+    }
+
+    .timeline-stats-footer strong {
+      color: #F4F4F6 !important;
+    }
+
+    /* Parâmetros do Crawler & Histórico de Buscas (Obsidian Luxury) */
+    .params-container {
+      gap: 1.25rem !important;
+    }
+
+    .params-card {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 14px !important;
+      padding: 1.5rem 1.65rem !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+
+    .params-card-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+      padding-bottom: 0.9rem !important;
+      margin-bottom: 1.2rem !important;
+    }
+
+    .params-card-header h4 {
+      color: #F4F4F6 !important;
+      font-size: 0.96rem !important;
+      font-weight: 600 !important;
+    }
+
+    .params-card-header p {
+      color: #71717A !important;
+      font-size: 0.82rem !important;
+    }
+
+    .param-label {
+      color: #A1A1AA !important;
+      font-size: 0.78rem !important;
+      font-weight: 500 !important;
+    }
+
+    .param-input,
+    .param-select {
+      background: #141418 !important;
+      color: #F4F4F6 !important;
+      border: 1px solid rgba(255, 255, 255, 0.11) !important;
+      border-radius: 8px !important;
+      padding: 0.6rem 0.8rem !important;
+      font-size: 0.84rem !important;
+    }
+
+    .param-input:focus,
+    .param-select:focus {
+      border-color: rgba(255, 255, 255, 0.28) !important;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .checkbox-label {
+      color: #D4D4D8 !important;
+      font-size: 0.82rem !important;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      accent-color: #4ADE80 !important;
+    }
+
+    .cidades-selector-box {
+      background: #141418 !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 10px !important;
+      padding: 1.15rem !important;
+      margin-top: 1.1rem !important;
+    }
+
+    .cidades-grid {
+      background: transparent !important;
+      border: none !important;
+      padding: 0.5rem 0 !important;
+      gap: 0.55rem !important;
+    }
+
+    .cidades-grid label,
+    .cidade-checkbox-item {
+      background: #1A1A20 !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 7px !important;
+      padding: 0.45rem 0.65rem !important;
+      color: #D4D4D8 !important;
+    }
+
+    .selected-cities-preview {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 8px !important;
+      color: #A1A1AA !important;
+      padding: 0.75rem 0.9rem !important;
+    }
+
+    .selected-cities-preview strong {
+      color: #F4F4F6 !important;
+    }
+
+    .history-log-table,
+    #crawler-health-container > div {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: 14px !important;
+      color: #A1A1AA !important;
+    }
+
+    .history-row,
+    .history-log-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+      color: #D4D4D8 !important;
+    }
+
+    .modal-sheet-panel {
+      background: #17171B !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: #A1A1AA !important;
+    }
+
+    .modal-title {
+      color: #F4F4F6 !important;
+    }
+
+    @media (max-width: 1120px) {
+      .insights-visual-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .insights-visual-grid {
+        grid-template-columns: 1fr;
+      }
+      .job-row {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1601,26 +2441,7 @@
 
     <div class="sidebar-divider"></div>
 
-    <!-- 2. WORKSPACE / PERFIL ATIVO (Estilo Abacate) -->
-    <div class="workspace-card" title="Perfil ativo de busca" onclick="navigateToScreen('04')">
-      <div class="workspace-avatar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-      </div>
-      <div class="workspace-info">
-        <span class="workspace-name">João Francisco</span>
-        <span class="workspace-handle">/engenharia-software</span>
-      </div>
-      <svg class="workspace-switch-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="6 9 12 15 18 9"/>
-      </svg>
-    </div>
-
-    <div class="sidebar-divider"></div>
-
-    <!-- 3. ABAS DA APLICAÇÃO (HOVER TÁTIL & CONTADORES) -->
+    <!-- ABAS DA APLICAÇÃO -->
     <nav class="sidebar-nav" aria-label="Navegação do Sona">
       <div class="nav-section-title">OPERAÇÃO</div>
       <ul class="sidebar-links">
@@ -1631,7 +2452,6 @@
               <polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
             <span class="nav-label">Meta do Dia</span>
-            <span class="nav-badge" id="badge-nav-abertas">0</span>
           </div>
         </li>
         <li>
@@ -1640,14 +2460,56 @@
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
             </svg>
-            <span class="nav-label">Candidaturas</span>
-            <span class="nav-badge" id="badge-nav-candidaturas">0</span>
+            <span class="nav-label">Todas as Vagas</span>
           </div>
         </li>
       </ul>
 
-      <div class="nav-section-title">TELEMETRIA</div>
+      <div class="nav-section-title">CURRÍCULO</div>
       <ul class="sidebar-links">
+        <li>
+          <div class="sidebar-link" id="nav-btn-06-studio" onclick="openResumeStudioScreen('studio')">
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <span class="nav-label">Gerador de Currículo</span>
+          </div>
+        </li>
+        <li>
+          <div class="sidebar-link" id="nav-btn-06-onboarding" onclick="openResumeStudioScreen('onboarding')">
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+            <span class="nav-label">Configurar Fontes</span>
+          </div>
+        </li>
+        <li>
+          <div class="sidebar-link" id="nav-btn-06-profile" onclick="openResumeStudioScreen('profile')">
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span class="nav-label">Banco de Fatos</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="nav-section-title">INSIGHTS</div>
+      <ul class="sidebar-links">
+        <li>
+          <div class="sidebar-link" id="nav-btn-05" onclick="navigateToScreen('05')">
+            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            <span class="nav-label">Insights</span>
+          </div>
+        </li>
         <li>
           <div class="sidebar-link" id="nav-btn-03" onclick="navigateToScreen('03')">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1658,23 +2520,29 @@
           </div>
         </li>
         <li>
-          <div class="sidebar-link" id="nav-btn-05" onclick="navigateToScreen('05')">
+          <div class="sidebar-link" id="nav-btn-04" onclick="navigateToScreen('04')">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <line x1="18" y1="20" x2="18" y2="10"/>
-              <line x1="12" y1="20" x2="12" y2="4"/>
-              <line x1="6" y1="20" x2="6" y2="14"/>
+              <line x1="4" y1="21" x2="4" y2="14"/>
+              <line x1="4" y1="10" x2="4" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12" y2="3"/>
+              <line x1="20" y1="21" x2="20" y2="16"/>
+              <line x1="20" y1="12" x2="20" y2="3"/>
+              <line x1="1" y1="14" x2="7" y2="14"/>
+              <line x1="9" y1="8" x2="15" y2="8"/>
+              <line x1="17" y1="16" x2="23" y2="16"/>
             </svg>
-            <span class="nav-label">Indicadores</span>
+            <span class="nav-label">Parâmetros do Crawler</span>
           </div>
         </li>
       </ul>
     </nav>
 
-    <!-- 4. BASE: CONFIGURAÇÕES E PERFIL COM LOGOUT (SEM DARK MODE) -->
+    <!-- 4. BASE: CONFIGURAÇÕES DA CONTA E PERFIL -->
     <div class="sidebar-bottom">
       <ul class="sidebar-links" style="margin-bottom: 0.5rem;">
         <li>
-          <div class="sidebar-link" id="nav-btn-04" onclick="navigateToScreen('04')">
+          <div class="sidebar-link" id="nav-btn-07" onclick="navigateToScreen('07')">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <circle cx="12" cy="12" r="3"/>
               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -1710,15 +2578,14 @@
   <main class="site-main">
 
     <!-- ===========================================================
-         TELA 01: META DO DIA & VAGAS ABERTAS
+         TELA 01: META DO DIA + MINHAS CANDIDATURAS (TRABALHO DIÁRIO)
          =========================================================== -->
     <section class="screen-view active" id="screen-view-01">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">SONA · OPERAÇÃO</div>
-          <h1 class="screen-title">Meta do Dia<span class="title-dot">.</span></h1>
+          <h1 class="screen-title">Meta do Dia</h1>
           <p class="screen-desc">
-            Três oportunidades selecionadas para você cumprir sua meta diária de hoje, além de todo o catálogo de vagas abertas para você escolher livremente.
+            Três vagas prioritárias para hoje e suas candidaturas ativas logo abaixo para gerar currículo e confirmar o envio.
           </p>
 
           <div class="goal-tracker-card">
@@ -1765,13 +2632,53 @@
           <h3>Foco de Hoje (3 Vagas Prioritárias)<span class="title-dot">.</span></h3>
           <span class="mono" style="font-size: 0.72rem;">Meta diária recomendada</span>
         </div>
-        <div class="jobs-table" id="table-focus-jobs">
+        <div class="focus-jobs-grid" id="table-focus-jobs">
           <!-- Rendered via JS -->
         </div>
 
-        <!-- SUB-SEÇÃO 2: TODAS AS OPORTUNIDADES ABERTAS -->
+        <!-- SUB-SEÇÃO 2: MINHAS CANDIDATURAS (EM ANDAMENTO / SALVAS / CONCLUÍDAS) -->
+        <div class="sub-section-header" style="margin-top: 2.2rem;">
+          <h3>Minhas Candidaturas<span class="title-dot">.</span></h3>
+          <span class="mono" style="font-size: 0.72rem;">Acompanhe, gere Currículo ATS e confirme</span>
+        </div>
+
+        <div class="screen-tabs-bar">
+          <button class="sub-tab-btn active" id="btn-subtab-andamento" onclick="switchSubTab02('andamento')">
+            <span>Em Andamento</span>
+            <span class="tab-count" id="count-subtab-andamento">(0)</span>
+          </button>
+          <button class="sub-tab-btn" id="btn-subtab-salvas" onclick="switchSubTab02('salvas')">
+            <span>Salvas</span>
+            <span class="tab-count" id="count-subtab-salvas">(0)</span>
+          </button>
+          <button class="sub-tab-btn" id="btn-subtab-aplicadas" onclick="switchSubTab02('aplicadas')">
+            <span>Concluídas</span>
+            <span class="tab-count" id="count-subtab-aplicadas">(0)</span>
+          </button>
+        </div>
+
+        <div class="jobs-table" id="table-candidaturas">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         TELA 02: TODAS AS VAGAS ABERTAS (CATÁLOGO & FILTROS)
+         =========================================================== -->
+    <section class="screen-view" id="screen-view-02">
+      <header class="screen-header-block">
+        <div class="wrap">
+          <h1 class="screen-title">Todas as Vagas Abertas</h1>
+          <p class="screen-desc">
+            Catálogo completo de vagas coletadas. Busque por empresa, cargo ou stack e filtre por modalidade.
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap">
         <div class="sub-section-header">
-          <h3>Todas as Vagas Abertas<span class="title-dot">.</span></h3>
+          <h3>Catálogo Completo<span class="title-dot">.</span></h3>
           <span class="mono" id="label-all-abertas-count">Carregando catálogo...</span>
         </div>
 
@@ -1796,16 +2703,6 @@
 
           <div class="filters-cluster">
             <div class="filter-subgroup">
-              <span class="filter-subgroup-label">Turno:</span>
-              <div class="toggle-strip">
-                <button class="toggle-btn active" id="f-turno-all" onclick="setFilterTurno('all')">Todos</button>
-                <button class="toggle-btn" id="f-turno-tarde" onclick="setFilterTurno('tarde')">Tarde</button>
-                <button class="toggle-btn" id="f-turno-noite" onclick="setFilterTurno('noite')">Noite</button>
-                <button class="toggle-btn" id="f-turno-flex" onclick="setFilterTurno('flexivel')">Flexível</button>
-              </div>
-            </div>
-
-            <div class="filter-subgroup">
               <span class="filter-subgroup-label">Localização:</span>
               <div class="toggle-strip">
                 <button class="toggle-btn active" id="f-loc-all" onclick="setFilterLoc('all')">Todas</button>
@@ -1823,53 +2720,14 @@
     </section>
 
     <!-- ===========================================================
-         TELA 02: MINHAS CANDIDATURAS
-         =========================================================== -->
-    <section class="screen-view" id="screen-view-02">
-      <header class="screen-header-block">
-        <div class="wrap">
-          <div class="screen-kicker mono">SONA · CANDIDATURAS</div>
-          <h1 class="screen-title">Minhas Candidaturas<span class="title-dot">.</span></h1>
-          <p class="screen-desc">
-            Acompanhe as inscrições que estão em andamento, confirme suas aplicações concluídas e consulte suas vagas salvas.
-          </p>
-        </div>
-      </header>
-
-      <div class="wrap">
-        <!-- Sub-abas da Tela 02 -->
-        <div class="screen-tabs-bar">
-          <button class="sub-tab-btn active" id="btn-subtab-salvas" onclick="switchSubTab02('salvas')">
-            <span>Vagas Salvas ★</span>
-            <span class="tab-count" id="count-subtab-salvas">(0)</span>
-          </button>
-          <button class="sub-tab-btn" id="btn-subtab-andamento" onclick="switchSubTab02('andamento')">
-            <span>Em Andamento</span>
-            <span class="tab-count" id="count-subtab-andamento">(0)</span>
-          </button>
-          <button class="sub-tab-btn" id="btn-subtab-aplicadas" onclick="switchSubTab02('aplicadas')">
-            <span>Inscrições Concluídas ✓</span>
-            <span class="tab-count" id="count-subtab-aplicadas">(0)</span>
-          </button>
-        </div>
-
-        <!-- Container da Lista de Candidaturas -->
-        <div class="jobs-table" id="table-candidaturas">
-          <!-- Rendered via JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ===========================================================
          TELA 03: HISTÓRICO DE BUSCAS
          =========================================================== -->
     <section class="screen-view" id="screen-view-03">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">SONA · TELEMETRIA</div>
-          <h1 class="screen-title">Histórico de Varreduras<span class="title-dot">.</span></h1>
+          <h1 class="screen-title">Histórico de Buscas</h1>
           <p class="screen-desc">
-            Registro imutável das execuções do bot, tempo de resposta e novas oportunidades catalogadas no radar.
+            Acompanhe as execuções automáticas do crawler, duração de cada rodada e novas vagas encontradas.
           </p>
         </div>
       </header>
@@ -1890,10 +2748,9 @@
     <section class="screen-view" id="screen-view-04">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">SONA · CONFIGURAÇÕES</div>
-          <h1 class="screen-title">Parâmetros do Crawler<span class="title-dot">.</span></h1>
+          <h1 class="screen-title">Parâmetros do Crawler</h1>
           <p class="screen-desc">
-            Ajuste as regras determinísticas de busca. Quando seu semestre mudar, seu turno da faculdade alterar ou se você mudar de estado/cidade, configure abaixo e o robô recalibrará as buscas imediatamente.
+            Defina turno, cidades, modalidades e áreas de interesse que o robô usa para filtrar vagas automaticamente.
           </p>
         </div>
       </header>
@@ -2072,20 +2929,49 @@
     </section>
 
     <!-- ===========================================================
-         TELA 05: INDICADORES & KPIS (Gráfico Quinzenal, Áreas & Funil Real)
+         TELA 05: INSIGHTS (Ref. Insights Dashboard — Cards + Gráficos + Filtros)
          =========================================================== -->
     <section class="screen-view" id="screen-view-05">
       <header class="screen-header-block">
         <div class="wrap">
-          <div class="screen-kicker mono">SONA · INDICADORES</div>
-          <h1 class="screen-title">Indicadores<span class="title-dot">.</span></h1>
+          <h1 class="screen-title">Insights</h1>
           <p class="screen-desc">
-            Métricas 100% auditadas e calculadas a partir das suas ações reais, sem valores fictícios ou estimativas artificiais.
+            Métricas reais do seu funil de candidaturas, distribuição por modalidade e cadência diária.
           </p>
         </div>
       </header>
 
       <div class="wrap">
+        <!-- Barra horizontal unificada de pesquisa e filtros (Ref. Imagem 4) -->
+        <div class="insights-toolbar">
+          <div class="search-row">
+            <div class="search-input-box">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="insights-search" class="search-input" placeholder="Pesquisar por empresa, cargo ou tecnologia..." oninput="renderInsightsVisualCards()">
+            </div>
+          </div>
+          <select id="insights-filter-mod" class="sona-input" style="padding:0.55rem 0.85rem; font-size:0.82rem; width:auto;" onchange="renderInsightsVisualCards()">
+            <option value="all">Todas modalidades</option>
+            <option value="remoto">Remoto</option>
+            <option value="hibrido">Híbrido</option>
+            <option value="presencial">Presencial</option>
+          </select>
+          <select id="insights-filter-plat" class="sona-input" style="padding:0.55rem 0.85rem; font-size:0.82rem; width:auto;" onchange="renderInsightsVisualCards()">
+            <option value="all">Todas plataformas</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="gupy">Gupy</option>
+            <option value="outros">Outros portais</option>
+          </select>
+        </div>
+
+        <!-- 4 Cards Proporcionais com Gráficos SVG Ilustrativos (Ref. Imagem 4) -->
+        <div class="insights-visual-grid" id="insights-visual-cards">
+          <!-- Renderizado via JS -->
+        </div>
+
         <div class="kpi-container">
           
           <!-- Summary Cards com Validação Rigorosa & Métricas Reais -->
@@ -2274,6 +3160,40 @@
 
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         TELA 06: SONA RESUME STUDIO (EMBEDDED SEM SIDEBAR DUPLICADA)
+         =========================================================== -->
+    <section class="screen-view" id="screen-view-06" style="padding: 0; margin: 0; width: 100%;">
+      <iframe
+        id="sona-studio-frame"
+        title="Sona Resume Studio"
+        style="width: 100%; height: 100vh; border: none; display: block; background: #111114;"
+      ></iframe>
+    </section>
+
+    <!-- ===========================================================
+         TELA 07: CONFIGURAÇÕES DA CONTA (RESERVADA PARA FUTURO)
+         =========================================================== -->
+    <section class="screen-view" id="screen-view-07">
+      <header class="screen-header-block">
+        <div class="wrap">
+          <h1 class="screen-title">Configurações</h1>
+          <p class="screen-desc">
+            Preferências da sua conta e dados pessoais.
+          </p>
+        </div>
+      </header>
+
+      <div class="wrap">
+        <div class="empty-state-box" style="padding: 3rem 2rem; text-align: center;">
+          <div class="empty-state-title" style="margin-bottom: 0.4rem;">Em breve</div>
+          <div class="empty-state-desc" style="color: #71717A; font-size: 0.85rem;">
+            Ajustes de conta (nome, perfil, notificações e sessão) ficarão centralizados aqui.
+          </div>
         </div>
       </div>
     </section>
@@ -2585,9 +3505,8 @@
 
     let allJobs = getConsolidatedJobs();
     let currentScreen = '01'; // '01', '02', '03', '04', '05'
-    let currentSubTab02 = 'salvas'; // 'andamento', 'aplicadas', 'salvas'
+    let currentSubTab02 = 'andamento'; // 'andamento', 'aplicadas', 'salvas'
     let search01Query = '';
-    let filter01Turno = 'all';
     let filter01Loc = 'all';
     let activeModalJob = null;
 
@@ -2652,8 +3571,8 @@
           }));
 
           allJobs = getConsolidatedJobs();
-          if (currentScreen === '01') renderScreen01();
-          else if (currentScreen === '02') renderScreen02();
+          if (currentScreen === '01') { renderScreen01(); renderScreen02(); }
+          else if (currentScreen === '02') renderScreen01();
           else if (currentScreen === '03') renderScreen03();
           else if (currentScreen === '05') renderScreen05();
           updateGlobalBadges();
@@ -2725,23 +3644,57 @@
       }
     }
 
+    let studioFrameLoaded = false;
+
     function navigateToScreen(screenId) {
       currentScreen = screenId;
 
-      ['01', '02', '03', '04', '05'].forEach(id => {
+      ['01', '02', '03', '04', '05', '06', '07'].forEach(id => {
         const btn = document.getElementById(`nav-btn-${id}`);
         const view = document.getElementById(`screen-view-${id}`);
         if (btn) btn.classList.toggle('active', id === screenId);
         if (view) view.classList.toggle('active', id === screenId);
       });
 
+      const mainEl = document.querySelector('main');
+      if (mainEl) mainEl.classList.toggle('studio-fullbleed', screenId === '06');
+
+      if (screenId !== '06') {
+        ['studio', 'onboarding', 'profile'].forEach(v => {
+          document.getElementById(`nav-btn-06-${v}`)?.classList.remove('active');
+        });
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      if (screenId === '01') renderScreen01();
-      if (screenId === '02') renderScreen02();
+      if (screenId === '01') { renderScreen01(); renderScreen02(); }
+      if (screenId === '02') renderScreen01();
       if (screenId === '03') renderScreen03();
       if (screenId === '05') renderScreen05();
       updateGlobalBadges();
+    }
+
+    function openResumeStudioScreen(view = 'studio', vagaId = '') {
+      navigateToScreen('06');
+      ['studio', 'onboarding', 'profile'].forEach(v => {
+        document.getElementById(`nav-btn-06-${v}`)?.classList.toggle('active', v === view);
+      });
+
+      const frame = document.getElementById('sona-studio-frame');
+      if (!frame) return;
+
+      if (!studioFrameLoaded || vagaId) {
+        const qs = new URLSearchParams({ embed: '1', view });
+        if (vagaId) qs.set('vaga_id', vagaId);
+        frame.src = `curriculo.html?${qs.toString()}`;
+        studioFrameLoaded = true;
+      } else {
+        try {
+          frame.contentWindow?.postMessage({ type: 'SONA_SWITCH_VIEW', view }, '*');
+        } catch (_) {
+          frame.src = `curriculo.html?embed=1&view=${encodeURIComponent(view)}`;
+        }
+      }
     }
 
     
@@ -2881,21 +3834,11 @@
           </div>
         `;
       } else {
-        containerFocus.innerHTML = focusJobs.map((job, idx) => renderJobRowHTML(job, idx + 1, 'screen01')).join('');
+        containerFocus.innerHTML = focusJobs.map((job) => renderFocusCardHTML(job)).join('');
       }
 
       // Todas as Vagas Abertas (com filtros)
       let filteredAll = openJobs.slice();
-
-      if (filter01Turno !== 'all') {
-        filteredAll = filteredAll.filter(j => {
-          const t = `${j.turno || ''} ${j.requisitos || ''}`.toLowerCase();
-          if (filter01Turno === 'tarde') return t.includes('tarde') || t.includes('13h') || t.includes('12h') || t.includes('flex');
-          if (filter01Turno === 'noite') return t.includes('noite') || t.includes('noturno') || t.includes('flex');
-          if (filter01Turno === 'flexivel') return t.includes('flex') || t.includes('6h') || t.includes('30h');
-          return true;
-        });
-      }
 
       if (filter01Loc === 'remoto') {
         filteredAll = filteredAll.filter(j => (j.modalidade || '').toLowerCase().includes('remoto') || (j.localizacao || '').toLowerCase().includes('remoto'));
@@ -2923,7 +3866,7 @@
         containerAll.innerHTML = `
           <div class="empty-state-box">
             <div class="empty-state-title">Nenhuma vaga encontrada com os filtros atuais</div>
-            <div class="empty-state-desc">Experimente alternar os filtros de turno ou limpar a busca.</div>
+            <div class="empty-state-desc">Experimente alternar o filtro de localização ou limpar a busca.</div>
           </div>
         `;
       } else {
@@ -2993,15 +3936,6 @@
         input.focus();
         renderScreen01();
       }
-    }
-
-    function setFilterTurno(turno) {
-      filter01Turno = turno;
-      ['all', 'tarde', 'noite', 'flex'].forEach(t => {
-        const el = document.getElementById(`f-turno-${t}`);
-        if (el) el.classList.toggle('active', t === (turno === 'flexivel' ? 'flex' : turno));
-      });
-      renderScreen01();
     }
 
     function setFilterLoc(loc) {
@@ -3074,6 +4008,17 @@
     // =============================================================
     // CANDIDATURA FLOW: INSCRIÇÃO -> EM ANDAMENTO -> CONFIRMADA
     // =============================================================
+    function abrirCurriculoStudio(canonicalKey) {
+      const job = allJobs.find(j => j.canonicalKey === canonicalKey);
+      if (job) {
+        try {
+          localStorage.setItem('sona_active_resume_job', JSON.stringify(job));
+        } catch (_) {}
+      }
+      const idParam = job?.id || canonicalKey || '';
+      openResumeStudioScreen('studio', idParam);
+    }
+
     function iniciarInscricao(canonicalKey, link) {
       if (link) {
         window.open(link, '_blank');
@@ -3091,12 +4036,15 @@
       if (job) {
         job.status = 'em_andamento';
         job.inicioCandidatura = current.inicioCandidatura;
+        try {
+          localStorage.setItem('sona_active_resume_job', JSON.stringify(job));
+        } catch (_) {}
       }
 
-      showToast('Link aberto! Vaga movida para "02 / Candidaturas (Em Andamento)"');
+      showToast('Candidatura iniciada. Disponível abaixo em "Em andamento" para gerar currículo.');
+      switchSubTab02('andamento');
       updateGlobalBadges();
       renderScreen01();
-      renderScreen02();
       renderScreen05();
     }
 
@@ -3264,132 +4212,161 @@
     // =============================================================
     // ROW HTML GENERATOR (Clean Gabriel Greco Project-Row)
     // =============================================================
-    function renderJobRowHTML(job, indexNum, contextScreen) {
-      const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
-      const isPresencial = (job.modalidade || '').toLowerCase().includes('presencial');
-      const tagClass = isRemoto ? 'remote' : (isPresencial ? 'presencial' : 'hybrid');
-      const tagLabel = isRemoto ? '100% Remoto' : (job.localizacao || job.modalidade || 'BH / Presencial');
+    function getPlatformNameClean(link) {
+      if (!link) return '';
+      const url = link.toLowerCase();
+      if (url.includes('linkedin.com')) return 'LinkedIn';
+      if (url.includes('gupy.io')) return 'Gupy';
+      if (url.includes('ciadetalentos')) return 'Cia de Talentos';
+      if (url.includes('vagas.com.br')) return 'Vagas.com';
+      if (url.includes('solides')) return 'Sólides';
+      if (url.includes('glassdoor')) return 'Glassdoor';
+      if (url.includes('indeed')) return 'Indeed';
+      if (url.includes('greenhouse')) return 'Greenhouse';
+      if (url.includes('inhire')) return 'InHire';
+      return 'Portal externo';
+    }
 
+    const ICON_SVG = {
+      starOutline: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+      starFilled: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+      check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
+      ban: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="5.6" y1="5.6" x2="18.4" y2="18.4"/></svg>',
+      external: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'
+    };
+
+    function renderFocusCardHTML(job) {
+      const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+      const tagLabel = isRemoto ? 'Remoto' : (job.localizacao || job.modalidade || 'Presencial');
       const isStarred = !!job.starred;
       const jobEncoded = encodeURIComponent(JSON.stringify(job));
-      const indexStr = indexNum.toString().padStart(2, '0');
+      const chips = extractTechChips(job).slice(0, 3);
+      const platform = getPlatformNameClean(job.link);
+      const metaLine = [tagLabel, platform, job.dataColeta ? job.dataColeta.split(',')[0] : ''].filter(Boolean).join(' · ');
+      const safeLink = (job.link || '').replace(/'/g, "\\'");
+
+      return `
+        <article class="focus-card" onclick="openJobModal('${jobEncoded}')">
+          <div>
+            <div class="job-meta-inline">
+              <span class="company-label" title="${job.empresa || 'Empresa'}">${job.empresa || 'Empresa'}</span>
+              <span>·</span>
+              <span>${metaLine}</span>
+            </div>
+            <h3 class="focus-card-title">${job.cargo}</h3>
+          </div>
+
+          ${chips.length > 0 ? `<div class="job-tech-stack">${chips.map(t => `<span class="tech-chip">${t}</span>`).join('')}</div>` : ''}
+
+          <p class="focus-card-snippet" title="${(job.requisitos || '').replace(/"/g, '&quot;')}">${job.requisitos || 'Clique para ver os requisitos completos.'}</p>
+
+          <div class="focus-card-footer" onclick="event.stopPropagation()">
+            <div class="focus-actions-row">
+              <button class="btn-action-secondary" data-tooltip="Abre o link sem mudar status" onclick="if('${safeLink}') window.open('${safeLink}', '_blank')">
+                <span>Ver Vaga</span>
+                ${ICON_SVG.external}
+              </button>
+              <button class="btn-action-ink" data-tooltip="Move para Em Andamento" onclick="iniciarInscricao('${job.canonicalKey}', '')">
+                <span>Iniciar Candidatura</span>
+              </button>
+            </div>
+            <div style="display: flex; gap: 0.4rem; align-items: center; justify-content: flex-end;">
+              <button class="job-icon-btn ${isStarred ? 'is-starred' : ''}" aria-label="${isStarred ? 'Remover de Salvas' : 'Salvar Vaga'}" data-tooltip="${isStarred ? 'Remover de Salvas' : 'Salvar Vaga'}" onclick="toggleStar('${job.canonicalKey}')">
+                ${isStarred ? ICON_SVG.starFilled : ICON_SVG.starOutline}
+              </button>
+              <button class="job-icon-btn" aria-label="Marcar como Enviada" data-tooltip="Marcar como Enviada" onclick="event.stopPropagation(); marcarJaCandidatado('${job.canonicalKey}')">
+                ${ICON_SVG.check}
+              </button>
+              <button class="job-icon-btn" aria-label="Descartar Vaga" data-tooltip="Descartar Vaga" onclick="event.stopPropagation(); abrirModalMismatchKey('${job.canonicalKey}')">
+                ${ICON_SVG.ban}
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderJobRowHTML(job, indexNum, contextScreen) {
+      const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
+      const tagLabel = isRemoto ? 'Remoto' : (job.localizacao || job.modalidade || 'Presencial');
+      const isStarred = !!job.starred;
+      const jobEncoded = encodeURIComponent(JSON.stringify(job));
+      const platform = getPlatformNameClean(job.link);
+      const safeLink = (job.link || '').replace(/'/g, "\\'");
+      const chips = extractTechChips(job).slice(0, 3);
 
       let actionButtons = '';
 
       if (contextScreen === 'screen01') {
         actionButtons = `
-          <button class="btn-action-ink" onclick="iniciarInscricao('${job.canonicalKey}', '${job.link || ''}')">
-            <span>Inscrição</span>
-            <span>↗</span>
+          <button class="btn-action-secondary" data-tooltip="Abre o link sem mudar status" onclick="if('${safeLink}') window.open('${safeLink}', '_blank')">
+            <span>Ver Vaga</span>
+            ${ICON_SVG.external}
           </button>
-          <div style="display: flex; gap: 0.4rem; align-items: center;">
-            <button class="job-icon-btn ${isStarred ? 'is-starred' : ''}" title="${isStarred ? 'Remover dos favoritos' : 'Favoritar'}" onclick="toggleStar('${job.canonicalKey}')">
-              ${isStarred ? '★' : '☆'}
-            </button>
-            <button class="job-icon-btn" title="Já me candidatei por fora (concluída)" onclick="event.stopPropagation(); marcarJaCandidatado('${job.canonicalKey}')" style="color: #16a34a; font-weight: bold;">
-              ✓
-            </button>
-            <button class="job-icon-btn" title="Descartar vaga (Mismatch com meu perfil)" onclick="event.stopPropagation(); abrirModalMismatchKey('${job.canonicalKey}')" style="color: #b45309;">
-              ⊘
-            </button>
-          </div>
+          <button class="btn-action-ink" data-tooltip="Move para Em Andamento" onclick="iniciarInscricao('${job.canonicalKey}', '')">
+            <span>Iniciar Candidatura</span>
+          </button>
+          <button class="job-icon-btn ${isStarred ? 'is-starred' : ''}" aria-label="${isStarred ? 'Remover de Salvas' : 'Salvar Vaga'}" data-tooltip="${isStarred ? 'Remover de Salvas' : 'Salvar Vaga'}" onclick="toggleStar('${job.canonicalKey}')">
+            ${isStarred ? ICON_SVG.starFilled : ICON_SVG.starOutline}
+          </button>
+          <button class="job-icon-btn" aria-label="Marcar como Enviada" data-tooltip="Marcar como Enviada" onclick="event.stopPropagation(); marcarJaCandidatado('${job.canonicalKey}')">
+            ${ICON_SVG.check}
+          </button>
+          <button class="job-icon-btn" aria-label="Descartar Vaga" data-tooltip="Descartar Vaga" onclick="event.stopPropagation(); abrirModalMismatchKey('${job.canonicalKey}')">
+            ${ICON_SVG.ban}
+          </button>
         `;
       } else if (contextScreen === 'screen02') {
         if (currentSubTab02 === 'andamento') {
-          let tempoDecorridoStr = "Iniciada recentemente";
-          if (job.inicioCandidatura) {
-            const min = Math.max(1, Math.round((Date.now() - job.inicioCandidatura) / 60000));
-            tempoDecorridoStr = `Aberta há ~${min} min`;
-          }
-
           actionButtons = `
-            <button class="btn-action-ink btn-confirm-success" onclick="confirmarCandidaturaConcluida('${job.canonicalKey}')">
-              <span>Confirmar Candidatura</span>
-              <span>✓</span>
+            <button class="btn-action-ink" onclick="abrirCurriculoStudio('${job.canonicalKey}')">
+              <span>Gerar Currículo</span>
             </button>
-            <div style="display: flex; gap: 0.4rem; align-items: center;">
-              <button class="btn-action-secondary" title="Reabrir link oficial" onclick="window.open('${job.link || ''}', '_blank')">Reabrir ↗</button>
-              <button class="btn-action-secondary" title="Mover de volta para abertas" onclick="moverDeVoltaParaAbertas('${job.canonicalKey}')">Desistir</button>
-            </div>
-            <span class="mono" style="font-size: 0.65rem; color: #2563eb;">${tempoDecorridoStr}</span>
+            <button class="btn-action-secondary" data-tooltip="Registra envio e conta na meta" onclick="confirmarCandidaturaConcluida('${job.canonicalKey}')">
+              <span>Confirmar Envio</span>
+            </button>
+            <button class="btn-action-secondary" data-tooltip="Abre o link oficial da vaga" onclick="if('${safeLink}') window.open('${safeLink}', '_blank')">Abrir Link</button>
+            <button class="btn-action-secondary" data-tooltip="Remove de Em Andamento" onclick="moverDeVoltaParaAbertas('${job.canonicalKey}')">Voltar para Abertas</button>
           `;
         } else if (currentSubTab02 === 'aplicadas') {
-          let badgeTexto = "✓ Concluída";
-          let tempoFormatado = "Candidatura externa";
-          if (job.etapaConcluida) {
-            badgeTexto = "✓ Etapa Concluída";
-            tempoFormatado = job.dataConclusaoEtapa ? `Concluída em: ${job.dataConclusaoEtapa}` : "Etapa / Teste finalizado";
-          } else if (job.candidaturaExterna) {
-            badgeTexto = "✓ Aplicada por fora";
-            tempoFormatado = "Sem cronômetro (externa)";
-          } else if (typeof job.tempoGastoSegundos === 'number' && job.tempoGastoSegundos > 0) {
-            const m = Math.floor(job.tempoGastoSegundos / 60);
-            const s = job.tempoGastoSegundos % 60;
-            tempoFormatado = `Tempo gasto: ${m > 0 ? `${m}m ${s}s` : `${s}s`}`;
-          }
-
+          let badgeTexto = "Enviada";
+          if (job.etapaConcluida) badgeTexto = "Etapa Concluída";
+          else if (job.candidaturaExterna) badgeTexto = "Enviada por Fora";
           actionButtons = `
             <span class="tag-badge applied">${badgeTexto}</span>
-            <span class="mono" style="font-size: 0.67rem; color: var(--faint);">${tempoFormatado}</span>
+            <button class="btn-action-secondary" onclick="abrirCurriculoStudio('${job.canonicalKey}')">Ver Currículo</button>
           `;
         } else if (currentSubTab02 === 'salvas') {
           actionButtons = `
-            <button class="btn-action-ink" onclick="iniciarInscricao('${job.canonicalKey}', '${job.link || ''}')">
-              <span>Inscrição ↗</span>
-            </button>
-            <div style="display: flex; gap: 0.4rem; align-items: center;">
-              <button class="job-icon-btn is-starred" onclick="toggleStar('${job.canonicalKey}')">★</button>
-              <button class="job-icon-btn" title="Já me candidatei por fora" onclick="event.stopPropagation(); marcarJaCandidatado('${job.canonicalKey}')" style="color: #16a34a; font-weight: bold;">✓</button>
-              <button class="job-icon-btn" title="Descartar vaga (Mismatch com meu perfil)" onclick="event.stopPropagation(); abrirModalMismatchKey('${job.canonicalKey}')" style="color: #b45309;">⊘</button>
-            </div>
+            <button class="btn-action-secondary" data-tooltip="Abre o link sem mudar status" onclick="if('${safeLink}') window.open('${safeLink}', '_blank')">Ver Vaga</button>
+            <button class="btn-action-ink" data-tooltip="Move para Em Andamento" onclick="iniciarInscricao('${job.canonicalKey}', '')">Iniciar Candidatura</button>
+            <button class="job-icon-btn is-starred" aria-label="Remover de Salvas" data-tooltip="Remover de Salvas" onclick="toggleStar('${job.canonicalKey}')">${ICON_SVG.starFilled}</button>
           `;
         } else if (currentSubTab02 === 'encerradas') {
-          actionButtons = `
-            <span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">❌ Encerrada</span>
-          `;
+          actionButtons = `<span class="tag-badge">Encerrada</span>`;
         } else if (currentSubTab02 === 'descartadas') {
           actionButtons = `
-            <span class="tag-badge" style="background: #fef3c7; color: #b45309; border: 1px solid #fcd34d;">⊘ Mismatch</span>
-            <div style="display: flex; gap: 0.4rem; align-items: center;">
-              <button class="btn-action-secondary" title="Mover de volta para vagas abertas" onclick="moverDeVoltaParaAbertas('${job.canonicalKey}')">Restaurar</button>
-            </div>
+            <span class="tag-badge">Descartada</span>
+            <button class="btn-action-secondary" onclick="moverDeVoltaParaAbertas('${job.canonicalKey}')">Voltar para Abertas</button>
           `;
         }
       }
 
+      const metaLine = [job.empresa || 'Empresa', tagLabel, platform, job.dataColeta ? job.dataColeta.split(',')[0] : ''].filter(Boolean).join(' · ');
+
       return `
         <article class="job-row" onclick="openJobModal('${jobEncoded}')">
-          <div class="company-avatar-squircle">
-            ${(job.empresa || 'V').trim().substring(0, 2).toUpperCase()}
-          </div>
-
           <div class="job-content">
-            <div class="job-top-meta">
-              <span class="company-label">${job.empresa || 'Empresa'}</span>
-              <span class="job-date">&bull; ${job.dataColeta ? job.dataColeta.split(',')[0] : 'Hoje'}</span>
-              <span class="tag-badge ${tagClass}">📍 ${tagLabel}</span>
-              ${getTurnoMatchBadge(job)}
-              ${(() => {
-                const matchData = calculateMatchScore(job);
-                return `<span class="tag-badge match-score" title="${matchData.tooltip}">⚡ ${matchData.score}% Match</span>`;
-              })()}
-              ${getPlatformBadge(job.link)}
-              ${getPrazoBadge(job.prazo)}
-              
-              ${job.status === 'em_andamento' ? '<span class="tag-badge andamento">⏳ Em Andamento</span>' : ''}
-              ${job.status === 'aplicada' ? (job.etapaConcluida ? '<span class="tag-badge applied">✓ Etapa Concluída</span>' : (job.candidaturaExterna ? '<span class="tag-badge applied">✓ Aplicada por fora</span>' : '<span class="tag-badge applied">✓ Aplicada</span>')) : ''}
-              ${job.status === 'encerrada' ? `<span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;">❌ Encerrada: ${job.motivoEncerramento || 'Inscrições encerradas'}</span>` : ''}
-              ${job.status === 'descartada' ? `<span class="tag-badge" style="background: #fef3c7; color: #b45309; border: 1px solid #fcd34d;">⊘ Mismatch: ${job.motivoMismatch || 'Perfil incompatível'}</span>` : ''}
+            <div class="job-meta-inline">
+              <span>${metaLine}</span>
+              ${job.status === 'em_andamento' ? '<span class="tag-badge andamento">Em andamento</span>' : ''}
             </div>
 
             <div class="job-title-line">
               <h3>${job.cargo}</h3>
             </div>
 
-            <div class="job-tech-stack">
-              ${extractTechChips(job).map(t => `<span class="tech-chip">${t}</span>`).join('')}
-            </div>
-            <p class="job-snippet">${job.requisitos || 'Sem descrição fornecida.'}</p>
+            ${chips.length > 0 ? `<div class="job-tech-stack" style="margin-top:0.35rem;">${chips.map(t => `<span class="tech-chip">${t}</span>`).join('')}</div>` : ''}
           </div>
 
           <div class="job-actions-column" onclick="event.stopPropagation()">
@@ -3902,7 +4879,153 @@
       };
     }
 
+    function renderInsightsVisualCards() {
+      const container = document.getElementById('insights-visual-cards');
+      if (!container) return;
+
+      const q = (document.getElementById('insights-search')?.value || '').trim().toLowerCase();
+      const modFilter = document.getElementById('insights-filter-mod')?.value || 'all';
+      const platFilter = document.getElementById('insights-filter-plat')?.value || 'all';
+
+      const filtered = allJobs.filter((j) => {
+        if (q) {
+          const hay = `${j.empresa || ''} ${j.cargo || ''} ${j.requisitos || ''} ${j.localizacao || ''}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        const mTxt = `${j.modalidade || ''} ${j.localizacao || ''}`.toLowerCase();
+        if (modFilter === 'remoto' && !mTxt.includes('remoto')) return false;
+        if (modFilter === 'hibrido' && !mTxt.includes('híbrido') && !mTxt.includes('hibrido')) return false;
+        if (modFilter === 'presencial' && !mTxt.includes('presencial')) return false;
+
+        const url = (j.link || '').toLowerCase();
+        if (platFilter === 'linkedin' && !url.includes('linkedin.com')) return false;
+        if (platFilter === 'gupy' && !url.includes('gupy.io')) return false;
+        if (platFilter === 'outros' && (url.includes('linkedin.com') || url.includes('gupy.io'))) return false;
+        return true;
+      });
+
+      const total = filtered.length || 1;
+      const abertas = filtered.filter((j) => j.status === 'para_aplicar').length;
+      const andamento = filtered.filter((j) => j.status === 'em_andamento').length;
+      const aplicadas = filtered.filter((j) => j.status === 'aplicada').length;
+      const remoto = filtered.filter((j) => (j.modalidade || '').toLowerCase().includes('remoto')).length;
+      const hibrido = filtered.filter((j) => /h[íi]brido/i.test(j.modalidade || '')).length;
+      const presencial = Math.max(0, filtered.length - remoto - hibrido);
+
+      const remotoPct = Math.round((remoto / total) * 100);
+      const convPct = (aplicadas + andamento) > 0 ? Math.round((aplicadas / (aplicadas + andamento)) * 100) : 0;
+
+      // Barras por stack principal
+      const stacks = [
+        { key: 'python', label: 'Python' },
+        { key: 'javascript', label: 'JS' },
+        { key: 'sql', label: 'SQL' },
+        { key: 'react', label: 'React' },
+        { key: 'java', label: 'Java' }
+      ];
+      const stackCounts = stacks.map((st) => filtered.filter((j) => `${j.cargo} ${j.requisitos}`.toLowerCase().includes(st.key)).length);
+      const maxStack = Math.max(1, ...stackCounts);
+
+      // Donut SVG math (circumference = 2 * pi * 30 = 188.5)
+      const c = 188.5;
+      const seg1 = (remoto / total) * c;
+      const seg2 = (hibrido / total) * c;
+
+      container.innerHTML = `
+        <div class="insight-card">
+          <div>
+            <div class="insight-card-head"><span class="insight-card-title">Vagas por Stack</span></div>
+            <div class="insight-card-metrics">
+              <span class="insight-big-num">${filtered.length}</span>
+              <span class="insight-sub-label">${abertas} abertas</span>
+            </div>
+          </div>
+          <div class="insight-svg-box">
+            <svg viewBox="0 0 200 84" width="100%" height="84">
+              ${stackCounts.map((cnt, i) => {
+                const h = Math.max(8, Math.round((cnt / maxStack) * 58));
+                const x = 10 + i * 38;
+                const y = 66 - h;
+                return `
+                  <rect x="${x}" y="8" width="24" height="58" rx="4" fill="rgba(255,255,255,0.04)" />
+                  <rect x="${x}" y="${y}" width="24" height="${h}" rx="4" fill="${i === 0 ? '#60A5FA' : 'rgba(96,165,250,0.45)'}" />
+                  <text x="${x + 12}" y="80" text-anchor="middle" fill="#71717A" font-size="8" font-family="Inter, sans-serif">${stacks[i].label}</text>
+                `;
+              }).join('')}
+            </svg>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div>
+            <div class="insight-card-head"><span class="insight-card-title">Taxa de Conclusão</span></div>
+            <div class="insight-card-metrics">
+              <span class="insight-big-num">${convPct}%</span>
+              <span class="insight-sub-label">${aplicadas} enviadas</span>
+            </div>
+          </div>
+          <div class="insight-svg-box">
+            <svg viewBox="0 0 200 84" width="100%" height="84">
+              <defs>
+                <linearGradient id="insAreaGreen" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#4ADE80" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <line x1="8" y1="26" x2="192" y2="26" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
+              <path d="M 8 74 C 46 72, 68 20, 102 22 C 136 24, 158 68, 192 72 L 192 78 L 8 78 Z" fill="url(#insAreaGreen)"/>
+              <path d="M 8 74 C 46 72, 68 20, 102 22 C 136 24, 158 68, 192 72" fill="none" stroke="#4ADE80" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div>
+            <div class="insight-card-head"><span class="insight-card-title">Modalidade Remota</span></div>
+            <div class="insight-card-metrics">
+              <span class="insight-big-num">${remotoPct}%</span>
+              <span class="insight-sub-label">${remoto} rem · ${hibrido} híb</span>
+            </div>
+          </div>
+          <div class="insight-svg-box" style="justify-content:center;">
+            <svg viewBox="0 0 90 90" width="84" height="84">
+              <circle cx="45" cy="45" r="30" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="10"/>
+              <circle cx="45" cy="45" r="30" fill="none" stroke="#60A5FA" stroke-width="10"
+                stroke-dasharray="${seg1.toFixed(1)} ${c}" transform="rotate(-90 45 45)"/>
+              <circle cx="45" cy="45" r="30" fill="none" stroke="#FBBF24" stroke-width="10"
+                stroke-dasharray="${seg2.toFixed(1)} ${c}" stroke-dashoffset="${(-seg1).toFixed(1)}" transform="rotate(-90 45 45)"/>
+              <text x="45" y="48" text-anchor="middle" fill="#F4F4F6" font-size="11" font-weight="600" font-family="JetBrains Mono, monospace">${remotoPct}%</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div>
+            <div class="insight-card-head"><span class="insight-card-title">Pipeline Ativo</span></div>
+            <div class="insight-card-metrics">
+              <span class="insight-big-num">${andamento}</span>
+              <span class="insight-sub-label">em andamento</span>
+            </div>
+          </div>
+          <div class="insight-svg-box">
+            <svg viewBox="0 0 200 84" width="100%" height="84">
+              <defs>
+                <linearGradient id="insAreaAmber" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.32"/>
+                  <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <path d="M 8 72 C 44 68, 72 52, 108 32 C 140 16, 168 38, 192 22 L 192 78 L 8 78 Z" fill="url(#insAreaAmber)"/>
+              <path d="M 8 72 C 44 68, 72 52, 108 32 C 140 16, 168 38, 192 22" fill="none" stroke="#FBBF24" stroke-width="2"/>
+              <text x="10" y="18" fill="#71717A" font-size="9" font-family="Inter, sans-serif">Abertas: ${abertas} · Presencial: ${presencial}</text>
+            </svg>
+          </div>
+        </div>
+      `;
+    }
+
     function renderScreen05() {
+      renderInsightsVisualCards();
       const aplicadas = allJobs.filter(j => j.status === 'aplicada');
       const andamento = allJobs.filter(j => j.status === 'em_andamento');
       const abertas = allJobs.filter(j => j.status === 'para_aplicar');
@@ -4285,27 +5408,7 @@
     // =============================================================
     // GLOBAL BADGES
     // =============================================================
-    function updateGlobalBadges() {
-      const openCount = allJobs.filter(j => j.status === 'para_aplicar').length;
-      const candCount = allJobs.filter(j => j.status === 'em_andamento' || j.status === 'aplicada').length;
-
-      const bAbertas = document.getElementById('badge-nav-abertas');
-      const bCand = document.getElementById('badge-nav-candidaturas');
-
-      if (bAbertas) bAbertas.innerText = openCount;
-      if (bCand) bCand.innerText = candCount;
-      const bRuns = null;
-      if (bRuns) {
-        const health = getCrawlerHealth();
-        if (health.status === 'error') {
-          bRuns.innerHTML = `${executionData.length} <span style="color:#ef4444; font-weight:bold;">⚠️</span>`;
-        } else if (health.status === 'warning') {
-          bRuns.innerHTML = `${executionData.length} <span style="color:#b45309; font-weight:bold;">⚡</span>`;
-        } else {
-          bRuns.innerText = executionData.length;
-        }
-      }
-    }
+    function updateGlobalBadges() {}
 
     // =============================================================
     // MODAL HANDLERS

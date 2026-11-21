@@ -13,6 +13,10 @@ if (!fs.existsSync(outDir)) {
 const filesToCopy = [
   'index.html',
   'dashboard.html',
+  'design-system.css',
+  'curriculo.html',
+  'curriculo.css',
+  'curriculo.js',
   'banco_vagas.js',
   'config_busca.js',
   'historico_execucoes.js',

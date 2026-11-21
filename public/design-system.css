@@ -1,0 +1,299 @@
+/* =============================================================
+   SONA DESIGN SYSTEM — OBSIDIAN LUXURY & TACTILE 3D
+   Fonte única de tokens e componentes compartilhados
+   (dashboard.html + curriculo.html)
+   ============================================================= */
+
+:root {
+  /* Superfícies em Camadas (Ref. Linear Dark) */
+  --bg-sidebar: #0C0C0E;
+  --bg-canvas: #111114;
+  --bg-surface: #17171B;
+  --bg-surface-elevated: #1E1E23;
+  --bg-hover: #24242A;
+  --bg-input: #141418;
+
+  /* Bordas Hairline */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.11);
+  --border-strong: rgba(255, 255, 255, 0.17);
+
+  /* Tipografia */
+  --text-primary: #F4F4F6;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --text-faint: #52525B;
+
+  /* Acentos Discretos (Sem poluição visual) */
+  --accent-green: #4ADE80;
+  --accent-green-dim: rgba(74, 222, 128, 0.12);
+  --accent-amber: #FBBF24;
+  --accent-amber-dim: rgba(251, 191, 36, 0.12);
+  --accent-rose: #F87171;
+  --accent-rose-dim: rgba(248, 113, 113, 0.12);
+  --accent-blue: #60A5FA;
+  --accent-blue-dim: rgba(96, 165, 250, 0.12);
+
+  /* Botões 3D Táteis (Ref. Dark Luxury Buttons) */
+  --btn-primary-bg: linear-gradient(180deg, #36363D 0%, #242429 100%);
+  --btn-primary-bg-hover: linear-gradient(180deg, #404048 0%, #2B2B32 100%);
+  --btn-primary-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.48),
+    0 1px 2px rgba(0, 0, 0, 0.72);
+  --btn-primary-shadow-active:
+    inset 0 2px 4px rgba(0, 0, 0, 0.55),
+    0 1px 2px rgba(0, 0, 0, 0.5);
+
+  --btn-secondary-bg: linear-gradient(180deg, #222227 0%, #19191D 100%);
+  --btn-secondary-bg-hover: linear-gradient(180deg, #2A2A31 0%, #1F1F24 100%);
+  --btn-secondary-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.38);
+
+  /* Elevação & Geometria */
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px rgba(0, 0, 0, 0.32);
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  /* Fontes */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Layout */
+  --sidebar-w: 236px;
+}
+
+/* =============================================================
+   BOTÕES 3D TÁTEIS (LUXO DISCRETO)
+   ============================================================= */
+.sona-btn-primary,
+.btn-primary,
+.btn-action-ink {
+  background: var(--btn-primary-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.56rem 1.05rem !important;
+  font-size: 0.83rem !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  box-shadow: var(--btn-primary-shadow) !important;
+  transition: background 0.14s ease, transform 0.1s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sona-btn-primary:hover:not(:disabled),
+.btn-primary:hover:not(:disabled),
+.btn-action-ink:hover:not(:disabled) {
+  background: var(--btn-primary-bg-hover) !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  transform: translateY(-0.5px);
+}
+
+.sona-btn-primary:active:not(:disabled),
+.btn-primary:active:not(:disabled),
+.btn-action-ink:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: var(--btn-primary-shadow-active) !important;
+}
+
+.sona-btn-primary:disabled,
+.btn-primary:disabled,
+.btn-action-ink:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sona-btn-secondary,
+.btn-secondary,
+.btn-action-secondary {
+  background: var(--btn-secondary-bg) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.52rem 0.92rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  box-shadow: var(--btn-secondary-shadow) !important;
+  transition: all 0.14s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sona-btn-secondary:hover:not(:disabled),
+.btn-secondary:hover:not(:disabled),
+.btn-action-secondary:hover:not(:disabled) {
+  background: var(--btn-secondary-bg-hover) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-strong) !important;
+}
+
+.sona-btn-secondary:active:not(:disabled),
+.btn-secondary:active:not(:disabled),
+.btn-action-secondary:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: var(--btn-primary-shadow-active) !important;
+}
+
+/* Botão Ícone Squircle 3D (Ref. Imagem 3) */
+.sona-icon-btn,
+.job-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px !important;
+  background: var(--btn-secondary-bg) !important;
+  border: 1px solid var(--border-medium) !important;
+  color: var(--text-secondary) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--btn-secondary-shadow) !important;
+  transition: all 0.14s ease;
+  flex-shrink: 0;
+}
+
+.sona-icon-btn:hover,
+.job-icon-btn:hover {
+  background: var(--btn-primary-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-strong) !important;
+}
+
+.sona-icon-btn:active,
+.job-icon-btn:active {
+  transform: translateY(1px);
+}
+
+/* Tooltip Estilizado Obsidian (Hover instantâneo e limpo) */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  left: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.14s ease, transform 0.14s ease;
+  z-index: 80;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 9px);
+  transform: translate(-50%, 4px);
+  background: linear-gradient(180deg, #27272E 0%, #1B1B20 100%);
+  color: #F4F4F6;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 7px;
+  padding: 0.34rem 0.62rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.55);
+}
+
+[data-tooltip]::after {
+  content: '';
+  bottom: calc(100% + 4px);
+  transform: translate(-50%, 4px) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: #1D1D22;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:focus-visible::before {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0) rotate(45deg);
+}
+
+.sona-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.55);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Inputs & Selects Dark Obsidian */
+.sona-input,
+.input,
+.select,
+.textarea {
+  background: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-radius: var(--radius-sm) !important;
+  font-family: var(--font-sans);
+  transition: border-color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.sona-input:focus,
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05) !important;
+}
+
+.sona-input::placeholder,
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-faint) !important;
+}
+
+/* Scrollbar Discreta Dark */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}

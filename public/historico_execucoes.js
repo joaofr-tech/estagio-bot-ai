@@ -1,383 +1,12 @@
 window.CRAWLER_HEALTH = {
-  "status": "warning",
-  "ultimaExecucao": "18/11/2026, 15:32:30",
+  "status": "healthy",
+  "ultimaExecucao": "18/11/2026, 12:35:41",
   "ultimoStatus": "SEM_VAGAS",
-  "duracaoSegundos": 63,
+  "duracaoSegundos": 1198,
   "falhasConsecutivas": 0,
-  "avisosFontes": [
-    "Fonte 'catho' sem retorno há 3 rodadas",
-    "Fonte 'gupy' sem retorno há 3 rodadas"
-  ],
-  "mensagem": "Fonte 'catho' sem retorno há 3 rodadas | Fonte 'gupy' sem retorno há 3 rodadas"
+  "mensagem": "Crawler operando normalmente."
 };
 window.HISTORICO_EXECUCOES = [
-  {
-    "timestamp": "18/11/2026, 15:32:30",
-    "status": "SEM_VAGAS",
-    "isErro": false,
-    "duracaoSegundos": 63,
-    "mensagem": "Varredura Python ETL concluída. Nenhuma vaga nova nesta rodada.",
-    "vagas": [],
-    "fontes": {
-      "linkedin": {
-        "status": "ok",
-        "brutas": 8,
-        "latenciaMs": 5591,
-        "erro": null
-      },
-      "gupy": {
-        "status": "ok",
-        "brutas": 0,
-        "latenciaMs": 23690,
-        "erro": null
-      },
-      "catho": {
-        "status": "error",
-        "brutas": 0,
-        "latenciaMs": 2674,
-        "erro": "Estrutura __NEXT_DATA__ ausente na Catho (possível bloqueio ou mudança de layout)"
-      },
-      "ats_greenhouse_inhire": {
-        "status": "ok",
-        "brutas": 1,
-        "latenciaMs": 5093,
-        "erro": null
-      }
-    },
-    "funil": {
-      "extraidas": 9,
-      "duplicadasRodada": 0,
-      "jaConhecidas": 9,
-      "filtradasMismatch": 0,
-      "invalidas": 0,
-      "ineditas": 0
-    },
-    "auditoria": {
-      "verificadas": 60,
-      "encerradasCount": 1
-    }
-  },
-  {
-    "timestamp": "18/11/2026, 15:04:07",
-    "status": "VAGAS_SALVAS",
-    "isErro": false,
-    "duracaoSegundos": 57,
-    "mensagem": "4 nova(s) oportunidade(s) catalogada(s) via Python ETL.",
-    "vagas": [
-      {
-        "id": "vaga-1795024998884-w6p8p",
-        "empresa": "TAAK",
-        "cargo": "Programa de Estágio - Desenvolvedor Salesforce",
-        "modalidade": "Presencial",
-        "localizacao": "São Bernardo do Campo, SP",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4490441966/",
-        "dataColeta": "18/11/2026, 15:03:18",
-        "notificada": false,
-        "status": "para_aplicar",
-        "fonte": "linkedin"
-      },
-      {
-        "id": "vaga-1795024998884-2bzfr",
-        "empresa": "Queiroz Cavalcanti Advocacia",
-        "cargo": "Estágio em Desenvolvimento e Aplicações",
-        "modalidade": "Presencial",
-        "localizacao": "Recife, PE",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4488269228/",
-        "dataColeta": "18/11/2026, 15:03:18",
-        "notificada": false,
-        "status": "para_aplicar",
-        "fonte": "linkedin"
-      },
-      {
-        "id": "vaga-1795024998884-fpdzq",
-        "empresa": "TELUS Digital",
-        "cargo": "Software Engineering Intern (Brazil) - Year Round 2027",
-        "modalidade": "Presencial",
-        "localizacao": "São Paulo, SP",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4456256579/",
-        "dataColeta": "18/11/2026, 15:03:18",
-        "notificada": false,
-        "status": "para_aplicar",
-        "fonte": "linkedin"
-      },
-      {
-        "id": "vaga-1795024998885-gqkfw",
-        "empresa": "Radix",
-        "cargo": "Estágio de Dados (Comunicação)",
-        "modalidade": "Remoto",
-        "localizacao": "Remoto - Brasil",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio via InHire (Radix)",
-        "link": "https://radix.inhire.app/vagas/bf2c2f15-63f1-4362-8370-59dc6a286060/estagio-de-dados-comunicacao",
-        "dataColeta": "18/11/2026, 15:03:18",
-        "notificada": false,
-        "status": "para_aplicar",
-        "fonte": "inhire"
-      }
-    ],
-    "fontes": {
-      "linkedin": {
-        "status": "ok",
-        "brutas": 8,
-        "latenciaMs": 4569,
-        "erro": null
-      },
-      "gupy": {
-        "status": "ok",
-        "brutas": 0,
-        "latenciaMs": 3927,
-        "erro": null
-      },
-      "catho": {
-        "status": "error",
-        "brutas": 0,
-        "latenciaMs": 3215,
-        "erro": "Estrutura __NEXT_DATA__ ausente na Catho (possível bloqueio ou mudança de layout)"
-      },
-      "ats_greenhouse_inhire": {
-        "status": "ok",
-        "brutas": 1,
-        "latenciaMs": 3877,
-        "erro": null
-      }
-    },
-    "funil": {
-      "extraidas": 9,
-      "duplicadasRodada": 0,
-      "jaConhecidas": 5,
-      "filtradasMismatch": 0,
-      "invalidas": 0,
-      "ineditas": 4
-    },
-    "auditoria": {
-      "verificadas": 60,
-      "encerradasCount": 4
-    }
-  },
-  {
-    "timestamp": "18/11/2026, 13:31:21",
-    "status": "VAGAS_SALVAS",
-    "isErro": false,
-    "duracaoSegundos": 939,
-    "mensagem": "Novas oportunidades catalogadas!",
-    "vagas": [
-      {
-        "empresa": "DoutorAID",
-        "cargo": "Estágio em Engenharia de Software",
-        "modalidade": "Remoto",
-        "localizacao": "Remoto - Brasil",
-        "turno": "Flexivel (6h)",
-        "prazo": "Inscricoes Abertas",
-        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação ou áreas afins (a partir do 3º período). Atuação em desenvolvimento de software full-stack voltado a aplicações digitais em saúde. Perfil analítico, aprendizado ágil, autonomia técnica, noções sólidas de engenharia de software e boa comunicação para atuar diretamente com o time de fundadores.",
-        "link": "https://www.linkedin.com/jobs/view/4491842515/"
-      }
-    ]
-  },
-  {
-    "timestamp": "18/11/2026, 13:28:46",
-    "status": "VAGAS_SALVAS",
-    "isErro": false,
-    "duracaoSegundos": 24,
-    "mensagem": "11 nova(s) oportunidade(s) catalogada(s) via pipeline ETL.",
-    "vagas": [
-      {
-        "id": "vaga-1795019305310-cqd36",
-        "empresa": "Belmicro",
-        "cargo": "Estagiário de TI | Suporte N0",
-        "modalidade": "Presencial",
-        "localizacao": "Contagem, MG",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4488596561/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305311-1pjvj",
-        "empresa": "Santa Casa BH",
-        "cargo": "Estágio Nível Médio - Infraestrutura de TI",
-        "modalidade": "Presencial",
-        "localizacao": "Belo Horizonte, MG",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4490151643/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305311-uaxxk",
-        "empresa": "Faculdade Católica Paulista",
-        "cargo": "Vaga de Estágio - Tecnologia da Informação - MG2026001926",
-        "modalidade": "Presencial",
-        "localizacao": "Belo Horizonte, MG",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4491521055/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305311-9q5ry",
-        "empresa": "Cadence",
-        "cargo": "Intern Product Validation Engineering: AI Quality Assurance (QA)",
-        "modalidade": "Presencial",
-        "localizacao": "Belo Horizonte, MG",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4471959708/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305312-la0pp",
-        "empresa": "Visagio",
-        "cargo": "Visagio Talentos - Estágio: Consultoria e Gestão de Negócios BH",
-        "modalidade": "Presencial",
-        "localizacao": "Belo Horizonte, MG",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4488994651/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305312-z5l0d",
-        "empresa": "KVCMining",
-        "cargo": "Estagio Engenharia Produção (Comercial)",
-        "modalidade": "Presencial",
-        "localizacao": "Belo Horizonte, MG",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4489782107/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305312-gw7ug",
-        "empresa": "TikTok USDS Joint Venture",
-        "cargo": "Software Engineer Intern (Data Foundation) - 2027 Summer",
-        "modalidade": "Presencial",
-        "localizacao": "Seattle, Washington, Estados Unidos",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4473719908/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305312-jm2vp",
-        "empresa": "Valstad Shipworks",
-        "cargo": "Software Engineering Intern, 3D & Manufacturing Applications",
-        "modalidade": "Presencial",
-        "localizacao": "Austin, Texas, Estados Unidos",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4490048068/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305313-ptzou",
-        "empresa": "Emerson",
-        "cargo": "Software Engineering Intern - ADG System R&D",
-        "modalidade": "Presencial",
-        "localizacao": "Austin, Texas, Estados Unidos",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4467790623/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305313-ghguq",
-        "empresa": "Docusign",
-        "cargo": "Software Engineering Intern – Self-Service Directory Diagnostics",
-        "modalidade": "Presencial",
-        "localizacao": "Seattle, Washington, Estados Unidos",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4473373323/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      },
-      {
-        "id": "vaga-1795019305313-mys5e",
-        "empresa": "Relativity Space",
-        "cargo": "Robotics Software Engineer Intern",
-        "modalidade": "Presencial",
-        "localizacao": "Long Beach, Califórnia, Estados Unidos",
-        "turno": "Tarde / Flexível",
-        "prazo": "Inscrições Abertas",
-        "requisitos": "Estágio em Tecnologia / Desenvolvimento",
-        "link": "https://www.linkedin.com/jobs/view/4476354109/",
-        "dataColeta": "18/11/2026, 13:28:25",
-        "notificada": false,
-        "status": "para_aplicar"
-      }
-    ],
-    "fontes": {
-      "linkedin": {
-        "status": "ok",
-        "brutas": 13,
-        "latenciaMs": 2457,
-        "erro": null
-      },
-      "gupy": {
-        "status": "ok",
-        "brutas": 0,
-        "latenciaMs": 1519,
-        "erro": null
-      },
-      "catho": {
-        "status": "error",
-        "brutas": 0,
-        "latenciaMs": 2282,
-        "erro": "Estrutura __NEXT_DATA__ ausente na Catho (possível bloqueio ou mudança de layout)"
-      }
-    },
-    "funil": {
-      "extraidas": 13,
-      "duplicadasRodada": 0,
-      "jaConhecidas": 2,
-      "filtradasMismatch": 0,
-      "invalidas": 0,
-      "ineditas": 11
-    },
-    "auditoria": {
-      "verificadas": 25,
-      "encerradasCount": 0
-    }
-  },
   {
     "timestamp": "18/11/2026, 12:35:41",
     "status": "SEM_VAGAS",
@@ -1033,5 +662,90 @@ window.HISTORICO_EXECUCOES = [
         "link": "https://www.linkedin.com/jobs/view/4425860170"
       }
     ]
+  },
+  {
+    "timestamp": "10/11/2026, 01:27:47",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 721,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "It4us Cyber Security",
+        "cargo": "Estágio em Inteligência Artificial",
+        "modalidade": "Remoto",
+        "localizacao": "Remoto - Brasil",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Estar cursando graduação em Engenharia de Software, Ciência da Computação, Análise e Desenvolvimento de Sistemas ou áreas relacionadas. Conhecimentos básicos de lógica de programação, Inteligência Artificial, modelos de linguagem (LLMs) e automação. Atuação no desenvolvimento de scripts, criação e configuração de agentes de IA e workflows, e integrações entre sistemas (diferenciais: Python, n8n, Make, ChatGPT/Claude).",
+        "link": "https://www.linkedin.com/jobs/view/4487342030"
+      },
+      {
+        "empresa": "Hospital Sofia Feldman",
+        "cargo": "Estagiário(a) de Dados e Banco de Dados",
+        "modalidade": "Presencial",
+        "localizacao": "Belo Horizonte/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Cursando Ensino Superior em Engenharia de Software, Ciência da Computação, Sistemas de Informação, Análise e Desenvolvimento de Sistemas ou áreas correlatas. Conhecimentos básicos em banco de dados relacionais, linguagem SQL e Excel para extração, organização, tratamento de dados, criação de consultas SQL, indicadores e dashboards.",
+        "link": "https://www.vagas.com.br/vagas/v2841752/estagiario-a-de-dados-e-banco-de-dados"
+      }
+    ]
+  },
+  {
+    "timestamp": "10/11/2026, 00:25:05",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 560,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Iveco Group",
+        "cargo": "Programa de Estágio 2026 - Tecnologia e Computação (Contagem/MG)",
+        "modalidade": "Hibrido",
+        "localizacao": "Contagem/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Cursando ensino superior em Computação, Sistemas de Informação ou Engenharias correlatas com disponibilidade mínima de 2 anos para estágio (compatível com 3º período de Engenharia de Software). Atuação em projetos de inovação e tecnologia com auxílio home office nos dias remotos, bolsa estágio, assistência médica/odontológica e fretado/vale-transporte.",
+        "link": "https://www.linkedin.com/jobs/view/4488899428"
+      }
+    ]
+  },
+  {
+    "timestamp": "09/11/2026, 23:29:23",
+    "status": "VAGAS_SALVAS",
+    "isErro": false,
+    "duracaoSegundos": 816,
+    "mensagem": "Novas oportunidades catalogadas!",
+    "vagas": [
+      {
+        "empresa": "Prestadora de Serviços em TI (via Jobbol)",
+        "cargo": "Estagiário na área de Análise e Desenvolvimento de Sistemas (QA / Testes de Software)",
+        "modalidade": "Remoto",
+        "localizacao": "Remoto - Brasil (Belo Horizonte e Região)",
+        "turno": "Tarde (13h-18h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Ensino superior em andamento em Engenharia de Software, Análise e Desenvolvimento de Sistemas, Sistemas de Informação ou áreas correlatas. Apoio ao time de qualidade e desenvolvimento na execução de testes de software, identificação de bugs, documentação de resultados e melhoria contínua dos sistemas. Sem exigência de experiência prévia. Jornada vespertina de 13h às 18h (25h semanais).",
+        "link": "https://www.linkedin.com/jobs/view/4479849273"
+      },
+      {
+        "empresa": "Vale (via abler Vagas)",
+        "cargo": "Estágio em Tecnologia e Dados (Machine Learning / Analytics)",
+        "modalidade": "Hibrido",
+        "localizacao": "Nova Lima/MG",
+        "turno": "Flexivel (6h)",
+        "prazo": "Inscricoes Abertas",
+        "requisitos": "Graduação em andamento em Engenharia de Software, Ciência da Computação, Ciência de Dados, Sistemas de Informação ou Engenharia de Computação. Conhecimento em lógica e linguagem de programação, Power BI, Power Platform, Excel e inglês intermediário. Atuação no desenvolvimento de modelos analíticos utilizando Machine Learning, análises exploratórias com técnicas estatísticas, regras de Data Quality na ingestão de dados e criação de ferramentas e dashboards globais.",
+        "link": "https://www.linkedin.com/jobs/view/4364227854"
+      }
+    ]
+  },
+  {
+    "timestamp": "09/11/2026, 22:30:27",
+    "status": "SEM_VAGAS",
+    "isErro": false,
+    "duracaoSegundos": 885,
+    "mensagem": "Varredura realizada. Nenhuma vaga nova nesta rodada.",
+    "vagas": []
   }
 ];
