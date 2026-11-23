@@ -1,6 +1,8 @@
 const assert = require('assert');
 const {
   detectJobLanguage,
+  compactJobDescription,
+  detectUnverifiedMetrics,
   buildSkillsWhitelist,
   selectTopProjectsDeterministically,
   enforceDeterministicGuardrails,
@@ -213,7 +215,8 @@ async function runResumeEngineTests() {
     profile: SAMPLE_PROFILE,
     job: { empresa: 'Startup X', cargo: 'Product Engineer Intern', requisitos: 'Python, React, Kubernetes, Web product' },
     llmConfig: { provider: 'gemini', apiKey: 'mock-key' },
-    llmCaller: mockLlmCaller
+    llmCaller: mockLlmCaller,
+    isolated: true
   });
 
   // Garante que houve chamadas isoladas por projeto (Top 3)
@@ -229,7 +232,73 @@ async function runResumeEngineTests() {
   );
   assert.strictEqual(pipelineResult.audit_report.corrections.length, 1);
   assert.ok(pipelineResult.match_report.excluded_gaps.includes('React'));
-  console.log('  ✓ Pipeline 3 Camadas completo (Isolamento por Projeto + Critic Anti-Alucinação)');
+  console.log('  ✓ Pipeline 3 Camadas (Modo Isolado + Critic Anti-Alucinação)');
+
+  // 5B. Modo Econômico (padrão): 2 chamadas quando limpo (pula Critic) + telemetria de tokens + evidence_idx + compactJobDescription
+  {
+    const longBoilerplateJd =
+      'Sobre a Empresa\n' + 'Texto institucional longo. '.repeat(120) +
+      '\nRequisitos\n- Python e SQL\n- APIs REST e PostgreSQL\n' +
+      '\nBenefícios\n' + 'Vale refeição, gympass e plano de saúde. '.repeat(80);
+    const compacted = compactJobDescription(longBoilerplateJd, 2800);
+    assert.ok(compacted.length <= 2800, 'JD compactada deve respeitar teto de 2800 chars');
+    assert.ok(compacted.includes('Python e SQL'), 'JD compactada deve preservar requisitos');
+    assert.ok(!compacted.includes('gympass'), 'JD compactada deve remover boilerplate de benefícios');
+
+    assert.deepStrictEqual(detectUnverifiedMetrics('Reduziu custos em 75% e 3x', 'Coleta vagas em 5 portais'), ['75%', '3x']);
+    assert.deepStrictEqual(detectUnverifiedMetrics('Coleta vagas em 5 portais desde 2025', 'Coleta vagas em 5 portais'), []);
+
+    const economicClean = await generateTruthfulATSResume({
+      profile: SAMPLE_PROFILE,
+      job: { empresa: 'Acme', cargo: 'Estágio Backend Python', requisitos: 'Python, SQL e APIs REST' },
+      llmConfig: { provider: 'gemini', apiKey: 'mock-key' },
+      llmCaller: async ({ userPrompt, onUsage }) => {
+        if (onUsage) onUsage({ input_tokens: 450, output_tokens: 220, total_tokens: 670 });
+        if (userPrompt.includes('VAGA ALVO:')) {
+          return {
+            target_role: 'Estágio Backend Python',
+            ats_keywords: ['Python', 'SQL', 'REST'],
+            direct_matches: ['Python', 'SQL'],
+            terminological_matches: [],
+            excluded_gaps: ['Go'],
+            fit_summary: 'Boa aderência em Python e SQL.'
+          };
+        }
+        if (userPrompt.includes('GERAÇÃO CONSOLIDADA ATS')) {
+          return {
+            summary: 'Estudante de Engenharia de Software com foco em Python e SQL.',
+            skills_grouped: [{ category: 'Linguagens', items: ['Python', 'SQL', 'Go'] }],
+            projects: [
+              {
+                project_id: 'proj-sona',
+                tech_stack: ['Python', 'PostgreSQL', 'Go'],
+                bullets: [{ text: 'Desenvolveu pipeline em Python coletando vagas em 5 portais.', evidence_idx: 0 }]
+              },
+              {
+                project_id: 'proj-api',
+                tech_stack: ['Node.js', 'SQL'],
+                bullets: [{ text: 'Construiu endpoints REST em Node.js com consultas SQL.', evidence_idx: 0 }]
+              }
+            ],
+            experiences: []
+          };
+        }
+        throw new Error('Critic não deveria ser chamado quando não há bullets suspeitos');
+      }
+    });
+
+    assert.strictEqual(economicClean.audit_report.token_usage.mode, 'economic');
+    assert.strictEqual(economicClean.audit_report.token_usage.llm_calls, 2, 'Modo econômico limpo deve usar apenas 2 chamadas IA');
+    assert.strictEqual(economicClean.audit_report.token_usage.total_tokens, 1340, 'Deve acumular telemetria real de tokens');
+    assert.strictEqual(economicClean.audit_report.critic_skipped_clean, true, 'Deve pular Critic quando nenhum bullet é suspeito');
+    assert.strictEqual(
+      economicClean.resume_json.projects[0].bullets[0].evidence_quote,
+      'Coleta vagas em 5 portais usando Python e httpx.',
+      'evidence_idx deve ser resolvido verbatim para o fato original'
+    );
+    assert.ok(!economicClean.resume_json.skills_grouped.flatMap((g) => g.items).includes('Go'), 'Whitelist continua bloqueando Go');
+    console.log('  ✓ Modo Econômico padrão (2 chamadas IA, Critic condicional, evidence_idx e telemetria de tokens)');
+  }
 
   // 6. Parser determinístico de CSVs do LinkedIn ZIP
   const parsedLi = parseLinkedInFiles({

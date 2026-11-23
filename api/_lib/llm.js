@@ -60,17 +60,22 @@ function extractJsonFromText(text) {
   throw new Error('Não foi possível interpretar o JSON retornado pelo modelo de IA.');
 }
 
-async function callGemini({ apiKey, model, systemPrompt, userPrompt, temperature = 0.2 }) {
+async function callGemini({ apiKey, model, systemPrompt, userPrompt, temperature = 0.2, maxOutputTokens, onUsage }) {
   const targetModel = model || PROVIDER_DEFAULTS.gemini.defaultModel;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(targetModel)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+  const generationConfig = {
+    temperature,
+    responseMimeType: 'application/json'
+  };
+  if (typeof maxOutputTokens === 'number' && maxOutputTokens > 0) {
+    generationConfig.maxOutputTokens = maxOutputTokens;
+  }
 
   const body = {
     system_instruction: systemPrompt ? { parts: [{ text: systemPrompt }] } : undefined,
     contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
-    generationConfig: {
-      temperature,
-      responseMimeType: 'application/json'
-    }
+    generationConfig
   };
 
   const response = await fetch(url, {
@@ -85,11 +90,19 @@ async function callGemini({ apiKey, model, systemPrompt, userPrompt, temperature
     throw new Error(errMsg);
   }
 
+  if (typeof onUsage === 'function' && data?.usageMetadata) {
+    onUsage({
+      input_tokens: Number(data.usageMetadata.promptTokenCount || 0),
+      output_tokens: Number(data.usageMetadata.candidatesTokenCount || 0),
+      total_tokens: Number(data.usageMetadata.totalTokenCount || 0)
+    });
+  }
+
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
   return extractJsonFromText(text);
 }
 
-async function callOpenAICompatible({ provider, apiKey, model, systemPrompt, userPrompt, temperature = 0.2 }) {
+async function callOpenAICompatible({ provider, apiKey, model, systemPrompt, userPrompt, temperature = 0.2, maxOutputTokens, onUsage }) {
   const cfg = PROVIDER_DEFAULTS[provider];
   if (!cfg || !cfg.baseUrl) {
     throw new Error(`Provedor desconhecido: ${provider}`);
@@ -114,6 +127,9 @@ async function callOpenAICompatible({ provider, apiKey, model, systemPrompt, use
     response_format: { type: 'json_object' },
     messages
   };
+  if (typeof maxOutputTokens === 'number' && maxOutputTokens > 0) {
+    body.max_tokens = maxOutputTokens;
+  }
 
   const response = await fetch(cfg.baseUrl, {
     method: 'POST',
@@ -127,6 +143,14 @@ async function callOpenAICompatible({ provider, apiKey, model, systemPrompt, use
     throw new Error(errMsg);
   }
 
+  if (typeof onUsage === 'function' && data?.usage) {
+    onUsage({
+      input_tokens: Number(data.usage.prompt_tokens || 0),
+      output_tokens: Number(data.usage.completion_tokens || 0),
+      total_tokens: Number(data.usage.total_tokens || 0)
+    });
+  }
+
   const text = data?.choices?.[0]?.message?.content || '';
   return extractJsonFromText(text);
 }
@@ -134,7 +158,7 @@ async function callOpenAICompatible({ provider, apiKey, model, systemPrompt, use
 /**
  * Executa uma chamada estruturada (JSON) ao provedor BYOK escolhido.
  */
-async function callLLMJson({ provider = 'gemini', apiKey, model, systemPrompt, userPrompt, temperature = 0.2 }) {
+async function callLLMJson({ provider = 'gemini', apiKey, model, systemPrompt, userPrompt, temperature = 0.2, maxOutputTokens, onUsage }) {
   const normalizedProvider = String(provider || 'gemini').toLowerCase().trim();
   if (!apiKey || !String(apiKey).trim()) {
     throw new Error('Chave de API (BYOK) não informada. Configure sua chave no Passo 1 do Onboarding.');
@@ -143,7 +167,7 @@ async function callLLMJson({ provider = 'gemini', apiKey, model, systemPrompt, u
   if (normalizedProvider === 'gemini') {
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     try {
-      return await callGemini({ apiKey: apiKey.trim(), model, systemPrompt, userPrompt, temperature });
+      return await callGemini({ apiKey: apiKey.trim(), model, systemPrompt, userPrompt, temperature, maxOutputTokens, onUsage });
     } catch (err) {
       const isHighDemand = /high demand|overloaded|503|temporarily unavailable|resource exhausted/i.test(err.message);
       const isDeprecated = /not found|404|not supported|no longer available|deprecated/i.test(err.message);
@@ -152,7 +176,7 @@ async function callLLMJson({ provider = 'gemini', apiKey, model, systemPrompt, u
       if (isHighDemand) {
         await sleep(1200);
         try {
-          return await callGemini({ apiKey: apiKey.trim(), model, systemPrompt, userPrompt, temperature });
+          return await callGemini({ apiKey: apiKey.trim(), model, systemPrompt, userPrompt, temperature, maxOutputTokens, onUsage });
         } catch (_) {}
       }
 
@@ -165,7 +189,7 @@ async function callLLMJson({ provider = 'gemini', apiKey, model, systemPrompt, u
         ];
         for (const fallback of Array.from(new Set(candidates))) {
           try {
-            return await callGemini({ apiKey: apiKey.trim(), model: fallback, systemPrompt, userPrompt, temperature });
+            return await callGemini({ apiKey: apiKey.trim(), model: fallback, systemPrompt, userPrompt, temperature, maxOutputTokens, onUsage });
           } catch (_) {}
         }
       }
@@ -180,7 +204,9 @@ async function callLLMJson({ provider = 'gemini', apiKey, model, systemPrompt, u
       model,
       systemPrompt,
       userPrompt,
-      temperature
+      temperature,
+      maxOutputTokens,
+      onUsage
     });
   }
 

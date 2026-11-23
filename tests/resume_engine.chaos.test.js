@@ -88,10 +88,19 @@ async function runChaosTests() {
         if (userPrompt.includes('VAGA ALVO:')) {
           return { target_role: 'Estágio Python', ats_keywords: ['Python'], direct_matches: ['Python'], excluded_gaps: ['Go'] };
         }
-        if (userPrompt.includes('PROJETO ISOLADO')) {
-          return { project_id: 'p1', name: 'App', tech_stack: ['Python', 'Go'], bullets: [{ text: 'Feito em Python.', evidence_quote: 'Feito em Python' }] };
+        if (userPrompt.includes('GERAÇÃO CONSOLIDADA ATS')) {
+          return {
+            summary: 'Estudante Python.',
+            skills_grouped: [{ category: 'Lang', items: ['Python', 'Go'] }],
+            projects: [{
+              project_id: 'p1',
+              tech_stack: ['Python', 'Go'],
+              bullets: [{ text: 'Feito em Python reduzindo latência em 80%.', evidence_idx: 0 }]
+            }],
+            experiences: []
+          };
         }
-        return { summary: 'Estudante Python.', skills_grouped: [{ category: 'Lang', items: ['Python', 'Go'] }] };
+        return {};
       }
     });
 

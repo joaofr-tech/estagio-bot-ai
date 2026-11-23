@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(check);
     }
 
-    const { profile, job, jdText = '' } = body;
+    const { profile, job, jdText = '', isolated = false } = body;
     if (!profile) {
       return res.status(400).json({
         error: 'Banco de Fatos (Master Profile) vazio. Complete o Onboarding antes de gerar.'
@@ -48,6 +48,7 @@ module.exports = async function handler(req, res) {
       profile,
       job: job || {},
       jdText,
+      isolated: Boolean(isolated),
       llmConfig: { provider, apiKey, model }
     });
 

@@ -1661,9 +1661,14 @@ function renderTransparencyPanel(matchReport, auditReport) {
   const corrCount = (auditReport?.corrections || []).length;
   const bulletsChecked = auditReport?.total_bullets_checked || 0;
   const injectionCount = (matchReport?.prompt_injection_warnings || []).length;
+  const usage = auditReport?.token_usage || null;
   const extraNotes = [];
   if (styleCount > 0) extraNotes.push(`${styleCount} ajuste(s) de estilo`);
   if (injectionCount > 0) extraNotes.push(`${injectionCount} alerta(s) de sanitização de JD`);
+  if (usage && usage.llm_calls > 0) {
+    const tokLabel = usage.total_tokens > 0 ? ` · ${usage.total_tokens.toLocaleString('pt-BR')} tokens` : '';
+    extraNotes.push(`${usage.llm_calls} chamada(s) IA${tokLabel}`);
+  }
 
   auditBox.innerHTML = `
     <div class="audit-badge-ok">Auditoria: ${bulletsChecked} bullets verificados · Formação preservada · ${blockedCount} skills bloqueadas · ${corrCount} correções${extraNotes.length ? ` · ${extraNotes.join(' · ')}` : ''}</div>
