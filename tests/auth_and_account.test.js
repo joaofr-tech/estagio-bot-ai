@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const SonaAuth = require('../auth_guard');
+const accountHandler = require('../api/account');
 
 async function runAuthAndAccountTests() {
   console.log('\n--- Testes: Autenticação Supabase, Isolamento por Usuário & Gerenciamento de Conta ---');
@@ -112,6 +113,75 @@ async function runAuthAndAccountTests() {
   assert.ok(sql.includes('on_auth_user_created'), 'Deve criar trigger on_auth_user_created');
   assert.ok(sql.includes('to authenticated'), 'Deve restringir leitura de vagas a authenticated');
   console.log('  ✓ schema_auth_supabase.sql contém tabelas, trigger e políticas RLS autenticadas');
+
+  // 7. Endpoint DELETE /api/account (CORS, 405, 401, 400 e 200 com exclusão em cascata)
+  function mockRes() {
+    return {
+      statusCode: 200,
+      headers: {},
+      body: null,
+      setHeader(k, v) { this.headers[k.toLowerCase()] = v; },
+      status(c) { this.statusCode = c; return this; },
+      json(p) { this.body = p; return this; },
+      end(p) { this.body = p; return this; }
+    };
+  }
+
+  const resOpt = mockRes();
+  await accountHandler({ method: 'OPTIONS', headers: {} }, resOpt);
+  assert.strictEqual(resOpt.statusCode, 204);
+
+  const resGet = mockRes();
+  await accountHandler({ method: 'GET', headers: {} }, resGet);
+  assert.strictEqual(resGet.statusCode, 405);
+
+  const resNoAuth = mockRes();
+  await accountHandler({ method: 'DELETE', headers: {}, body: { confirmation: 'EXCLUIR' }, _adminClient: {} }, resNoAuth);
+  assert.strictEqual(resNoAuth.statusCode, 401);
+
+  let deletedUid = null;
+  const fakeAdminClient = {
+    auth: {
+      async getUser(token) {
+        if (token === 'valid-jwt') return { data: { user: { id: 'user-del-99' } }, error: null };
+        return { data: { user: null }, error: { message: 'Invalid JWT' } };
+      },
+      admin: {
+        async deleteUser(uid) {
+          deletedUid = uid;
+          return { data: {}, error: null };
+        }
+      }
+    }
+  };
+
+  const resBadJwt = mockRes();
+  await accountHandler({
+    method: 'DELETE',
+    headers: { authorization: 'Bearer wrong-jwt', 'x-confirm-delete': 'EXCLUIR' },
+    _adminClient: fakeAdminClient
+  }, resBadJwt);
+  assert.strictEqual(resBadJwt.statusCode, 401);
+
+  const resNoConfirm = mockRes();
+  await accountHandler({
+    method: 'DELETE',
+    headers: { authorization: 'Bearer valid-jwt' },
+    body: { confirmation: 'errado' },
+    _adminClient: fakeAdminClient
+  }, resNoConfirm);
+  assert.strictEqual(resNoConfirm.statusCode, 400);
+
+  const resOk = mockRes();
+  await accountHandler({
+    method: 'DELETE',
+    headers: { authorization: 'Bearer valid-jwt', 'x-confirm-delete': 'EXCLUIR' },
+    _adminClient: fakeAdminClient
+  }, resOk);
+  assert.strictEqual(resOk.statusCode, 200);
+  assert.strictEqual(resOk.body.ok, true);
+  assert.strictEqual(deletedUid, 'user-del-99');
+  console.log('  ✓ Handler DELETE /api/account valida JWT, exige confirmação EXCLUIR e remove usuário');
 }
 
 module.exports = { runAuthAndAccountTests };

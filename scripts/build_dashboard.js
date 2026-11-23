@@ -4,15 +4,23 @@ const path = require('path');
 const rootDir = path.join(__dirname, '..');
 const outDir = path.join(rootDir, 'public');
 
-// Garantir que a pasta public existe
 if (!fs.existsSync(outDir)) {
   fs.mkdirSync(outDir, { recursive: true });
 }
 
-// Arquivos necessários para o dashboard funcionar
+// Mantém index.html sempre idêntico a dashboard.html
+const dashboardSrc = path.join(rootDir, 'dashboard.html');
+const indexDest = path.join(rootDir, 'index.html');
+if (fs.existsSync(dashboardSrc)) {
+  fs.copyFileSync(dashboardSrc, indexDest);
+}
+
 const filesToCopy = [
   'index.html',
   'dashboard.html',
+  'auth.html',
+  'auth.css',
+  'auth_guard.js',
   'design-system.css',
   'curriculo.html',
   'curriculo.css',
@@ -34,7 +42,6 @@ filesToCopy.forEach(file => {
   }
 });
 
-// Copiar pasta assets se existir
 const assetsSrc = path.join(rootDir, 'assets');
 const assetsDest = path.join(outDir, 'assets');
 if (fs.existsSync(assetsSrc)) {

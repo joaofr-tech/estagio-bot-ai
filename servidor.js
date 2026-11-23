@@ -28,7 +28,7 @@ const BLOCKED_FILENAMES = new Set([
   'package-lock.json'
 ]);
 
-const BLOCKED_DIRS = new Set(['api', 'etl', 'node_modules', 'scripts', 'src', 'tests', 'tests_py']);
+const BLOCKED_DIRS = new Set(['api', 'docs', 'etl', 'node_modules', 'scripts', 'src', 'tests', 'tests_py']);
 
 function isSensitiveOrUnsafePath(rootDir, candidatePath) {
   const rel = path.relative(rootDir, candidatePath);
@@ -62,8 +62,8 @@ function getLocalIPs() {
 const server = http.createServer(async (req, res) => {
   // CORS habilitado para leitura e endpoints /api locais
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-LLM-Provider, X-LLM-Key, X-LLM-Model, X-GitHub-Token');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Confirm-Delete, X-LLM-Provider, X-LLM-Key, X-LLM-Model, X-GitHub-Token');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);

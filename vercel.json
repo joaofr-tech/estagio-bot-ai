@@ -11,6 +11,9 @@
     },
     "api/parse-resume-pdf.js": {
       "maxDuration": 30
+    },
+    "api/account.js": {
+      "maxDuration": 15
     }
   }
 }

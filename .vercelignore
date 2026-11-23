@@ -37,3 +37,5 @@ requirements.txt
 pyproject.toml
 DESIGN.md
 CHANGELOG.md
+docs/
+schema_auth_supabase.sql

@@ -49,6 +49,10 @@ async function runApiAndSecurityTests() {
   assert.strictEqual(isSensitiveOrUnsafePath(rootDir, path.resolve(rootDir, 'dashboard.html')), false, 'Deve permitir dashboard.html');
   assert.strictEqual(isSensitiveOrUnsafePath(rootDir, path.resolve(rootDir, 'curriculo.js')), false, 'Deve permitir curriculo.js');
   assert.strictEqual(isSensitiveOrUnsafePath(rootDir, path.resolve(rootDir, 'assets', 'dashboard_preview.png')), false, 'Deve permitir assets/');
+  assert.strictEqual(isSensitiveOrUnsafePath(rootDir, path.resolve(rootDir, 'schema_auth_supabase.sql')), true, 'Deve bloquear schema_auth_supabase.sql');
+  assert.strictEqual(isSensitiveOrUnsafePath(rootDir, path.resolve(rootDir, 'docs', 'superpowers', 'specs', 'test.md')), true, 'Deve bloquear pasta docs/');
+  assert.strictEqual(isSensitiveOrUnsafePath(rootDir, path.resolve(rootDir, 'auth.html')), false, 'Deve permitir auth.html');
+  assert.strictEqual(isSensitiveOrUnsafePath(rootDir, path.resolve(rootDir, 'auth_guard.js')), false, 'Deve permitir auth_guard.js');
   console.log('  ✓ Proteção do servidor local (dotfiles, arquivos sensíveis e path traversal)');
 
   // 2. Validação de método e entrada em /api/generate-resume
