@@ -24,8 +24,9 @@
 
   function sanitizeNextPath(rawNext, fallback = '/dashboard.html') {
     if (!rawNext || typeof rawNext !== 'string') return fallback;
+    if (/[\u0000-\u001F\u007F]/.test(rawNext)) return fallback;
     const trimmed = rawNext.trim();
-    if (!trimmed.startsWith('/') || trimmed.startsWith('//') || trimmed.includes('://')) {
+    if (!trimmed.startsWith('/') || trimmed.startsWith('//') || trimmed.includes('://') || trimmed.includes('\\')) {
       return fallback;
     }
     const lower = trimmed.toLowerCase();

@@ -12,6 +12,9 @@ async function runAuthAndAccountTests() {
   assert.strictEqual(SonaAuth.sanitizeNextPath('/curriculo.html?view=profile'), '/curriculo.html?view=profile');
   assert.strictEqual(SonaAuth.sanitizeNextPath('https://evil.com/phish'), '/dashboard.html');
   assert.strictEqual(SonaAuth.sanitizeNextPath('//evil.com/phish'), '/dashboard.html');
+  assert.strictEqual(SonaAuth.sanitizeNextPath('/\\evil.com'), '/dashboard.html');
+  assert.strictEqual(SonaAuth.sanitizeNextPath('\\evil.com'), '/dashboard.html');
+  assert.strictEqual(SonaAuth.sanitizeNextPath('/dashboard.html\u0000'), '/dashboard.html');
   assert.strictEqual(SonaAuth.sanitizeNextPath('javascript:alert(1)'), '/dashboard.html');
   assert.strictEqual(SonaAuth.sanitizeNextPath('/auth.html'), '/dashboard.html');
   assert.strictEqual(SonaAuth.sanitizeNextPath(''), '/dashboard.html');
