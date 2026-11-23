@@ -6,7 +6,7 @@ import time
 import unicodedata
 from typing import Any
 
-from .http_client import fetch_with_retry
+from .http_client import extract_json_ld_job_postings, fetch_with_retry
 
 
 def _slug(texto: str | None) -> str:
@@ -46,12 +46,44 @@ def extract(config: dict[str, Any] | None = None) -> dict[str, Any]:
 
     next_data = extrair_next_data(resp.body)
     if not next_data:
+        # Fallback Nível 1 (webscraping-expert): tenta dados estruturados JSON-LD JobPosting
+        ld_jobs = extract_json_ld_job_postings(resp.body)
+        if not ld_jobs:
+            return {
+                "source": "catho",
+                "ok": False,
+                "jobs": [],
+                "durationMs": int((time.monotonic() - t0) * 1000),
+                "error": "Estrutura __NEXT_DATA__ e JSON-LD ausentes na Catho (possível bloqueio ou mudança de layout)",
+            }
+        cidade_padrao = cidades[0] if isinstance(cidades, list) and cidades else "Belo Horizonte"
+        uf_padrao = config.get("estado") or "MG"
+        fallback_jobs: list[dict[str, Any]] = []
+        for jp in ld_jobs:
+            cargo = str(jp.get("title") or "").strip()
+            hiring = jp.get("hiringOrganization") or {}
+            empresa = (hiring.get("name") if isinstance(hiring, dict) else str(hiring or "")).strip() or "Empresa via Catho"
+            link = str(jp.get("url") or url).strip()
+            if not cargo or not re.match(r"^https?://", link, re.I):
+                continue
+            desc = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", str(jp.get("description") or ""))).strip()[:280]
+            fallback_jobs.append({
+                "empresa": empresa,
+                "cargo": cargo,
+                "modalidade": "Remoto" if "TELECOMMUTE" in str(jp.get("jobLocationType") or "").upper() else "Presencial",
+                "localizacao": f"{cidade_padrao}/{uf_padrao}",
+                "turno": "Tarde / Flexível",
+                "prazo": "Inscrições Abertas",
+                "requisitos": desc or "Estágio em Tecnologia / Desenvolvimento (Catho JSON-LD)",
+                "link": link,
+                "fonte": "catho",
+            })
         return {
             "source": "catho",
-            "ok": False,
-            "jobs": [],
+            "ok": bool(fallback_jobs),
+            "jobs": fallback_jobs,
             "durationMs": int((time.monotonic() - t0) * 1000),
-            "error": "Estrutura __NEXT_DATA__ ausente na Catho (possível bloqueio ou mudança de layout)",
+            "error": None if fallback_jobs else "JSON-LD encontrado na Catho mas sem vagas válidas",
         }
 
     page_props = next_data.get("props", {}).get("pageProps", {})

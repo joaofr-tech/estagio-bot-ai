@@ -124,6 +124,7 @@ class FunnelMetrics(BaseModel):
     duplicadasRodada: int = 0
     jaConhecidas: int = 0
     filtradasMismatch: int = 0
+    alertasRevisao: int = 0
     invalidas: int = 0
     ineditas: int = 0
 

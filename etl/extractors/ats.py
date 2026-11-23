@@ -9,6 +9,7 @@ from typing import Any
 from urllib.parse import quote
 
 from .http_client import fetch_with_retry
+from .jd_fetcher import html_to_text
 
 GREENHOUSE_BOARDS = [
     {"slug": "ifoodcarreiras", "empresa": "iFood"},
@@ -23,6 +24,10 @@ INHIRE_TENANTS = [
     {"slug": "atlantico", "empresa": "Instituto Atlântico"},
     {"slug": "nuvidio", "empresa": "Nuvidio"},
 ]
+
+# Boards adicionais configuráveis via config_busca.json (`ashbyBoards` / `leverBoards`)
+ASHBY_BOARDS: list[dict[str, str]] = []
+LEVER_BOARDS: list[dict[str, str]] = []
 
 
 def _normalizar_sem_acento(texto: str | None) -> str:
@@ -182,16 +187,113 @@ def _fetch_inhire_tenant(tenant: dict[str, str], config: dict[str, Any]) -> dict
     return {"ok": True, "jobs": jobs, "error": None}
 
 
+def _fetch_ashby_board(board: dict[str, str], config: dict[str, Any]) -> dict[str, Any]:
+    slug = board["slug"]
+    url = f"https://api.ashbyhq.com/posting-api/job-board/{quote(slug)}?includeCompensation=true"
+    resp = fetch_with_retry(url, headers={"Accept": "application/json"}, retries=1, timeout=8.0)
+    if not resp.ok:
+        return {"ok": False, "jobs": [], "error": resp.error}
+
+    try:
+        data = json.loads(resp.body)
+    except Exception:
+        return {"ok": False, "jobs": [], "error": "JSON inválido Ashby"}
+
+    jobs: list[dict[str, Any]] = []
+    for j in data.get("jobs", []) or []:
+        cargo = (j.get("title") or "").strip()
+        if not is_estagio_tech(cargo):
+            continue
+        loc_str = (j.get("location") or "Brasil").strip()
+        workplace = j.get("workplaceType") or ("Remote" if j.get("isRemote") else "")
+        modalidade = _inferir_modalidade(workplace, loc_str, cargo)
+        if not _is_local_compativel(modalidade, loc_str, config):
+            continue
+        job_url = (j.get("jobUrl") or "").strip()
+        if not job_url and j.get("id"):
+            job_url = f"https://jobs.ashbyhq.com/{slug}/{j['id']}"
+        if not job_url:
+            continue
+        desc_plain = (j.get("descriptionPlain") or html_to_text(j.get("descriptionHtml") or "")).strip()
+        requisitos = re.sub(r"\s+", " ", desc_plain)[:400] if desc_plain else f"Estágio via Ashby ({board['empresa']})"
+        jobs.append({
+            "empresa": board["empresa"],
+            "cargo": cargo,
+            "modalidade": modalidade,
+            "localizacao": "Remoto - Brasil" if modalidade == "Remoto" else loc_str,
+            "turno": "Tarde / Flexível",
+            "prazo": "Inscrições Abertas",
+            "requisitos": requisitos,
+            "link": job_url,
+            "fonte": "ashby",
+        })
+    return {"ok": True, "jobs": jobs, "error": None}
+
+
+def _fetch_lever_board(board: dict[str, str], config: dict[str, Any]) -> dict[str, Any]:
+    slug = board["slug"]
+    url = f"https://api.lever.co/v0/postings/{quote(slug)}?mode=json"
+    resp = fetch_with_retry(url, headers={"Accept": "application/json"}, retries=1, timeout=8.0)
+    if not resp.ok:
+        return {"ok": False, "jobs": [], "error": resp.error}
+
+    try:
+        data = json.loads(resp.body)
+    except Exception:
+        return {"ok": False, "jobs": [], "error": "JSON inválido Lever"}
+
+    if not isinstance(data, list):
+        return {"ok": False, "jobs": [], "error": "Formato inesperado Lever"}
+
+    jobs: list[dict[str, Any]] = []
+    for j in data:
+        if not isinstance(j, dict):
+            continue
+        cargo = (j.get("text") or "").strip()
+        if not is_estagio_tech(cargo):
+            continue
+        cats = j.get("categories") or {}
+        loc_str = (cats.get("location") or "Brasil").strip()
+        modalidade = _inferir_modalidade(j.get("workplaceType") or "", loc_str, cargo)
+        if not _is_local_compativel(modalidade, loc_str, config):
+            continue
+        hosted_url = (j.get("hostedUrl") or "").strip()
+        if not hosted_url:
+            continue
+        desc_plain = (j.get("descriptionPlain") or html_to_text(j.get("description") or "")).strip()
+        requisitos = re.sub(r"\s+", " ", desc_plain)[:400] if desc_plain else f"Estágio via Lever ({board['empresa']})"
+        jobs.append({
+            "empresa": board["empresa"],
+            "cargo": cargo,
+            "modalidade": modalidade,
+            "localizacao": "Remoto - Brasil" if modalidade == "Remoto" else loc_str,
+            "turno": "Tarde / Flexível",
+            "prazo": "Inscrições Abertas",
+            "requisitos": requisitos,
+            "link": hosted_url,
+            "fonte": "lever",
+        })
+    return {"ok": True, "jobs": jobs, "error": None}
+
+
 def extract(config: dict[str, Any] | None = None) -> dict[str, Any]:
-    """Extrai vagas diretamente das APIs públicas do Greenhouse e InHire."""
+    """Extrai vagas diretamente das APIs públicas de Greenhouse, InHire, Ashby e Lever."""
     config = config or {}
     t0 = time.monotonic()
 
-    tasks: list[tuple[Any, dict[str, str]]] = [
-        (_fetch_greenhouse_board, b) for b in GREENHOUSE_BOARDS
-    ] + [
-        (_fetch_inhire_tenant, t) for t in INHIRE_TENANTS
+    ashby_list = list(ASHBY_BOARDS) + [
+        b for b in (config.get("ashbyBoards") or []) if isinstance(b, dict) and b.get("slug")
     ]
+    lever_list = list(LEVER_BOARDS) + [
+        b for b in (config.get("leverBoards") or []) if isinstance(b, dict) and b.get("slug")
+    ]
+
+    tasks: list[tuple[Any, dict[str, str]]] = (
+        [(_fetch_greenhouse_board, b) for b in GREENHOUSE_BOARDS]
+        + [(_fetch_inhire_tenant, t) for t in INHIRE_TENANTS]
+        + [(_fetch_ashby_board, b) for b in ashby_list]
+        + [(_fetch_lever_board, b) for b in lever_list]
+    )
 
     jobs: list[dict[str, Any]] = []
     seen_links: set[str] = set()

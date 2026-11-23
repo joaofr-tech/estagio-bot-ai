@@ -8,6 +8,13 @@
     "sdr",
     "vendas"
   ],
+  "termosAlerta": [
+    "plantão",
+    "sobreaviso",
+    "on-call",
+    "banco de talentos",
+    "40 horas"
+  ],
   "regrasExclusao": [
     "Vagas com foco em Suporte Técnico / Help Desk / Manutenção de Hardware",
     "Vagas comerciais, prospecção SDR ou vendas de software",
