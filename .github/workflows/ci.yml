@@ -36,8 +36,11 @@ jobs:
       - name: Executar testes Node.js (Dashboard, Motor ATS, API & Segurança)
         run: npm test
 
-      - name: Executar testes Python ETL (pytest)
-        run: pytest tests_py/test_etl_pipeline.py -v
+      - name: Executar testes Python ETL e Chaos (pytest)
+        run: pytest tests_py/test_etl_pipeline.py tests_py/test_etl_chaos.py -v
+
+      - name: Auditoria de UI (DESIGN.md)
+        run: npm run audit:ui
 
       - name: Validar build estático e sincronia com /public
         run: |

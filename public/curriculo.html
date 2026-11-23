@@ -97,6 +97,7 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
             </button>
             <div class="studio-more-menu" id="studio-more-menu">
+              <button type="button" class="studio-menu-item" id="btn-open-import-jd" onclick="closeStudioMoreMenu(); toggleStudioDrawer('drawer-import-jd')">Importar Descrição da Vaga</button>
               <button type="button" class="studio-menu-item" id="btn-open-analysis" onclick="closeStudioMoreMenu(); toggleStudioDrawer('drawer-analysis')">Análise de Aderência</button>
               <button type="button" class="studio-menu-item" onclick="closeStudioMoreMenu(); toggleStudioDrawer('drawer-history')">Histórico de Versões</button>
               <button type="button" class="studio-menu-item" id="btn-toggle-edit" onclick="closeStudioMoreMenu(); toggleSheetEditMode()">Preview Limpo</button>
@@ -104,6 +105,38 @@
               <button type="button" class="studio-menu-item" id="btn-undo-edit" onclick="closeStudioMoreMenu(); undoResumeEdit()" style="display:none;">Desfazer Última Edição</button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- GAVETA SOB DEMANDA: IMPORTAR DESCRIÇÃO DA VAGA (JD) -->
+      <div class="studio-drawer" id="drawer-import-jd" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+          <div class="card-title" style="margin-bottom:0;">Importar Descrição da Vaga</div>
+          <button class="btn-secondary" onclick="toggleStudioDrawer('drawer-import-jd')">Fechar</button>
+        </div>
+        <p class="field-hint" style="margin-bottom:0.85rem;">
+          Cole o link de qualquer vaga (LinkedIn, Gupy, Greenhouse, Ashby, Lever ou página de carreiras) para puxar a descrição completa antes de gerar o currículo.
+        </p>
+        <div style="display:flex; gap:0.55rem; margin-bottom:0.85rem; flex-wrap:wrap;">
+          <input
+            type="url"
+            id="input-import-jd-url"
+            class="form-input"
+            placeholder="https://jobs.ashbyhq.com/... ou link da vaga"
+            style="flex:1; min-width:240px;"
+          />
+          <button type="button" class="btn-primary" id="btn-fetch-jd-url" onclick="importJobDescriptionFromUrl()">Importar Link</button>
+        </div>
+        <div id="import-jd-status" class="field-hint" style="margin-bottom:0.65rem;"></div>
+        <textarea
+          id="input-import-jd-text"
+          class="form-input"
+          rows="6"
+          placeholder="Descrição completa da vaga (preenchida automaticamente pelo link ou colada manualmente)..."
+          style="width:100%; resize:vertical; font-size:0.82rem; line-height:1.45;"
+        ></textarea>
+        <div style="display:flex; justify-content:flex-end; gap:0.55rem; margin-top:0.75rem;">
+          <button type="button" class="btn-secondary" onclick="applyManualJobDescription()">Aplicar Descrição</button>
         </div>
       </div>
 

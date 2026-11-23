@@ -210,7 +210,7 @@ function switchView(viewName) {
 }
 
 function toggleStudioDrawer(drawerId) {
-  const drawers = ['drawer-analysis', 'drawer-history'];
+  const drawers = ['drawer-import-jd', 'drawer-analysis', 'drawer-history'];
   drawers.forEach((id) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -1348,6 +1348,160 @@ async function loadSampleProfile() {
 /* =============================================================
    VAGA ALVO & GERAÇÃO ATS (VIEW 1)
    ============================================================= */
+function updateActiveJobBanner() {
+  if (!activeJob) return;
+  const companyEl = document.getElementById('job-company');
+  const titleEl = document.getElementById('job-title');
+  const metaEl = document.getElementById('job-meta');
+  if (companyEl) companyEl.textContent = activeJob.empresa || 'Empresa';
+  if (titleEl) titleEl.textContent = activeJob.cargo || 'Vaga selecionada';
+  if (metaEl) {
+    metaEl.textContent = [activeJob.modalidade, activeJob.localizacao, activeJob.turno]
+      .filter(Boolean)
+      .join(' · ');
+  }
+  const urlInput = document.getElementById('input-import-jd-url');
+  const textInput = document.getElementById('input-import-jd-text');
+  if (urlInput && activeJob.link && !urlInput.value) urlInput.value = activeJob.link;
+  if (textInput && activeJob.requisitos) textInput.value = activeJob.requisitos;
+}
+
+function isGenericOrShortJd(text = '') {
+  const clean = String(text || '').trim();
+  if (clean.length < 300) return true;
+  return /^(estágio via |estágio em tecnologia \/ desenvolvimento)/i.test(clean);
+}
+
+async function fetchFullJdFromApi(url) {
+  const res = await fetch('/api/fetch-jd', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Falha ao importar descrição da vaga.');
+  return data;
+}
+
+async function enrichActiveJobDescriptionIfNeeded() {
+  if (!activeJob || activeJob._jdEnriched) return false;
+  const link = String(activeJob.link || '').trim();
+  if (!/^https?:\/\//i.test(link)) return false;
+  if (!isGenericOrShortJd(activeJob.requisitos || '')) return false;
+
+  try {
+    const data = await fetchFullJdFromApi(link);
+    const desc = (data?.posting?.description || '').trim();
+    if (desc.length > (activeJob.requisitos || '').trim().length) {
+      activeJob.requisitos = desc;
+      activeJob._jdEnriched = true;
+      if (!activeJob.empresa && data.posting.company) activeJob.empresa = data.posting.company;
+      if (!activeJob.cargo && data.posting.title) activeJob.cargo = data.posting.title;
+      try {
+        localStorage.setItem(STORAGE_KEYS.ACTIVE_JOB, JSON.stringify(activeJob));
+      } catch (_) {}
+      updateActiveJobBanner();
+      const statusEl = document.getElementById('import-jd-status');
+      if (statusEl) {
+        const warnCount = (data.prompt_injection_warnings || []).length;
+        statusEl.textContent = `Descrição completa importada (${data.posting.source}, ${desc.length} caracteres)${warnCount ? ` · ${warnCount} alerta(s) de sanitização` : ''}.`;
+      }
+      return true;
+    }
+  } catch (_) {
+    // Fallback silencioso: mantém a descrição já disponível sem bloquear geração
+  }
+  return false;
+}
+
+async function importJobDescriptionFromUrl() {
+  const urlInput = document.getElementById('input-import-jd-url');
+  const textInput = document.getElementById('input-import-jd-text');
+  const statusEl = document.getElementById('import-jd-status');
+  const btn = document.getElementById('btn-fetch-jd-url');
+  const url = (urlInput?.value || activeJob?.link || '').trim();
+
+  if (!/^https?:\/\//i.test(url)) {
+    showToast('Informe um link válido iniciando com http:// ou https://.');
+    return;
+  }
+
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Importando...';
+  }
+  if (statusEl) statusEl.textContent = 'Buscando descrição completa da vaga...';
+
+  try {
+    const data = await fetchFullJdFromApi(url);
+    const p = data.posting || {};
+    const desc = (p.description || '').trim();
+    if (!desc) throw new Error('A página não retornou texto legível sem JavaScript. Cole a descrição manualmente abaixo.');
+
+    activeJob = {
+      ...(activeJob || {}),
+      id: activeJob?.id || `ext-${Date.now()}`,
+      empresa: p.company || activeJob?.empresa || 'Vaga Externa',
+      cargo: p.title || activeJob?.cargo || 'Estágio em Tecnologia',
+      modalidade: p.workplace || activeJob?.modalidade || '',
+      localizacao: p.location || activeJob?.localizacao || '',
+      requisitos: desc,
+      link: url,
+      _jdEnriched: true
+    };
+    try {
+      localStorage.setItem(STORAGE_KEYS.ACTIVE_JOB, JSON.stringify(activeJob));
+    } catch (_) {}
+
+    if (textInput) textInput.value = desc;
+    updateActiveJobBanner();
+
+    const warnCount = (data.prompt_injection_warnings || []).length;
+    if (statusEl) {
+      statusEl.textContent = `Importada via ${p.source || 'web'} (${desc.length} caracteres)${warnCount ? ` · ${warnCount} instrução(ões) suspeita(s) neutralizada(s)` : ''}.`;
+    }
+    showToast('Descrição completa da vaga importada com sucesso.');
+  } catch (err) {
+    if (statusEl) statusEl.textContent = `Aviso: ${err.message}`;
+    showToast(`Erro ao importar link: ${err.message}`);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Importar Link';
+    }
+  }
+}
+
+function applyManualJobDescription() {
+  const textInput = document.getElementById('input-import-jd-text');
+  const urlInput = document.getElementById('input-import-jd-url');
+  const statusEl = document.getElementById('import-jd-status');
+  const desc = (textInput?.value || '').trim();
+
+  if (desc.length < 30) {
+    showToast('Cole ao menos 30 caracteres da descrição da vaga.');
+    return;
+  }
+
+  activeJob = {
+    ...(activeJob || {}),
+    id: activeJob?.id || `manual-${Date.now()}`,
+    empresa: activeJob?.empresa || 'Vaga Externa',
+    cargo: activeJob?.cargo || 'Estágio em Tecnologia',
+    link: (urlInput?.value || activeJob?.link || '').trim(),
+    requisitos: desc,
+    _jdEnriched: true
+  };
+  try {
+    localStorage.setItem(STORAGE_KEYS.ACTIVE_JOB, JSON.stringify(activeJob));
+  } catch (_) {}
+
+  updateActiveJobBanner();
+  if (statusEl) statusEl.textContent = `Descrição aplicada (${desc.length} caracteres).`;
+  toggleStudioDrawer('drawer-import-jd');
+  showToast('Descrição da vaga atualizada para geração do currículo.');
+}
+
 async function loadTargetJobFromContext() {
   const params = new URLSearchParams(window.location.search);
   const vagaId = params.get('vaga_id');
@@ -1373,40 +1527,45 @@ async function loadTargetJobFromContext() {
     if (data) activeJob = data;
   }
 
-  if (activeJob) {
-    document.getElementById('job-company').textContent = activeJob.empresa || 'Empresa';
-    document.getElementById('job-title').textContent = activeJob.cargo || 'Vaga selecionada';
-    document.getElementById('job-meta').textContent = [activeJob.modalidade, activeJob.localizacao, activeJob.turno]
-      .filter(Boolean)
-      .join(' · ');
-  }
+  updateActiveJobBanner();
 }
 
 async function generateATSResume() {
   const byok = getByokConfig();
   if (!byok.apiKey) {
-    showToast('Configure sua chave de IA em "Configurar fontes".');
+    showToast('Configure sua chave de IA em "Configurar Fontes".');
     switchView('onboarding');
     goToStep(1);
     return;
   }
 
   if ((masterProfile.projects || []).length === 0 && (masterProfile.experiences || []).length === 0) {
-    showToast('Adicione pelo menos 1 projeto ou experiência no Banco de fatos.');
+    showToast('Adicione pelo menos 1 projeto ou experiência no Banco de Fatos.');
     switchView('onboarding');
     goToStep(2);
     return;
   }
 
-  const cargo = activeJob?.cargo || '';
-  const jdText = activeJob?.requisitos || '';
+  let cargo = activeJob?.cargo || '';
+  let jdText = activeJob?.requisitos || '';
   if (!jdText && !cargo) {
-    showToast('Selecione uma vaga em andamento em "Meta do Dia" para gerar o currículo.');
+    showToast('Selecione uma vaga em andamento ou importe um link em "Mais Opções".');
+    toggleStudioDrawer('drawer-import-jd');
     return;
   }
 
   const btn = document.getElementById('btn-generate-ats');
   btn.disabled = true;
+  btn.textContent = 'Buscando Descrição...';
+
+  // Enriquecimento automático via /api/fetch-jd quando a descrição coletada pelo ETL for curta/genérica
+  const enriched = await enrichActiveJobDescriptionIfNeeded();
+  if (enriched) {
+    cargo = activeJob?.cargo || cargo;
+    jdText = activeJob?.requisitos || jdText;
+    showToast('Descrição completa importada da fonte antes de gerar.');
+  }
+
   btn.textContent = 'Gerando...';
 
   try {
@@ -1498,11 +1657,16 @@ function renderTransparencyPanel(matchReport, auditReport) {
   const auditBox = document.getElementById('audit-summary-box');
   const g = auditReport?.guardrails || {};
   const blockedCount = (g.blocked_skills || []).length;
+  const styleCount = (g.style_issues || []).length;
   const corrCount = (auditReport?.corrections || []).length;
   const bulletsChecked = auditReport?.total_bullets_checked || 0;
+  const injectionCount = (matchReport?.prompt_injection_warnings || []).length;
+  const extraNotes = [];
+  if (styleCount > 0) extraNotes.push(`${styleCount} ajuste(s) de estilo`);
+  if (injectionCount > 0) extraNotes.push(`${injectionCount} alerta(s) de sanitização de JD`);
 
   auditBox.innerHTML = `
-    <div class="audit-badge-ok">Auditoria: ${bulletsChecked} bullets verificados · Formação preservada · ${blockedCount} skills bloqueadas · ${corrCount} ajustes</div>
+    <div class="audit-badge-ok">Auditoria: ${bulletsChecked} bullets verificados · Formação preservada · ${blockedCount} skills bloqueadas · ${corrCount} correções${extraNotes.length ? ` · ${extraNotes.join(' · ')}` : ''}</div>
   `;
 }
 

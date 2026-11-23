@@ -22,6 +22,131 @@ function escapeRegExp(str) {
   return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+const PROMPT_INJECTION_PATTERNS = [
+  { id: 'ignore_instructions', regex: /\b(ignore|disregard|forget)\s+(all\s+)?(previous|prior|above)\s+(instructions?|prompts?|rules?)\b/gi },
+  { id: 'ignore_instructions_pt', regex: /\b(ignore|desconsidere|esque[cç]a)\s+(todas?\s+as\s+)?(instru[cç][oõ]es|regras|comandos)\s+(anteriores|acima)\b/gi },
+  { id: 'role_override', regex: /\b(you are now|act as a|system prompt:|assistant:|\[system\]|<\|im_start\|>)\b/gi },
+  { id: 'hidden_directive', regex: /\b(if you are an? (ai|llm|agent)|note to (ai|llm|chatgpt|claude)|include the word)\b/gi }
+];
+
+const DEFAULT_BANNED_PHRASES = [
+  // PT-BR clichês de IA
+  'apaixonado por tecnologia',
+  'apaixonada por tecnologia',
+  'alavancar',
+  'sinergia',
+  'proativo e dinâmico',
+  'proativa e dinâmica',
+  'pensar fora da caixa',
+  'vestir a camisa',
+  'soluções inovadoras de ponta',
+  // EN clichês de IA
+  'passionate about technology',
+  'results-driven',
+  'cutting-edge',
+  'fast-paced environment',
+  'leverage synergies',
+  'synergy',
+  'delve into',
+  'hardworking team player',
+  'think outside the box'
+];
+
+const DEFAULT_BANNED_CHARS = ['—', '\u200B', '\u200C', '\u200D', '\uFEFF'];
+
+/**
+ * Sanitiza a descrição de vaga (JD) contra instruções ocultas de prompt injection
+ * e caracteres invisíveis (inspirado em job-hunt-agent/docs/portals.md).
+ */
+function sanitizeJobDescription(jdText = '') {
+  const raw = String(jdText || '');
+  const warnings = [];
+
+  // Remove caracteres zero-width invisíveis frequentemente usados para ocultar texto
+  let sanitized = raw.replace(/[\u200B-\u200D\uFEFF]/g, '');
+  if (sanitized.length !== raw.length) {
+    warnings.push({
+      kind: 'zero_width_chars',
+      detail: 'Caracteres invisíveis (zero-width) removidos da descrição da vaga.'
+    });
+  }
+
+  for (const { id, regex } of PROMPT_INJECTION_PATTERNS) {
+    regex.lastIndex = 0;
+    const matches = sanitized.match(regex);
+    if (matches && matches.length > 0) {
+      warnings.push({
+        kind: id,
+        matches: matches.slice(0, 3),
+        detail: `Possível instrução de prompt injection neutralizada (${id}).`
+      });
+      sanitized = sanitized.replace(regex, '[trecho-ignorado]');
+    }
+  }
+
+  return { sanitizedText: sanitized.trim(), warnings };
+}
+
+/**
+ * Linter determinístico anti-clichê de IA para textos de currículo e outreach
+ * (portado de job-hunt-agent/src/jobhunt/lint.py).
+ */
+function lintResumeText(
+  text = '',
+  {
+    bannedChars = DEFAULT_BANNED_CHARS,
+    bannedPhrases = DEFAULT_BANNED_PHRASES,
+    maxChars = null
+  } = {}
+) {
+  const value = String(text || '');
+  const issues = [];
+
+  for (const ch of bannedChars || []) {
+    if (value.includes(ch)) {
+      const code = ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+      issues.push({
+        kind: 'char',
+        token: ch,
+        message: `Caractere proibido ${JSON.stringify(ch)} (U+${code})`
+      });
+    }
+  }
+
+  for (const phrase of bannedPhrases || []) {
+    const rx = new RegExp(`(?<!\\w)${escapeRegExp(phrase)}(?!\\w)`, 'i');
+    const m = value.match(rx);
+    if (m) {
+      issues.push({
+        kind: 'phrase',
+        token: m[0],
+        message: `Clichê de IA detectado: "${m[0]}"`
+      });
+    }
+  }
+
+  if (typeof maxChars === 'number' && maxChars > 0) {
+    const trimmedLen = value.trim().length;
+    if (trimmedLen > maxChars) {
+      issues.push({
+        kind: 'length',
+        token: String(trimmedLen),
+        message: `${trimmedLen} caracteres (limite recomendado: ${maxChars})`
+      });
+    }
+  }
+
+  return issues;
+}
+
+function cleanStyleChars(text = '') {
+  return String(text || '')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/\s*—\s*/g, ' - ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 /**
  * Detecta automaticamente se a vaga está em Inglês ou Português (pt-BR).
  */
@@ -153,7 +278,8 @@ function selectTopProjectsDeterministically(projects = [], jdText = '', jdKeywor
  */
 async function analyzeJobAndBuildMatchMatrix({ profile, job, jdText, llmConfig, llmCaller = callLLMJson }) {
   const whitelist = buildSkillsWhitelist(profile);
-  const fullJd = [job?.cargo, job?.empresa, job?.requisitos, jdText].filter(Boolean).join('\n\n');
+  const rawJd = [job?.cargo, job?.empresa, job?.requisitos, jdText].filter(Boolean).join('\n\n');
+  const { sanitizedText: fullJd, warnings: promptInjectionWarnings } = sanitizeJobDescription(rawJd);
   const idioma = detectJobLanguage(fullJd);
 
   const systemPrompt = `Você é um especialista sênior em recrutamento técnico e sistemas ATS.
@@ -235,7 +361,8 @@ Retorne JSON no formato exato:
     fit_summary: analysis.fit_summary || '',
     selected_projects: selectedScored.map((s) => s.project),
     selected_project_ids: selectedScored.map((s) => s.project.id),
-    whitelist
+    whitelist,
+    prompt_injection_warnings: promptInjectionWarnings
   };
 }
 
@@ -429,6 +556,7 @@ function enforceDeterministicGuardrails({ resume, profile, matchMatrix }) {
   const blockedSkills = [];
   const gapViolations = [];
   const crossProjectWarnings = [];
+  const styleIssues = [];
   let educationRestored = false;
 
   // 1. Filtra skills_grouped estritamente pela whitelist
@@ -483,14 +611,20 @@ function enforceDeterministicGuardrails({ resume, profile, matchMatrix }) {
       return false;
     });
 
-    // Checa contaminação cruzada entre projetos (menção a outro projeto nos bullets)
+    // Checa contaminação cruzada entre projetos (menção a outro projeto nos bullets) e estilo anti-clichê
     const checkedBullets = (proj.bullets || []).map((b) => {
-      const bNorm = normalizeToken(b.text);
+      const origText = b?.text || '';
+      const rawStyle = lintResumeText(origText, { maxChars: 220 });
+      if (rawStyle.length > 0) {
+        rawStyle.forEach((iss) => styleIssues.push({ location: `Projeto: ${proj.name}`, ...iss, text: origText }));
+      }
+      const cleanedText = cleanStyleChars(origText);
+      const bNorm = normalizeToken(cleanedText);
       for (const other of allOtherProjectNames) {
         if (other.id !== proj.id && other.nameNorm.length >= 4 && bNorm.includes(other.nameNorm)) {
           crossProjectWarnings.push({
             project_id: proj.id,
-            bullet: b.text,
+            bullet: cleanedText,
             reason: `Possível referência cruzada ao projeto "${other.nameNorm}".`
           });
         }
@@ -499,10 +633,10 @@ function enforceDeterministicGuardrails({ resume, profile, matchMatrix }) {
       for (const gap of forbiddenGaps) {
         const gapNorm = normalizeToken(gap);
         if (gapNorm.length >= 2 && new RegExp(`(^|\\s)${escapeRegExp(gapNorm)}(\\s|$)`).test(bNorm)) {
-          gapViolations.push({ location: `Projeto: ${proj.name}`, term: gap, text: b.text });
+          gapViolations.push({ location: `Projeto: ${proj.name}`, term: gap, text: cleanedText });
         }
       }
-      return b;
+      return { ...b, text: cleanedText };
     });
 
     return {
@@ -512,25 +646,37 @@ function enforceDeterministicGuardrails({ resume, profile, matchMatrix }) {
     };
   });
 
-  // 3. Checa termos proibidos (gaps) no resumo e nas experiências
-  const summaryNorm = normalizeToken(resume.summary);
+  // 3. Checa termos proibidos (gaps) e estilo anti-clichê no resumo e nas experiências
+  const rawSummary = resume.summary || '';
+  lintResumeText(rawSummary, { maxChars: 460 }).forEach((iss) => {
+    styleIssues.push({ location: 'Resumo', ...iss, text: rawSummary });
+  });
+  const cleanSummary = cleanStyleChars(rawSummary);
+  const summaryNorm = normalizeToken(cleanSummary);
   for (const gap of forbiddenGaps) {
     const gapNorm = normalizeToken(gap);
     if (gapNorm.length >= 2 && new RegExp(`(^|\\s)${escapeRegExp(gapNorm)}(\\s|$)`).test(summaryNorm)) {
-      gapViolations.push({ location: 'Resumo', term: gap, text: resume.summary });
+      gapViolations.push({ location: 'Resumo', term: gap, text: cleanSummary });
     }
   }
-  (resume.experiences || []).forEach((exp) => {
-    (exp.bullets || []).forEach((b) => {
-      const bNorm = normalizeToken(b.text);
+  const cleanExperiences = (resume.experiences || []).map((exp) => ({
+    ...exp,
+    bullets: (exp.bullets || []).map((b) => {
+      const origText = b?.text || '';
+      lintResumeText(origText, { maxChars: 220 }).forEach((iss) => {
+        styleIssues.push({ location: `Experiência: ${exp.company}`, ...iss, text: origText });
+      });
+      const cleanedText = cleanStyleChars(origText);
+      const bNorm = normalizeToken(cleanedText);
       for (const gap of forbiddenGaps) {
         const gapNorm = normalizeToken(gap);
         if (gapNorm.length >= 2 && new RegExp(`(^|\\s)${escapeRegExp(gapNorm)}(\\s|$)`).test(bNorm)) {
-          gapViolations.push({ location: `Experiência: ${exp.company}`, term: gap, text: b.text });
+          gapViolations.push({ location: `Experiência: ${exp.company}`, term: gap, text: cleanedText });
         }
       }
-    });
-  });
+      return { ...b, text: cleanedText };
+    })
+  }));
 
   // 4. Integridade 1:1 da Formação Acadêmica (Education nunca pode ser inventada ou alterada)
   const expectedEdu = (profile.education || []).map((edu) => ({
@@ -549,7 +695,9 @@ function enforceDeterministicGuardrails({ resume, profile, matchMatrix }) {
   return {
     resume: {
       ...resume,
+      summary: cleanSummary,
       education: expectedEdu,
+      experiences: cleanExperiences,
       projects: cleanProjects,
       skills_grouped: cleanSkillsGrouped
     },
@@ -557,6 +705,7 @@ function enforceDeterministicGuardrails({ resume, profile, matchMatrix }) {
       blocked_skills: Array.from(new Set(blockedSkills)),
       gap_violations: gapViolations,
       cross_project_warnings: crossProjectWarnings,
+      style_issues: styleIssues,
       education_restored: educationRestored
     }
   };
@@ -613,6 +762,9 @@ ${JSON.stringify(bulletsToAudit)}
 
 VIOLAÇÕES DE GAP DETECTADAS PELO CÓDIGO (se houver, reescreva removendo o termo proibido):
 ${JSON.stringify(guardrails.gap_violations || [])}
+
+ALERTAS DE ESTILO / CLICHÊS DE IA DETECTADOS (se houver clichê em um bullet, reescreva de forma direta e factual):
+${JSON.stringify((guardrails.style_issues || []).filter((s) => s.kind === 'phrase'))}
 
 Retorne JSON exato:
 {
@@ -763,7 +915,8 @@ async function generateTruthfulATSResume({ profile, job, jdText = '', llmConfig,
       terminological_matches: matchMatrix.terminological_matches,
       excluded_gaps: matchMatrix.excluded_gaps,
       fit_summary: matchMatrix.fit_summary,
-      selected_project_ids: matchMatrix.selected_project_ids
+      selected_project_ids: matchMatrix.selected_project_ids,
+      prompt_injection_warnings: matchMatrix.prompt_injection_warnings || []
     },
     audit_report
   };
@@ -772,6 +925,8 @@ async function generateTruthfulATSResume({ profile, job, jdText = '', llmConfig,
 module.exports = {
   normalizeToken,
   detectJobLanguage,
+  sanitizeJobDescription,
+  lintResumeText,
   buildSkillsWhitelist,
   selectTopProjectsDeterministically,
   analyzeJobAndBuildMatchMatrix,
