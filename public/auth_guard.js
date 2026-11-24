@@ -167,8 +167,11 @@
 
   function translateAuthError(errOrMessage) {
     const raw = String((errOrMessage && errOrMessage.message) || errOrMessage || '').trim();
+    const code = String((errOrMessage && (errOrMessage.code || errOrMessage.error_code)) || '')
+      .trim()
+      .toLowerCase();
     const low = raw.toLowerCase();
-    if (!raw) return 'Não foi possível concluir a operação. Tente novamente.';
+    if (!raw && !code) return 'Não foi possível concluir a operação. Tente novamente.';
     if (low.includes('invalid login credentials')) return 'E-mail ou senha incorretos.';
     if (low.includes('email not confirmed')) return 'Confirme seu e-mail através do link enviado antes de entrar.';
     if (low.includes('user already registered') || low.includes('already been registered')) {
@@ -180,6 +183,30 @@
     }
     if (low.includes('same password') || low.includes('different from the old password')) {
       return 'A nova senha deve ser diferente da senha atual.';
+    }
+    if (
+      code === 'otp_expired' ||
+      low.includes('otp_expired') ||
+      low.includes('email link is invalid or has expired') ||
+      low.includes('token has expired or is invalid')
+    ) {
+      return 'O link de recuperação expirou ou já foi utilizado. Solicite um novo link para redefinir sua senha.';
+    }
+    if (
+      code === 'session_not_found' ||
+      low.includes('auth session missing') ||
+      low.includes('session_not_found')
+    ) {
+      return 'Sessão de recuperação ausente ou expirada. Solicite um novo link de redefinição de senha.';
+    }
+    if (
+      code === 'access_denied' ||
+      low.includes('access_denied') ||
+      low.includes('access denied') ||
+      low.includes('user denied') ||
+      low.includes('permissions error')
+    ) {
+      return 'Autenticação cancelada ou acesso negado. Tente novamente ou entre com seu e-mail e senha.';
     }
     return raw;
   }

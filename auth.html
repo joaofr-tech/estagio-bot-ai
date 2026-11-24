@@ -105,6 +105,9 @@
         <button type="submit" class="sona-btn-primary auth-submit-btn" id="btn-reset-submit">
           Salvar Nova Senha
         </button>
+        <button type="button" class="sona-btn-secondary auth-submit-btn" onclick="setAuthMode('signin')">
+          Voltar para Login
+        </button>
       </form>
 
       <div id="oauth-section">
@@ -124,9 +127,13 @@
   <script src="auth_guard.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
+    const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
     const nextPath = window.SonaAuth.sanitizeNextPath(params.get('next'), '/dashboard.html');
     let sb = null;
-    let isRecoveryFlow = params.get('mode') === 'reset';
+    let isRecoveryFlow =
+      params.get('mode') === 'reset' ||
+      params.get('type') === 'recovery' ||
+      hashParams.get('type') === 'recovery';
 
     function showFeedback(message, type = 'error') {
       const box = document.getElementById('auth-feedback');
@@ -144,6 +151,9 @@
     }
 
     function setAuthMode(mode) {
+      if (mode !== 'reset') {
+        isRecoveryFlow = false;
+      }
       clearFeedback();
       const heading = document.getElementById('auth-heading');
       const subheading = document.getElementById('auth-subheading');
@@ -177,15 +187,31 @@
 
     async function initAuthPage() {
       const initialMode = params.get('mode');
-      if (initialMode === 'signup' || initialMode === 'recover' || initialMode === 'reset') {
+      if (isRecoveryFlow) {
+        setAuthMode('reset');
+      } else if (initialMode === 'signup' || initialMode === 'recover') {
         setAuthMode(initialMode);
       }
 
+      const rawQueryError = params.get('error');
+      const callbackErrDesc = params.get('error_description') || hashParams.get('error_description') || '';
+      const callbackErrCode = params.get('error_code') || hashParams.get('error_code') || '';
+      const callbackErr =
+        (rawQueryError && rawQueryError !== 'config' ? rawQueryError : '') ||
+        hashParams.get('error') ||
+        '';
+      const rawCallbackError =
+        callbackErrCode === 'otp_expired'
+          ? callbackErrCode
+          : callbackErrDesc || callbackErrCode || callbackErr;
+
       if (params.get('deleted') === '1') {
         showFeedback('Sua conta e todos os dados associados foram excluídos com segurança.', 'success');
-      } else if (params.get('error') === 'config') {
+      } else if (rawQueryError === 'config') {
         showFeedback('Configuração do Supabase ausente neste ambiente. Verifique supabase_config.js.', 'error');
         return;
+      } else if (rawCallbackError) {
+        showFeedback(window.SonaAuth.translateAuthError(rawCallbackError), 'error');
       }
 
       sb = window.SonaAuth.getClient();

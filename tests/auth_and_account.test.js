@@ -89,6 +89,11 @@ async function runAuthAndAccountTests() {
 
   assert.ok(SonaAuth.translateAuthError('Invalid login credentials').includes('E-mail ou senha incorretos'));
   assert.ok(SonaAuth.translateAuthError('User already registered').includes('já possui cadastro'));
+  assert.ok(SonaAuth.translateAuthError('otp_expired').includes('expirou'));
+  assert.ok(SonaAuth.translateAuthError('Email link is invalid or has expired').includes('expirou'));
+  assert.ok(SonaAuth.translateAuthError('Auth session missing!').includes('Sessão de recuperação'));
+  assert.ok(SonaAuth.translateAuthError('access_denied').includes('cancelada'));
+  assert.ok(SonaAuth.translateAuthError('The user denied your request').includes('cancelada'));
   console.log('  ✓ deriveUserIdentity e translateAuthError geram microcopy limpa em PT-BR');
 
   // 5. Detecção de dados legados no navegador
@@ -197,6 +202,18 @@ async function runAuthAndAccountTests() {
   ['form-signin', 'form-signup', 'form-recover', 'form-reset', 'btn-oauth-github', 'auth-feedback'].forEach((id) => {
     assert.ok(authHtml.includes(`id="${id}"`), `auth.html deve conter #${id}`);
   });
+  const resetFormMatch = authHtml.match(/<form[^>]*id="form-reset"[\s\S]*?<\/form>/);
+  assert.ok(resetFormMatch, 'auth.html deve conter o bloco <form id="form-reset">');
+  assert.ok(
+    resetFormMatch[0].includes('Voltar para Login') && resetFormMatch[0].includes("setAuthMode('signin')"),
+    '#form-reset deve incluir botão Voltar para Login'
+  );
+  assert.ok(authHtml.includes("type') === 'recovery'"), "auth.html deve detectar type === 'recovery' na URL/hash");
+  assert.ok(authHtml.includes('window.location.hash'), 'auth.html deve inspecionar window.location.hash no startup');
+  assert.ok(
+    authHtml.includes('error_description') && authHtml.includes('error_code'),
+    'auth.html deve exibir erros de callback OAuth/OTP'
+  );
   console.log('  ✓ auth.html contém os 4 fluxos de autenticação e obedece estritamente ao DESIGN.md');
 }
 
