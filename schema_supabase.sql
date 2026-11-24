@@ -28,9 +28,12 @@ alter table public.vagas
 
 alter table public.vagas enable row level security;
 
+-- SaaS fechado: leitura restrita a sessões autenticadas; escrita apenas via service_role no ETL
 drop policy if exists "Permitir leitura publica de vagas" on public.vagas;
-create policy "Permitir leitura publica de vagas"
+drop policy if exists "Permitir leitura autenticada de vagas" on public.vagas;
+create policy "Permitir leitura autenticada de vagas"
   on public.vagas for select
+  to authenticated
   using (true);
 
 -- Remove política antiga excessivamente permissiva (escrita deve ocorrer apenas via service_role no ETL)
@@ -50,9 +53,12 @@ create table if not exists public.historico_execucoes (
 
 alter table public.historico_execucoes enable row level security;
 
+-- SaaS fechado: leitura restrita a sessões autenticadas; inserção apenas via service_role no ETL
 drop policy if exists "Permitir leitura publica do historico" on public.historico_execucoes;
-create policy "Permitir leitura publica do historico"
+drop policy if exists "Permitir leitura autenticada do historico" on public.historico_execucoes;
+create policy "Permitir leitura autenticada do historico"
   on public.historico_execucoes for select
+  to authenticated
   using (true);
 
 -- Remove política antiga de inserção anônima (inserção ocorre apenas via service_role no ETL)

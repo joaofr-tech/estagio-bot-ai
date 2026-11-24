@@ -56,9 +56,9 @@ flowchart LR
 ├── dashboard.html / index.html # Painel principal (Obsidian Dark) sincronizado com Supabase
 ├── curriculo.html / .js / .css # Sona Resume Studio (Editor WYSIWYG, Onboarding, Banco de Fatos)
 ├── design-system.css           # Tokens e componentes do Design System (DESIGN.md)
-├── schema_supabase.sql         # Schema + RLS de `vagas` e `historico_execucoes`
-├── schema_curriculo_supabase.sql # Schema + RLS de `master_profiles` e `curriculos_gerados`
-├── schema_auth_supabase.sql    # Schema + RLS de `user_settings`, `user_vagas` e trigger `on_auth_user_created`
+├── schema_supabase.sql         # 1. Schema + RLS autenticada de `vagas` e `historico_execucoes` (escrita `service_role`)
+├── schema_curriculo_supabase.sql # 2. Schema + RLS por `auth.uid()` de `master_profiles` e `curriculos_gerados`
+├── schema_auth_supabase.sql    # 3. Schema + RLS por `auth.uid()` de `user_settings`, `user_vagas` e trigger `on_auth_user_created`
 ├── tests/                      # Testes Node.js (Dashboard, Motor ATS, APIs e Segurança Local)
 ├── tests_py/                   # Testes Python (ETL unitários + E2E Playwright)
 └── .github/workflows/          # CI em PRs (ci.yml) + ETL horário fail-fast (etl_pipeline.yml)
@@ -87,10 +87,10 @@ Copie [.env.example](.env.example) para `.env` e preencha:
 - **Opcionais:** `EMAIL_ADDRESS`, `EMAIL_PASSWORD`, `ALERT_WEBHOOK_URL`
 
 #### 2. Provisionar o Banco no Supabase
-No **SQL Editor** do Supabase, execute os três scripts idempotentes em ordem:
-1. [schema_supabase.sql](schema_supabase.sql) — tabelas `vagas` (com `updated_at`) e `historico_execucoes`, com escrita restrita à `service_role`.
+No **SQL Editor** do Supabase, execute na ordem explícita `1. schema_supabase.sql` -> `2. schema_curriculo_supabase.sql` -> `3. schema_auth_supabase.sql`. Os três scripts são **idempotentes** (seguros para criação inicial e reexecução em bancos existentes sem reabrir acesso anônimo):
+1. [schema_supabase.sql](schema_supabase.sql) — tabelas `vagas` (com `updated_at`) e `historico_execucoes`, com leitura permitida apenas a usuários autenticados (`to authenticated`) e escrita restrita exclusivamente à `service_role`.
 2. [schema_curriculo_supabase.sql](schema_curriculo_supabase.sql) — tabelas `master_profiles` e `curriculos_gerados` com RLS estrita por `auth.uid()`.
-3. [schema_auth_supabase.sql](schema_auth_supabase.sql) — tabelas `user_settings` e `user_vagas`, trigger automático `on_auth_user_created` e políticas RLS fechadas para usuários autenticados.
+3. [schema_auth_supabase.sql](schema_auth_supabase.sql) — tabelas `user_settings` e `user_vagas`, trigger automático `on_auth_user_created` e políticas RLS fechadas para usuários autenticados (garantindo remoção de políticas antigas de leitura pública em `vagas` e `historico_execucoes`).
 
 > **Configuração do Supabase Auth:** No painel do Supabase, acesse **Authentication -> URL Configuration** e defina a `Site URL` (ex.: `http://127.0.0.1:3000` localmente ou o domínio de produção na Vercel) e adicione em **Redirect URLs** `http://127.0.0.1:3000/**` e `https://<seu-dominio>.vercel.app/**`. Opcionalmente, habilite o provedor **GitHub** em **Authentication -> Providers** para login via OAuth.
 

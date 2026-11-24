@@ -110,14 +110,31 @@ async function runAuthAndAccountTests() {
   assert.strictEqual(legacyReport.counts.hasByokKey, true);
   console.log('  ✓ detectLegacyLocalData identifica registros antigos para migração assistida');
 
-  // 6. Validação estrutural de schema_auth_supabase.sql
+  // 6. Validação estrutural de schema_supabase.sql e schema_auth_supabase.sql
+  const baseSqlPath = path.resolve(__dirname, '..', 'schema_supabase.sql');
+  const baseSql = fs.readFileSync(baseSqlPath, 'utf8');
+  assert.strictEqual(
+    baseSql.includes('create policy "Permitir leitura publica'),
+    false,
+    'schema_supabase.sql não pode criar política de leitura pública anônima'
+  );
+  assert.ok(
+    baseSql.includes('to authenticated'),
+    'schema_supabase.sql deve restringir políticas SELECT a authenticated'
+  );
+  assert.ok(
+    baseSql.includes('create policy "Permitir leitura autenticada de vagas"') &&
+      baseSql.includes('create policy "Permitir leitura autenticada do historico"'),
+    'schema_supabase.sql deve criar políticas de leitura autenticada para vagas e historico_execucoes'
+  );
+
   const sqlPath = path.resolve(__dirname, '..', 'schema_auth_supabase.sql');
   const sql = fs.readFileSync(sqlPath, 'utf8');
   assert.ok(sql.includes('create table if not exists public.user_settings'), 'Deve criar user_settings');
   assert.ok(sql.includes('create table if not exists public.user_vagas'), 'Deve criar user_vagas');
   assert.ok(sql.includes('on_auth_user_created'), 'Deve criar trigger on_auth_user_created');
   assert.ok(sql.includes('to authenticated'), 'Deve restringir leitura de vagas a authenticated');
-  console.log('  ✓ schema_auth_supabase.sql contém tabelas, trigger e políticas RLS autenticadas');
+  console.log('  ✓ schema_supabase.sql e schema_auth_supabase.sql impõem políticas RLS autenticadas');
 
   // 7. Endpoint DELETE /api/account (CORS, 405, 401, 400 e 200 com exclusão em cascata)
   function mockRes() {
