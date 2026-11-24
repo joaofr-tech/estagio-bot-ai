@@ -29,6 +29,7 @@ alter table public.vagas
 alter table public.vagas enable row level security;
 
 -- SaaS fechado: leitura restrita a sessões autenticadas; escrita apenas via service_role no ETL
+drop policy if exists "Permitir leitura pública das vagas" on public.vagas;
 drop policy if exists "Permitir leitura publica de vagas" on public.vagas;
 drop policy if exists "Permitir leitura autenticada de vagas" on public.vagas;
 create policy "Permitir leitura autenticada de vagas"

@@ -158,6 +158,7 @@ create trigger trg_user_vagas_updated_at
   for each row execute function public.sona_set_updated_at();
 
 -- 5. SAAS FECHADO: RESTRINGE CATÁLOGO DE VAGAS E TELEMETRIA A SESSÕES AUTENTICADAS
+drop policy if exists "Permitir leitura pública das vagas" on public.vagas;
 drop policy if exists "Permitir leitura publica de vagas" on public.vagas;
 drop policy if exists "Permitir leitura autenticada de vagas" on public.vagas;
 create policy "Permitir leitura autenticada de vagas"
