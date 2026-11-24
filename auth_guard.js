@@ -21,6 +21,7 @@
   let _session = null;
   let _user = null;
   let _authListenerAttached = false;
+  let _signingOutRedirect = null;
 
   function sanitizeNextPath(rawNext, fallback = '/dashboard.html') {
     if (!rawNext || typeof rawNext !== 'string') return fallback;
@@ -311,7 +312,7 @@
         _session = newSession || null;
         _user = newSession?.user || null;
         if (event === 'SIGNED_OUT' || !newSession) {
-          redirectToAuth('/auth.html');
+          redirectToAuth(_signingOutRedirect || '/auth.html');
           return;
         }
         if (typeof options.onSessionUpdate === 'function') {
@@ -332,6 +333,7 @@
 
   async function signOut(redirectUrl = '/auth.html') {
     const client = getClient();
+    _signingOutRedirect = redirectUrl || '/auth.html';
     _session = null;
     _user = null;
     if (client) {
@@ -339,7 +341,9 @@
         await client.auth.signOut();
       } catch (_) {}
     }
-    redirectToAuth(redirectUrl);
+    const targetUrl = _signingOutRedirect;
+    _signingOutRedirect = null;
+    redirectToAuth(targetUrl);
   }
 
   function clearUserLocalCache(userId, storage) {

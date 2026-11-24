@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="auth-pending">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -17,6 +17,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
+    html.auth-pending { background: #111114; }
+    html.auth-pending body { opacity: 0; pointer-events: none; }
+    .user-avatar-circle img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
     /* =============================================================
        ORATRY DESIGN SYSTEM — ESTÁGIOBOT 2.0
        Electric Cobalt Palette · Floating Glass · Smooth Pills · Deep Hierarchy
@@ -2553,11 +2556,11 @@
       </ul>
 
       <!-- CARD DO USUÁRIO LOGADO + LOGOUT CORAL -->
-      <div class="user-footer-card">
-        <div class="user-avatar-circle">JF</div>
+      <div class="user-footer-card" id="sidebar-user-card">
+        <div class="user-avatar-circle" id="sidebar-user-avatar">--</div>
         <div class="user-details">
-          <span class="user-name">João Francisco</span>
-          <span class="user-email">@joaofrancisco</span>
+          <span class="user-name" id="sidebar-user-name">Carregando...</span>
+          <span class="user-email" id="sidebar-user-handle">@conta</span>
         </div>
         <div class="user-actions">
           <button class="icon-action-btn logout" onclick="handleLogout()" title="Sair da Conta">
@@ -3012,11 +3015,11 @@
             <div class="timeline-chart-header">
               <div>
                 <h4>Histórico Quinzenal de Candidaturas</h4>
-                <p style="color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem;">
+                <p id="tl-subtitle-goal" style="color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem;">
                   Acompanhamento diário dos últimos 15 dias em relação à meta de 3 vagas/dia.
                 </p>
               </div>
-              <span class="mono" style="font-size: 0.72rem; color: var(--green);">Linha tracejada: Meta (3/dia)</span>
+              <span id="tl-badge-goal" class="mono" style="font-size: 0.72rem; color: var(--green);">Linha tracejada: Meta (3/dia)</span>
             </div>
 
             <!-- SVG Line Chart Canvas -->
@@ -3027,7 +3030,7 @@
             <div class="timeline-stats-footer" id="timeline-stats-footer">
               <span>Total nos últimos 15 dias: <strong id="tl-total-15">0 vagas</strong></span>
               <span>Média diária: <strong id="tl-media-15">0.0/dia</strong></span>
-              <span>Dias atingindo a meta (≥3): <strong id="tl-dias-meta">0 dias</strong></span>
+              <span>Dias atingindo a meta (≥<span id="tl-label-goal-min">3</span>): <strong id="tl-dias-meta">0 dias</strong></span>
               <span>Maior pico em 1 dia: <strong id="tl-pico-dia">0 vagas</strong></span>
             </div>
           </div>
@@ -3176,23 +3179,94 @@
     </section>
 
     <!-- ===========================================================
-         TELA 07: CONFIGURAÇÕES DA CONTA (RESERVADA PARA FUTURO)
+         TELA 07: CONFIGURAÇÕES DA CONTA
          =========================================================== -->
     <section class="screen-view" id="screen-view-07">
       <header class="screen-header-block">
         <div class="wrap">
-          <h1 class="screen-title">Configurações</h1>
+          <h1 class="screen-title">Configurações da Conta</h1>
           <p class="screen-desc">
-            Preferências da sua conta e dados pessoais.
+            Gerencie sua identidade, meta diária, segurança da sessão e portabilidade dos seus dados.
           </p>
         </div>
       </header>
 
-      <div class="wrap">
-        <div class="empty-state-box" style="padding: 3rem 2rem; text-align: center;">
-          <div class="empty-state-title" style="margin-bottom: 0.4rem;">Em breve</div>
-          <div class="empty-state-desc" style="color: #71717A; font-size: 0.85rem;">
-            Ajustes de conta (nome, perfil, notificações e sessão) ficarão centralizados aqui.
+      <div class="wrap" style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 760px; padding-bottom: 3rem;">
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h2 style="font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem 0; color: var(--text-primary);">Perfil e Operação</h2>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0 0 1.25rem 0;">
+            Essas informações personalizam seu painel e definem sua meta diária de candidaturas.
+          </p>
+          <form onsubmit="salvarConfiguracoesConta(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.35rem;" for="acc-display-name">Nome de Exibição</label>
+              <input class="sona-input" id="acc-display-name" type="text" style="width: 100%; padding: 0.58rem 0.75rem; box-sizing: border-box;" required />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.35rem;" for="acc-handle">Identificador (@handle)</label>
+              <input class="sona-input" id="acc-handle" type="text" style="width: 100%; padding: 0.58rem 0.75rem; box-sizing: border-box;" required />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.35rem;" for="acc-daily-goal">Meta Diária de Candidaturas</label>
+              <input class="sona-input" id="acc-daily-goal" type="number" min="1" max="50" style="width: 100%; padding: 0.58rem 0.75rem; box-sizing: border-box;" required />
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 0.25rem;">
+              <button type="submit" class="sona-btn-primary" id="btn-save-account-profile">Salvar Alterações</button>
+            </div>
+          </form>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h2 style="font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem 0; color: var(--text-primary);">Segurança e Sessão</h2>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0 0 1rem 0;">
+            Conectado como <strong id="acc-email-label" style="color: var(--text-primary);">--</strong> via <strong id="acc-provider-label" style="color: var(--text-primary);">--</strong>.
+          </p>
+          <form onsubmit="alterarSenhaConta(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; align-items: end;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.35rem;" for="acc-new-password">Nova Senha (mínimo 8 caracteres)</label>
+              <input class="sona-input" id="acc-new-password" type="password" minlength="8" autocomplete="new-password" placeholder="Nova senha" style="width: 100%; padding: 0.58rem 0.75rem; box-sizing: border-box;" required />
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.35rem;" for="acc-confirm-password">Confirmar Nova Senha</label>
+              <input class="sona-input" id="acc-confirm-password" type="password" minlength="8" autocomplete="new-password" placeholder="Repita a nova senha" style="width: 100%; padding: 0.58rem 0.75rem; box-sizing: border-box;" required />
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.25rem;">
+              <button type="button" class="sona-btn-secondary" onclick="handleLogout()">Sair da Conta</button>
+              <button type="submit" class="sona-btn-primary" id="btn-change-password">Alterar Senha</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="legacy-migration-section" style="display: none; background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h2 style="font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem 0; color: var(--text-primary);">Dados Locais Encontrados Neste Navegador</h2>
+          <p id="legacy-migration-desc" style="font-size: 0.82rem; color: var(--text-secondary); margin: 0 0 1rem 0;">
+            Encontramos registros salvos antes da ativação de contas individuais.
+          </p>
+          <button type="button" class="sona-btn-primary" id="btn-import-legacy-data" onclick="importarDadosLocaisLegados()">
+            Importar Dados para Minha Conta
+          </button>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem;">
+          <h2 style="font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem 0; color: var(--text-primary);">Portabilidade e Exclusão de Conta</h2>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); margin: 0 0 1.15rem 0;">
+            Exporte uma cópia JSON completa das suas informações ou remova permanentemente sua conta e todos os dados vinculados no Supabase.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.35rem;">
+            <button type="button" class="sona-btn-secondary" id="btn-export-account-data" onclick="exportarDadosConta()">
+              Exportar Meus Dados
+            </button>
+          </div>
+          <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.15rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
+            <div style="flex: 1; min-width: 220px;">
+              <label style="display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 0.35rem;" for="acc-delete-confirm">
+                Digite <strong>EXCLUIR</strong> para confirmar a remoção definitiva da conta
+              </label>
+              <input class="sona-input" id="acc-delete-confirm" type="text" placeholder="EXCLUIR" style="width: 100%; max-width: 240px; padding: 0.54rem 0.75rem; box-sizing: border-box;" />
+            </div>
+            <button type="button" class="sona-btn-secondary" id="btn-delete-account" onclick="excluirContaDefinitivamente()" style="color: #FCA5A5 !important; border-color: rgba(248, 113, 113, 0.32) !important;">
+              Excluir Conta
+            </button>
           </div>
         </div>
       </div>
@@ -3324,6 +3398,7 @@
   <script src="regras_mismatch.js"></script>
   <script src="supabase_config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth_guard.js"></script>
 
   <!-- =============================================================
        DASHBOARD CONTROLLER JAVASCRIPT
@@ -3332,8 +3407,14 @@
     /* =============================================================
        STATE & REPOSITORIES
        ============================================================= */
-    const STORAGE_KEY = 'estagios_user_store';
-    const PARAMS_KEY = 'estagios_crawler_params';
+    let authUser = null;
+    let userSettingsRow = null;
+    let currentUserDailyGoal = 3;
+    let allJobs = [];
+
+    function getScopedKeys() {
+      return window.SonaAuth.getUserScopedKeys(authUser?.id || 'anon');
+    }
 
     // Base de Estados e Cidades Polos
     const ESTADOS_REGIOES = {
@@ -3381,18 +3462,81 @@
 
     function getUserStore() {
       try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+        const stored = localStorage.getItem(getScopedKeys().USER_STORE);
         return stored ? JSON.parse(stored) : {};
-      } catch (e) {
+      } catch (_) {
         return {};
       }
     }
 
-    function saveUserStore(store) {
+    function saveUserStore(store, changedKey = null) {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-      } catch (e) {}
+        localStorage.setItem(getScopedKeys().USER_STORE, JSON.stringify(store));
+      } catch (_) {}
+      if (changedKey) {
+        persistVagaStateCloud(changedKey, store[changedKey]);
+      }
     }
+
+    function markPendingVagaSync(vagaKey) {
+      try {
+        const key = getScopedKeys().PENDING_SYNC;
+        const list = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!list.includes(vagaKey)) {
+          list.push(vagaKey);
+          localStorage.setItem(key, JSON.stringify(list));
+        }
+      } catch (_) {}
+    }
+
+    async function persistVagaStateCloud(vagaKey, entry) {
+      const sb = window.SonaAuth?.getClient();
+      if (!sb || !authUser || !vagaKey) return;
+      const job =
+        (Array.isArray(allJobs) && allJobs.find((j) => j.canonicalKey === vagaKey)) ||
+        (window.BANCO_VAGAS || []).find((v) => normalizarChave(v.empresa, v.cargo) === vagaKey) ||
+        null;
+      try {
+        if (window.SonaAuth.isNeutralVagaEntry(entry)) {
+          const { error } = await sb
+            .from('user_vagas')
+            .delete()
+            .eq('user_id', authUser.id)
+            .eq('vaga_key', vagaKey);
+          if (error) throw error;
+        } else {
+          const row = window.SonaAuth.storeEntryToDbRow(authUser.id, vagaKey, entry, job?.id || null);
+          const { error } = await sb.from('user_vagas').upsert(row, { onConflict: 'user_id,vaga_key' });
+          if (error) throw error;
+        }
+      } catch (err) {
+        console.warn('[Supabase] Falha ao sincronizar vaga individual, agendando reenvio:', err.message);
+        markPendingVagaSync(vagaKey);
+        showToast('Sem conexão momentânea. Alteração salva localmente para reenvio automático.');
+      }
+    }
+
+    async function flushPendingVagasSync() {
+      const sb = window.SonaAuth?.getClient();
+      if (!sb || !authUser) return;
+      const pendingKey = getScopedKeys().PENDING_SYNC;
+      let list = [];
+      try {
+        list = JSON.parse(localStorage.getItem(pendingKey) || '[]');
+      } catch (_) {}
+      if (!Array.isArray(list) || !list.length) return;
+      const store = getUserStore();
+      try {
+        localStorage.removeItem(pendingKey);
+      } catch (_) {}
+      for (const vagaKey of list) {
+        await persistVagaStateCloud(vagaKey, store[vagaKey]);
+      }
+    }
+
+    window.addEventListener('online', () => {
+      flushPendingVagasSync();
+    });
 
     function normalizarChave(empresa, cargo) {
       const clean = (s) => (s || '')
@@ -3451,7 +3595,7 @@
               userState.status = 'encerrada';
               userState.motivoEncerramento = job.motivoEncerramento || 'Vaga encerrada no banco';
               store[key] = userState;
-              saveUserStore(store);
+              saveUserStore(store, key);
             }
 
             const motivoMismatch = userState.motivoMismatch || job.motivoMismatch || '';
@@ -3503,8 +3647,7 @@
       return Array.from(map.values());
     }
 
-    let allJobs = getConsolidatedJobs();
-    let currentScreen = '01'; // '01', '02', '03', '04', '05'
+    let currentScreen = '01'; // '01', '02', '03', '04', '05', '06', '07'
     let currentSubTab02 = 'andamento'; // 'andamento', 'aplicadas', 'salvas'
     let search01Query = '';
     let filter01Loc = 'all';
@@ -3521,7 +3664,7 @@
       if (!hud || !msgEl) return;
 
       if (undoCallback) {
-        msgEl.innerHTML = `<span>${msg}</span><button id="toast-undo-action" class="toast-undo-btn">Desfazer ↺</button>`;
+        msgEl.innerHTML = `<span>${msg}</span><button id="toast-undo-action" class="toast-undo-btn">Desfazer</button>`;
         const undoBtn = document.getElementById('toast-undo-action');
         if (undoBtn) {
           undoBtn.onclick = () => {
@@ -3544,11 +3687,10 @@
     // INITIALIZATION & SUPABASE CLOUD SYNC
     // =============================================================
     async function carregarVagasSupabase() {
-      if (!window.SUPABASE_CONFIG || !window.SUPABASE_CONFIG.url || !window.SUPABASE_CONFIG.anonKey) return;
-      if (!window.supabase || typeof window.supabase.createClient !== 'function') return;
+      const sbClient = window.SonaAuth?.getClient();
+      if (!sbClient) return;
 
       try {
-        const sbClient = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
         const { data, error } = await sbClient
           .from('vagas')
           .select('*')
@@ -3576,7 +3718,7 @@
           else if (currentScreen === '03') renderScreen03();
           else if (currentScreen === '05') renderScreen05();
           updateGlobalBadges();
-          console.log(`[Supabase] ☁️ ${data.length} vagas carregadas da nuvem em tempo real!`);
+          console.log(`[Supabase] ${data.length} vagas carregadas da nuvem em tempo real.`);
         }
       } catch (err) {
         console.warn('[Supabase] Aviso ao sincronizar com nuvem:', err);
@@ -3584,11 +3726,10 @@
     }
 
     async function carregarHistoricoSupabase() {
-      if (!window.SUPABASE_CONFIG || !window.SUPABASE_CONFIG.url || !window.SUPABASE_CONFIG.anonKey) return;
-      if (!window.supabase || typeof window.supabase.createClient !== 'function') return;
+      const sbClient = window.SonaAuth?.getClient();
+      if (!sbClient) return;
 
       try {
-        const sbClient = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
         const { data, error } = await sbClient
           .from('historico_execucoes')
           .select('*')
@@ -3614,33 +3755,632 @@
 
           if (currentScreen === '03') renderScreen03();
           updateGlobalBadges();
-          console.log(`[Supabase] 📡 ${data.length} execuções de crawler carregadas da nuvem em tempo real!`);
+          console.log(`[Supabase] ${data.length} execuções de crawler carregadas da nuvem em tempo real.`);
         }
       } catch (err) {
         console.warn('[Supabase] Aviso ao sincronizar telemetria com nuvem:', err);
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function atualizarUIConta() {
+      if (!authUser) return;
+      const identity = window.SonaAuth.deriveUserIdentity(authUser, userSettingsRow);
+      currentUserDailyGoal = identity.dailyGoal;
+
+      const avatarEl = document.getElementById('sidebar-user-avatar');
+      const nameEl = document.getElementById('sidebar-user-name');
+      const handleEl = document.getElementById('sidebar-user-handle');
+
+      if (avatarEl) {
+        avatarEl.textContent = '';
+        if (identity.avatarUrl && /^https?:\/\//i.test(identity.avatarUrl)) {
+          const img = document.createElement('img');
+          img.src = identity.avatarUrl;
+          img.alt = identity.displayName;
+          img.referrerPolicy = 'no-referrer';
+          img.onerror = () => {
+            avatarEl.textContent = identity.initials;
+          };
+          avatarEl.appendChild(img);
+        } else {
+          avatarEl.textContent = identity.initials;
+        }
+      }
+      if (nameEl) nameEl.textContent = identity.displayName;
+      if (handleEl) handleEl.textContent = identity.handle;
+
+      const inpName = document.getElementById('acc-display-name');
+      const inpHandle = document.getElementById('acc-handle');
+      const inpGoal = document.getElementById('acc-daily-goal');
+      const emailLbl = document.getElementById('acc-email-label');
+      const providerLbl = document.getElementById('acc-provider-label');
+
+      if (inpName) inpName.value = identity.displayName;
+      if (inpHandle) inpHandle.value = identity.handle;
+      if (inpGoal) inpGoal.value = String(identity.dailyGoal);
+      if (emailLbl) emailLbl.textContent = identity.email || 'Sem e-mail público';
+      if (providerLbl) {
+        providerLbl.textContent = identity.provider === 'github' ? 'GitHub OAuth' : 'E-mail e Senha';
+      }
+    }
+
+    function atualizarStatusMigracaoLegada() {
+      const sec = document.getElementById('legacy-migration-section');
+      const desc = document.getElementById('legacy-migration-desc');
+      if (!sec) return;
+      const report = window.SonaAuth.detectLegacyLocalData();
+      if (!report.hasLegacy) {
+        sec.style.display = 'none';
+        return;
+      }
+      const parts = [];
+      if (report.counts.vagas > 0) parts.push(`${report.counts.vagas} vaga(s) interagida(s)`);
+      if (report.counts.hasParams) parts.push('parâmetros de busca');
+      if (report.counts.hasProfile) parts.push('Banco de Fatos');
+      if (report.counts.history > 0) parts.push(`${report.counts.history} currículo(s) no histórico`);
+      if (report.counts.hasByokKey) parts.push('configuração de chave de IA');
+
+      if (desc) {
+        desc.textContent = `Encontramos registros anteriores neste navegador (${parts.join(', ')}). Vincule-os à sua conta para sincronizar tudo na nuvem.`;
+      }
+      sec.style.display = 'block';
+    }
+
+    async function carregarContaESincronizarSupabase() {
+      const sb = window.SonaAuth?.getClient();
+      if (!sb || !authUser) return;
+
+      try {
+        await flushPendingVagasSync();
+
+        const [settingsRes, vagasRes] = await Promise.all([
+          sb.from('user_settings').select('*').eq('user_id', authUser.id).maybeSingle(),
+          sb.from('user_vagas').select('*').eq('user_id', authUser.id)
+        ]);
+
+        if (!settingsRes.error && settingsRes.data) {
+          userSettingsRow = settingsRes.data;
+        } else if (!settingsRes.error && !settingsRes.data) {
+          const initialIdentity = window.SonaAuth.deriveUserIdentity(authUser, null);
+          const initialRow = {
+            user_id: authUser.id,
+            display_name: initialIdentity.displayName,
+            handle: initialIdentity.handle,
+            avatar_url: initialIdentity.avatarUrl || '',
+            daily_goal: initialIdentity.dailyGoal || 3,
+            crawler_params: {}
+          };
+          const { data: createdRow } = await sb
+            .from('user_settings')
+            .upsert(initialRow, { onConflict: 'user_id' })
+            .select('*')
+            .maybeSingle();
+          userSettingsRow = createdRow || initialRow;
+        }
+
+        if (
+          userSettingsRow?.crawler_params &&
+          typeof userSettingsRow.crawler_params === 'object' &&
+          Object.keys(userSettingsRow.crawler_params).length > 0
+        ) {
+          try {
+            localStorage.setItem(getScopedKeys().PARAMS, JSON.stringify(userSettingsRow.crawler_params));
+          } catch (_) {}
+          carregarParametrosCrawler();
+        }
+
+        if (!vagasRes.error && Array.isArray(vagasRes.data)) {
+          const cloudStore = {};
+          vagasRes.data.forEach((row) => {
+            const { vagaKey, entry } = window.SonaAuth.dbRowToStoreEntry(row);
+            if (vagaKey && !window.SonaAuth.isNeutralVagaEntry(entry)) {
+              cloudStore[vagaKey] = entry;
+            }
+          });
+
+          try {
+            const pendingList = JSON.parse(localStorage.getItem(getScopedKeys().PENDING_SYNC) || '[]');
+            if (Array.isArray(pendingList) && pendingList.length > 0) {
+              const localStore = getUserStore();
+              pendingList.forEach((k) => {
+                if (localStore[k]) cloudStore[k] = localStore[k];
+              });
+            }
+            localStorage.setItem(getScopedKeys().USER_STORE, JSON.stringify(cloudStore));
+          } catch (_) {}
+        }
+
+        atualizarUIConta();
+        atualizarStatusMigracaoLegada();
+        allJobs = getConsolidatedJobs();
+        renderScreen01();
+        renderScreen02();
+        if (currentScreen === '03') renderScreen03();
+        renderScreen05();
+        updateGlobalBadges();
+      } catch (err) {
+        console.warn('[Supabase] Aviso ao carregar configurações e vagas do usuário:', err);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      setupSearch01();
+
+      const session = await window.SonaAuth.requireSession({
+        onSessionUpdate: (newSession) => {
+          if (newSession?.user) {
+            const switched = authUser?.id && authUser.id !== newSession.user.id;
+            authUser = newSession.user;
+            atualizarUIConta();
+            if (switched) {
+              userSettingsRow = null;
+              studioFrameLoaded = false;
+              carregarContaESincronizarSupabase();
+            }
+          }
+        }
+      });
+      if (!session || !session.user) return;
+
+      authUser = session.user;
       allJobs = getConsolidatedJobs();
       carregarParametrosCrawler();
+      atualizarUIConta();
+      atualizarStatusMigracaoLegada();
       renderScreen01();
       renderScreen02();
       renderScreen03();
       renderScreen05();
-      setupSearch01();
       updateGlobalBadges();
-      carregarVagasSupabase();
-      carregarHistoricoSupabase();
+
+      await Promise.all([
+        carregarVagasSupabase(),
+        carregarHistoricoSupabase(),
+        carregarContaESincronizarSupabase()
+      ]);
     });
 
     // =============================================================
-    // DECOUPLED SCREEN NAVIGATION
+    // DECOUPLED SCREEN NAVIGATION & ACCOUNT CONTROLLERS (TELA 07)
     // =============================================================
-    function handleLogout() {
-      if (confirm('Deseja realmente sair da sessão do Sona?')) {
-        localStorage.removeItem('sb_auth_token');
-        alert('Sessão encerrada com sucesso.');
+    async function handleLogout() {
+      try {
+        localStorage.removeItem('sona_active_resume_job');
+      } catch (_) {}
+      await window.SonaAuth.signOut('/auth.html');
+    }
+
+    async function salvarConfiguracoesConta(event) {
+      if (event) event.preventDefault();
+      const sb = window.SonaAuth?.getClient();
+      if (!sb || !authUser) return;
+
+      const displayName = (document.getElementById('acc-display-name')?.value || '').trim();
+      let rawHandle = (document.getElementById('acc-handle')?.value || '').trim();
+      const goalNum = parseInt(document.getElementById('acc-daily-goal')?.value || '3', 10);
+
+      if (!displayName) {
+        showToast('Informe um nome de exibição válido.');
+        return;
+      }
+      rawHandle = rawHandle.replace(/\s+/g, '');
+      if (!rawHandle) {
+        showToast('Informe um identificador (@handle) válido.');
+        return;
+      }
+      const handle = rawHandle.startsWith('@') ? rawHandle : `@${rawHandle}`;
+      if (handle.length < 2) {
+        showToast('Informe um identificador (@handle) válido.');
+        return;
+      }
+      if (!Number.isInteger(goalNum) || goalNum < 1 || goalNum > 50) {
+        showToast('A meta diária deve estar entre 1 e 50 candidaturas.');
+        return;
+      }
+
+      const btn = document.getElementById('btn-save-account-profile');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Salvando...';
+      }
+
+      try {
+        const payload = {
+          user_id: authUser.id,
+          display_name: displayName,
+          handle,
+          daily_goal: goalNum
+        };
+        const { data, error } = await sb
+          .from('user_settings')
+          .upsert(payload, { onConflict: 'user_id' })
+          .select('*')
+          .maybeSingle();
+        if (error) throw error;
+
+        userSettingsRow = data || { ...(userSettingsRow || {}), ...payload };
+        currentUserDailyGoal = goalNum;
+
+        const { data: updatedAuth } = await sb.auth.updateUser({
+          data: { full_name: displayName, user_name: handle.replace(/^@/, '') }
+        });
+        if (updatedAuth?.user) {
+          authUser = updatedAuth.user;
+        }
+
+        atualizarUIConta();
+        renderScreen01();
+        renderScreen05();
+        showToast('Configurações da conta salvas com sucesso.');
+      } catch (err) {
+        showToast(window.SonaAuth.translateAuthError(err));
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Salvar Alterações';
+        }
+      }
+    }
+
+    async function alterarSenhaConta(event) {
+      if (event) event.preventDefault();
+      const sb = window.SonaAuth?.getClient();
+      if (!sb || !authUser) return;
+
+      const newPassEl = document.getElementById('acc-new-password');
+      const confirmPassEl = document.getElementById('acc-confirm-password');
+      const newPassword = newPassEl?.value || '';
+      const confirmPassword = confirmPassEl?.value || '';
+
+      if (newPassword.length < 8) {
+        showToast('A nova senha deve ter pelo menos 8 caracteres.');
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        showToast('A confirmação de senha não coincide com a nova senha.');
+        return;
+      }
+
+      const btn = document.getElementById('btn-change-password');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Alterando...';
+      }
+
+      try {
+        const { error } = await sb.auth.updateUser({ password: newPassword });
+        if (error) throw error;
+        if (newPassEl) newPassEl.value = '';
+        if (confirmPassEl) confirmPassEl.value = '';
+        showToast('Senha atualizada com sucesso.');
+      } catch (err) {
+        showToast(window.SonaAuth.translateAuthError(err));
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Alterar Senha';
+        }
+      }
+    }
+
+    async function exportarDadosConta() {
+      const sb = window.SonaAuth?.getClient();
+      if (!sb || !authUser) return;
+
+      const btn = document.getElementById('btn-export-account-data');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Exportando...';
+      }
+
+      try {
+        const [settingsRes, vagasRes, profileRes, curriculosRes] = await Promise.all([
+          sb.from('user_settings').select('*').eq('user_id', authUser.id).maybeSingle(),
+          sb.from('user_vagas').select('*').eq('user_id', authUser.id),
+          sb.from('master_profiles').select('*').eq('user_id', authUser.id).maybeSingle(),
+          sb.from('curriculos_gerados').select('*').eq('user_id', authUser.id).order('created_at', { ascending: false })
+        ]);
+
+        if (settingsRes.error) throw settingsRes.error;
+        if (vagasRes.error) throw vagasRes.error;
+        if (profileRes.error) throw profileRes.error;
+        if (curriculosRes.error) throw curriculosRes.error;
+
+        const identity = window.SonaAuth.deriveUserIdentity(authUser, settingsRes.data || userSettingsRow);
+        const cleanHandle =
+          String(identity.handle || 'conta')
+            .replace(/^@/, '')
+            .replace(/[^a-z0-9_.-]/gi, '')
+            .toLowerCase() || 'conta';
+        const dateStr = new Date().toISOString().slice(0, 10);
+
+        const exportPayload = {
+          exported_at: new Date().toISOString(),
+          account: {
+            id: authUser.id,
+            email: authUser.email || '',
+            display_name: identity.displayName,
+            handle: identity.handle
+          },
+          user_settings: settingsRes.data || userSettingsRow || {},
+          user_vagas: vagasRes.data || [],
+          master_profile: profileRes.data || null,
+          curriculos_gerados: curriculosRes.data || []
+        };
+
+        const blob = new Blob([JSON.stringify(exportPayload, null, 2)], {
+          type: 'application/json;charset=utf-8'
+        });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `sona-dados-${cleanHandle}-${dateStr}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+        showToast('Exportação concluída com sucesso.');
+      } catch (err) {
+        showToast(`Falha ao exportar dados: ${window.SonaAuth.translateAuthError(err)}`);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Exportar Meus Dados';
+        }
+      }
+    }
+
+    async function importarDadosLocaisLegados() {
+      const sb = window.SonaAuth?.getClient();
+      if (!sb || !authUser) return;
+
+      const L = window.SonaAuth.LEGACY_STORAGE_KEYS;
+      const scoped = getScopedKeys();
+      const btn = document.getElementById('btn-import-legacy-data');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Importando Dados...';
+      }
+
+      try {
+        // 1. Vagas interagidas (estagios_user_store -> user_vagas)
+        const rawStore = localStorage.getItem(L.USER_STORE);
+        if (rawStore) {
+          const legacyStore = JSON.parse(rawStore) || {};
+          const currentStore = getUserStore();
+          const mergedStore = { ...currentStore };
+          const rowsToUpsert = [];
+
+          Object.entries(legacyStore).forEach(([vagaKey, entry]) => {
+            if (!window.SonaAuth.isNeutralVagaEntry(entry)) {
+              const chosen = mergedStore[vagaKey] || entry;
+              mergedStore[vagaKey] = chosen;
+              const job = allJobs.find((j) => j.canonicalKey === vagaKey);
+              rowsToUpsert.push(window.SonaAuth.storeEntryToDbRow(authUser.id, vagaKey, chosen, job?.id || null));
+            }
+          });
+
+          if (rowsToUpsert.length > 0) {
+            const { error: vagasErr } = await sb
+              .from('user_vagas')
+              .upsert(rowsToUpsert, { onConflict: 'user_id,vaga_key' });
+            if (vagasErr) throw vagasErr;
+          }
+          localStorage.setItem(scoped.USER_STORE, JSON.stringify(mergedStore));
+        }
+
+        // 2 & 5. Parâmetros do crawler + metadados BYOK -> user_settings (apiKey restrita ao navegador)
+        const rawParams = localStorage.getItem(L.PARAMS);
+        const rawByok = localStorage.getItem(L.BYOK);
+        const settingsPatch = { user_id: authUser.id };
+        let hasSettingsPatch = false;
+
+        if (rawParams) {
+          const parsedParams = JSON.parse(rawParams);
+          if (parsedParams && typeof parsedParams === 'object') {
+            const existingParams = userSettingsRow?.crawler_params;
+            const mergedParams =
+              existingParams && Object.keys(existingParams).length > 0 ? existingParams : parsedParams;
+            settingsPatch.crawler_params = mergedParams;
+            hasSettingsPatch = true;
+          }
+        }
+
+        let pendingScopedByok = null;
+        if (rawByok) {
+          const parsedByok = JSON.parse(rawByok);
+          if (parsedByok && typeof parsedByok === 'object') {
+            if (parsedByok.provider) {
+              settingsPatch.byok_provider = String(parsedByok.provider);
+              hasSettingsPatch = true;
+            }
+            if (parsedByok.model) {
+              settingsPatch.byok_model = String(parsedByok.model);
+              hasSettingsPatch = true;
+            }
+            let currentScopedByok = {};
+            try {
+              currentScopedByok = JSON.parse(localStorage.getItem(scoped.BYOK_KEY) || '{}') || {};
+            } catch (_) {}
+            if (parsedByok.apiKey && !currentScopedByok.apiKey) {
+              pendingScopedByok = {
+                provider: parsedByok.provider || currentScopedByok.provider || 'gemini',
+                model: parsedByok.model || currentScopedByok.model || 'gemini-3.8-flash',
+                apiKey: parsedByok.apiKey
+              };
+            }
+          }
+        }
+
+        if (hasSettingsPatch) {
+          const { data: updatedSettings, error: settingsErr } = await sb
+            .from('user_settings')
+            .upsert(settingsPatch, { onConflict: 'user_id' })
+            .select('*')
+            .maybeSingle();
+          if (settingsErr) throw settingsErr;
+          if (updatedSettings) userSettingsRow = updatedSettings;
+          if (settingsPatch.crawler_params) {
+            localStorage.setItem(scoped.PARAMS, JSON.stringify(settingsPatch.crawler_params));
+          }
+        }
+        if (pendingScopedByok) {
+          localStorage.setItem(scoped.BYOK_KEY, JSON.stringify(pendingScopedByok));
+        }
+
+        // 3. Banco de Fatos (sona_master_profile_v1 -> master_profiles)
+        const rawProfile = localStorage.getItem(L.PROFILE);
+        if (rawProfile) {
+          const parsedProf = JSON.parse(rawProfile);
+          if (parsedProf && typeof parsedProf === 'object') {
+            const { data: existingProf, error: readProfErr } = await sb
+              .from('master_profiles')
+              .select('*')
+              .eq('user_id', authUser.id)
+              .maybeSingle();
+            if (readProfErr) throw readProfErr;
+
+            const hasExistingFacts =
+              existingProf &&
+              ((existingProf.basics && existingProf.basics.name) ||
+                (Array.isArray(existingProf.projects) && existingProf.projects.length > 0) ||
+                (Array.isArray(existingProf.experiences) && existingProf.experiences.length > 0));
+            const srcProf = hasExistingFacts ? existingProf : parsedProf;
+
+            const profilePayload = {
+              user_id: authUser.id,
+              basics: srcProf.basics || {},
+              education: Array.isArray(srcProf.education) ? srcProf.education : [],
+              experiences: Array.isArray(srcProf.experiences) ? srcProf.experiences : [],
+              projects: Array.isArray(srcProf.projects) ? srcProf.projects : [],
+              skills_whitelist: Array.isArray(srcProf.skills_whitelist) ? srcProf.skills_whitelist : [],
+              certifications: Array.isArray(srcProf.certifications) ? srcProf.certifications : [],
+              languages_spoken: Array.isArray(srcProf.languages_spoken) ? srcProf.languages_spoken : [],
+              github_username: srcProf.github_username || ''
+            };
+            const { error: profErr } = await sb
+              .from('master_profiles')
+              .upsert(profilePayload, { onConflict: 'user_id' });
+            if (profErr) throw profErr;
+            localStorage.setItem(scoped.PROFILE, JSON.stringify(profilePayload));
+          }
+        }
+
+        // 4. Histórico de currículos (sona_resume_history_v1 -> curriculos_gerados)
+        const rawHistory = localStorage.getItem(L.HISTORY);
+        if (rawHistory) {
+          const histArr = JSON.parse(rawHistory);
+          if (Array.isArray(histArr) && histArr.length > 0) {
+            const histRows = histArr.slice(0, 25).map((item) => ({
+              user_id: authUser.id,
+              vaga_id: String(item.vaga_id || `legacy-${Date.now()}`),
+              vaga_empresa: String(item.vaga_empresa || ''),
+              vaga_cargo: String(item.vaga_cargo || ''),
+              idioma: String(item.idioma || 'pt-BR'),
+              jd_snapshot: String(item.jd_snapshot || ''),
+              match_report: item.match_report && typeof item.match_report === 'object' ? item.match_report : {},
+              resume_json: item.resume_json && typeof item.resume_json === 'object' ? item.resume_json : {},
+              audit_report: item.audit_report && typeof item.audit_report === 'object' ? item.audit_report : {}
+            }));
+            const { data: insertedHist, error: histErr } = await sb
+              .from('curriculos_gerados')
+              .insert(histRows)
+              .select('*');
+            if (histErr) throw histErr;
+            if (Array.isArray(insertedHist)) {
+              let existingHist = [];
+              try {
+                existingHist = JSON.parse(localStorage.getItem(scoped.HISTORY) || '[]');
+                if (!Array.isArray(existingHist)) existingHist = [];
+              } catch (_) {}
+              localStorage.setItem(scoped.HISTORY, JSON.stringify([...insertedHist, ...existingHist].slice(0, 25)));
+            }
+          }
+        }
+
+        // Remove chaves legadas somente após confirmação de escrita na nuvem
+        Object.values(L).forEach((legacyKey) => {
+          try {
+            localStorage.removeItem(legacyKey);
+          } catch (_) {}
+        });
+
+        studioFrameLoaded = false;
+        allJobs = getConsolidatedJobs();
+        carregarParametrosCrawler();
+        atualizarUIConta();
+        atualizarStatusMigracaoLegada();
+        renderScreen01();
+        renderScreen02();
+        renderScreen05();
+        updateGlobalBadges();
+        showToast('Dados locais importados e sincronizados na sua conta com sucesso.');
+      } catch (err) {
+        showToast(`Falha ao importar dados locais: ${window.SonaAuth.translateAuthError(err)}`);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Importar Dados para Minha Conta';
+        }
+      }
+    }
+
+    async function excluirContaDefinitivamente() {
+      const confirmInput = document.getElementById('acc-delete-confirm');
+      const typed = (confirmInput?.value || '').trim();
+      if (typed !== 'EXCLUIR') {
+        showToast('Digite exatamente EXCLUIR no campo de confirmação para prosseguir.');
+        confirmInput?.focus();
+        return;
+      }
+
+      const btn = document.getElementById('btn-delete-account');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Excluindo Conta...';
+      }
+
+      try {
+        const token = await window.SonaAuth.getAccessToken();
+        if (!token) {
+          throw new Error('Sessão expirada. Entre novamente antes de excluir a conta.');
+        }
+
+        const uidToClear = authUser?.id;
+        const res = await fetch('/api/account', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'X-Confirm-Delete': 'EXCLUIR'
+          },
+          body: JSON.stringify({ confirmation: 'EXCLUIR' })
+        });
+
+        let payload = {};
+        try {
+          payload = await res.json();
+        } catch (_) {}
+
+        if (!res.ok) {
+          throw new Error(payload.error || 'Não foi possível excluir a conta no momento.');
+        }
+
+        if (uidToClear) {
+          window.SonaAuth.clearUserLocalCache(uidToClear);
+        }
+        try {
+          localStorage.removeItem('sona_active_resume_job');
+        } catch (_) {}
+
+        await window.SonaAuth.signOut('/auth.html?deleted=1');
+      } catch (err) {
+        showToast(err.message || 'Falha ao excluir a conta.');
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Excluir Conta';
+        }
       }
     }
 
@@ -3671,6 +4411,7 @@
       if (screenId === '02') renderScreen01();
       if (screenId === '03') renderScreen03();
       if (screenId === '05') renderScreen05();
+      if (screenId === '07') { atualizarUIConta(); atualizarStatusMigracaoLegada(); }
       updateGlobalBadges();
     }
 
@@ -3874,25 +4615,26 @@
       }
 
       // Meta Diária Real (baseada em aplicações feitas hoje)
+      const goal = Math.max(1, Number(currentUserDailyGoal) || 3);
       const hojeStr = new Date().toLocaleDateString('pt-BR');
       const aplicadasHoje = allJobs.filter(j => j.status === 'aplicada' && (j.dataAplicacao || '').includes(hojeStr)).length;
-      const progresso = Math.min(aplicadasHoje, 3);
-      const pct = Math.round((progresso / 3) * 100);
+      const progresso = Math.min(aplicadasHoje, goal);
+      const pct = Math.round((progresso / goal) * 100);
 
       const fill = document.getElementById('meter-fill-meta');
       const text = document.getElementById('meter-text-meta');
       const statusLabel = document.getElementById('label-meta-status');
 
       if (fill) fill.style.width = `${pct}%`;
-      if (text) text.innerText = `${aplicadasHoje} de 3`;
+      if (text) text.innerText = `${aplicadasHoje} de ${goal}`;
       const cardTracker = document.querySelector('.goal-tracker-card');
       if (statusLabel) {
-        if (aplicadasHoje >= 3) {
-          statusLabel.innerText = `🎉 Meta diária batida com sucesso! (${aplicadasHoje} candidaturas confirmadas hoje)`;
+        if (aplicadasHoje >= goal) {
+          statusLabel.innerText = `Meta diária concluída (${aplicadasHoje} de ${goal} candidaturas confirmadas hoje)`;
           if (cardTracker) cardTracker.classList.add('goal-achieved');
         } else {
-          const faltam = 3 - aplicadasHoje;
-          statusLabel.innerText = `${aplicadasHoje} de 3 concluídas hoje (faltam apenas ${faltam} para o dever cumprido)`;
+          const faltam = goal - aplicadasHoje;
+          statusLabel.innerText = `${aplicadasHoje} de ${goal} concluídas hoje (faltam ${faltam} para a meta diária)`;
           if (cardTracker) cardTracker.classList.remove('goal-achieved');
         }
       }
@@ -4012,7 +4754,9 @@
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
         try {
-          localStorage.setItem('sona_active_resume_job', JSON.stringify(job));
+          const serialized = JSON.stringify(job);
+          localStorage.setItem(getScopedKeys().ACTIVE_JOB, serialized);
+          localStorage.setItem('sona_active_resume_job', serialized);
         } catch (_) {}
       }
       const idParam = job?.id || canonicalKey || '';
@@ -4030,18 +4774,20 @@
       current.status = 'em_andamento';
       current.inicioCandidatura = Date.now();
       store[canonicalKey] = current;
-      saveUserStore(store);
+      saveUserStore(store, canonicalKey);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
         job.status = 'em_andamento';
         job.inicioCandidatura = current.inicioCandidatura;
         try {
-          localStorage.setItem('sona_active_resume_job', JSON.stringify(job));
+          const serialized = JSON.stringify(job);
+          localStorage.setItem(getScopedKeys().ACTIVE_JOB, serialized);
+          localStorage.setItem('sona_active_resume_job', serialized);
         } catch (_) {}
       }
 
-      showToast('Candidatura iniciada. Disponível abaixo em "Em andamento" para gerar currículo.');
+      showToast('Candidatura iniciada. Disponível abaixo em "Em Andamento" para gerar currículo.');
       switchSubTab02('andamento');
       updateGlobalBadges();
       renderScreen01();
@@ -4063,7 +4809,7 @@
       current.dataAplicacao = new Date().toLocaleString('pt-BR');
       current.tempoGastoSegundos = tempoGasto;
       store[canonicalKey] = current;
-      saveUserStore(store);
+      saveUserStore(store, canonicalKey);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
@@ -4076,7 +4822,7 @@
       const segundos = tempoGasto % 60;
       const tempoStr = minutos > 0 ? `${minutos}m ${segundos}s` : `${segundos}s`;
 
-      showToast(`Candidatura confirmada com sucesso! (Tempo gasto: ${tempoStr})`);
+      showToast(`Candidatura confirmada com sucesso (tempo gasto: ${tempoStr}).`);
       updateGlobalBadges();
       renderScreen01();
       renderScreen02();
@@ -4093,7 +4839,7 @@
       current.tempoGastoSegundos = null; // Candidatura externa: não afeta métrica de tempo cronometrado
       delete current.inicioCandidatura;
       store[canonicalKey] = current;
-      saveUserStore(store);
+      saveUserStore(store, canonicalKey);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
@@ -4104,7 +4850,7 @@
         job.inicioCandidatura = null;
       }
 
-      showToast('Candidatura externa registrada! Contabilizada sem alterar o tempo médio.');
+      showToast('Candidatura externa registrada sem alterar o tempo médio.');
       updateGlobalBadges();
       renderScreen01();
       renderScreen02();
@@ -4124,7 +4870,7 @@
         current.ultimaDataRecebimentoConcluida = job.detalhesAcao.dataRecebimento || '';
       }
       store[canonicalKey] = current;
-      saveUserStore(store);
+      saveUserStore(store, canonicalKey);
 
       if (job) {
         job.status = 'aplicada';
@@ -4145,7 +4891,7 @@
         } catch (e) {}
       }
 
-      showToast('Etapa concluída com sucesso! Vaga arquivada em "Aplicadas / Concluídas".');
+      showToast('Etapa concluída com sucesso. Vaga arquivada em Concluídas.');
       updateGlobalBadges();
       renderScreen01();
       renderScreen02();
@@ -4158,13 +4904,23 @@
       
       current.status = 'para_aplicar';
       delete current.inicioCandidatura;
-      store[canonicalKey] = current;
-      saveUserStore(store);
+      delete current.motivoMismatch;
+      delete current.detalheMismatch;
+      delete current.dataMismatch;
+      if (window.SonaAuth.isNeutralVagaEntry(current)) {
+        delete store[canonicalKey];
+      } else {
+        store[canonicalKey] = current;
+      }
+      saveUserStore(store, canonicalKey);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
         job.status = 'para_aplicar';
         job.inicioCandidatura = null;
+        job.motivoMismatch = '';
+        job.detalheMismatch = '';
+        job.dataMismatch = '';
       }
 
       showToast('Vaga retornou para a lista de vagas abertas.');
@@ -4178,15 +4934,19 @@
       const store = getUserStore();
       const current = store[canonicalKey] || {};
       current.starred = !current.starred;
-      store[canonicalKey] = current;
-      saveUserStore(store);
+      if (window.SonaAuth.isNeutralVagaEntry(current)) {
+        delete store[canonicalKey];
+      } else {
+        store[canonicalKey] = current;
+      }
+      saveUserStore(store, canonicalKey);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
         job.starred = current.starred;
       }
 
-      showToast(current.starred ? 'Vaga favoritada' : 'Removida dos favoritos');
+      showToast(current.starred ? 'Vaga salva nos favoritos.' : 'Vaga removida dos favoritos.');
       updateGlobalBadges();
       if (currentScreen === '01') renderScreen01();
       if (currentScreen === '02') renderScreen02();
@@ -4197,7 +4957,7 @@
       const current = store[canonicalKey] || {};
       current.status = 'encerrada';
       store[canonicalKey] = current;
-      saveUserStore(store);
+      saveUserStore(store, canonicalKey);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
@@ -4746,7 +5506,7 @@
       }
     }
 
-    function salvarParametrosCrawler() {
+    async function salvarParametrosCrawler() {
       const turnos = [];
       const todosTurnos = document.getElementById('chk-turno-todos').checked;
 
@@ -4765,8 +5525,12 @@
         ? `${estadoNome} (${selectedCitiesList.join(', ')})`
         : estadoNome;
 
+      const defaultName = authUser
+        ? window.SonaAuth.deriveUserIdentity(authUser, userSettingsRow).displayName
+        : 'Candidato';
+
       const params = {
-        candidato: document.getElementById('cfg-candidato-nome').value.trim() || "João Francisco",
+        candidato: document.getElementById('cfg-candidato-nome').value.trim() || defaultName,
         periodo: document.getElementById('cfg-semestre-texto').value.trim() || "3º período de Engenharia de Software",
         turnoFaculdade: document.getElementById('cfg-turno-faculdade').value,
         turnosDisponiveis: turnos.length > 0 ? turnos : ["Tarde", "Flexível"],
@@ -4780,14 +5544,29 @@
       };
 
       try {
-        localStorage.setItem(PARAMS_KEY, JSON.stringify(params));
-        
+        localStorage.setItem(getScopedKeys().PARAMS, JSON.stringify(params));
+
         const availText = document.getElementById('sidebar-avail-text');
         if (availText) {
           availText.innerText = `Disponível: ${params.turnosDisponiveis.join(' / ')} • ${params.localizacao}`;
         }
 
-        showToast('Parâmetros salvos com sucesso! O crawler adaptará as próximas buscas.');
+        const sb = window.SonaAuth?.getClient();
+        if (sb && authUser) {
+          const { data, error } = await sb
+            .from('user_settings')
+            .upsert({ user_id: authUser.id, crawler_params: params }, { onConflict: 'user_id' })
+            .select('*')
+            .maybeSingle();
+          if (error) {
+            console.warn('[Supabase] Falha ao sincronizar crawler_params:', error.message);
+            showToast('Parâmetros salvos localmente. A sincronização na nuvem será retomada em breve.');
+            return;
+          }
+          if (data) userSettingsRow = data;
+        }
+
+        showToast('Parâmetros salvos e sincronizados na sua conta.');
       } catch (e) {
         showToast('Erro ao salvar configurações.');
       }
@@ -4795,11 +5574,14 @@
 
     function carregarParametrosCrawler() {
       try {
-        const stored = localStorage.getItem(PARAMS_KEY);
+        const stored = localStorage.getItem(getScopedKeys().PARAMS);
         const cfg = stored ? JSON.parse(stored) : (window.CONFIG_BUSCA || null);
 
         if (cfg) {
-          if (cfg.candidato) document.getElementById('cfg-candidato-nome').value = cfg.candidato;
+          const candidateName = stored
+            ? cfg.candidato
+            : (authUser ? window.SonaAuth.deriveUserIdentity(authUser, userSettingsRow).displayName : cfg.candidato);
+          if (candidateName) document.getElementById('cfg-candidato-nome').value = candidateName;
           if (cfg.periodo) document.getElementById('cfg-semestre-texto').value = cfg.periodo;
           if (cfg.turnoFaculdade) document.getElementById('cfg-turno-faculdade').value = cfg.turnoFaculdade;
           if (cfg.areasInteresse) document.getElementById('cfg-areas-texto').value = cfg.areasInteresse;
@@ -5071,11 +5853,12 @@
       }
 
       // 3. META DO DIA & TOTAL APLICADAS
+      const goal = Math.max(1, Number(currentUserDailyGoal) || 3);
       const hojeStr = new Date().toLocaleDateString('pt-BR');
       const aplicadasHoje = aplicadas.filter(j => (j.dataAplicacao || '').includes(hojeStr)).length;
 
       const kpiMeta = document.getElementById('kpi-meta-hoje');
-      if (kpiMeta) kpiMeta.innerText = `${aplicadasHoje}/3`;
+      if (kpiMeta) kpiMeta.innerText = `${aplicadasHoje}/${goal}`;
 
       // 4. VIDA ÚTIL MÉDIA DAS VAGAS (Tempo até Encerramento)
       const vidaStats = calcularMetricaVidaUtilVagas();
@@ -5190,14 +5973,22 @@
         days.push({ dayStr, shortLabel, count });
       }
 
+      const goal = Math.max(1, Number(currentUserDailyGoal) || 3);
       const counts = days.map(d => d.count);
       const totalPeriodo = counts.reduce((a, b) => a + b, 0);
-      const maxCount = Math.max(5, ...counts);
-      const diasMetaBatida = counts.filter(c => c >= 3).length;
+      const maxCount = Math.max(goal + 2, 5, ...counts);
+      const diasMetaBatida = counts.filter(c => c >= goal).length;
       const picoMax = Math.max(0, ...counts);
       const mediaDiaria = (totalPeriodo / 15).toFixed(1);
 
-      // Atualizar footer stats
+      // Atualizar cabeçalho e footer stats
+      const tlSub = document.getElementById('tl-subtitle-goal');
+      const tlBadge = document.getElementById('tl-badge-goal');
+      const tlMin = document.getElementById('tl-label-goal-min');
+      if (tlSub) tlSub.innerText = `Acompanhamento diário dos últimos 15 dias em relação à meta de ${goal} vaga(s)/dia.`;
+      if (tlBadge) tlBadge.innerText = `Linha tracejada: Meta (${goal}/dia)`;
+      if (tlMin) tlMin.innerText = String(goal);
+
       const tlTotal = document.getElementById('tl-total-15');
       const tlMedia = document.getElementById('tl-media-15');
       const tlDiasMeta = document.getElementById('tl-dias-meta');
@@ -5227,8 +6018,8 @@
         return { ...d, x, y };
       });
 
-      // Linha da Meta (y = 3)
-      const yMeta = padTop + chartH - (3 / maxCount) * chartH;
+      // Linha da Meta (y = goal)
+      const yMeta = padTop + chartH - (goal / maxCount) * chartH;
 
       // Path SVG
       const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
@@ -5241,9 +6032,9 @@
           <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#d9d7cf" stroke-width="1" />
           <line x1="${padLeft}" y1="${padTop}" x2="${width - padRight}" y2="${padTop}" stroke="#efeee8" stroke-width="1" stroke-dasharray="3" />
 
-          <!-- Linha de Meta Diária (3 vagas) -->
+          <!-- Linha de Meta Diária -->
           <line x1="${padLeft}" y1="${yMeta}" x2="${width - padRight}" y2="${yMeta}" stroke="#2f6f4e" stroke-width="1.5" stroke-dasharray="4" />
-          <text x="${width - padRight - 65}" y="${yMeta - 5}" font-size="10" fill="#2f6f4e" font-weight="600">META: 3/DIA</text>
+          <text x="${width - padRight - 72}" y="${yMeta - 5}" font-size="10" fill="#2f6f4e" font-weight="600">META: ${goal}/DIA</text>
 
           <!-- Área sob a linha -->
           <path d="${areaD}" fill="#f1df7d" fill-opacity="0.18" />
@@ -5253,13 +6044,13 @@
 
           <!-- Pontos e Labels -->
           ${points.map(p => {
-            const isGoal = p.count >= 3;
+            const isGoal = p.count >= goal;
             const fillColor = isGoal ? '#2f6f4e' : '#ffffff';
             const strokeColor = isGoal ? '#2f6f4e' : '#242420';
             return `
               <g>
                 <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5" fill="${fillColor}" stroke="${strokeColor}" stroke-width="2">
-                  <title>${p.dayStr}: ${p.count} candidatura(s)${isGoal ? ' (Meta batida! 🎉)' : ''}</title>
+                  <title>${p.dayStr}: ${p.count} candidatura(s)${isGoal ? ' (Meta batida)' : ''}</title>
                 </circle>
                 ${p.count > 0 ? `<text x="${p.x.toFixed(1)}" y="${(p.y - 8).toFixed(1)}" font-size="10" font-weight="600" text-anchor="middle" fill="#242420">${p.count}</text>` : ''}
                 <text x="${p.x.toFixed(1)}" y="${height - 12}" font-size="9.5" text-anchor="middle" fill="#716f68">${p.shortLabel}</text>
@@ -5269,7 +6060,7 @@
 
           <!-- Eixo Y labels -->
           <text x="${padLeft - 10}" y="${padTop + chartH + 3}" font-size="10" text-anchor="end" fill="#9a978f">0</text>
-          <text x="${padLeft - 10}" y="${yMeta + 3}" font-size="10" text-anchor="end" fill="#2f6f4e" font-weight="600">3</text>
+          <text x="${padLeft - 10}" y="${yMeta + 3}" font-size="10" text-anchor="end" fill="#2f6f4e" font-weight="600">${goal}</text>
           <text x="${padLeft - 10}" y="${padTop + 4}" font-size="10" text-anchor="end" fill="#9a978f">${maxCount}</text>
         </svg>
       `;
@@ -5590,7 +6381,7 @@
       current.detalheMismatch = detalhe || motivo;
       current.dataMismatch = new Date().toISOString();
       store[canonicalKey] = current;
-      saveUserStore(store);
+      saveUserStore(store, canonicalKey);
 
       const job = allJobs.find(j => j.canonicalKey === canonicalKey);
       if (job) {
@@ -5612,9 +6403,9 @@
       }
 
       const motivoCurto = motivo.split('/')[0].trim();
-      showToast(`🧠 Robô calibrado! Vagas de "${motivoCurto}" foram excluídas do radar.`, () => {
+      showToast(`Filtro atualizado. Vagas de "${motivoCurto}" foram descartadas do radar.`, () => {
         moverDeVoltaParaAbertas(canonicalKey);
-        showToast('↺ Ação desfeita: Vaga restaurada para abertas!');
+        showToast('Ação desfeita: vaga restaurada para abertas.');
       });
       updateGlobalBadges();
       renderScreen01();

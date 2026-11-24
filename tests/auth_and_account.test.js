@@ -231,6 +231,65 @@ async function runAuthAndAccountTests() {
   assert.strictEqual(curriculoJs.includes('STORAGE_KEYS'), false, 'curriculo.js não deve mais conter referências a STORAGE_KEYS');
   assert.strictEqual(curriculoJs.includes('Modo Local-First'), false, 'curriculo.js não deve mais exibir modo anônimo Local-First');
   console.log('  ✓ curriculo.html e curriculo.js exigem sessão Supabase e isolam cache + BYOK por usuário');
+
+  // 10. Integração de dashboard.html, Tela 07 (Configurações) e paridade com index.html e public/
+  const dashHtml = fs.readFileSync(path.resolve(__dirname, '..', 'dashboard.html'), 'utf8');
+  const indexHtml = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf8');
+  const pubDashHtml = fs.readFileSync(path.resolve(__dirname, '..', 'public', 'dashboard.html'), 'utf8');
+  const pubIndexHtml = fs.readFileSync(path.resolve(__dirname, '..', 'public', 'index.html'), 'utf8');
+  const authGuardSrc = fs.readFileSync(path.resolve(__dirname, '..', 'auth_guard.js'), 'utf8');
+  const pubAuthGuardSrc = fs.readFileSync(path.resolve(__dirname, '..', 'public', 'auth_guard.js'), 'utf8');
+
+  assert.strictEqual(dashHtml, indexHtml, 'index.html deve ser idêntico a dashboard.html');
+  assert.ok(dashHtml.includes('auth-pending'), 'dashboard.html deve ter proteção anti-FOUC auth-pending');
+  assert.strictEqual(dashHtml, pubDashHtml, 'public/dashboard.html deve estar sincronizado com dashboard.html');
+  assert.strictEqual(dashHtml, pubIndexHtml, 'public/index.html deve estar sincronizado com dashboard.html');
+  assert.strictEqual(authGuardSrc, pubAuthGuardSrc, 'public/auth_guard.js deve estar sincronizado com auth_guard.js');
+  assert.ok(
+    authGuardSrc.includes('_signingOutRedirect'),
+    'auth_guard.js deve preservar redirectUrl customizado (/auth.html?deleted=1) durante SIGNED_OUT'
+  );
+  assert.ok(dashHtml.includes('auth_guard.js'), 'dashboard.html deve carregar auth_guard.js');
+  assert.ok(dashHtml.includes('SonaAuth.requireSession'), 'dashboard.html deve exigir sessão via SonaAuth');
+  assert.ok(dashHtml.includes("from('user_vagas')"), 'dashboard.html deve sincronizar vagas individuais em user_vagas');
+  assert.ok(dashHtml.includes("from('user_settings')"), 'dashboard.html deve sincronizar conta e filtros em user_settings');
+  assert.strictEqual(dashHtml.includes("const STORAGE_KEY = 'estagios_user_store'"), false, 'dashboard.html não deve usar STORAGE_KEY global fixa');
+  assert.strictEqual(dashHtml.includes("const PARAMS_KEY = 'estagios_crawler_params'"), false, 'dashboard.html não deve usar PARAMS_KEY global fixa');
+  assert.strictEqual(dashHtml.includes("localStorage.removeItem('sb_auth_token')"), false, 'handleLogout não deve usar mock sb_auth_token');
+  assert.ok(dashHtml.includes('currentUserDailyGoal'), 'dashboard.html deve usar currentUserDailyGoal dinâmico');
+  assert.ok(dashHtml.includes('persistVagaStateCloud'), 'dashboard.html deve sincronizar mutações unitárias na nuvem');
+  assert.ok(dashHtml.includes('flushPendingVagasSync'), 'dashboard.html deve reenviar fila offline pendente');
+  assert.ok(dashHtml.includes('/api/account'), 'dashboard.html deve chamar DELETE /api/account na exclusão de conta');
+  assert.ok(dashHtml.includes('clearUserLocalCache'), 'dashboard.html deve limpar cache local do usuário ao excluir conta');
+
+  ['sidebar-user-card', 'sidebar-user-avatar', 'sidebar-user-name', 'sidebar-user-handle'].forEach((id) => {
+    assert.ok(dashHtml.includes(`id="${id}"`), `Sidebar deve conter #${id}`);
+  });
+
+  // Verifica seções e IDs obrigatórios da Tela 07 (Configurações) e ausência do placeholder "Em breve"
+  const screen07Match = dashHtml.match(/<section class="screen-view" id="screen-view-07">([\s\S]*?)<\/section>/);
+  assert.ok(screen07Match, 'Seção #screen-view-07 deve existir em dashboard.html');
+  const screen07Html = screen07Match[1];
+  assert.strictEqual(screen07Html.includes('Em breve'), false, 'Tela 07 não deve mais conter placeholder Em breve');
+  assert.strictEqual(emojiRegex.test(screen07Html), false, 'Tela 07 não pode conter emojis (DESIGN.md)');
+
+  [
+    'acc-display-name',
+    'acc-handle',
+    'acc-daily-goal',
+    'acc-email-label',
+    'acc-provider-label',
+    'acc-new-password',
+    'acc-confirm-password',
+    'acc-delete-confirm',
+    'legacy-migration-section',
+    'btn-import-legacy-data',
+    'btn-export-account-data',
+    'btn-delete-account'
+  ].forEach((id) => {
+    assert.ok(screen07Html.includes(`id="${id}"`), `Tela 07 deve conter controle #${id}`);
+  });
+  console.log('  ✓ dashboard.html implementa sincronização em user_vagas/user_settings e Tela 07 completa');
 }
 
 module.exports = { runAuthAndAccountTests };
