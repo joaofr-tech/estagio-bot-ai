@@ -9,7 +9,9 @@
     "start": "node servidor.js",
     "test": "node tests/run_all_tests.js",
     "test:py": "pytest tests_py/",
-    "test:e2e": "pytest tests_py/test_e2e_studio.py -v"
+    "test:e2e": "pytest tests_py/test_e2e_studio.py -v",
+    "audit:ui": "python scripts/audit_ui.py --strict",
+    "check:pdf": "python scripts/check_pdf_pages.py"
   },
   "keywords": [],
   "author": "",

@@ -1485,8 +1485,8 @@
       position: fixed;
       inset: 0;
       background: rgba(15, 23, 42, 0.45);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px); /* sona-allow: A12 */
+      -webkit-backdrop-filter: blur(8px); /* sona-allow: A12 */
       z-index: 100;
       display: none;
       align-items: center;
@@ -2611,18 +2611,17 @@
 
 
           <!-- BANNER DE ALERTA DE OBSERVABILIDADE DO CRAWLER -->
-          <div id="banner-crawler-falha" style="display: none; margin-top: 1.2rem; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 6px; padding: 1rem 1.25rem;">
+          <div id="banner-crawler-falha" style="display: none; margin-top: 1.2rem; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 6px; padding: 1rem 1.25rem;">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
               <div style="display: flex; align-items: center; gap: 0.8rem;">
-                <span style="font-size: 1.5rem;">⚠️</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                 <div>
-                  <div style="font-size: 0.95rem; font-weight: 700; color: #991b1b;" id="banner-crawler-titulo">Alerta de Observabilidade: Falha no Crawler</div>
-                  <div style="font-size: 0.82rem; color: #b91c1c;" id="banner-crawler-desc">O robô encerrou com erro ou duração anômala na última execução.</div>
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #fca5a5;" id="banner-crawler-titulo">Alerta de Observabilidade: Falha no Crawler</div>
+                  <div style="font-size: 0.82rem; color: #fecaca;" id="banner-crawler-desc">O robô encerrou com erro ou duração anômala na última execução.</div>
                 </div>
               </div>
-              <button class="btn-action-ink" onclick="navigateToScreen('03');" style="background: #991b1b; border-color: #7f1d1d; font-size: 0.8rem; padding: 0.5rem 0.9rem;">
+              <button class="btn-action-ink" onclick="navigateToScreen('03');" style="font-size: 0.8rem; padding: 0.5rem 0.9rem;">
                 <span>Ver Telemetria</span>
-                <span>→</span>
               </button>
             </div>
           </div>
@@ -2700,7 +2699,7 @@
                 placeholder="Buscar por cargo, empresa, tecnologia (ex: React, Python) ou cidade/bairro..."
                 autocomplete="off"
               >
-              <button class="search-clear-btn" id="btn-clear-01" onclick="clearSearch01()">✕</button>
+              <button class="search-clear-btn" id="btn-clear-01" onclick="clearSearch01()" aria-label="Limpar Busca"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
           </div>
 
@@ -2923,7 +2922,6 @@
             <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
               <button class="btn-action-ink" onclick="salvarParametrosCrawler()">
                 <span>Salvar Novos Parâmetros do Crawler</span>
-                <span>✓</span>
               </button>
             </div>
           </div>
@@ -3148,7 +3146,7 @@
                   <span id="kpi-dist-hibrido-pct">0%</span>
                 </div>
                 <div class="bar-stat-track">
-                  <div class="bar-stat-fill" id="kpi-dist-hibrido-bar" style="width: 0%; background: #6366f1;"></div>
+                  <div class="bar-stat-fill" id="kpi-dist-hibrido-bar" style="width: 0%; background: #60a5fa;"></div>
                 </div>
               </div>
             </div>
@@ -3279,7 +3277,7 @@
        ============================================================= -->
   <div class="modal-backdrop" id="job-modal" onclick="handleScrimClick(event)">
     <div class="modal-sheet-panel">
-      <button class="modal-close-btn" onclick="closeModal()" title="Fechar">✕</button>
+      <button class="modal-close-btn" onclick="closeModal()" title="Fechar" aria-label="Fechar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
 
       <div class="modal-header-block">
         <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
@@ -3303,24 +3301,24 @@
       <div style="border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
         <div style="display: flex; gap: 0.8rem;">
           <button class="btn-action-ink" id="m-btn-inscrever" onclick="iniciarInscricaoModal()" style="flex: 1; justify-content: center;">
-            <span>Abrir Inscrição Oficial ↗</span>
+            <span>Abrir Inscrição Oficial</span>
           </button>
           
-          <button class="job-icon-btn" id="m-btn-star" onclick="toggleStarModal()" style="width: 44px; height: 44px;" title="Salvar">
-            ★
+          <button class="job-icon-btn" id="m-btn-star" onclick="toggleStarModal()" style="width: 44px; height: 44px;" title="Salvar" aria-label="Salvar Vaga">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </button>
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem; gap: 0.5rem; flex-wrap: wrap;">
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="btn-action-secondary" id="m-btn-ja-apliquei" onclick="marcarJaCandidatadoModal()" style="color: #15803d; border-color: #86efac; background: #f0fdf4;">
-              ✓ Já me candidatei por fora
+            <button class="btn-action-secondary" id="m-btn-ja-apliquei" onclick="marcarJaCandidatadoModal()" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.35); background: rgba(74, 222, 128, 0.08);">
+              Já Me Candidatei por Fora
             </button>
-            <button class="btn-action-secondary" onclick="marcarEncerradaModal()" style="color: #b91c1c; border-color: #fca5a5;">
+            <button class="btn-action-secondary" onclick="marcarEncerradaModal()" style="color: #f87171; border-color: rgba(248, 113, 113, 0.35);">
               Remover / Encerrada
             </button>
-            <button class="btn-action-secondary" onclick="abrirModalMismatch()" style="color: #b45309; border-color: #fcd34d; background: #fffbeb;">
-              ⊘ Não combina / Mismatch
+            <button class="btn-action-secondary" onclick="abrirModalMismatch()" style="color: #fbbf24; border-color: rgba(251, 191, 36, 0.35); background: rgba(251, 191, 36, 0.08);">
+              Não Combina / Mismatch
             </button>
           </div>
           <button class="btn-action-secondary" onclick="closeModal()">
@@ -3336,39 +3334,39 @@
        ============================================================= -->
   <div class="modal-backdrop" id="mismatch-modal" onclick="handleMismatchScrim(event)">
     <div class="modal-sheet-panel" style="max-width: 520px;">
-      <button class="modal-close-btn" onclick="fecharModalMismatch()" title="Fechar">✕</button>
+      <button class="modal-close-btn" onclick="fecharModalMismatch()" title="Fechar" aria-label="Fechar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
 
       <div class="modal-header-block">
-        <span class="mono" style="color: #b45309; font-size: 0.72rem; letter-spacing: 0.05em;">FEEDBACK INTELIGENTE • ACTIVE LEARNING</span>
-        <h3 class="modal-title" style="font-size: 1.25rem; margin-top: 0.2rem;">Por que essa vaga é um Mismatch?</h3>
+        <span class="mono" style="color: #fbbf24; font-size: 0.72rem; letter-spacing: 0.05em;">Calibração de Filtros</span>
+        <h3 class="modal-title" style="font-size: 1.25rem; margin-top: 0.2rem;">Por que Essa Vaga É um Mismatch?</h3>
         <p style="font-size: 0.83rem; color: var(--muted); margin-top: 0.25rem; line-height: 1.4;">
-          Sua escolha ensinará o robô a refinar os filtros e não trazer mais vagas desse perfil nas próximas buscas.
+          Sua escolha ensina o crawler a refinar os filtros e evitar vagas desse perfil nas próximas buscas.
         </p>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1.1rem;">
         <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Suporte / Help Desk / Atendimento Operacional')">
-          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">🛠️ Suporte / Help Desk / TI Operacional</div>
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">Suporte / Help Desk / TI Operacional</div>
           <small style="color: var(--muted); font-size: 0.75rem;">Não envolve desenvolvimento de software, engenharia de dados ou IA</small>
         </button>
 
         <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Comercial / Vendas / SDR / Pré-vendas')">
-          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">📈 Comercial / Vendas / SDR / Prospecção</div>
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">Comercial / Vendas / SDR / Prospecção</div>
           <small style="color: var(--muted); font-size: 0.75rem;">Foco em prospecção, metas comerciais ou atendimento telefônico</small>
         </button>
 
         <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Stack ou Tecnologias não desejadas (Legado)')">
-          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">📦 Stack não desejada (PHP legado, WordPress, CMS)</div>
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">Stack Não Desejada (PHP Legado, WordPress, CMS)</div>
           <small style="color: var(--muted); font-size: 0.75rem;">Tecnologias fora do foco moderno (Python, JS/TS, Cloud, IA)</small>
         </button>
 
         <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Exigência abusiva / Pede experiência de pleno para estágio')">
-          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">⚠️ Exigência irreal (Pede experiência sênior para estágio)</div>
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">Exigência Irreal (Pede Experiência Sênior para Estágio)</div>
           <small style="color: var(--muted); font-size: 0.75rem;">Exige anos de experiência comprovada para vaga de estagiário</small>
         </button>
 
         <button class="chip-mismatch-btn" onclick="confirmarMismatchMotivo('Presencial rígido / Localização inviável')">
-          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">📍 Localização inviável / Presencial rígido</div>
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--ink);">Localização Inviável / Presencial Rígido</div>
           <small style="color: var(--muted); font-size: 0.75rem;">Distância excessiva ou modelo presencial incompatível com faculdade</small>
         </button>
 
@@ -4448,27 +4446,27 @@
       const url = link.toLowerCase();
       
       if (url.includes('linkedin.com')) {
-        return `<span class="tag-badge platform" style="background: #E8F0FE; color: #0A66C2; border: 1px solid rgba(10, 102, 194, 0.2);" title="Vaga oficial hospedada no LinkedIn">💼 LinkedIn</span>`;
+        return `<span class="tag-badge platform" style="background: rgba(10, 102, 194, 0.14); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.25);" title="Vaga oficial hospedada no LinkedIn">LinkedIn</span>`;
       }
       if (url.includes('gupy.io')) {
-        return `<span class="tag-badge platform" style="background: #F3E8FF; color: #7E22CE; border: 1px solid rgba(126, 34, 206, 0.2);" title="Processo seletivo hospedado na Gupy">🏢 Gupy</span>`;
+        return `<span class="tag-badge platform" style="background: rgba(168, 85, 247, 0.14); color: #d8b4fe; border: 1px solid rgba(216, 180, 254, 0.25);" title="Processo seletivo hospedado na Gupy">Gupy</span>`;
       }
       if (url.includes('ciadetalentos') || url.includes('vagas.ciadetalentos')) {
-        return `<span class="tag-badge platform" style="background: #FFF7ED; color: #C2410C; border: 1px solid rgba(194, 65, 12, 0.2);" title="Programa de estágio na Cia de Talentos">🎯 Cia de Talentos</span>`;
+        return `<span class="tag-badge platform" style="background: rgba(249, 115, 22, 0.14); color: #fdba74; border: 1px solid rgba(253, 186, 116, 0.25);" title="Programa de estágio na Cia de Talentos">Cia de Talentos</span>`;
       }
       if (url.includes('vagas.com.br')) {
-        return `<span class="tag-badge platform" style="background: #ECFEFF; color: #0E7490; border: 1px solid rgba(14, 116, 144, 0.2);" title="Vaga hospedada no Vagas.com">📄 Vagas.com</span>`;
+        return `<span class="tag-badge platform" style="background: rgba(6, 182, 212, 0.14); color: #67e8f9; border: 1px solid rgba(103, 232, 249, 0.25);" title="Vaga hospedada no Vagas.com">Vagas.com</span>`;
       }
       if (url.includes('solides')) {
-        return `<span class="tag-badge platform" style="background: #FDF2F8; color: #BE185D; border: 1px solid rgba(190, 24, 93, 0.2);" title="Vaga hospedada no Portal Sólides">🚀 Sólides</span>`;
+        return `<span class="tag-badge platform" style="background: rgba(236, 72, 153, 0.14); color: #f9a8d4; border: 1px solid rgba(249, 168, 212, 0.25);" title="Vaga hospedada no Portal Sólides">Sólides</span>`;
       }
       if (url.includes('glassdoor')) {
-        return `<span class="tag-badge platform" style="background: #F0FDF4; color: #15803D; border: 1px solid rgba(21, 128, 61, 0.2);" title="Vaga hospedada no Glassdoor">🚪 Glassdoor</span>`;
+        return `<span class="tag-badge platform" style="background: rgba(34, 197, 94, 0.14); color: #86efac; border: 1px solid rgba(134, 239, 172, 0.25);" title="Vaga hospedada no Glassdoor">Glassdoor</span>`;
       }
       if (url.includes('indeed')) {
-        return `<span class="tag-badge platform" style="background: #EFF6FF; color: #1D4ED8; border: 1px solid rgba(29, 78, 216, 0.2);" title="Vaga hospedada no Indeed">🔍 Indeed</span>`;
+        return `<span class="tag-badge platform" style="background: rgba(59, 130, 246, 0.14); color: #93c5fd; border: 1px solid rgba(147, 197, 253, 0.25);" title="Vaga hospedada no Indeed">Indeed</span>`;
       }
-      return `<span class="tag-badge platform" style="background: #F8FAFD; color: #475569; border: 1px solid #E2E8F0;" title="Link oficial de candidatura">🌐 Link Oficial</span>`;
+      return `<span class="tag-badge platform" style="background: rgba(161, 161, 170, 0.12); color: #d4d4d8; border: 1px solid rgba(255, 255, 255, 0.12);" title="Link oficial de candidatura">Link Oficial</span>`;
     }
 
     function getPrazoBadge(prazo) {
@@ -4479,7 +4477,7 @@
 
       // Se tiver data explícita (ex: "Prazo: 28/11" ou "Até 30/11/2026")
       if (/\d{1,2}\/\d{1,2}/.test(p) || /\b(at[eé]|prazo|encerra)\b/i.test(p)) {
-        return `<span class="tag-badge prazo-real" style="background: #FFFBEB; color: #B45309; border: 1px solid #FCD34D; font-weight: 700;" title="Data limite informada pelo processo seletivo">⏳ ${p}</span>`;
+        return `<span class="tag-badge prazo-real" style="background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); font-weight: 700;" title="Data limite informada pelo processo seletivo">${p}</span>`;
       }
       return '';
     }
@@ -4549,11 +4547,11 @@
       if (faculdadeTurno === 'manhã' || faculdadeTurno === 'manha') {
         const isManhaRigido = (text.includes('manhã') || text.includes('manha') || text.includes('matutino') || text.includes('08:00') || text.includes('8h às 15h')) && !text.includes('flex');
         if (isManhaRigido) {
-          return `<span class="tag-badge" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FCA5A5;" title="Turno matutino pode colidir com horário da faculdade">⚠️ Possível Conflito (Manhã)</span>`;
+          return `<span class="tag-badge" style="background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.35);" title="Turno matutino pode colidir com horário da faculdade">Possível Conflito (Manhã)</span>`;
         }
-        return `<span class="tag-badge" style="background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0;" title="Horário perfeitamente compatível com faculdade pela manhã">✓ Turno Compatível</span>`;
+        return `<span class="tag-badge" style="background: rgba(74, 222, 128, 0.12); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3);" title="Horário perfeitamente compatível com faculdade pela manhã">Turno Compatível</span>`;
       }
-      return `<span class="tag-badge turno">⏱️ ${job.turno || 'Tarde / Flexível'}</span>`;
+      return `<span class="tag-badge turno">${job.turno || 'Tarde / Flexível'}</span>`;
     }
 
     // =============================================================
@@ -4649,7 +4647,7 @@
           bannerCrawler.style.display = 'block';
           const titulo = document.getElementById('banner-crawler-titulo');
           const desc = document.getElementById('banner-crawler-desc');
-          if (titulo) titulo.innerText = `⚠️ Alerta de Observabilidade: ${health.label}`;
+          if (titulo) titulo.innerText = `Alerta de Observabilidade: ${health.label}`;
           if (desc) desc.innerText = `${health.desc} (Última tentativa: ${health.timestamp || 'recente'})`;
         } else {
           bannerCrawler.style.display = 'none';
@@ -4726,7 +4724,7 @@
         let msgDesc = "Clique em 'Inscrição ↗' em qualquer vaga aberta da Tela 01 para iniciar.";
         if (currentSubTab02 === 'salvas') {
           msgTitle = "Nenhuma vaga favoritada";
-          msgDesc = "Clique no ícone de estrela (★) para salvar oportunidades interessantes e aplicar quando quiser.";
+          msgDesc = "Clique no ícone de favorito para salvar oportunidades interessantes e aplicar quando quiser.";
         } else if (currentSubTab02 === 'andamento') {
           msgTitle = "Nenhuma inscrição em andamento";
           msgDesc = "Ao clicar em 'Inscrição ↗' na Tela 01, a vaga vem para cá para você confirmar o envio.";
@@ -5139,11 +5137,15 @@
     // =============================================================
     // OBSERVABILIDADE & SAÚDE DO CRAWLER
     // =============================================================
+    function getStatusDotHtml(color) {
+      return `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;"></span>`;
+    }
+
     function getCrawlerHealth() {
       if (executionData.length === 0) {
         return {
           status: 'healthy',
-          icon: '🟢',
+          icon: getStatusDotHtml('#4ADE80'),
           color: 'var(--green)',
           label: 'Aguardando Inicialização',
           desc: 'Nenhuma varredura registrada ainda no sistema.',
@@ -5170,8 +5172,8 @@
       if (isLastRunErro) {
         return {
           status: 'error',
-          icon: '🔴',
-          color: '#b91c1c',
+          icon: getStatusDotHtml('#EF4444'),
+          color: '#f87171',
           label: 'Falha no Crawler Detectada',
           desc: lastRun.mensagem || 'A última varredura encerrou com erro no processo.',
           duracao: lastRun.duracaoSegundos !== undefined ? lastRun.duracaoSegundos : 0,
@@ -5183,8 +5185,8 @@
       if (lastRun.duracaoSegundos !== undefined && lastRun.duracaoSegundos < 15 && (!lastRun.vagas || lastRun.vagas.length === 0) && lastRun.status === 'ERRO_CRAWLER') {
         return {
           status: 'error',
-          icon: '🔴',
-          color: '#b91c1c',
+          icon: getStatusDotHtml('#EF4444'),
+          color: '#f87171',
           label: 'Execução Anômala (< 15s)',
           desc: 'O crawler encerrou imediatamente sem buscar vagas na web.',
           duracao: lastRun.duracaoSegundos,
@@ -5196,8 +5198,8 @@
       if (horasDesdeUltima > 3) {
         return {
           status: 'warning',
-          icon: '🟡',
-          color: '#b45309',
+          icon: getStatusDotHtml('#FBBF24'),
+          color: '#fbbf24',
           label: `Inativo há ~${Math.round(horasDesdeUltima)} horas`,
           desc: 'O agendador horário pode estar pausado ou a máquina desligada.',
           duracao: lastRun.duracaoSegundos || 0,
@@ -5208,7 +5210,7 @@
       const duracaoStr = lastRun.duracaoSegundos !== undefined ? `${Math.round(lastRun.duracaoSegundos)}s` : 'OK';
       return {
         status: 'healthy',
-        icon: '🟢',
+        icon: getStatusDotHtml('#4ADE80'),
         color: 'var(--green)',
         label: 'Operacional & Saudável',
         desc: `Última varredura concluída com sucesso (${duracaoStr}). Agendamento automático ativo.`,
@@ -5245,8 +5247,8 @@
         const crawlerHealthMeta = window.CRAWLER_HEALTH || {};
         const avisosFontes = Array.isArray(crawlerHealthMeta.avisosFontes) ? crawlerHealthMeta.avisosFontes : [];
         const avisosHtml = avisosFontes.length > 0
-          ? `<div style="margin-top: 0.75rem; padding: 0.7rem 1rem; border-radius: 8px; background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; font-size: 0.78rem;">
-              <strong>⚠️ Alerta de Fontes (Zero-Yield):</strong> ${avisosFontes.map(a => String(a).replace(/</g, '&lt;')).join(' &bull; ')}
+          ? `<div style="margin-top: 0.75rem; padding: 0.7rem 1rem; border-radius: 8px; background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.35); color: #fcd34d; font-size: 0.78rem;">
+              <strong>Alerta de Fontes (Zero-Yield):</strong> ${avisosFontes.map(a => String(a).replace(/</g, '&lt;')).join(' &bull; ')}
              </div>`
           : '';
 
@@ -5306,12 +5308,12 @@
         
         let badge = `<span class="tag-badge hybrid">0 vagas</span>`;
         if (isErro) {
-          badge = `<span class="tag-badge" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; font-weight: 700;">❌ Falha (${run.duracaoSegundos !== undefined ? run.duracaoSegundos : 0}s)</span>`;
+          badge = `<span class="tag-badge" style="background: rgba(239, 68, 68, 0.14); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.35); font-weight: 700;">Falha (${run.duracaoSegundos !== undefined ? run.duracaoSegundos : 0}s)</span>`;
         } else if (hasJobs) {
           badge = `<span class="tag-badge remote">+${count} nova(s) vaga(s)</span>`;
         }
 
-        const borderStyle = isErro ? 'border-left: 3px solid #ef4444; background: #fff5f5;' : '';
+        const borderStyle = isErro ? 'border-color: rgba(239, 68, 68, 0.45); background: rgba(239, 68, 68, 0.08);' : '';
         const numStr = (idx + 1).toString().padStart(2, '0');
 
         const pills = [];
@@ -6154,20 +6156,20 @@
       }
 
       const meta = {
-        "Google Jobs": { label: "🔎 Google Jobs", color: "#475569" },
-        "LinkedIn": { label: "💼 LinkedIn", color: "#0A66C2" },
-        "Gupy": { label: "🏢 Gupy", color: "#7E22CE" },
-        "Greenhouse (ATS)": { label: "🌱 Greenhouse (ATS)", color: "#047857" },
-        "InHire (ATS)": { label: "⚡ InHire (ATS)", color: "#4F46E5" },
-        "Workday (ATS)": { label: "⚙️ Workday (ATS)", color: "#1D4ED8" },
-        "Sólides (ATS)": { label: "🚀 Sólides (ATS)", color: "#BE185D" },
-        "Catho": { label: "📋 Catho", color: "#E11D48" },
-        "Agentes (Nube/CIEE)": { label: "🎓 Agentes (Nube/CIEE)", color: "#0D9488" },
-        "Cia de Talentos": { label: "🎯 Cia de Talentos", color: "#C2410C" },
-        "Vagas.com": { label: "📄 Vagas.com", color: "#0E7490" },
-        "Glassdoor": { label: "🚪 Glassdoor", color: "#15803D" },
-        "Indeed": { label: "🔍 Indeed", color: "#1D4ED8" },
-        "Sites Próprios das Empresas": { label: "🏢 Sites Próprios das Empresas", color: "#334155" }
+        "Google Jobs": { label: "Google Jobs", color: "#64748b" },
+        "LinkedIn": { label: "LinkedIn", color: "#0A66C2" },
+        "Gupy": { label: "Gupy", color: "#94a3b8" },
+        "Greenhouse (ATS)": { label: "Greenhouse (ATS)", color: "#10b981" },
+        "InHire (ATS)": { label: "InHire (ATS)", color: "#38bdf8" },
+        "Workday (ATS)": { label: "Workday (ATS)", color: "#3b82f6" },
+        "Sólides (ATS)": { label: "Sólides (ATS)", color: "#f472b6" },
+        "Catho": { label: "Catho", color: "#fb7185" },
+        "Agentes (Nube/CIEE)": { label: "Agentes (Nube/CIEE)", color: "#14b8a6" },
+        "Cia de Talentos": { label: "Cia de Talentos", color: "#fb923c" },
+        "Vagas.com": { label: "Vagas.com", color: "#22d3ee" },
+        "Glassdoor": { label: "Glassdoor", color: "#4ade80" },
+        "Indeed": { label: "Indeed", color: "#60a5fa" },
+        "Sites Próprios das Empresas": { label: "Sites Próprios das Empresas", color: "#71717a" }
       };
 
       const counts = {};
@@ -6181,7 +6183,7 @@
       container.innerHTML = sortedPlats.map(plat => {
         const count = counts[plat];
         const pct = Math.round((count / total) * 100);
-        const info = meta[plat] || { label: `🌐 ${plat}`, color: "#475569" };
+        const info = meta[plat] || { label: plat, color: "#71717a" };
         return `
           <div class="bar-stat-row">
             <div class="bar-stat-labels">
@@ -6214,27 +6216,31 @@
 
       const isRemoto = (job.modalidade || '').toLowerCase().includes('remoto');
       const isPresencial = (job.modalidade || '').toLowerCase().includes('presencial');
+      function getStarIconSvg(filled) {
+        return `<svg width="15" height="15" viewBox="0 0 24 24" fill="${filled ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+      }
+
       const locBadge = document.getElementById('m-badge-loc');
       locBadge.className = `tag-badge ${isRemoto ? 'remote' : (isPresencial ? 'presencial' : 'hybrid')}`;
-      locBadge.innerText = `📍 ${job.localizacao || (isRemoto ? '100% Remoto' : 'Presencial / BH')}`;
+      locBadge.innerText = job.localizacao || (isRemoto ? '100% Remoto' : 'Presencial / BH');
 
-      document.getElementById('m-badge-turno').innerText = `⏱️ ${job.turno || 'Tarde / Flexível'}`;
+      document.getElementById('m-badge-turno').innerText = job.turno || 'Tarde / Flexível';
       const badgePrazoModal = document.getElementById('m-badge-prazo');
       if (badgePrazoModal) {
         const p = (job.prazo || '').trim();
         if (p && !/^inscri[çc][õo]es\s+abertas$/i.test(p)) {
           badgePrazoModal.style.display = 'inline-flex';
-          badgePrazoModal.innerText = `⏳ ${p}`;
-          badgePrazoModal.style.background = '#FFFBEB';
-          badgePrazoModal.style.color = '#B45309';
-          badgePrazoModal.style.borderColor = '#FCD34D';
+          badgePrazoModal.innerText = p;
+          badgePrazoModal.style.background = 'rgba(251, 191, 36, 0.12)';
+          badgePrazoModal.style.color = '#fbbf24';
+          badgePrazoModal.style.borderColor = 'rgba(251, 191, 36, 0.35)';
         } else {
           badgePrazoModal.style.display = 'none';
         }
       }
 
       const starBtn = document.getElementById('m-btn-star');
-      starBtn.innerText = job.starred ? '★' : '☆';
+      starBtn.innerHTML = getStarIconSvg(!!job.starred);
       starBtn.className = `job-icon-btn ${job.starred ? 'is-starred' : ''}`;
 
       const applyBtn = document.getElementById('m-btn-inscrever');
@@ -6250,13 +6256,13 @@
 
       if (job.status === 'acao_pendente') {
         const isEntrevista = job.detalhesAcao && job.detalhesAcao.tipo && job.detalhesAcao.tipo.includes('Entrevista');
-        applyBtn.innerHTML = `<span>${isEntrevista ? 'Agendar Entrevista ↗' : 'Acessar Teste Técnico ↗'}</span>`;
+        applyBtn.innerHTML = `<span>${isEntrevista ? 'Agendar Entrevista' : 'Acessar Teste Técnico'}</span>`;
       } else if (job.status === 'em_andamento') {
-        applyBtn.innerHTML = '<span>Confirmar Candidatura Concluída ✓</span>';
+        applyBtn.innerHTML = '<span>Confirmar Candidatura Concluída</span>';
       } else if (job.status === 'aplicada') {
-        applyBtn.innerHTML = '<span>Reabrir Inscrição Oficial ↗</span>';
+        applyBtn.innerHTML = '<span>Abrir Link</span>';
       } else {
-        applyBtn.innerHTML = '<span>Abrir Inscrição Oficial ↗</span>';
+        applyBtn.innerHTML = '<span>Abrir Inscrição Oficial</span>';
       }
 
       document.getElementById('job-modal').classList.add('visible');
@@ -6296,7 +6302,7 @@
       if (!activeModalJob) return;
       toggleStar(activeModalJob.canonicalKey);
       const starBtn = document.getElementById('m-btn-star');
-      starBtn.innerText = activeModalJob.starred ? '★' : '☆';
+      starBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="${activeModalJob.starred ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
       starBtn.className = `job-icon-btn ${activeModalJob.starred ? 'is-starred' : ''}`;
     }
 
@@ -6401,7 +6407,7 @@
       }
 
       const motivoCurto = motivo.split('/')[0].trim();
-      showToast(`Filtro atualizado. Vagas de "${motivoCurto}" foram descartadas do radar.`, () => {
+      showToast(`Filtros calibrados: vagas de "${motivoCurto}" excluídas do radar.`, () => {
         moverDeVoltaParaAbertas(canonicalKey);
         showToast('Ação desfeita: vaga restaurada para abertas.');
       });
