@@ -58,9 +58,14 @@ function escapeHtml(str) {
    INICIALIZAÇÃO & SUPABASE AUTH
    ============================================================= */
 async function initStudio() {
-  // 0. Modo embutido dentro do dashboard.html (esconde sidebar duplicada)
+  // 0. Modo embutido dentro do dashboard.html (esconde sidebar duplicada apenas dentro de iframe real)
   const initParams = new URLSearchParams(window.location.search);
-  if (initParams.get('embed') === '1' || window.self !== window.top) {
+  const isInsideIframe = window.self !== window.top;
+  if (!isInsideIframe && initParams.get('embed') === '1') {
+    window.location.replace('/dashboard.html');
+    return;
+  }
+  if (isInsideIframe) {
     document.body.classList.add('is-embedded');
   }
 

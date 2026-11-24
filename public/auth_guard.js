@@ -34,6 +34,9 @@
     if (lower.startsWith('/auth.html') || lower.startsWith('javascript:')) {
       return fallback;
     }
+    if ((lower.startsWith('/curriculo') || lower.includes('curriculo.html')) && /[?&]embed=1(?:&|$|#)/.test(lower)) {
+      return fallback;
+    }
     return trimmed;
   }
 
@@ -274,7 +277,14 @@
 
   function redirectToAuth(customUrl) {
     if (typeof window === 'undefined') return;
-    const currentPath = window.location.pathname + window.location.search;
+    let currentPath = window.location.pathname + window.location.search;
+    try {
+      if (window.top && window.top !== window && window.top.location) {
+        currentPath = window.top.location.pathname + window.top.location.search;
+      }
+    } catch (_) {
+      currentPath = '/dashboard.html';
+    }
     const nextParam = encodeURIComponent(sanitizeNextPath(currentPath, '/dashboard.html'));
     const target = customUrl || `/auth.html?next=${nextParam}`;
     try {

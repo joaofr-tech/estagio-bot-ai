@@ -433,6 +433,13 @@ def test_auth_guard_redirects_anonymous_and_switches_modes(local_server):
         assert "/auth.html" in page.url
         assert "next=%2Fcurriculo.html" in page.url
 
+        # Acesso sem login a URL embutida (?embed=1) NUNCA deve gravar embed=1 no ?next=
+        page.goto(f"{local_server}/curriculo.html?embed=1&view=studio&vaga_id=test-99", wait_until="domcontentloaded")
+        page.wait_for_url("**/auth.html**")
+        assert "/auth.html" in page.url
+        assert "next=%2Fdashboard.html" in page.url
+        assert "embed%3D1" not in page.url
+
         # Acesso sem login ao dashboard deve redirecionar imediatamente para /auth.html
         page.goto(f"{local_server}/dashboard.html", wait_until="domcontentloaded")
         page.wait_for_url("**/auth.html**")
@@ -476,6 +483,12 @@ def test_e2e_sona_full_flow(local_server, tmp_path):
             route.continue_()
 
         context.route("**/api/**", route_api)
+
+        # 0. Regressão: se abrir /curriculo.html?embed=1 fora de iframe (top-level), redireciona para /dashboard.html com sidebar visível
+        page.goto(f"{local_server}/curriculo.html?embed=1&view=studio&vaga_id=stale-job", wait_until="domcontentloaded")
+        page.wait_for_url("**/dashboard.html**", timeout=5000)
+        page.wait_for_selector(".site-sidebar", state="visible", timeout=5000)
+        assert page.locator("#screen-view-01").is_visible()
 
         # 1. Pré-popula localStorage escopado por user_id com chave BYOK + duplicatas propositais para testar deduplicação
         page.goto(f"{local_server}/dashboard.html", wait_until="domcontentloaded")

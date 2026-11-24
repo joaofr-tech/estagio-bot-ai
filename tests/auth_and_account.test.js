@@ -18,6 +18,8 @@ async function runAuthAndAccountTests() {
   assert.strictEqual(SonaAuth.sanitizeNextPath('/dashboard.html\u0000'), '/dashboard.html');
   assert.strictEqual(SonaAuth.sanitizeNextPath('javascript:alert(1)'), '/dashboard.html');
   assert.strictEqual(SonaAuth.sanitizeNextPath('/auth.html'), '/dashboard.html');
+  assert.strictEqual(SonaAuth.sanitizeNextPath('/curriculo.html?embed=1&view=studio&vaga_id=123'), '/dashboard.html');
+  assert.strictEqual(SonaAuth.sanitizeNextPath('/curriculo.html?view=studio&embed=1'), '/dashboard.html');
   assert.strictEqual(SonaAuth.sanitizeNextPath(''), '/dashboard.html');
   console.log('  ✓ sanitizeNextPath bloqueia open-redirects e loops para /auth.html');
 
