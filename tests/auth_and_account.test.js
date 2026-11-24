@@ -182,6 +182,22 @@ async function runAuthAndAccountTests() {
   assert.strictEqual(resOk.body.ok, true);
   assert.strictEqual(deletedUid, 'user-del-99');
   console.log('  ✓ Handler DELETE /api/account valida JWT, exige confirmação EXCLUIR e remove usuário');
+
+  // 8. Conformidade de auth.html e auth.css com DESIGN.md (zero emojis, 4 modos, GitHub OAuth)
+  const authHtmlPath = path.resolve(__dirname, '..', 'auth.html');
+  const authCssPath = path.resolve(__dirname, '..', 'auth.css');
+  assert.ok(fs.existsSync(authHtmlPath), 'auth.html deve existir na raiz');
+  assert.ok(fs.existsSync(authCssPath), 'auth.css deve existir na raiz');
+
+  const authHtml = fs.readFileSync(authHtmlPath, 'utf8');
+  const authCss = fs.readFileSync(authCssPath, 'utf8');
+  const emojiRegex = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+  assert.strictEqual(emojiRegex.test(authHtml), false, 'auth.html não pode conter emojis (DESIGN.md)');
+  assert.strictEqual(emojiRegex.test(authCss), false, 'auth.css não pode conter emojis (DESIGN.md)');
+  ['form-signin', 'form-signup', 'form-recover', 'form-reset', 'btn-oauth-github', 'auth-feedback'].forEach((id) => {
+    assert.ok(authHtml.includes(`id="${id}"`), `auth.html deve conter #${id}`);
+  });
+  console.log('  ✓ auth.html contém os 4 fluxos de autenticação e obedece estritamente ao DESIGN.md');
 }
 
 module.exports = { runAuthAndAccountTests };

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111114" />
+  <title>Entrar — Sona</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+  <main class="auth-viewport">
+    <section class="auth-surface" aria-labelledby="auth-heading">
+      <div class="auth-brand">
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="9" opacity="0.28" />
+          <path d="M50 10 A40 40 0 0 1 90 50" stroke="currentColor" stroke-width="9" stroke-linecap="round" />
+        </svg>
+        <span class="auth-brand-name">Sona</span>
+      </div>
+
+      <h1 class="auth-title" id="auth-heading">Entrar na Conta</h1>
+      <p class="auth-subtitle" id="auth-subheading">
+        Acesse seu painel individual de vagas, candidaturas e currículos ATS.
+      </p>
+
+      <div class="auth-tabs" id="auth-tabs-bar" role="tablist">
+        <button type="button" class="auth-tab active" id="tab-signin" onclick="setAuthMode('signin')">
+          Entrar
+        </button>
+        <button type="button" class="auth-tab" id="tab-signup" onclick="setAuthMode('signup')">
+          Criar Conta
+        </button>
+      </div>
+
+      <div class="auth-feedback" id="auth-feedback" role="status" aria-live="polite"></div>
+
+      <!-- MODO 1: ENTRAR -->
+      <form class="auth-form active" id="form-signin" onsubmit="handleSignIn(event)">
+        <div class="auth-field">
+          <label class="auth-label" for="signin-email">E-mail</label>
+          <input class="sona-input auth-input" id="signin-email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+        </div>
+        <div class="auth-field">
+          <div class="auth-label-row">
+            <label class="auth-label" for="signin-password">Senha</label>
+            <button type="button" class="auth-link-btn" onclick="setAuthMode('recover')">
+              Esqueci Minha Senha
+            </button>
+          </div>
+          <input class="sona-input auth-input" id="signin-password" type="password" autocomplete="current-password" placeholder="Sua senha" required />
+        </div>
+        <button type="submit" class="sona-btn-primary auth-submit-btn" id="btn-signin-submit">
+          Entrar na Conta
+        </button>
+      </form>
+
+      <!-- MODO 2: CRIAR CONTA -->
+      <form class="auth-form" id="form-signup" onsubmit="handleSignUp(event)">
+        <div class="auth-field">
+          <label class="auth-label" for="signup-name">Nome de Exibição</label>
+          <input class="sona-input auth-input" id="signup-name" type="text" autocomplete="name" placeholder="Seu nome completo" required />
+        </div>
+        <div class="auth-field">
+          <label class="auth-label" for="signup-email">E-mail</label>
+          <input class="sona-input auth-input" id="signup-email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+        </div>
+        <div class="auth-field">
+          <label class="auth-label" for="signup-password">Senha (mínimo 8 caracteres)</label>
+          <input class="sona-input auth-input" id="signup-password" type="password" autocomplete="new-password" minlength="8" placeholder="Crie uma senha forte" required />
+        </div>
+        <button type="submit" class="sona-btn-primary auth-submit-btn" id="btn-signup-submit">
+          Criar Conta
+        </button>
+      </form>
+
+      <!-- MODO 3: RECUPERAR SENHA -->
+      <form class="auth-form" id="form-recover" onsubmit="handleRecoverPassword(event)">
+        <div class="auth-field">
+          <label class="auth-label" for="recover-email">E-mail da Conta</label>
+          <input class="sona-input auth-input" id="recover-email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+        </div>
+        <button type="submit" class="sona-btn-primary auth-submit-btn" id="btn-recover-submit">
+          Enviar Link de Recuperação
+        </button>
+        <button type="button" class="sona-btn-secondary auth-submit-btn" onclick="setAuthMode('signin')">
+          Voltar para Login
+        </button>
+      </form>
+
+      <!-- MODO 4: DEFINIR NOVA SENHA (PASSWORD_RECOVERY) -->
+      <form class="auth-form" id="form-reset" onsubmit="handleUpdatePassword(event)">
+        <div class="auth-field">
+          <label class="auth-label" for="reset-password">Nova Senha (mínimo 8 caracteres)</label>
+          <input class="sona-input auth-input" id="reset-password" type="password" autocomplete="new-password" minlength="8" placeholder="Digite a nova senha" required />
+        </div>
+        <div class="auth-field">
+          <label class="auth-label" for="reset-password-confirm">Confirmar Nova Senha</label>
+          <input class="sona-input auth-input" id="reset-password-confirm" type="password" autocomplete="new-password" minlength="8" placeholder="Repita a nova senha" required />
+        </div>
+        <button type="submit" class="sona-btn-primary auth-submit-btn" id="btn-reset-submit">
+          Salvar Nova Senha
+        </button>
+      </form>
+
+      <div id="oauth-section">
+        <div class="auth-divider">ou continue com</div>
+        <button type="button" class="sona-btn-secondary auth-oauth-btn" id="btn-oauth-github" onclick="handleGitHubOAuth()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          <span>Continuar com GitHub</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="supabase_config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth_guard.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nextPath = window.SonaAuth.sanitizeNextPath(params.get('next'), '/dashboard.html');
+    let sb = null;
+    let isRecoveryFlow = params.get('mode') === 'reset';
+
+    function showFeedback(message, type = 'error') {
+      const box = document.getElementById('auth-feedback');
+      if (!box) return;
+      box.textContent = message;
+      box.className = `auth-feedback show ${type}`;
+    }
+
+    function clearFeedback() {
+      const box = document.getElementById('auth-feedback');
+      if (box) {
+        box.textContent = '';
+        box.className = 'auth-feedback';
+      }
+    }
+
+    function setAuthMode(mode) {
+      clearFeedback();
+      const heading = document.getElementById('auth-heading');
+      const subheading = document.getElementById('auth-subheading');
+      const tabsBar = document.getElementById('auth-tabs-bar');
+      const oauthSec = document.getElementById('oauth-section');
+
+      ['signin', 'signup', 'recover', 'reset'].forEach((m) => {
+        document.getElementById(`form-${m}`)?.classList.toggle('active', m === mode);
+      });
+      document.getElementById('tab-signin')?.classList.toggle('active', mode === 'signin');
+      document.getElementById('tab-signup')?.classList.toggle('active', mode === 'signup');
+
+      const showTabs = mode === 'signin' || mode === 'signup';
+      if (tabsBar) tabsBar.style.display = showTabs ? 'grid' : 'none';
+      if (oauthSec) oauthSec.style.display = showTabs ? 'block' : 'none';
+
+      if (mode === 'signin') {
+        heading.textContent = 'Entrar na Conta';
+        subheading.textContent = 'Acesse seu painel individual de vagas, candidaturas e currículos ATS.';
+      } else if (mode === 'signup') {
+        heading.textContent = 'Criar Conta';
+        subheading.textContent = 'Crie sua conta para salvar candidaturas, filtros e currículos na nuvem.';
+      } else if (mode === 'recover') {
+        heading.textContent = 'Recuperar Senha';
+        subheading.textContent = 'Informe seu e-mail para receber o link seguro de redefinição.';
+      } else if (mode === 'reset') {
+        heading.textContent = 'Definir Nova Senha';
+        subheading.textContent = 'Escolha uma nova senha para concluir a recuperação da sua conta.';
+      }
+    }
+
+    async function initAuthPage() {
+      const initialMode = params.get('mode');
+      if (initialMode === 'signup' || initialMode === 'recover' || initialMode === 'reset') {
+        setAuthMode(initialMode);
+      }
+
+      if (params.get('deleted') === '1') {
+        showFeedback('Sua conta e todos os dados associados foram excluídos com segurança.', 'success');
+      } else if (params.get('error') === 'config') {
+        showFeedback('Configuração do Supabase ausente neste ambiente. Verifique supabase_config.js.', 'error');
+        return;
+      }
+
+      sb = window.SonaAuth.getClient();
+      if (!sb) {
+        showFeedback('Cliente Supabase indisponível. Verifique sua conexão de rede.', 'error');
+        return;
+      }
+
+      sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'PASSWORD_RECOVERY') {
+          isRecoveryFlow = true;
+          setAuthMode('reset');
+          return;
+        }
+        if (session?.user && !isRecoveryFlow) {
+          window.location.replace(nextPath);
+        }
+      });
+
+      const { data } = await sb.auth.getSession();
+      if (data?.session?.user && !isRecoveryFlow) {
+        window.location.replace(nextPath);
+      }
+    }
+
+    async function handleSignIn(e) {
+      e.preventDefault();
+      if (!sb) return;
+      clearFeedback();
+      const btn = document.getElementById('btn-signin-submit');
+      const email = document.getElementById('signin-email').value.trim();
+      const password = document.getElementById('signin-password').value;
+
+      btn.disabled = true;
+      try {
+        const { data, error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        if (data?.session) {
+          window.location.replace(nextPath);
+        }
+      } catch (err) {
+        showFeedback(window.SonaAuth.translateAuthError(err), 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function handleSignUp(e) {
+      e.preventDefault();
+      if (!sb) return;
+      clearFeedback();
+      const btn = document.getElementById('btn-signup-submit');
+      const fullName = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+
+      if (password.length < 8) {
+        showFeedback('A senha deve ter pelo menos 8 caracteres.', 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      try {
+        const { data, error } = await sb.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name: fullName },
+            emailRedirectTo: window.location.origin + nextPath
+          }
+        });
+        if (error) throw error;
+        if (data?.session) {
+          window.location.replace(nextPath);
+          return;
+        }
+        showFeedback('Cadastro criado. Verifique a caixa de entrada do seu e-mail para ativar a conta.', 'success');
+      } catch (err) {
+        showFeedback(window.SonaAuth.translateAuthError(err), 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function handleRecoverPassword(e) {
+      e.preventDefault();
+      if (!sb) return;
+      clearFeedback();
+      const btn = document.getElementById('btn-recover-submit');
+      const email = document.getElementById('recover-email').value.trim();
+
+      btn.disabled = true;
+      try {
+        const { error } = await sb.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/auth.html?mode=reset`
+        });
+        if (error) throw error;
+        showFeedback('Se o e-mail estiver cadastrado, enviamos um link seguro para redefinir sua senha.', 'success');
+      } catch (err) {
+        showFeedback(window.SonaAuth.translateAuthError(err), 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function handleUpdatePassword(e) {
+      e.preventDefault();
+      if (!sb) return;
+      clearFeedback();
+      const btn = document.getElementById('btn-reset-submit');
+      const pw = document.getElementById('reset-password').value;
+      const pwConfirm = document.getElementById('reset-password-confirm').value;
+
+      if (pw.length < 8) {
+        showFeedback('A nova senha deve ter pelo menos 8 caracteres.', 'error');
+        return;
+      }
+      if (pw !== pwConfirm) {
+        showFeedback('As senhas digitadas não coincidem.', 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      try {
+        const { error } = await sb.auth.updateUser({ password: pw });
+        if (error) throw error;
+        isRecoveryFlow = false;
+        showFeedback('Senha atualizada com sucesso. Redirecionando para o painel...', 'success');
+        setTimeout(() => window.location.replace(nextPath), 700);
+      } catch (err) {
+        showFeedback(window.SonaAuth.translateAuthError(err), 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function handleGitHubOAuth() {
+      if (!sb) return;
+      clearFeedback();
+      const { error } = await sb.auth.signInWithOAuth({
+        provider: 'github',
+        options: {
+          scopes: 'read:user repo',
+          redirectTo: `${window.location.origin}${nextPath}`
+        }
+      });
+      if (error) {
+        showFeedback(window.SonaAuth.translateAuthError(error), 'error');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initAuthPage);
+  </script>
+</body>
+</html>
