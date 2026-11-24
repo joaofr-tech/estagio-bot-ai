@@ -29,7 +29,43 @@ async function runAuthAndAccountTests() {
   assert.strictEqual(keysA.USER_STORE, 'sona_user_store_user-111');
   assert.strictEqual(keysA.PARAMS, 'sona_params_user-111');
   assert.strictEqual(keysA.BYOK_KEY, 'sona_byok_key_user-111');
-  console.log('  ✓ getUserScopedKeys isola completamente o cache entre contas distintas');
+  assert.strictEqual(keysA.ACTIVE_JOB, 'sona_active_job_user-111');
+
+  const mockStorageData = {
+    [keysA.USER_STORE]: '{"a":1}',
+    [keysA.PARAMS]: '{"b":2}',
+    [keysA.PENDING_SYNC]: '[]',
+    [keysA.PROFILE]: '{}',
+    [keysA.HISTORY]: '[]',
+    [keysA.BYOK_KEY]: '{"apiKey":"k1"}',
+    [keysA.ACTIVE_JOB]: '{"id":"job-1"}',
+    sona_active_resume_job: '{"id":"legacy-job"}',
+    [keysB.USER_STORE]: '{"keep":true}'
+  };
+  const mockStorage = {
+    removeItem(k) {
+      delete mockStorageData[k];
+    }
+  };
+  SonaAuth.clearUserLocalCache('user-111', mockStorage);
+  Object.values(keysA).forEach((k) => {
+    assert.strictEqual(
+      Object.prototype.hasOwnProperty.call(mockStorageData, k),
+      false,
+      `clearUserLocalCache deve remover ${k}`
+    );
+  });
+  assert.strictEqual(
+    Object.prototype.hasOwnProperty.call(mockStorageData, 'sona_active_resume_job'),
+    false,
+    'clearUserLocalCache deve remover sona_active_resume_job além das chaves escopadas por <uid>'
+  );
+  assert.strictEqual(
+    mockStorageData[keysB.USER_STORE],
+    '{"keep":true}',
+    'clearUserLocalCache não deve afetar chaves de outra conta'
+  );
+  console.log('  ✓ getUserScopedKeys e clearUserLocalCache isolam e limpam o cache (incluindo sona_active_resume_job)');
 
   // 3. Detecção de estado neutro e conversão bidirecional store <-> user_vagas
   assert.strictEqual(SonaAuth.isNeutralVagaEntry({ status: 'para_aplicar', starred: false }), true);
@@ -238,6 +274,10 @@ async function runAuthAndAccountTests() {
   const curriculoJs = fs.readFileSync(path.resolve(__dirname, '..', 'curriculo.js'), 'utf8');
 
   assert.ok(curriculoHtml.includes('auth-pending'), 'curriculo.html deve iniciar com classe auth-pending anti-FOUC');
+  assert.ok(
+    curriculoHtml.includes('html.auth-pending { background: #111114; }'),
+    'curriculo.html deve aplicar background #111114 em html.auth-pending'
+  );
   assert.ok(curriculoHtml.includes('auth_guard.js'), 'curriculo.html deve carregar auth_guard.js');
   assert.strictEqual(curriculoHtml.includes('Armazenamento local'), false, 'curriculo.html não deve mais exibir Armazenamento local');
   assert.strictEqual(emojiRegex.test(curriculoHtml), false, 'curriculo.html não pode conter emojis (DESIGN.md)');
@@ -247,6 +287,19 @@ async function runAuthAndAccountTests() {
   assert.ok(curriculoJs.includes('pullCloudHistory'), 'curriculo.js deve puxar histórico de currículos gerados da nuvem');
   assert.strictEqual(curriculoJs.includes('STORAGE_KEYS'), false, 'curriculo.js não deve mais conter referências a STORAGE_KEYS');
   assert.strictEqual(curriculoJs.includes('Modo Local-First'), false, 'curriculo.js não deve mais exibir modo anônimo Local-First');
+  assert.strictEqual(
+    curriculoJs.includes('sona_active_resume_job'),
+    false,
+    'curriculo.js não deve conter fallback para sona_active_resume_job'
+  );
+  assert.ok(
+    curriculoJs.includes("keyEl.value = cfg.apiKey || ''"),
+    'curriculo.js deve limpar #byok-key quando a nova sessão não tiver apiKey local'
+  );
+  assert.ok(
+    curriculoJs.includes("if (ghEl) ghEl.value = ''"),
+    'curriculo.js deve limpar #gh-username durante troca de sessão ao vivo'
+  );
   console.log('  ✓ curriculo.html e curriculo.js exigem sessão Supabase e isolam cache + BYOK por usuário');
 
   // 10. Integração de dashboard.html, Tela 07 (Configurações) e paridade com index.html e public/
@@ -273,6 +326,11 @@ async function runAuthAndAccountTests() {
   assert.strictEqual(dashHtml.includes("const STORAGE_KEY = 'estagios_user_store'"), false, 'dashboard.html não deve usar STORAGE_KEY global fixa');
   assert.strictEqual(dashHtml.includes("const PARAMS_KEY = 'estagios_crawler_params'"), false, 'dashboard.html não deve usar PARAMS_KEY global fixa');
   assert.strictEqual(dashHtml.includes("localStorage.removeItem('sb_auth_token')"), false, 'handleLogout não deve usar mock sb_auth_token');
+  assert.strictEqual(
+    dashHtml.includes("localStorage.setItem('sona_active_resume_job'"),
+    false,
+    'dashboard.html não deve gravar chave não-escopada sona_active_resume_job'
+  );
   assert.ok(dashHtml.includes('currentUserDailyGoal'), 'dashboard.html deve usar currentUserDailyGoal dinâmico');
   assert.ok(dashHtml.includes('persistVagaStateCloud'), 'dashboard.html deve sincronizar mutações unitárias na nuvem');
   assert.ok(dashHtml.includes('flushPendingVagasSync'), 'dashboard.html deve reenviar fila offline pendente');

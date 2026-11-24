@@ -140,6 +140,8 @@ async function handleAuthSession(session) {
     userCloudSettings = null;
     masterProfile = createEmptyProfile();
     currentResumeState = null;
+    const ghEl = document.getElementById('gh-username');
+    if (ghEl) ghEl.value = '';
     loadLocalProfile();
     await Promise.all([pullCloudSettings(), pullCloudProfile(), pullCloudHistory()]);
     loadByokConfig();
@@ -288,7 +290,8 @@ function getSelectedModel(provider) {
 function loadByokConfig() {
   const cfg = getByokConfig();
   if (cfg.provider) document.getElementById('byok-provider').value = cfg.provider;
-  if (cfg.apiKey) document.getElementById('byok-key').value = cfg.apiKey;
+  const keyEl = document.getElementById('byok-key');
+  if (keyEl) keyEl.value = cfg.apiKey || '';
   onProviderChange();
   if (cfg.model) {
     if ((cfg.provider || 'gemini') === 'gemini') {
@@ -1380,9 +1383,7 @@ async function loadTargetJobFromContext() {
 
   // 1. Tenta snapshot salvo pelo dashboard.html ao clicar em Inscrição
   try {
-    const snapRaw =
-      localStorage.getItem(getStudioStorageKeys().ACTIVE_JOB) ||
-      localStorage.getItem('sona_active_resume_job');
+    const snapRaw = localStorage.getItem(getStudioStorageKeys().ACTIVE_JOB);
     if (snapRaw) {
       const snap = JSON.parse(snapRaw);
       if (!vagaId || snap.id === vagaId || snap.canonicalKey === vagaId) {

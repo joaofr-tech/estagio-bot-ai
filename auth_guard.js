@@ -312,6 +312,11 @@
         _session = newSession || null;
         _user = newSession?.user || null;
         if (event === 'SIGNED_OUT' || !newSession) {
+          try {
+            if (typeof localStorage !== 'undefined') {
+              localStorage.removeItem('sona_active_resume_job');
+            }
+          } catch (_) {}
           redirectToAuth(_signingOutRedirect || '/auth.html');
           return;
         }
@@ -336,6 +341,11 @@
     _signingOutRedirect = redirectUrl || '/auth.html';
     _session = null;
     _user = null;
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem('sona_active_resume_job');
+      }
+    } catch (_) {}
     if (client) {
       try {
         await client.auth.signOut();
@@ -355,6 +365,9 @@
         st.removeItem(k);
       } catch (_) {}
     });
+    try {
+      st.removeItem('sona_active_resume_job');
+    } catch (_) {}
   }
 
   return {

@@ -4756,7 +4756,6 @@
         try {
           const serialized = JSON.stringify(job);
           localStorage.setItem(getScopedKeys().ACTIVE_JOB, serialized);
-          localStorage.setItem('sona_active_resume_job', serialized);
         } catch (_) {}
       }
       const idParam = job?.id || canonicalKey || '';
@@ -4783,7 +4782,6 @@
         try {
           const serialized = JSON.stringify(job);
           localStorage.setItem(getScopedKeys().ACTIVE_JOB, serialized);
-          localStorage.setItem('sona_active_resume_job', serialized);
         } catch (_) {}
       }
 
