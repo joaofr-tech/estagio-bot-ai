@@ -2,19 +2,17 @@
    SONA RESUME STUDIO — CLIENT CONTROLLER (curriculo.js)
    ============================================================= */
 
-const STORAGE_KEYS = {
-  PROFILE: 'sona_master_profile_v1',
-  BYOK: 'sona_byok_config_v1',
-  HISTORY: 'sona_resume_history_v1',
-  ACTIVE_JOB: 'sona_active_resume_job'
-};
-
 let supabaseClient = null;
 let currentUser = null;
+let userCloudSettings = null;
 let githubOAuthToken = '';
 let activeJob = null;
 let currentResumeState = null; // { id, vaga_id, idioma, resume_json, match_report, audit_report }
 let masterProfile = createEmptyProfile();
+
+function getStudioStorageKeys() {
+  return window.SonaAuth.getUserScopedKeys(currentUser?.id || 'anon');
+}
 
 function createEmptyProfile() {
   return {
@@ -78,24 +76,17 @@ async function initStudio() {
       'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 
-  // 2. Carrega estado local imediato (Local-First)
+  // 1.5 Exige sessão autenticada (SaaS fechado)
+  const session = await window.SonaAuth.requireSession({
+    onSessionUpdate: (newSession) => handleAuthSession(newSession)
+  });
+  if (!session) return;
+
+  supabaseClient = window.SonaAuth.getClient();
+  await handleAuthSession(session);
   loadLocalProfile();
+  await Promise.all([pullCloudSettings(), pullCloudProfile(), pullCloudHistory()]);
   loadByokConfig();
-
-  // 3. Inicializa Supabase Auth + Sync na nuvem
-  if (window.supabase && window.SUPABASE_CONFIG?.url && window.SUPABASE_CONFIG?.anonKey) {
-    supabaseClient = window.supabase.createClient(
-      window.SUPABASE_CONFIG.url,
-      window.SUPABASE_CONFIG.anonKey
-    );
-
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    await handleAuthSession(session);
-
-    supabaseClient.auth.onAuthStateChange((_event, newSession) => {
-      handleAuthSession(newSession);
-    });
-  }
 
   // 4. Carrega vaga da URL (?vaga_id=...) ou localStorage
   await loadTargetJobFromContext();
@@ -140,46 +131,40 @@ async function initStudio() {
 }
 
 async function handleAuthSession(session) {
-  const dot = document.getElementById('auth-dot');
-  const nameEl = document.getElementById('auth-user-name');
-  const modeEl = document.getElementById('auth-mode-label');
-  const btnLogin = document.getElementById('btn-github-login');
-  const btnLogout = document.getElementById('btn-logout');
+  if (!session?.user) return;
+  const prevUserId = currentUser?.id;
+  currentUser = session.user;
+  githubOAuthToken = session.provider_token || '';
 
-  if (session?.user) {
-    currentUser = session.user;
-    githubOAuthToken = session.provider_token || '';
-    const meta = session.user.user_metadata || {};
-    dot.classList.remove('local');
-    nameEl.textContent = meta.full_name || meta.user_name || session.user.email || 'Usuário Conectado';
-    modeEl.textContent = githubOAuthToken ? 'Supabase + GitHub OAuth' : 'Sincronizado na nuvem';
-    btnLogin.style.display = 'none';
-    btnLogout.style.display = 'block';
-
-    if (meta.user_name && !document.getElementById('gh-username').value) {
-      document.getElementById('gh-username').value = meta.user_name;
-    }
-
-    await pullCloudProfile();
+  if (prevUserId && prevUserId !== currentUser.id) {
+    userCloudSettings = null;
+    masterProfile = createEmptyProfile();
+    currentResumeState = null;
+    loadLocalProfile();
+    await Promise.all([pullCloudSettings(), pullCloudProfile(), pullCloudHistory()]);
+    loadByokConfig();
     renderProfileForm();
     renderHistoryList();
     updateBadges();
-  } else {
-    currentUser = null;
-    githubOAuthToken = '';
-    dot.classList.add('local');
-    nameEl.textContent = 'Modo Local-First';
-    modeEl.textContent = 'Salvo no navegador';
-    btnLogin.style.display = 'block';
-    btnLogout.style.display = 'none';
+  }
+
+  const identity = window.SonaAuth.deriveUserIdentity(currentUser, userCloudSettings);
+  const dot = document.getElementById('auth-dot');
+  const nameEl = document.getElementById('auth-user-name');
+  const modeEl = document.getElementById('auth-mode-label');
+
+  if (dot) dot.classList.remove('local');
+  if (nameEl) nameEl.textContent = identity.displayName;
+  if (modeEl) modeEl.textContent = githubOAuthToken ? 'Supabase + GitHub OAuth' : 'Sincronizado na nuvem';
+
+  const ghInput = document.getElementById('gh-username');
+  if (ghInput && !ghInput.value && currentUser.user_metadata?.user_name) {
+    ghInput.value = currentUser.user_metadata.user_name;
   }
 }
 
 async function loginWithGitHub() {
-  if (!supabaseClient) {
-    showToast('Supabase não configurado neste ambiente.');
-    return;
-  }
+  if (!supabaseClient) return;
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: 'github',
     options: {
@@ -187,15 +172,11 @@ async function loginWithGitHub() {
       redirectTo: window.location.origin + window.location.pathname + window.location.search
     }
   });
-  if (error) {
-    showToast(`Erro no login GitHub: ${error.message}`);
-  }
+  if (error) showToast(`Erro ao conectar GitHub: ${error.message}`);
 }
 
 async function logoutSupabase() {
-  if (!supabaseClient) return;
-  await supabaseClient.auth.signOut();
-  showToast('Sessão encerrada. Continuando em modo Local-First.');
+  await window.SonaAuth.signOut('/auth.html');
 }
 
 /* =============================================================
@@ -270,12 +251,30 @@ function updateBadges() {
 /* =============================================================
    BYOK CONFIG (PASSO 1)
    ============================================================= */
-function getByokConfig() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEYS.BYOK) || '{}');
-  } catch {
-    return {};
+async function pullCloudSettings() {
+  if (!supabaseClient || !currentUser) return;
+  const { data } = await supabaseClient
+    .from('user_settings')
+    .select('display_name, handle, avatar_url, daily_goal, byok_provider, byok_model')
+    .eq('user_id', currentUser.id)
+    .maybeSingle();
+  if (data) {
+    userCloudSettings = data;
+    await handleAuthSession({ user: currentUser, provider_token: githubOAuthToken });
   }
+}
+
+function getByokConfig() {
+  const keys = getStudioStorageKeys();
+  let local = {};
+  try {
+    local = JSON.parse(localStorage.getItem(keys.BYOK_KEY) || '{}');
+  } catch (_) {}
+  return {
+    provider: local.provider || userCloudSettings?.byok_provider || 'gemini',
+    model: local.model || userCloudSettings?.byok_model || 'gemini-2.5-flash',
+    apiKey: local.apiKey || ''
+  };
 }
 
 function getSelectedModel(provider) {
@@ -377,7 +376,18 @@ async function saveAndTestKey() {
     return;
   }
 
-  localStorage.setItem(STORAGE_KEYS.BYOK, JSON.stringify({ provider, model, apiKey }));
+  localStorage.setItem(getStudioStorageKeys().BYOK_KEY, JSON.stringify({ provider, model, apiKey }));
+  if (userCloudSettings) {
+    userCloudSettings.byok_provider = provider;
+    userCloudSettings.byok_model = model;
+  }
+  if (supabaseClient && currentUser) {
+    supabaseClient.from('user_settings').upsert({
+      user_id: currentUser.id,
+      byok_provider: provider,
+      byok_model: model
+    }).then(() => {}, () => {});
+  }
   btn.disabled = true;
   statusEl.textContent = `Testando conexão com ${model || provider}...`;
 
@@ -409,17 +419,20 @@ async function saveAndTestKey() {
    ============================================================= */
 function loadLocalProfile() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEYS.PROFILE);
+    const keys = getStudioStorageKeys();
+    const raw = localStorage.getItem(keys.PROFILE);
     if (raw) {
       masterProfile = { ...createEmptyProfile(), ...JSON.parse(raw) };
       deduplicateMasterProfile(masterProfile);
-      localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(masterProfile));
+      localStorage.setItem(keys.PROFILE, JSON.stringify(masterProfile));
+    } else {
+      masterProfile = createEmptyProfile();
     }
   } catch (_) {}
 }
 
 async function persistProfile() {
-  localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(masterProfile));
+  localStorage.setItem(getStudioStorageKeys().PROFILE, JSON.stringify(masterProfile));
   updateBadges();
 
   if (supabaseClient && currentUser) {
@@ -453,7 +466,20 @@ async function pullCloudProfile() {
       ...createEmptyProfile(),
       ...data
     };
-    localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(masterProfile));
+    localStorage.setItem(getStudioStorageKeys().PROFILE, JSON.stringify(masterProfile));
+  }
+}
+
+async function pullCloudHistory() {
+  if (!supabaseClient || !currentUser) return;
+  const { data, error } = await supabaseClient
+    .from('curriculos_gerados')
+    .select('*')
+    .eq('user_id', currentUser.id)
+    .order('created_at', { ascending: false })
+    .limit(25);
+  if (!error && Array.isArray(data) && data.length > 0) {
+    localStorage.setItem(getStudioStorageKeys().HISTORY, JSON.stringify(data));
   }
 }
 
@@ -1354,7 +1380,9 @@ async function loadTargetJobFromContext() {
 
   // 1. Tenta snapshot salvo pelo dashboard.html ao clicar em Inscrição
   try {
-    const snapRaw = localStorage.getItem(STORAGE_KEYS.ACTIVE_JOB);
+    const snapRaw =
+      localStorage.getItem(getStudioStorageKeys().ACTIVE_JOB) ||
+      localStorage.getItem('sona_active_resume_job');
     if (snapRaw) {
       const snap = JSON.parse(snapRaw);
       if (!vagaId || snap.id === vagaId || snap.canonicalKey === vagaId) {
@@ -1998,7 +2026,7 @@ function sheetAddCertification() {
    ============================================================= */
 function getLocalHistory() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY) || '[]');
+    return JSON.parse(localStorage.getItem(getStudioStorageKeys().HISTORY) || '[]');
   } catch {
     return [];
   }
@@ -2007,21 +2035,40 @@ function getLocalHistory() {
 async function saveResumeToHistory(record) {
   const hist = getLocalHistory().filter((h) => h.id !== record.id);
   hist.unshift(record);
-  localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(hist.slice(0, 25)));
+  localStorage.setItem(getStudioStorageKeys().HISTORY, JSON.stringify(hist.slice(0, 25)));
   renderHistoryList();
 
   if (supabaseClient && currentUser) {
-    await supabaseClient.from('curriculos_gerados').insert({
+    const payload = {
       user_id: currentUser.id,
       vaga_id: record.vaga_id,
       vaga_empresa: record.vaga_empresa,
       vaga_cargo: record.vaga_cargo,
       idioma: record.idioma,
-      jd_snapshot: record.jd_snapshot,
-      match_report: record.match_report,
-      resume_json: record.resume_json,
-      audit_report: record.audit_report
-    });
+      jd_snapshot: record.jd_snapshot || '',
+      match_report: record.match_report || {},
+      resume_json: record.resume_json || {},
+      audit_report: record.audit_report || {}
+    };
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(record.id || ''));
+    const cloudId = record._cloud_id || (isUuid ? record.id : null);
+    if (cloudId) {
+      await supabaseClient
+        .from('curriculos_gerados')
+        .update(payload)
+        .eq('id', cloudId)
+        .eq('user_id', currentUser.id);
+    } else {
+      const { data } = await supabaseClient
+        .from('curriculos_gerados')
+        .insert(payload)
+        .select('id')
+        .maybeSingle();
+      if (data?.id) {
+        record._cloud_id = data.id;
+        localStorage.setItem(getStudioStorageKeys().HISTORY, JSON.stringify(hist.slice(0, 25)));
+      }
+    }
   }
 }
 

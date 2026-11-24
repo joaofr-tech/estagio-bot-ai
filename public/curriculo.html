@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="auth-pending">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="design-system.css?v=1">
   <link rel="stylesheet" href="curriculo.css?v=11">
+  <style>html.auth-pending body { opacity: 0; pointer-events: none; }</style>
 </head>
 <body>
 
@@ -31,17 +32,14 @@
 
     <div class="auth-card" id="auth-card">
       <div class="auth-status-row">
-        <span class="auth-dot local" id="auth-dot"></span>
+        <span class="auth-dot" id="auth-dot"></span>
         <div style="min-width:0;">
-          <div class="auth-name" id="auth-user-name">Armazenamento local</div>
-          <div class="auth-mode" id="auth-mode-label">Salvo no navegador</div>
+          <div class="auth-name" id="auth-user-name">Conta Conectada</div>
+          <div class="auth-mode" id="auth-mode-label">Sincronizado na nuvem</div>
         </div>
       </div>
-      <button class="btn-secondary" id="btn-github-login" onclick="loginWithGitHub()" style="width:100%; font-size:0.76rem; padding:0.42rem 0.65rem;">
-        Conectar com GitHub
-      </button>
-      <button class="btn-secondary" id="btn-logout" style="display:none; width:100%; font-size:0.76rem; padding:0.42rem 0.65rem;" onclick="logoutSupabase()">
-        Sair da conta
+      <button class="btn-secondary" id="btn-logout" style="width:100%; font-size:0.76rem; padding:0.42rem 0.65rem;" onclick="logoutSupabase()">
+        Sair da Conta
       </button>
     </div>
 
@@ -489,6 +487,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="supabase_config.js"></script>
+  <script src="auth_guard.js"></script>
   <script src="curriculo.js?v=12"></script>
 </body>
 </html>

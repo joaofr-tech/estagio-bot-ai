@@ -215,6 +215,22 @@ async function runAuthAndAccountTests() {
     'auth.html deve exibir erros de callback OAuth/OTP'
   );
   console.log('  ✓ auth.html contém os 4 fluxos de autenticação e obedece estritamente ao DESIGN.md');
+
+  // 9. Integração de auth_guard.js e isolamento por usuário no Sona Resume Studio
+  const curriculoHtml = fs.readFileSync(path.resolve(__dirname, '..', 'curriculo.html'), 'utf8');
+  const curriculoJs = fs.readFileSync(path.resolve(__dirname, '..', 'curriculo.js'), 'utf8');
+
+  assert.ok(curriculoHtml.includes('auth-pending'), 'curriculo.html deve iniciar com classe auth-pending anti-FOUC');
+  assert.ok(curriculoHtml.includes('auth_guard.js'), 'curriculo.html deve carregar auth_guard.js');
+  assert.strictEqual(curriculoHtml.includes('Armazenamento local'), false, 'curriculo.html não deve mais exibir Armazenamento local');
+  assert.strictEqual(emojiRegex.test(curriculoHtml), false, 'curriculo.html não pode conter emojis (DESIGN.md)');
+  assert.ok(curriculoJs.includes('SonaAuth.requireSession'), 'curriculo.js deve exigir sessão autenticada via SonaAuth');
+  assert.ok(curriculoJs.includes('SonaAuth.getUserScopedKeys'), 'curriculo.js deve escopar chaves locais por user_id');
+  assert.ok(curriculoJs.includes('byok_provider'), 'curriculo.js deve sincronizar byok_provider em user_settings');
+  assert.ok(curriculoJs.includes('pullCloudHistory'), 'curriculo.js deve puxar histórico de currículos gerados da nuvem');
+  assert.strictEqual(curriculoJs.includes('STORAGE_KEYS'), false, 'curriculo.js não deve mais conter referências a STORAGE_KEYS');
+  assert.strictEqual(curriculoJs.includes('Modo Local-First'), false, 'curriculo.js não deve mais exibir modo anônimo Local-First');
+  console.log('  ✓ curriculo.html e curriculo.js exigem sessão Supabase e isolam cache + BYOK por usuário');
 }
 
 module.exports = { runAuthAndAccountTests };
