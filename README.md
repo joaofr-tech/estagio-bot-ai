@@ -46,16 +46,19 @@ flowchart LR
 ```text
 ├── etl/                        # Pipeline ETL Python (Pydantic v2, Supabase, Auditoria, Notificador)
 │   └── extractors/             # Conectores paralelos (LinkedIn, Gupy, Catho, Greenhouse/InHire)
-├── api/                        # Vercel Serverless Functions do Sona Resume Studio
+├── api/                        # Vercel Serverless Functions do Sona Resume Studio & Conta
+│   ├── account.js              # DELETE /api/account (Exclusão autenticada da conta via Admin API)
 │   ├── generate-resume.js      # POST /api/generate-resume (Pipeline ATS em 3 camadas)
 │   ├── github-sync.js          # POST /api/github-sync (Seletor inteligente + leitura de READMEs)
 │   ├── parse-resume-pdf.js     # POST /api/parse-resume-pdf (Extração factual de PDF)
 │   └── _lib/                   # Motor anti-alucinação (resume_engine.js), BYOK (llm.js), parser LinkedIn
+├── auth.html / .css / auth_guard.js # Autenticação obrigatória (Login, Cadastro, Recuperação e OAuth)
 ├── dashboard.html / index.html # Painel principal (Obsidian Dark) sincronizado com Supabase
 ├── curriculo.html / .js / .css # Sona Resume Studio (Editor WYSIWYG, Onboarding, Banco de Fatos)
 ├── design-system.css           # Tokens e componentes do Design System (DESIGN.md)
 ├── schema_supabase.sql         # Schema + RLS de `vagas` e `historico_execucoes`
 ├── schema_curriculo_supabase.sql # Schema + RLS de `master_profiles` e `curriculos_gerados`
+├── schema_auth_supabase.sql    # Schema + RLS de `user_settings`, `user_vagas` e trigger `on_auth_user_created`
 ├── tests/                      # Testes Node.js (Dashboard, Motor ATS, APIs e Segurança Local)
 ├── tests_py/                   # Testes Python (ETL unitários + E2E Playwright)
 └── .github/workflows/          # CI em PRs (ci.yml) + ETL horário fail-fast (etl_pipeline.yml)
@@ -84,9 +87,12 @@ Copie [.env.example](.env.example) para `.env` e preencha:
 - **Opcionais:** `EMAIL_ADDRESS`, `EMAIL_PASSWORD`, `ALERT_WEBHOOK_URL`
 
 #### 2. Provisionar o Banco no Supabase
-No **SQL Editor** do Supabase, execute os dois scripts idempotentes:
-1. [schema_supabase.sql](schema_supabase.sql) — tabelas `vagas` (com `updated_at`) e `historico_execucoes`, com leitura pública e escrita restrita à `service_role`.
+No **SQL Editor** do Supabase, execute os três scripts idempotentes em ordem:
+1. [schema_supabase.sql](schema_supabase.sql) — tabelas `vagas` (com `updated_at`) e `historico_execucoes`, com escrita restrita à `service_role`.
 2. [schema_curriculo_supabase.sql](schema_curriculo_supabase.sql) — tabelas `master_profiles` e `curriculos_gerados` com RLS estrita por `auth.uid()`.
+3. [schema_auth_supabase.sql](schema_auth_supabase.sql) — tabelas `user_settings` e `user_vagas`, trigger automático `on_auth_user_created` e políticas RLS fechadas para usuários autenticados.
+
+> **Configuração do Supabase Auth:** No painel do Supabase, acesse **Authentication -> URL Configuration** e defina a `Site URL` (ex.: `http://127.0.0.1:3000` localmente ou o domínio de produção na Vercel) e adicione em **Redirect URLs** `http://127.0.0.1:3000/**` e `https://<seu-dominio>.vercel.app/**`. Opcionalmente, habilite o provedor **GitHub** em **Authentication -> Providers** para login via OAuth.
 
 #### 3. Executar Pipeline ETL Manualmente
 ```bash
@@ -115,7 +121,7 @@ Acesse `http://127.0.0.1:3000`. O servidor local [servidor.js](servidor.js) escu
 - **Vercel ([vercel.json](vercel.json)):**
   - `buildCommand`: `npm run build` (copia os artefatos estáticos para `public/` via [scripts/build_dashboard.js](scripts/build_dashboard.js)).
   - `outputDirectory`: `public`.
-  - Funções serverless: `/api/generate-resume` (`maxDuration: 60`), `/api/github-sync` (`30s`) e `/api/parse-resume-pdf` (`30s`).
+  - Funções serverless: `/api/generate-resume` (`maxDuration: 60`), `/api/github-sync` (`30s`), `/api/parse-resume-pdf` (`30s`) e `/api/account` (`15s`, requer `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` nas variáveis de ambiente da Vercel para exclusão de conta).
   - **Importante:** Não use GitHub Pages para produção — o Resume Studio requer o runtime serverless `/api/*` da Vercel.
 - **GitHub Actions:**
   - [`.github/workflows/etl_pipeline.yml`](.github/workflows/etl_pipeline.yml): executa `pytest` + `python -m etl.pipeline --require-cloud` a cada hora. Exige os secrets `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (e opcionalmente `EMAIL_ADDRESS`, `EMAIL_PASSWORD`, `ALERT_WEBHOOK_URL`).

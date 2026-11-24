@@ -6,10 +6,12 @@ deduplicação do Banco de Fatos, Seletor Inteligente do GitHub, Template modelo
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import subprocess
 import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -21,6 +23,13 @@ sync_playwright = playwright_sync.sync_playwright
 ROOT_DIR = Path(__file__).resolve().parent.parent
 TEST_PORT = 3917
 BASE_URL = f"http://127.0.0.1:{TEST_PORT}"
+
+TEST_USER_ID = "00000000-0000-4000-8000-000000000001"
+TEST_USER_EMAIL = "joao@exemplo.com"
+SUPABASE_STORAGE_KEY = "sb-plmlmoytazwulxepyypr-auth-token"
+SCOPED_BYOK_KEY = f"sona_byok_key_{TEST_USER_ID}"
+SCOPED_PROFILE_KEY = f"sona_profile_{TEST_USER_ID}"
+SUPABASE_UMD_PATH = ROOT_DIR / "node_modules" / "@supabase" / "supabase-js" / "dist" / "umd" / "supabase.js"
 
 
 @pytest.fixture(scope="module")
@@ -242,12 +251,214 @@ def _launch_browser(p):
     raise RuntimeError("Nenhum navegador Chromium/Chrome/Edge disponível para Playwright.")
 
 
+def _route_local_supabase_sdk(context):
+    if not SUPABASE_UMD_PATH.exists():
+        return
+    umd_body = SUPABASE_UMD_PATH.read_text(encoding="utf-8")
+
+    def handle_cdn(route):
+        route.fulfill(status=200, content_type="application/javascript; charset=utf-8", body=umd_body)
+
+    context.route("https://cdn.jsdelivr.net/npm/@supabase/supabase-js**", handle_cdn)
+
+
+def _build_mock_supabase_session() -> tuple[dict, dict]:
+    now = int(time.time())
+    exp = now + 3600
+    jwt_payload = {
+        "sub": TEST_USER_ID,
+        "email": TEST_USER_EMAIL,
+        "role": "authenticated",
+        "aud": "authenticated",
+        "iat": now,
+        "exp": exp,
+    }
+    b64_payload = (
+        base64.urlsafe_b64encode(json.dumps(jwt_payload, separators=(",", ":")).encode("utf-8"))
+        .decode("ascii")
+        .rstrip("=")
+    )
+    access_token = f"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.{b64_payload}.mock_sig"
+    user_obj = {
+        "id": TEST_USER_ID,
+        "aud": "authenticated",
+        "role": "authenticated",
+        "email": TEST_USER_EMAIL,
+        "email_confirmed_at": "2026-11-23T00:00:00Z",
+        "app_metadata": {"provider": "email", "providers": ["email"]},
+        "user_metadata": {
+            "full_name": "João Francisco",
+            "user_name": "joaofrancisco",
+        },
+        "created_at": "2026-11-23T00:00:00Z",
+        "updated_at": "2026-11-23T00:00:00Z",
+    }
+    session_obj = {
+        "access_token": access_token,
+        "refresh_token": "mock-refresh-token",
+        "token_type": "bearer",
+        "expires_in": 3600,
+        "expires_at": exp,
+        "user": user_obj,
+    }
+    return session_obj, user_obj
+
+
+def _setup_supabase_auth_mock(context, base_url: str | None = None):
+    _ = base_url
+    _route_local_supabase_sdk(context)
+    session_obj, user_obj = _build_mock_supabase_session()
+    user_settings_state = {
+        "user_id": TEST_USER_ID,
+        "display_name": "João Francisco",
+        "handle": "@joaofrancisco",
+        "avatar_url": "",
+        "daily_goal": 3,
+        "crawler_params": {},
+        "byok_provider": "gemini",
+        "byok_model": "gemini-3.8-flash",
+    }
+    user_vagas_state: dict[str, dict] = {}
+
+    def route_supabase_auth(route):
+        url = route.request.url
+        method = route.request.method.upper()
+        if method == "OPTIONS":
+            route.fulfill(status=204)
+            return
+        if "/logout" in url:
+            route.fulfill(status=200, content_type="application/json", body="{}")
+            return
+        if "/token" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(session_obj))
+            return
+        if "/user" in url and method in ("PUT", "PATCH"):
+            body = json.loads(route.request.post_data or "{}")
+            if isinstance(body.get("data"), dict):
+                user_obj["user_metadata"].update(body["data"])
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(user_obj))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(user_obj))
+
+    def route_supabase_rest(route):
+        url = route.request.url
+        method = route.request.method.upper()
+        if method == "OPTIONS":
+            route.fulfill(status=204)
+            return
+
+        accept = (route.request.headers.get("accept") or "").lower()
+        wants_object = "application/vnd.pgrst.object+json" in accept
+        parsed = urllib.parse.urlparse(url)
+        path = parsed.path
+
+        def fulfill_json(single_obj, list_rows):
+            payload = single_obj if wants_object else list_rows
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(payload))
+
+        if path.endswith("/rest/v1/user_settings"):
+            if method in ("POST", "PATCH", "PUT"):
+                patch = json.loads(route.request.post_data or "{}")
+                if isinstance(patch, list) and patch:
+                    patch = patch[0]
+                if isinstance(patch, dict):
+                    user_settings_state.update(patch)
+            fulfill_json(user_settings_state, [user_settings_state])
+            return
+
+        if path.endswith("/rest/v1/user_vagas"):
+            if method in ("POST", "PATCH", "PUT"):
+                raw_payload = json.loads(route.request.post_data or "{}")
+                rows = raw_payload if isinstance(raw_payload, list) else [raw_payload]
+                for row in rows:
+                    if isinstance(row, dict) and row.get("vaga_key"):
+                        user_vagas_state[row["vaga_key"]] = row
+                fulfill_json(rows[0] if rows else None, rows)
+                return
+            if method == "DELETE":
+                qs = urllib.parse.parse_qs(parsed.query)
+                eq_vals = qs.get("vaga_key", [])
+                for val in eq_vals:
+                    if val.startswith("eq."):
+                        user_vagas_state.pop(val[3:], None)
+                fulfill_json(None, [])
+                return
+            rows = list(user_vagas_state.values())
+            fulfill_json(rows[0] if rows else None, rows)
+            return
+
+        if path.endswith("/rest/v1/curriculos_gerados") and method == "POST":
+            created = {"id": "00000000-0000-4000-8000-000000000099"}
+            fulfill_json(created, [created])
+            return
+
+        fulfill_json(None, [])
+
+    context.route("https://*.supabase.co/auth/v1/**", route_supabase_auth)
+    context.route("https://*.supabase.co/rest/v1/**", route_supabase_rest)
+
+    session_json = json.dumps(session_obj)
+    context.add_init_script(
+        f"""(() => {{
+            try {{
+                if (!sessionStorage.getItem('__sona_e2e_auth_seeded') && !localStorage.getItem({json.dumps(SUPABASE_STORAGE_KEY)})) {{
+                    localStorage.setItem({json.dumps(SUPABASE_STORAGE_KEY)}, {json.dumps(session_json)});
+                    sessionStorage.setItem('__sona_e2e_auth_seeded', '1');
+                }}
+            }} catch (_) {{}}
+        }})();"""
+    )
+
+
+_inject_authenticated_supabase_mock = _setup_supabase_auth_mock
+
+
+def test_auth_guard_redirects_anonymous_and_switches_modes(local_server):
+    page_errors = []
+
+    with sync_playwright() as p:
+        browser = _launch_browser(p)
+        context = browser.new_context(viewport={"width": 1366, "height": 840})
+        _route_local_supabase_sdk(context)
+        context.route(
+            "https://*.supabase.co/**",
+            lambda route: route.fulfill(status=401, content_type="application/json", body='{"message":"Unauthorized"}'),
+        )
+        page = context.new_page()
+        page.on("pageerror", lambda err: page_errors.append(str(err)))
+
+        # Acesso sem login ao Resume Studio deve redirecionar imediatamente para /auth.html
+        page.goto(f"{local_server}/curriculo.html", wait_until="domcontentloaded")
+        page.wait_for_url("**/auth.html**")
+        assert "/auth.html" in page.url
+        assert "next=%2Fcurriculo.html" in page.url
+
+        # Acesso sem login ao dashboard deve redirecionar imediatamente para /auth.html
+        page.goto(f"{local_server}/dashboard.html", wait_until="domcontentloaded")
+        page.wait_for_url("**/auth.html**")
+        assert "/auth.html" in page.url
+        assert "next=%2Fdashboard.html" in page.url
+
+        # Alterna entre Entrar, Criar Conta e Recuperar Senha
+        assert page.locator("#form-signin").is_visible()
+        page.click("#tab-signup")
+        assert page.locator("#form-signup").is_visible()
+        page.click("#tab-signin")
+        page.click("text=Esqueci Minha Senha")
+        assert page.locator("#form-recover").is_visible()
+
+        browser.close()
+
+    assert page_errors == [], f"Erros JS encontrados na tela de autenticação: {page_errors}"
+
+
 def test_e2e_sona_full_flow(local_server, tmp_path):
     page_errors = []
 
     with sync_playwright() as p:
         browser = _launch_browser(p)
         context = browser.new_context(viewport={"width": 1440, "height": 900})
+        _setup_supabase_auth_mock(context, local_server)
         page = context.new_page()
         page.on("pageerror", lambda err: page_errors.append(str(err)))
 
@@ -266,16 +477,17 @@ def test_e2e_sona_full_flow(local_server, tmp_path):
 
         context.route("**/api/**", route_api)
 
-        # 1. Pré-popula localStorage com chave BYOK + duplicatas propositais para testar deduplicação
+        # 1. Pré-popula localStorage escopado por user_id com chave BYOK + duplicatas propositais para testar deduplicação
         page.goto(f"{local_server}/dashboard.html", wait_until="domcontentloaded")
+        page.wait_for_selector("#sidebar-user-name:has-text('João Francisco')", timeout=8000)
         page.evaluate(
-            """() => {
-                localStorage.setItem('sona_byok_config_v1', JSON.stringify({
+            """([byokKey, profileKey]) => {
+                localStorage.setItem(byokKey, JSON.stringify({
                     provider: 'gemini',
                     model: 'gemini-3.8-flash',
                     apiKey: 'AIza-mock-test-key'
                 }));
-                localStorage.setItem('sona_master_profile_v1', JSON.stringify({
+                localStorage.setItem(profileKey, JSON.stringify({
                     basics: { name: 'João Francisco', email: 'joao@exemplo.com', location: 'Belo Horizonte, MG' },
                     education: [
                         { id: 'e1', institution: 'PUC Minas', degree: 'Bacharelado em Engenharia de Software', start_date: '2025', end_date: '2028', source: 'linkedin_pdf' },
@@ -290,9 +502,11 @@ def test_e2e_sona_full_flow(local_server, tmp_path):
                     certifications: [{ id: 'c1', name: 'Python para Engenharia de Dados', authority: 'Alura', date: '2026', source: 'linkedin_pdf' }],
                     languages_spoken: [{ name: 'Português', proficiency: 'nativo' }, { name: 'Inglês', proficiency: 'intermediário' }]
                 }));
-            }"""
+            }""",
+            [SCOPED_BYOK_KEY, SCOPED_PROFILE_KEY],
         )
         page.reload(wait_until="domcontentloaded")
+        page.wait_for_selector("#sidebar-user-name:has-text('João Francisco')", timeout=8000)
         page.wait_for_selector("#table-focus-jobs .focus-card", timeout=8000)
 
         # 2. Valida separação Meta do Dia (+ Candidaturas) vs Todas as Vagas
@@ -329,12 +543,18 @@ def test_e2e_sona_full_flow(local_server, tmp_path):
         assert page.locator("#insights-visual-cards .insight-card").count() == 4
         page.screenshot(path=str(scratch_dir / "e2e_02_insights.png"))
 
-        # Valida tela Parâmetros do crawler (Obsidian) + Configurações separada
+        # Valida tela Parâmetros do crawler (Obsidian) + Configurações da Conta (Tela 07)
         page.click("#nav-btn-04")
         assert page.locator("#screen-view-04").is_visible()
         page.screenshot(path=str(scratch_dir / "e2e_04_parametros_crawler.png"))
         page.click("#nav-btn-07")
         assert page.locator("#screen-view-07").is_visible()
+        assert page.locator("#acc-display-name").input_value() == "João Francisco"
+        assert page.locator("#acc-handle").input_value() == "@joaofrancisco"
+        assert page.locator("#acc-daily-goal").input_value() == "3"
+        assert page.locator("#acc-email-label").inner_text() == TEST_USER_EMAIL
+        assert page.locator("#btn-export-account-data").is_visible()
+        assert page.locator("#btn-delete-account").is_visible()
 
         # Volta para Meta do Dia e clica em "Gerar currículo" → abre Estúdio embutido SEM sidebar duplicada + auto-gera!
         page.click("#nav-btn-01")
