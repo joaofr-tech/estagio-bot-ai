@@ -7,6 +7,7 @@ const { runResumeEngineTests } = require('./resume_engine.test');
 const { runApiAndSecurityTests } = require('./api_and_security.test');
 const { runChaosTests } = require('./resume_engine.chaos.test');
 const { runAuthAndAccountTests } = require('./auth_and_account.test');
+const { runQaBotTests } = require('./qa_bot.test');
 
 async function runAll() {
   const start = Date.now();
@@ -24,6 +25,7 @@ async function runAll() {
     await runApiAndSecurityTests();
     await runChaosTests();
     await runAuthAndAccountTests();
+    await runQaBotTests();
 
     const elapsed = Date.now() - start;
     console.log('\n====================================================');
