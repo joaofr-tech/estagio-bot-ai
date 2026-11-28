@@ -12,7 +12,18 @@ Fluxo completo rodando 100% na sua assinatura do **Orca (`antigravity`)**, usand
 
 ## Como Operar
 
-### 1. Subir para `main` antes de habilitar
+### 1. Login único no perfil isolado `Sona QA Bot`
+Para que o bot navegue autenticado em `/dashboard.html` e `/curriculo.html` sem salvar senhas em disco:
+- Perfil isolado no Orca: `Sona QA Bot` (`id: 1f6aaac9-1a2a-4666-bbc8-0fb08f6d6827`)
+- Origem local fixa: `http://127.0.0.1:3456` (porta padrão de `scripts/qa/qa_server.js`)
+- Para renovar a sessão quando expirar:
+  ```powershell
+  node scripts/qa/qa_server.js --start
+  orca tab create --url "http://127.0.0.1:3456/auth.html" --profile 1f6aaac9-1a2a-4666-bbc8-0fb08f6d6827 --focus --json
+  ```
+  Faça login com sua conta de teste na aba aberta e depois encerre o servidor com `node scripts/qa/qa_server.js --stop <pid>`.
+
+### 2. Subir para `main` antes de habilitar
 Como as 3 automações usam `new_per_run` (worktree limpo a partir da branch base `main`), faça commit e push dos arquivos em `scripts/qa/`, `docs/qa/` e `tests/qa_bot.test.js` para `main` antes de rodar as automações.
 
 ### 2. Testar manualmente qualquer fase sob demanda

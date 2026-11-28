@@ -7,6 +7,18 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 const ROOT_DIR = path.resolve(__dirname, '..', '..');
+const DEFAULT_QA_PORT = 3456;
+
+function isPortAvailable(port, host = '127.0.0.1') {
+  return new Promise((resolve) => {
+    const srv = net.createServer();
+    srv.unref();
+    srv.on('error', () => resolve(false));
+    srv.listen(port, host, () => {
+      srv.close(() => resolve(true));
+    });
+  });
+}
 
 function findFreePort(host = '127.0.0.1') {
   return new Promise((resolve, reject) => {
@@ -43,9 +55,20 @@ function waitForServer(url, timeoutMs = 10000) {
   });
 }
 
-async function startQaServer() {
+async function startQaServer(options = {}) {
   const host = '127.0.0.1';
-  const port = await findFreePort(host);
+  const requestedPort = Number(options.port || process.env.SONA_QA_PORT || DEFAULT_QA_PORT);
+  const useRandomPort = Boolean(options.randomPort);
+
+  let port;
+  if (useRandomPort) {
+    port = await findFreePort(host);
+  } else if (await isPortAvailable(requestedPort, host)) {
+    port = requestedPort;
+  } else {
+    port = await findFreePort(host);
+  }
+
   const child = spawn(process.execPath, [path.join(ROOT_DIR, 'servidor.js')], {
     cwd: ROOT_DIR,
     detached: true,
@@ -60,7 +83,7 @@ async function startQaServer() {
 
   const url = `http://${host}:${port}`;
   await waitForServer(`${url}/dashboard.html`, 10000);
-  return { url, host, port, pid: child.pid };
+  return { url, host, port, pid: child.pid, fixedOrigin: port === requestedPort };
 }
 
 function stopQaServer(pid) {
@@ -104,6 +127,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  DEFAULT_QA_PORT,
+  isPortAvailable,
   findFreePort,
   waitForServer,
   startQaServer,

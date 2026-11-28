@@ -19,14 +19,17 @@ node scripts/qa/qa_server.js --start
 ```
 Guarde `url` (ex: `http://127.0.0.1:54321`) e `pid` retornados no JSON.
 
-### 2. Abrir o navegador do Orca e ativar captura
+### 2. Abrir o navegador do Orca com o perfil autenticado `Sona QA Bot` e ativar captura
+Use o perfil isolado dedicado (`1f6aaac9-1a2a-4666-bbc8-0fb08f6d6827`, label `Sona QA Bot`), que mantém a sessão de teste persistida para a origem fixa `http://127.0.0.1:3456`:
 ```bash
-orca tab create --url "<url>/dashboard.html" --json
+orca tab create --url "<url>/dashboard.html" --profile 1f6aaac9-1a2a-4666-bbc8-0fb08f6d6827 --json
 ```
 Guarde o `browserPageId` retornado e inicie a captura de console/rede:
 ```bash
 orca capture start --page <browserPageId> --json
 ```
+- **Regra de preservação de sessão:** **NUNCA** clique em Sair/Logout, Excluir Conta nem limpe o `localStorage` no perfil `Sona QA Bot`, para não derrubar a sessão autenticada.
+- Se ainda assim `/dashboard.html` redirecionar para `/auth.html`, reporte no resumo final que a sessão do perfil `Sona QA Bot` expirou e precisa de novo login manual.
 
 ### 3. Executar as missões de `docs/qa/missions.md`
 Leia `docs/qa/missions.md` e execute as 4 missões:
